@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
 
+
+    @Bind(R.id.main_small_header_layout_root)
+    View llToolBarRoot; // 标题栏
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +91,14 @@ public class MainActivity extends AppCompatActivity {
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
             if (!mIsTheTitleVisible) {
-                startAlphaAnimation(tvRoomNumber, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                startAlphaAnimation(mTbToolbar, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+//                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
             }
         } else {
             if (mIsTheTitleVisible) {
-                startAlphaAnimation(tvRoomNumber, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+                startAlphaAnimation(mTbToolbar, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+//                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleVisible = false;
             }
         }

@@ -39,7 +39,6 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
     private void init() {
         bindDimensions();
     }
-
     private void bindDimensions() {
         mAvatarMaxSize = mContext.getResources().getDimension(R.dimen.image_width);
     }
@@ -73,7 +72,6 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
 
         // 高度减小
         float heightToSubtract = ((mStartHeight - mFinalHeight) * (1f - expandedPercentageFactor));
-        Log.e("distanceYToSubtract="+distanceYToSubtract,"raleigh_test");
         // 图片位置
         child.setY(mStartYPosition - distanceYToSubtract);
         child.setX(mStartXPosition - distanceXToSubtract);

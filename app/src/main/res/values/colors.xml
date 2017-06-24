@@ -3,4 +3,9 @@
     <color name="colorPrimary">#1c1b6e</color>
     <color name="colorPrimaryDark">#1c1b6e</color>
     <color name="colorAccent">#1c1b6e</color>
+    <color name="pay_color">#04c2aa</color>
+    <color name="talking_color">#f6b379</color>
+    <color name="repair_color">#4793f6</color>
+    <color name="property_color">#6c6cc1</color>
+    <color name="committee_color">#40b1b0</color>
 </resources>

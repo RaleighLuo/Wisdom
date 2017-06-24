@@ -2,6 +2,12 @@
     <string name="app_name">TestCoordinatorLayout</string>
     <string name="action_settings">Settings</string>
 
+    <!--主页-->
+    <string name="pay">缴费</string>
+    <string name="talking">话题</string>
+    <string name="repair">报修</string>
+    <string name="newest_notice">最新通告</string>
+
     <string name="person_name">孙骁骁</string>
     <string name="person_title">演员</string>
     <string name="person_intro">
