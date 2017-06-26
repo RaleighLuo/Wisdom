@@ -5,6 +5,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,19 +48,13 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_tv_toolbar_title)
     TextView mTvToolbarTitle; // 标题栏Title
 
-    @Bind(R.id.main_ll_toolbar_root)
-    View mllToolbarRoot; // 标题栏Title
-
-    @Bind(R.id.main_layout_ll_title_root)
-    View mllTitleRoot; // 标题栏Title
-
-
 
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
     @Bind(R.id.NestedScrollView)
     NestedScrollView mNestedScrollView; // 工具栏
-
+    @Bind(R.id.main_layout_recyclerView)
+    RecyclerView mRecyclerView; // 工具栏
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initParallaxValues(); // 自动滑动效果
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(new NoticeAdapter(this));
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){
@@ -104,21 +104,12 @@ public class MainActivity extends AppCompatActivity {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
             if (!mIsTheTitleVisible) {
 
-                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                startAlphaAnimation(mllTitleRoot, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
-                mllToolbarRoot.setVisibility(View.VISIBLE);
-                mllTitleRoot.setVisibility(View.VISIBLE);
 
             }
         } else {
             if (mIsTheTitleVisible) {
-
-                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
-                startAlphaAnimation(mllTitleRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
-                mllToolbarRoot.setVisibility(View.GONE);
-                mllTitleRoot.setVisibility(View.GONE);
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleVisible = false;
 
