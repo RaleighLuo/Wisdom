@@ -3,8 +3,10 @@ package com.gkzxhn.wisdom;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
+    @Bind(R.id.NestedScrollView)
+    NestedScrollView mNestedScrollView; // 工具栏
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

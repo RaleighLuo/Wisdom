@@ -65,10 +65,10 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
         final int  maxScrollDistance=getStatusBarHeight();
         // 滑动的百分比
         float expandedPercentageFactor = dependency.getY() / maxScrollDistance;
-        Log.e("mStartToolbarPosition="+mStartToolbarPosition,"raleigh_test");
-        Log.e("getStatusBarHeight()="+getStatusBarHeight(),"raleigh_test");
-        Log.e("dependency.getY() ="+dependency.getY() ,"raleigh_test");
-        Log.e("expandedPercentageFactor="+expandedPercentageFactor,"raleigh_test");
+//        Log.e("mStartToolbarPosition="+mStartToolbarPosition,"raleigh_test");
+//        Log.e("getStatusBarHeight()="+getStatusBarHeight(),"raleigh_test");
+//        Log.e("dependency.getY() ="+dependency.getY() ,"raleigh_test");
+//        Log.e("expandedPercentageFactor="+expandedPercentageFactor,"raleigh_test");
         int dis=expandedPercentageFactor==0?(mFinalHeight/2):(child.getHeight() / 2);
         // Y轴距离
         float distanceYToSubtract = ((mStartYPosition - mFinalYPosition)
