@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -38,17 +39,16 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_abl_app_bar)
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
 
-    @Bind(R.id.main_layout_tv_name)
+    @Bind(R.id.main_tv_toolbar_title)
     TextView mTvToolbarTitle; // 标题栏Title
-    @Bind(R.id.main_layout_tv_room_number)
-    TextView tvRoomNumber; // 标题栏Title
+
+    @Bind(R.id.main_ll_toolbar_root)
+    View mllToolbarRoot; // 标题栏Title
+
+
 
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
-
-
-    @Bind(R.id.main_small_header_layout_root)
-    View llToolBarRoot; // 标题栏
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,15 +91,18 @@ public class MainActivity extends AppCompatActivity {
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
             if (!mIsTheTitleVisible) {
-                startAlphaAnimation(mTbToolbar, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
+                mllToolbarRoot.setVisibility(View.VISIBLE);
             }
         } else {
             if (mIsTheTitleVisible) {
-                startAlphaAnimation(mTbToolbar, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
+
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleVisible = false;
+                mllToolbarRoot.setVisibility(View.GONE);
             }
         }
     }
