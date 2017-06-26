@@ -166,6 +166,7 @@
         android:src="@drawable/small"
         app:border_color="@android:color/white"
         app:border_width="2dp"
+        android:onClick="onClickListener"
         app:layout_behavior=".AvatarImageBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>
