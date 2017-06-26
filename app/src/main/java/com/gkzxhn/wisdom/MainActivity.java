@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_ll_toolbar_root)
     View mllToolbarRoot; // 标题栏Title
 
+    @Bind(R.id.main_layout_ll_title_root)
+    View mllTitleRoot; // 标题栏Title
+
 
 
     @Bind(R.id.main_tb_toolbar)
@@ -75,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
         initParallaxValues(); // 自动滑动效果
     }
+    private boolean isExpanded=true;
+    public void onClickListener(View view){
+        isExpanded=!isExpanded;
+        mAblAppBar.setExpanded(isExpanded);
+    }
 
     // 设置自动滑动的动画效果
     private void initParallaxValues() {
@@ -95,18 +103,25 @@ public class MainActivity extends AppCompatActivity {
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
             if (!mIsTheTitleVisible) {
+
                 startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                startAlphaAnimation(mllTitleRoot, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
                 mllToolbarRoot.setVisibility(View.VISIBLE);
+                mllTitleRoot.setVisibility(View.VISIBLE);
+
             }
         } else {
             if (mIsTheTitleVisible) {
-                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
 
+                startAlphaAnimation(mllToolbarRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
+                startAlphaAnimation(mllTitleRoot, ALPHA_ANIMATIONS_DURATION, View.GONE);
+                mllToolbarRoot.setVisibility(View.GONE);
+                mllTitleRoot.setVisibility(View.GONE);
 //                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleVisible = false;
-                mllToolbarRoot.setVisibility(View.GONE);
+
             }
         }
     }
@@ -116,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
             if (mIsTheTitleContainerVisible) {
                 startAlphaAnimation(mLlTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+
                 mIsTheTitleContainerVisible = false;
             }
         } else {
