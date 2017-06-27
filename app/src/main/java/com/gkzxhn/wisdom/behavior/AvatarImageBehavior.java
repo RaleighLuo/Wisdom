@@ -1,4 +1,4 @@
-package com.gkzxhn.wisdom;
+package com.gkzxhn.wisdom.behavior;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
@@ -6,7 +6,12 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.gkzxhn.wisdom.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -16,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author wangchenlong
  */
 @SuppressWarnings("unused")
-public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageView> {
+public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayout> {
     private final static float MIN_AVATAR_PERCENTAGE_SIZE = 0.3f;
     private final static int EXTRA_FINAL_AVATAR_PADDING = 80;
 
@@ -49,22 +54,44 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
 
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, CircleImageView child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, RelativeLayout child, View dependency) {
         // 依赖Toolbar控件
         return dependency instanceof Toolbar;
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, CircleImageView child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, RelativeLayout childRoot, View dependency) {
+        CircleImageView child= (CircleImageView) childRoot.getChildAt(0);
 
         // 初始化属性
-        shouldInitProperties(child, dependency);
+        shouldInitProperties(childRoot,child, dependency);
 
         // 最大滑动距离: 起始位置-状态栏高度
 //        final int maxScrollDistance = (int) (mStartToolbarPosition - getStatusBarHeight());
         final int  maxScrollDistance=getStatusBarHeight();
         // 滑动的百分比
         float expandedPercentageFactor = dependency.getY() / maxScrollDistance;
+
+        for(int i=1;i<childRoot.getChildCount();i++){
+            TextView tvTitle= (TextView) childRoot.getChildAt(i);
+            int dimen=0;
+            switch (tvTitle.getId()){
+                case R.id.home_full_screen_layout_tv_week:
+                case R.id.home_full_screen_layout_tv_date:
+                    dimen=R.dimen.main_layout_date_text_size;
+                    break;
+                case R.id.home_full_screen_layout_tv_home_number:
+                    dimen=R.dimen.main_layout_home_number_text_size;
+                    break;
+                case R.id.home_full_screen_layout_tv_community_name:
+                    dimen=R.dimen.main_layout_community_name_text_size;
+                    break;
+
+            }
+            int titleSize=mContext.getResources().getDimensionPixelSize(dimen);
+            float disSize=4*(1-expandedPercentageFactor);//[0-4的区间]
+            tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, (float) (titleSize-disSize));
+        }
 //        Log.e("mStartToolbarPosition="+mStartToolbarPosition,"raleigh_test");
 //        Log.e("getStatusBarHeight()="+getStatusBarHeight(),"raleigh_test");
 //        Log.e("dependency.getY() ="+dependency.getY() ,"raleigh_test");
@@ -103,7 +130,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
         child.setX(mStartXPosition - distanceXToSubtract);
 
         // 图片大小
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) child.getLayoutParams();
         lp.width = (int) (mStartHeight - heightToSubtract);
         lp.height = (int) (mStartHeight - heightToSubtract);
         child.setLayoutParams(lp);
@@ -117,7 +144,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
      * @param child      图片控件
      * @param dependency ToolBar
      */
-    private void shouldInitProperties(CircleImageView child, View dependency) {
+    private void shouldInitProperties( RelativeLayout childRoot,CircleImageView child, View dependency) {
 //        Log.e("childX="+child.getX()+",childY"+ child.getY()+",childHeigth"+child.getHeight(),"raleigh_test");
 //        Log.e("dependencyX="+dependency.getX()+",dependencyY"+ dependency.getY()+",dependencyHeigth"+dependency.getHeight(),"raleigh_test");
 
@@ -142,10 +169,10 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
 
         // 边缘+缩略图宽度的一半
         if (mFinalXPosition == 0)
-            mFinalXPosition=mImageFinalMargin+(mFinalHeight / 2);
+            mFinalXPosition=childRoot.getPaddingLeft()+(mFinalHeight / 2);
 //            mFinalXPosition = mContext.getResources().getDimensionPixelOffset(R.dimen.image_final_margin) + (mFinalHeight / 2);
         if (mFinalYPosition == 0)
-            mFinalYPosition = mImageFinalMargin+(mFinalHeight / 2);
+            mFinalYPosition = childRoot.getPaddingTop()+(mFinalHeight / 2);
 
         // Toolbar的起始位置
         if (mStartToolbarPosition == 0)

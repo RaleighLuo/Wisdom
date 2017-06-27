@@ -13,5 +13,9 @@
     <dimen name="main_max_height">400dip</dimen>
     <dimen name="image_start_margin">20dip</dimen>
     <dimen name="image_final_margin">15dip</dimen>
+    <!--主页-->
+    <dimen name="main_layout_date_text_size">12sp</dimen>
+    <dimen name="main_layout_home_number_text_size">18sp</dimen>
+    <dimen name="main_layout_community_name_text_size">20sp</dimen>
 
 </resources>
