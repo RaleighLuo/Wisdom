@@ -6,7 +6,12 @@
     <string name="pay">缴费</string>
     <string name="talking">话题</string>
     <string name="repair">报修</string>
-    <string name="newest_notice">最新通告</string>
+    <string name="newest_notice">最新通知</string>
+    <string name="pay_record">缴费记录</string>
+    <string name="repair_record">报修记录</string>
+    <string name="carpet_area">室内面积</string>
+    <string name="housing_area">房屋面积</string>
+    <string name="square_meter">㎡</string>
 
     <string name="person_name">孙骁骁</string>
     <string name="person_title">演员</string>

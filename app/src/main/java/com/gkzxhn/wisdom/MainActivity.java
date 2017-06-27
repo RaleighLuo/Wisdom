@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mIvPlaceholder; // 大图片
 
     @Bind(R.id.main_ll_title_container)
-    LinearLayout mLlTitleContainer; // Title的LinearLayout
+    View mLlTitleContainer; // Title的LinearLayout
 
     @Bind(R.id.main_fl_title)
     FrameLayout mFlTitleContainer; // Title的FrameLayout
