@@ -6,16 +6,19 @@
 
     <dimen name="image_final_width">50dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
-    <dimen name="image_width">150dp</dimen>
+    <dimen name="image_width">120dp</dimen>
     <dimen name="title_margin">20dp</dimen>
     <dimen name="action_bar_left_margin">20dp</dimen>
     <dimen name="toolbar_height">200dip</dimen>
     <dimen name="main_max_height">400dip</dimen>
-    <dimen name="image_start_margin">20dip</dimen>
-    <dimen name="image_final_margin">15dip</dimen>
+    <dimen name="image_start_margin">10dip</dimen>
     <!--主页-->
     <dimen name="main_layout_date_text_size">12sp</dimen>
-    <dimen name="main_layout_home_number_text_size">18sp</dimen>
-    <dimen name="main_layout_community_name_text_size">20sp</dimen>
+    <dimen name="main_layout_home_number_text_size">22sp</dimen>
+    <dimen name="main_layout_community_name_text_size">30sp</dimen>
+
+    <dimen name="main_layout_date_padding_top">40dip</dimen>
+    <dimen name="main_layout_home_number_padding_top">25dip</dimen>
+    <dimen name="main_layout_community_name_padding_top">20dip</dimen>
 
 </resources>

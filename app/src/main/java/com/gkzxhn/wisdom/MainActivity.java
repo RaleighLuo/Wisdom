@@ -8,14 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 
@@ -25,16 +21,12 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     // 控制ToolBar的变量
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
 
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
-    private boolean mIsTheTitleVisible = false;
     private boolean mIsTheTitleContainerVisible = true;
 
-    @Bind(R.id.main_iv_placeholder)
-    ImageView mIvPlaceholder; // 大图片
 
     @Bind(R.id.main_ll_title_container)
     View mLlTitleContainer; // Title的LinearLayout
@@ -45,12 +37,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_abl_app_bar)
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
 
-    @Bind(R.id.NestedScrollView)
+    @Bind(R.id.main_layout_nestedscrollview)
     NestedScrollView mNestedScrollView; // 标题栏Title
-
-
-    @Bind(R.id.main_tb_toolbar)
-    Toolbar mTbToolbar; // 工具栏
     @Bind(R.id.main_layout_recyclerView)
     RecyclerView mRecyclerView; // 工具栏
     @Override
@@ -59,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mTbToolbar.setTitle("");
 
         // AppBar的监听
         mAblAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -68,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 int maxScroll = appBarLayout.getTotalScrollRange();
                 float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
                 handleAlphaOnTitle(percentage);
-                handleToolbarTitleVisibility(percentage);
             }
         });
 
@@ -86,36 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
     // 设置自动滑动的动画效果
     private void initParallaxValues() {
-        CollapsingToolbarLayout.LayoutParams petDetailsLp =
-                (CollapsingToolbarLayout.LayoutParams) mIvPlaceholder.getLayoutParams();
-
         CollapsingToolbarLayout.LayoutParams petBackgroundLp =
                 (CollapsingToolbarLayout.LayoutParams) mFlTitleContainer.getLayoutParams();
-
-        petDetailsLp.setParallaxMultiplier(0.9f);
-        petBackgroundLp.setParallaxMultiplier(0.3f);
-
-        mIvPlaceholder.setLayoutParams(petDetailsLp);
+        petBackgroundLp.setParallaxMultiplier(PERCENTAGE_TO_HIDE_TITLE_DETAILS);
         mFlTitleContainer.setLayoutParams(petBackgroundLp);
     }
 
-    // 处理ToolBar的显示
-    private void handleToolbarTitleVisibility(float percentage) {
-        if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-            if (!mIsTheTitleVisible) {
-
-//                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleVisible = true;
-
-            }
-        } else {
-            if (mIsTheTitleVisible) {
-//                startAlphaAnimation(mTvToolbarTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleVisible = false;
-
-            }
-        }
-    }
 
     // 控制Title的显示
     private void handleAlphaOnTitle(float percentage) {
