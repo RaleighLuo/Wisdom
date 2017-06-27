@@ -95,6 +95,7 @@
         app:contentInsetStart="0dip"
         app:layout_collapseMode="pin"
         app:layout_anchor="@id/main_fl_title"
+        app:layout_anchorGravity="top"
         app:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     </android.support.v7.widget.Toolbar>

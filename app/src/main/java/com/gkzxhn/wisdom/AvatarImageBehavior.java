@@ -50,6 +50,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, CircleImageView child, View dependency) {
+        Log.e("dependency="+dependency,"raleigh_test");
         // 依赖Toolbar控件
         return dependency instanceof Toolbar;
     }
