@@ -32,7 +32,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 10;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

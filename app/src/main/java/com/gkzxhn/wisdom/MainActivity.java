@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.main_tv_toolbar_title)
     TextView mTvToolbarTitle; // 标题栏Title
+    @Bind(R.id.NestedScrollView)
+    NestedScrollView mNestedScrollView; // 标题栏Title
 
 
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
-    @Bind(R.id.NestedScrollView)
-    NestedScrollView mNestedScrollView; // 工具栏
     @Bind(R.id.main_layout_recyclerView)
     RecyclerView mRecyclerView; // 工具栏
     @Override
@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         initParallaxValues(); // 自动滑动效果
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new NoticeAdapter(this));
+        mNestedScrollView.setFillViewport(true);//NestedScrollView子项全屏
+//        mRecyclerView.setNestedScrollingEnabled(false);//解决滑动不流畅的问题
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){

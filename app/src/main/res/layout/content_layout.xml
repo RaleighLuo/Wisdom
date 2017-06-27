@@ -145,16 +145,17 @@
             android:background="@drawable/main_repair_selector"
             />
     </LinearLayout>
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_below="@+id/main_layout_ll_big_menu"
-        android:background="@android:color/black"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:id="@+id/main_layout_recyclerView"
-            android:background="@android:color/white"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
+        android:id="@+id/main_layout_recyclerView"
+        android:background="@android:color/white"
+        android:layout_above="@+id/content_layout_v_bottom"
+        android:layout_height="match_parent"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:id="@+id/content_layout_v_bottom"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>
 
