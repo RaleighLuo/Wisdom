@@ -29,6 +29,8 @@
                 app:layout_collapseMode="parallax">
                 <include layout="@layout/home_full_screen_layout"/>
             </FrameLayout>
+
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
@@ -43,6 +45,15 @@
         <include layout="@layout/content_layout"
             />
     </android.support.v4.widget.NestedScrollView>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:contentInsetStart="0dip"
+        android:elevation="0dip"
+        app:layout_collapseMode="pin"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:paddingLeft="20dip"
@@ -59,7 +70,7 @@
             app:border_color="@android:color/white"
             app:border_width="2dp"
             android:onClick="onClickListener"
-          />
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,4 +114,5 @@
             android:textStyle="bold"
             android:textColor="@android:color/white" />
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>
