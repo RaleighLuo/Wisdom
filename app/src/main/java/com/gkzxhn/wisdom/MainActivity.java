@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +62,16 @@ public class MainActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 int maxScroll = appBarLayout.getTotalScrollRange();
                 float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+                if(percentage>1)percentage=1;
+                if(percentage<0)percentage=0;
+                Log.e("percentage="+percentage+",isExpanded="+isExpanded,"raleigh_test");
+                if(percentage==1){
+                    isExpanded=false;
+                } else if(percentage==0){
+                    isExpanded=true;
+                }
                 handleAlphaOnTitle(percentage);
+
             }
         });
 
@@ -95,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
 
     // 控制Title的显示
     private void handleAlphaOnTitle(float percentage) {
+
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
             if (mIsTheTitleContainerVisible) {
                 startAlphaAnimation(mLlTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-
                 mIsTheTitleContainerVisible = false;
             }
         } else {

@@ -11,52 +11,52 @@
         android:id="@+id/main_layout_v_top_gap"
         />
     <!--<TextView-->
-        <!--android:id="@+id/main_tv_toolbar_title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="70dip"-->
-        <!--android:text="八栋三单元1205"-->
-        <!--android:paddingLeft="@dimen/image_final_margin"-->
-        <!--android:paddingRight="@dimen/image_final_margin"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:textSize="18sp"-->
-        <!--/>-->
+    <!--android:id="@+id/main_tv_toolbar_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="70dip"-->
+    <!--android:text="八栋三单元1205"-->
+    <!--android:paddingLeft="@dimen/image_final_margin"-->
+    <!--android:paddingRight="@dimen/image_final_margin"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="18sp"-->
+    <!--/>-->
     <!--<TextView-->
-        <!--android:id="@+id/main_layout_tv_t1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="海文花园"-->
-        <!--android:paddingLeft="@dimen/image_final_margin"-->
-        <!--android:paddingRight="@dimen/image_final_margin"-->
-        <!--android:layout_below="@+id/main_tv_toolbar_title"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_marginTop="7dip"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:textSize="22sp"-->
-        <!--/>-->
+    <!--android:id="@+id/main_layout_tv_t1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="海文花园"-->
+    <!--android:paddingLeft="@dimen/image_final_margin"-->
+    <!--android:paddingRight="@dimen/image_final_margin"-->
+    <!--android:layout_below="@+id/main_tv_toolbar_title"-->
+    <!--android:textStyle="bold"-->
+    <!--android:layout_marginTop="7dip"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="22sp"-->
+    <!--/>-->
 
     <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="2017年6月20号"-->
-        <!--android:paddingLeft="@dimen/image_final_margin"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="2017年6月20号"-->
+    <!--android:paddingLeft="@dimen/image_final_margin"-->
 
-        <!--android:layout_below="@+id/main_layout_tv_t1"-->
-        <!--android:layout_marginTop="12dip"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:textSize="12sp"-->
-        <!--/>-->
+    <!--android:layout_below="@+id/main_layout_tv_t1"-->
+    <!--android:layout_marginTop="12dip"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="12sp"-->
+    <!--/>-->
     <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="星期三"-->
-        <!--android:paddingRight="@dimen/image_final_margin"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_below="@+id/main_layout_tv_t1"-->
-        <!--android:layout_marginTop="12dip"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:textSize="12sp"-->
-        <!--/>-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="星期三"-->
+    <!--android:paddingRight="@dimen/image_final_margin"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_below="@+id/main_layout_tv_t1"-->
+    <!--android:layout_marginTop="12dip"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="12sp"-->
+    <!--/>-->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:id="@+id/main_layout_cv_small_menu"
@@ -113,21 +113,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="20dip"
-        android:paddingLeft="10dip"
+        android:paddingLeft="20dip"
         android:id="@+id/main_layout_ll_big_menu"
         android:layout_below="@+id/main_layout_v_top_gap"
-        android:paddingRight="10dip"
+        android:paddingRight="20dip"
         android:background="@android:color/white"
         android:paddingTop="60dip"
         android:layout_gravity="center_horizontal"
         >
-        <com.starlight.mobile.android.lib.view.CusTextView
-            style="@style/main_pay_text_style"
-            android:text="@string/pay"
-            android:id="@+id/main_layout_tv_pay"
-            android:drawableTop="@mipmap/pay"
-            android:background="@drawable/main_pay_selector"
-            />
+            <com.starlight.mobile.android.lib.view.CusTextView
+                style="@style/main_pay_text_style"
+                android:text="@string/pay"
+                android:id="@+id/main_layout_tv_pay"
+                android:drawableTop="@mipmap/pay"
+                android:background="@drawable/main_pay_selector"
+                />
         <com.starlight.mobile.android.lib.view.CusTextView
             style="@style/main_pay_text_style"
             android:text="@string/talking"
