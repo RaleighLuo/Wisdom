@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.main_abl_app_bar)
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
 
-    @Bind(R.id.main_tv_toolbar_title)
-    TextView mTvToolbarTitle; // 标题栏Title
     @Bind(R.id.NestedScrollView)
     NestedScrollView mNestedScrollView; // 标题栏Title
 
