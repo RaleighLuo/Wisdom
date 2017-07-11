@@ -8,4 +8,14 @@
     <color name="repair_color">#4793f6</color>
     <color name="property_color">#6c6cc1</color>
     <color name="committee_color">#40b1b0</color>
+
+    <color name="common_hint_text_color">#cccccc</color>
+    <color name="common_gray_title_color">#999999</color>
+    <color name="common_text_color">#333333</color>
+    <color name="common_light_text_color">#666666</color>
+    <color name="common_item_click_color">#d0dcea</color>
+    <color name="common_bg_color">#f4f3f3</color>
+    <color name="light_gray_color">#FFDEDFE0</color>
+    <color name="common_dark_gray_text_color">#999999</color>
+    <color name="common_line_color">#eeeeee</color>
 </resources>

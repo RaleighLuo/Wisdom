@@ -1,5 +1,6 @@
-package com.gkzxhn.wisdom;
+package com.gkzxhn.wisdom.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,10 +17,9 @@ import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,30 +29,29 @@ public class MainActivity extends AppCompatActivity {
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
     private boolean mIsTheTitleContainerVisible = true;
-
-
-    @Bind(R.id.home_full_screen_layout_ll_title_container)
     View mLlTitleContainer; // Title的LinearLayout
-
-    @Bind(R.id.main_layout_fl_title)
     FrameLayout mFlTitleContainer; // Title的FrameLayout
-
-    @Bind(R.id.main_layout_app_bar)
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
-
-    @Bind(R.id.main_layout_nestedscrollview)
     NestedScrollView mNestedScrollView; // 标题栏Title
-    @Bind(R.id.main_layout_recyclerView)
     RecyclerView mRecyclerView; // 工具栏
-    @Bind(R.id.main_layout_toolbar)
     Toolbar mToolbar; // 工具栏
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        initControls();
+        init();
+    }
+    private void initControls(){
+        mFlTitleContainer= (FrameLayout) findViewById(R.id.main_layout_fl_title);
+        mLlTitleContainer=findViewById(R.id.home_full_screen_layout_ll_title_container);
+        mAblAppBar= (AppBarLayout) findViewById(R.id.main_layout_app_bar);
+        mNestedScrollView= (NestedScrollView) findViewById(R.id.main_layout_nestedscrollview);
+        mRecyclerView= (RecyclerView) findViewById(R.id.main_layout_recyclerView);
+        mToolbar= (Toolbar) findViewById(R.id.main_layout_toolbar);
+    }
+    private void init(){
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         // AppBar的监听
@@ -89,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){
-        isExpanded=!isExpanded;
-        mAblAppBar.setExpanded(isExpanded);
+        if(view.getId()==R.id.main_layout_tv_newst_notice){
+            startActivity(new Intent(this,NoticeActivity.class));
+        }else {
+            isExpanded = !isExpanded;
+            mAblAppBar.setExpanded(isExpanded);
+        }
     }
 
     // 设置自动滑动的动画效果

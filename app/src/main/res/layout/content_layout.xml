@@ -121,13 +121,13 @@
         android:paddingTop="60dip"
         android:layout_gravity="center_horizontal"
         >
-            <com.starlight.mobile.android.lib.view.CusTextView
-                style="@style/main_pay_text_style"
-                android:text="@string/pay"
-                android:id="@+id/main_layout_tv_pay"
-                android:drawableTop="@mipmap/pay"
-                android:background="@drawable/main_pay_selector"
-                />
+        <com.starlight.mobile.android.lib.view.CusTextView
+            style="@style/main_pay_text_style"
+            android:text="@string/pay"
+            android:id="@+id/main_layout_tv_pay"
+            android:drawableTop="@mipmap/pay"
+            android:background="@drawable/main_pay_selector"
+            />
         <com.starlight.mobile.android.lib.view.CusTextView
             style="@style/main_pay_text_style"
             android:text="@string/talking"
@@ -145,9 +145,33 @@
             android:background="@drawable/main_repair_selector"
             />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/main_layout_tv_newst_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/newst_notice"
+        android:paddingLeft="35dip"
+        android:paddingTop="10dip"
+        android:onClick="onClickListener"
+        android:clickable="true"
+        android:textColor="@color/common_text_color"
+        android:paddingBottom="20dip"
+        android:background="@android:color/white"
+        android:layout_below="@+id/main_layout_ll_big_menu"
+        />
+    <View android:layout_width="5dip"
+        android:id="@+id/main_layout_v_newst_notice"
+        android:layout_marginLeft="20dip"
+        android:layout_marginBottom="22dip"
+        android:layout_marginTop="12dip"
+        android:background="@color/property_color"
+        android:layout_alignBottom="@+id/main_layout_tv_newst_notice"
+        android:layout_alignTop="@+id/main_layout_tv_newst_notice"
+        android:layout_height="wrap_content"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_below="@+id/main_layout_ll_big_menu"
+        android:layout_below="@+id/main_layout_tv_newst_notice"
         android:id="@+id/main_layout_recyclerView"
         android:background="@android:color/white"
         android:layout_above="@+id/content_layout_v_bottom"
