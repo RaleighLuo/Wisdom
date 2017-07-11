@@ -20,6 +20,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.PublishRepairActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
             android:name=".activity.NoticeActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"

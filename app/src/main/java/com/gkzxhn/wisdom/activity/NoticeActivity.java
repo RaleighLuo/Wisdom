@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/11.
+ * 通知公告
  */
 
 public class NoticeActivity extends  SuperFragmentActivity{

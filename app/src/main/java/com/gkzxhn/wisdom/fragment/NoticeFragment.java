@@ -73,11 +73,12 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
 
     @Override
     public void onRefresh() {
+        mSwipeRefresh.setRefreshing(false);
 
     }
 
     @Override
     public void onLoad() {
-
+        mSwipeRefresh.setLoading(false);
     }
 }
