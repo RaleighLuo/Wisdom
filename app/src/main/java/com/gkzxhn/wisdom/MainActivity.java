@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
@@ -32,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean mIsTheTitleContainerVisible = true;
 
 
-    @Bind(R.id.main_ll_title_container)
+    @Bind(R.id.home_full_screen_layout_ll_title_container)
     View mLlTitleContainer; // Title的LinearLayout
 
-    @Bind(R.id.main_fl_title)
+    @Bind(R.id.main_layout_fl_title)
     FrameLayout mFlTitleContainer; // Title的FrameLayout
 
-    @Bind(R.id.main_abl_app_bar)
+    @Bind(R.id.main_layout_app_bar)
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
 
     @Bind(R.id.main_layout_nestedscrollview)
