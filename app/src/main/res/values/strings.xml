@@ -4,6 +4,9 @@
     <string name="no_data">暂无数据</string>
     <!--common-->
     <string name="commit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="take_photo">拍照</string>
+    <string name="album">相册</string>
     <!--主页-->
     <string name="pay">缴费</string>
     <string name="talking">话题</string>
