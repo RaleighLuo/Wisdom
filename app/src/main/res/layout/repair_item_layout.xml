@@ -59,6 +59,7 @@
         android:layout_marginLeft="10dip"
         android:layout_height="wrap_content"
         android:text="@string/delete"
+        android:padding="5dip"
         android:background="@drawable/repair_delete_btn_selector"
         android:textColor="@color/red"
         />
