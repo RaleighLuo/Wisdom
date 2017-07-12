@@ -32,4 +32,7 @@
     <dimen name="main_layout_home_number_padding_top">25dip</dimen>
     <dimen name="main_layout_community_name_padding_top">20dip</dimen>
 
+    <!--边距-->
+    <dimen name="margin">15dip</dimen>
+
 </resources>

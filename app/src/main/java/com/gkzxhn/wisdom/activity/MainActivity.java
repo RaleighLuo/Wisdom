@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getApplicationContext(),"Click Setting",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,PersonInforActivity.class));
                 return false;
             }
         });
