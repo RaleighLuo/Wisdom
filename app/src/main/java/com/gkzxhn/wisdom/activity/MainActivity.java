@@ -88,11 +88,17 @@ public class MainActivity extends AppCompatActivity {
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){
-        if(view.getId()==R.id.main_layout_tv_newst_notice){
-            startActivity(new Intent(this,NoticeActivity.class));
-        }else {
-            isExpanded = !isExpanded;
-            mAblAppBar.setExpanded(isExpanded);
+        switch (view.getId()){
+            case R.id.main_layout_tv_repair:
+                startActivity(new Intent(this,PublishRepairActivity.class));
+                break;
+            case R.id.main_layout_tv_newst_notice:
+                startActivity(new Intent(this,NoticeActivity.class));
+                break;
+            default:
+                isExpanded = !isExpanded;
+                mAblAppBar.setExpanded(isExpanded);
+                break;
         }
     }
 

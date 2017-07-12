@@ -18,4 +18,5 @@
     <color name="light_gray_color">#FFDEDFE0</color>
     <color name="common_dark_gray_text_color">#999999</color>
     <color name="common_line_color">#cccccc</color>
+    <color name="red">#fd0101</color>
 </resources>
