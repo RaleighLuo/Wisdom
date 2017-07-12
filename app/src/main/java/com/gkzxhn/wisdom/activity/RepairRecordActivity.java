@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -103,6 +104,9 @@ public class RepairRecordActivity extends SuperFragmentActivity {
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();
+                break;
+            case R.id.common_head_layout_tv_right:
+                startActivity(new Intent(this,PublishRepairActivity.class));
                 break;
         }
     }

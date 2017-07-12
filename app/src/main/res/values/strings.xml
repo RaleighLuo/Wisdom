@@ -28,4 +28,12 @@
     <string name="finished">完成</string>
     <string name="detail">详情</string>
     <string name="delete">删除</string>
+    <string name="publish">发布</string>
+    <!--个人中心-->
+    <string name="person_infor">个人中心</string>
+    <string name="sign_hint">每日签到可得到1金币</string>
+    <string name="sign_immediately">立即签到</string>
+    <string name="contact_phone">联系电话</string>
+    <string name="own_community">我的小区</string>
+    <string name="contact_property">联系物业</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -23,8 +24,15 @@ public class PublishRepairActivity extends SuperActivity{
     }
     private void initControls(){
         etContent= (EditText) findViewById(R.id.publish_repair_layout_et_content);
-        btnSubmit.findViewById(R.id.publish_repair_layout_btn_submit);
+        btnSubmit= (Button) findViewById(R.id.publish_repair_layout_btn_submit);
     }
     private void init(){
+    }
+    public void onClickListener(View view) {
+        switch (view.getId()) {
+            case R.id.common_head_layout_iv_left:
+                finish();
+                break;
+        }
     }
 }
