@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="15dip"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/repair_item_layout_fl_oval"
+        android:layout_width="wrap_content"
+        android:layout_alignBottom="@+id/repair_item_layout_tv_title"
+        android:layout_alignTop="@+id/repair_item_layout_tv_title"
+        android:layout_height="wrap_content">
+        <View android:layout_width="5dip"
+            android:layout_gravity="center_vertical"
+            android:layout_height="5dip"
+            android:background="@drawable/repair_oval_shape"
+            />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/repair_item_layout_tv_title"
+        android:layout_toLeftOf="@+id/repair_item_layout_ll_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设备设施"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@+id/repair_item_layout_fl_oval"
+        android:textColor="@color/common_text_color"
+        />
+    <TextView
+        android:id="@+id/repair_item_layout_tv_date"
+        android:layout_width="wrap_content"
+        android:layout_alignLeft="@+id/repair_item_layout_tv_title"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/repair_item_layout_tv_title"
+        android:text="2017年6月1号"
+        android:layout_marginTop="5dip"
+        android:textColor="@color/common_gray_title_color"
+        android:textSize="12sp"
+        />
+<LinearLayout
+    android:id="@+id/repair_item_layout_ll_buttom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignParentRight="true"
+    >
+    <TextView
+        android:id="@+id/repair_item_layout_tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/detail"
+        android:padding="5dip"
+        android:background="@drawable/repair_detial_btn_selector"
+        />
+    <TextView
+        android:id="@+id/repair_item_layout_tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@drawable/repair_delete_btn_selector"
+        android:textColor="@color/red"
+        />
+</LinearLayout>
+</RelativeLayout>
