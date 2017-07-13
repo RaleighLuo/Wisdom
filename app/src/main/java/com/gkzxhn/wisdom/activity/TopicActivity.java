@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
+import com.gkzxhn.wisdom.fragment.TopicFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -36,8 +37,8 @@ public class TopicActivity extends SuperFragmentActivity{
     }
     private void init(){
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new NoticeFragment());
-        fragmentList.add(new NoticeFragment());
+        fragmentList.add(new TopicFragment());
+        fragmentList.add(new TopicFragment());
         adapter=new ViewPagerAdapter(this,getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
