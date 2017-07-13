@@ -105,9 +105,6 @@ public class RepairRecordActivity extends SuperFragmentActivity {
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
-            case R.id.common_head_layout_tv_right:
-                startActivity(new Intent(this,PublishRepairActivity.class));
-                break;
         }
     }
 }

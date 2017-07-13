@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.main_layout_tv_repair:
-                startActivity(new Intent(this,RepairRecordActivity.class));
+                startActivity(new Intent(this,PublishRepairActivity.class));
                 break;
             case R.id.main_layout_tv_newst_notice:
                 startActivity(new Intent(this,NoticeActivity.class));

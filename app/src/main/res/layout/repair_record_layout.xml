@@ -9,7 +9,6 @@
         style="@style/common_head_style"
         mAttr:chHead_leftImg="@mipmap/ic_back"
         mAttr:chHead_title="@string/repair_record"
-        mAttr:chHead_rightText="@string/publish"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
     <RadioGroup
