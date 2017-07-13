@@ -61,6 +61,7 @@ public class PersonInforActivity extends SuperActivity {
             case R.id.person_infor_layout_tv_sign://每日签到
                 break;
             case R.id.person_infor_layout_tv_pay_record://缴费记录
+                startActivity(new Intent(this,PayRecordActivity.class));
                 break;
             case R.id.person_infor_layout_tv_repair_record://报修记录
                 startActivity(new Intent(this,RepairRecordActivity.class));
