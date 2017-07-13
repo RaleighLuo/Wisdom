@@ -78,6 +78,8 @@
 
             android:layout_height="wrap_content">
             <ImageButton
+                android:id="@+id/main_layout_ib_message"
+                android:onClick="onClickListener"
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -85,6 +87,9 @@
                 android:background="@null"
                 />
             <ImageButton
+                android:id="@+id/main_layout_ib_service"
+                android:onClick="onClickListener"
+
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -92,6 +97,9 @@
                 android:background="@null"
                 />
             <ImageButton
+                android:id="@+id/main_layout_ib_complaint"
+                android:onClick="onClickListener"
+
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -99,6 +107,8 @@
                 android:background="@null"
                 />
             <ImageButton
+                android:id="@+id/main_layout_ib_sign"
+                android:onClick="onClickListener"
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"

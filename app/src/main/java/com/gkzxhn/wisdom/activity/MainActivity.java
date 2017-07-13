@@ -101,9 +101,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.home_full_screen_layout_tv_repair_record://报修记录
                 startActivity(new Intent(this,RepairRecordActivity.class));
                 break;
+            case R.id.main_layout_tv_talking://话题
+                startActivity(new Intent(this,TopicActivity.class));
+                break;
             case R.id.main_layout_iv_portrait://头像
                 isExpanded = !isExpanded;
                 mAblAppBar.setExpanded(isExpanded);
+                break;
+            case R.id.main_layout_ib_complaint://投诉建议
+                startActivity(new Intent(this,ComplaintActivity.class));
+                break;
+            case R.id.main_layout_ib_message://消息
+                break;
+            case R.id.main_layout_ib_service://服务
+                break;
+            case R.id.main_layout_ib_sign://签到
                 break;
         }
     }
