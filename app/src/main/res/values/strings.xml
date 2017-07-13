@@ -26,6 +26,7 @@
     <string name="notice">通知</string>
     <string name="announcement">公告</string>
     <string name="comment">评论</string>
+
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>
     <string name="repair_type">报修类别</string>
@@ -49,4 +50,5 @@
     <!--话题-->
     <string name="own">我的</string>
     <string name="community">社区</string>
+    <string name="like">赞</string>
 </resources>

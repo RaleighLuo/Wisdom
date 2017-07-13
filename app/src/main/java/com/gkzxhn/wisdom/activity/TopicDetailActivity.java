@@ -1,57 +1,43 @@
-package com.gkzxhn.wisdom.fragment;
+package com.gkzxhn.wisdom.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.adapter.NoticeAdapter;
+import com.gkzxhn.wisdom.adapter.TopicCommentAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
 
 /**
- * Created by Raleigh.Luo on 17/7/11.
+ * Created by Raleigh.Luo on 17/7/13.
  */
 
-public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.OnRefreshListener,
+public class TopicDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
         CusSwipeRefreshLayout.OnLoadListener{
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
     private View ivNodata;
     private DotsTextView tvLoading;
-    private Context mActivity;
-    private View parentView;
-    private NoticeAdapter adapter;
+    private TopicCommentAdapter adapter;
     @Override
-    public void onAttach(Context activity) {
-        super.onAttach(activity);
-        this.mActivity=activity;
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        parentView = inflater.inflate(R.layout.common_list_layout, container,false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.topic_detial_layout);
         initControls();
         init();
-        return parentView;
     }
     private void initControls(){
-        parentView.findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(android.R.color.white);
-        tvLoading= (DotsTextView) parentView.findViewById(R.id.common_loading_layout_tv_load);
-        ivNodata=parentView.findViewById(R.id.common_no_data_layout_iv_image);
-        mRecyclerView= (RecyclerView) parentView.findViewById(R.id.common_list_layout_rv_list);
-        mSwipeRefresh= (CusSwipeRefreshLayout) parentView.findViewById(R.id.common_list_layout_swipeRefresh);
+        tvLoading= (DotsTextView) findViewById(R.id.common_loading_layout_tv_load);
+        ivNodata=findViewById(R.id.common_no_data_layout_iv_image);
+        mRecyclerView= (RecyclerView) findViewById(R.id.common_list_layout_rv_list);
+        mSwipeRefresh= (CusSwipeRefreshLayout) findViewById(R.id.common_list_layout_swipeRefresh);
 
     }
     private void init(){
@@ -64,12 +50,12 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
         // improve performance if you know that changes in content
         // do not change the size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
-        adapter=new NoticeAdapter(mActivity);
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        adapter=new TopicCommentAdapter(this);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
@@ -84,6 +70,14 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
     public void onLoad() {
         mSwipeRefresh.setLoading(false);
     }
+    public void onClickListener(View view){
+        switch (view.getId()){
+            case R.id.common_head_layout_iv_left:
+                finish();
+                break;
+        }
+    }
+
     public void startRefreshAnim() {
         //使用handler刷新页面状态,主要解决vNoDataHint显示问题
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
