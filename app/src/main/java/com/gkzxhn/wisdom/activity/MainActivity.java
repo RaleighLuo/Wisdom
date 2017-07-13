@@ -95,7 +95,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_layout_tv_newst_notice:
                 startActivity(new Intent(this,NoticeActivity.class));
                 break;
-            default:
+            case R.id.home_full_screen_layout_tv_pay_record://缴费记录
+                startActivity(new Intent(this,PayRecordActivity.class));
+                break;
+            case R.id.home_full_screen_layout_tv_repair_record://报修记录
+                startActivity(new Intent(this,RepairRecordActivity.class));
+                break;
+            case R.id.main_layout_iv_portrait://头像
                 isExpanded = !isExpanded;
                 mAblAppBar.setExpanded(isExpanded);
                 break;

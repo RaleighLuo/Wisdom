@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/pay_record_layout_ch_head"
+        style="@style/common_head_style"
+        mAttr:chHead_leftImg="@mipmap/ic_back"
+        mAttr:chHead_title="@string/pay_record"
+        mAttr:chHead_title_padding_left="0dip" />
+    <View style="@style/common_line_style"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:background="@color/common_bg_color"/>
+    <include layout="@layout/common_list_layout" />
+</LinearLayout>

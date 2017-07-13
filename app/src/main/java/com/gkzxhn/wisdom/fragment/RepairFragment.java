@@ -2,6 +2,8 @@ package com.gkzxhn.wisdom.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.adapter.RepairAdapter;
+import com.gkzxhn.wisdom.common.Constants;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -81,4 +84,47 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
     public void onLoad() {
         mSwipeRefresh.setLoading(false);
     }
+    public void startRefreshAnim() {
+        //使用handler刷新页面状态,主要解决vNoDataHint显示问题
+        handler.sendEmptyMessage(Constants.START_REFRESH_UI);
+    }
+
+    public void stopRefreshUI() {
+        handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
+    }
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what==Constants.START_REFRESH_UI){
+                if (adapter == null || adapter.getItemCount() == 0) {
+                    if (ivNodata.isShown()) {
+                        ivNodata.setVisibility(View.GONE);
+                    }
+                    tvLoading.setVisibility(View.VISIBLE);
+                    if (!tvLoading.isPlaying()) {
+
+                        tvLoading.showAndPlay();
+                    }
+                    if (mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(false);
+                } else {
+                    if (!mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(true);
+                }
+            }else if(msg.what== Constants.STOP_REFRESH_UI){
+                if (tvLoading.isPlaying() || tvLoading.isShown()) {
+                    tvLoading.hideAndStop();
+                    tvLoading.setVisibility(View.GONE);
+                }
+                if (!mSwipeRefresh.isShown()) mSwipeRefresh.setVisibility(View.VISIBLE);
+                if (mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(false);
+                if (mSwipeRefresh.isLoading()) mSwipeRefresh.setLoading(false);
+                if (adapter == null || adapter.getItemCount() == 0) {
+
+                    if (!ivNodata.isShown()) ivNodata.setVisibility(View.VISIBLE);
+                } else {
+                    if (ivNodata.isShown()) ivNodata.setVisibility(View.GONE);
+                }
+            }
+        }
+    };
 }
