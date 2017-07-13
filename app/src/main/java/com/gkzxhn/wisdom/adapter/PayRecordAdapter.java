@@ -29,6 +29,12 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

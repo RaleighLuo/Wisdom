@@ -3,6 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dip"
+    android:background="@drawable/common_item_click_selector"
     >
     <FrameLayout
         android:layout_width="wrap_content"
