@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/common_item_click_selector"
     >
     <ImageView
         android:id="@+id/topic_item_layout_iv_portrait"
-        android:layout_width="52dip"
-        android:layout_height="52dip"
-        android:layout_margin="@dimen/margin"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="10dip"
         android:src="@mipmap/topic_portrait"
         />
     <TextView
@@ -28,7 +31,7 @@
         android:layout_alignLeft="@+id/topic_item_layout_tv_name"
         android:layout_below="@+id/topic_item_layout_tv_name"
         android:textColor="@color/common_hint_text_color"
-        android:layout_marginTop="3dip"
+        android:layout_marginTop="1dip"
         android:text="6-19 08:07"
         />
     <TextView
@@ -57,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/topic_item_layout_iv_comment"
         android:text="6"
+        android:textSize="12sp"
         android:textColor="@color/common_light_text_color"
         android:layout_marginLeft="5dip"
         android:layout_alignTop="@+id/topic_item_layout_iv_comment"
@@ -64,7 +68,7 @@
 
     <ImageView
         android:id="@+id/topic_item_layout_iv_like"
-        android:layout_width="19dip"
+        android:layout_width="16dip"
         android:layout_height="16dip"
         android:layout_toLeftOf="@+id/topic_item_layout_tv_like"
         android:src="@drawable/like_btn_selector"
@@ -76,6 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="6"
+        android:textSize="12sp"
         android:layout_alignParentRight="true"
         android:textColor="@color/common_light_text_color"
         android:layout_marginLeft="5dip"
