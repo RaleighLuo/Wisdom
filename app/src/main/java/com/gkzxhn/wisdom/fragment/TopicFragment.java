@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.TopicDetailActivity;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicAdapter;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
@@ -66,9 +69,16 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new TopicAdapter(mActivity);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            startActivity(new Intent(mActivity, TopicDetailActivity.class));
+        }
+    };
 
     @Override
     public void onRefresh() {
