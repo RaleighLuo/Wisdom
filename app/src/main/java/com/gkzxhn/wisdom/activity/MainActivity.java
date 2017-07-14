@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_layout_ib_service://服务
                 break;
             case R.id.main_layout_ib_sign://签到
+                startActivity(new Intent(this,SignActivity.class));
                 break;
         }
     }

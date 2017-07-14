@@ -59,6 +59,7 @@ public class PersonInforActivity extends SuperActivity {
 
                 break;
             case R.id.person_infor_layout_tv_sign://每日签到
+                startActivity(new Intent(this,SignActivity.class));
                 break;
             case R.id.person_infor_layout_tv_pay_record://缴费记录
                 startActivity(new Intent(this,PayRecordActivity.class));

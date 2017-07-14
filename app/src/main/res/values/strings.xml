@@ -51,4 +51,11 @@
     <string name="own">我的</string>
     <string name="community">社区</string>
     <string name="like">赞</string>
+    <!--签到-->
+    <string name="click_sign">点击签到</string>
+    <string name="sign">签到</string>
+    <string name="coin">金币</string>
+    <string name="sign_in_day">连续签到天数</string>
+    <string name="sign_describe">签到说明</string>
+    <string name="sign_describe_hint">每天签到一次，获取对应积分；连续签到，积分更多哦！</string>
 </resources>

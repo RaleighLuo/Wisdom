@@ -105,8 +105,7 @@ public class TopicActivity extends SuperFragmentActivity{
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
-            case R.id.common_head_layout_iv_right:
-                startActivity(new Intent(this,TopicDetailActivity.class));
+            case R.id.common_head_layout_iv_right://发布话题
                 break;
         }
     }
