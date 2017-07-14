@@ -7,6 +7,11 @@
     <string name="cancel">取消</string>
     <string name="take_photo">拍照</string>
     <string name="album">相册</string>
+    <!--登录-->
+    <string name="phone_number">手机号</string>
+    <string name="get_verfy_code">获取验证码</string>
+    <string name="verfy_code">验证码</string>
+    <string name="login">登录</string>
     <!--主页-->
     <string name="pay">缴费</string>
     <string name="talking">话题</string>
