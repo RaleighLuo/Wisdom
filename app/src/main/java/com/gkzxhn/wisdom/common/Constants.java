@@ -8,6 +8,7 @@ import android.os.Environment;
 
 public interface Constants {
     /*-------------------------------Configration-------------------------------------------------*/
+    final int REQUEST_TIMEOUT=60000;//超时时间1分钟
     public final String ATTACH_TYPE_IMAGE_POSTFIX_JPEG=".jpg";
     public final String SD_ROOT_PATH= Environment.getExternalStorageDirectory().getPath()+"/WQLMLawyer";
     public final String SD_FILE_CACHE_PATH = SD_ROOT_PATH+"/cache/";
@@ -20,6 +21,7 @@ public interface Constants {
     final String USER_TABLE="user_table";
     final String USER_IS_UNAUTHORIZED="isUnauthorized";
     final String USER_ID="user_id";
+    final String USER_TOKEN="user_token";
     final String USER_NAME="user_name";
     final String USER_PHONE="user_phone";
     final String USER_PORTRAIT="user_portrait";
@@ -32,13 +34,12 @@ public interface Constants {
     final String CLOSE_MESSAGE_NOTICE="close_message_notice";//关闭消息通知
     final String USER_SIGNED_STATUS="user_signed_status";//签约状态：0-未签约；1-签约中；2-签约失败；3-签约成功
     /*-------------------------------Request URL-------------------------------------------------*/
-    public final String RELEASE_DOMAIN="https://www.weiquanlianmeng.com/activistAlliance";//发布正式环境
-    public final String TEST_DOMAIN="http://10.10.10.103:8080/activistAlliance";//发布正式环境
-    public final String DEMO_DOMAIN="http://10.10.10.101:8080/activistAlliance";//开发环境
-    public final String DOMAIN_NAME_XLS = RELEASE_DOMAIN;
+    public final String RELEASE_DOMAIN="http://10.93.1.100:3000";//发布正式环境
+    public final String DEMO_DOMAIN="http://10.10.10.119:3000";//开发环境
+    public final String DOMAIN_NAME_XLS = DEMO_DOMAIN;
 
-    final String REQUEST_REGISTER_URL=DOMAIN_NAME_XLS+"/lawyer/register";//注册
-
+    final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
+    final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//登录
 
     /*-------------------------------Request Code-------------------------------------------------*/
     final String EXTRA="extra";
