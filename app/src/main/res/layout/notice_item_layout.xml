@@ -2,36 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
     android:background="@drawable/common_item_click_selector"
     >
 
-    <ImageView
-        android:id="@+id/notice_item_layout_iv_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/notice_item_layout_tv_icon"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
         android:layout_margin="10dip"
-        android:src="@mipmap/ic_launcher"
+        android:text="@string/wu"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@drawable/property_oval_shape"
         />
     <TextView
         android:id="@+id/notice_item_layout_tv_title"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/notice_item_layout_iv_image"
+        android:layout_toRightOf="@+id/notice_item_layout_tv_icon"
         android:layout_height="wrap_content"
         android:text="YYL666"
-        android:textColor="@android:color/black"
-        android:layout_alignTop="@+id/notice_item_layout_iv_image"
-        android:textSize="16sp"
+        android:textColor="@color/common_light_text_color"
+        android:layout_alignTop="@+id/notice_item_layout_tv_icon"
+        android:textSize="14sp"
         />
     <TextView
         android:id="@+id/notice_item_layout_tv_content"
         android:layout_width="wrap_content"
-        android:textColor="@android:color/black"
-        android:layout_toRightOf="@+id/notice_item_layout_iv_image"
+        android:textColor="@color/common_light_text_color"
+        android:layout_toRightOf="@+id/notice_item_layout_tv_icon"
         android:layout_height="wrap_content"
         android:text="6月20号晚上10点小区断电"
         android:layout_marginTop="10dip"
         android:layout_below="@+id/notice_item_layout_tv_title"
-        android:textSize="14sp"
+        android:textSize="12sp"
         />
 
     <TextView

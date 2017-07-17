@@ -17,7 +17,7 @@ public class ComplaintActivity extends SuperActivity {
     }
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.common_head_layout_iv_left:
+            case R.id.complaint_layout_iv_back:
                 finish();
                 break;
         }

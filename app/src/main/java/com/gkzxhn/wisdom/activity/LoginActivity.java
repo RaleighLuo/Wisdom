@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.gkzxhn.wisdom.view.ILoginView;
 public class LoginActivity extends SuperActivity implements ILoginView{
     private EditText etPhone,etVerifyCode;
     private LoginPresenter mPresenter;
+    private ProgressDialog mProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +29,13 @@ public class LoginActivity extends SuperActivity implements ILoginView{
     private void initControls(){
         etPhone= (EditText) findViewById(R.id.login_layout_et_phone);
         etVerifyCode= (EditText) findViewById(R.id.login_layout_et_verfy_code);
-        etPhone.setText("18163657553");
+
     }
     private void init(){
+        etPhone.setText("18163657553");
         mPresenter=new LoginPresenter(this,this);
+        mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
+        stopRefreshAnim();
     }
     public void onClickListener(View view){
         switch (view.getId()){
@@ -63,13 +68,15 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 
     @Override
     public void startRefreshAnim() {
-
+        if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
     }
 
     @Override
     public void stopRefreshAnim() {
-
+        if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
     }
+
+
 
     @Override
     public void onSuccess() {

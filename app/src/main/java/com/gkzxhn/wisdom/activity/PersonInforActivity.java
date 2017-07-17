@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.util.Utils;
 import com.starlight.mobile.android.lib.activity.CutPhotoActivity;
 import com.starlight.mobile.android.lib.album.AlbumActivity;
@@ -69,6 +70,9 @@ public class PersonInforActivity extends SuperActivity {
                 break;
             case R.id.person_infor_layout_tv_contact_property://联系物业
                 break;
+            case R.id.person_infor_layout_btn_login_off://退出当前账号
+                GKApplication.getInstance().exit();
+                break;
         }
     }
 
@@ -107,8 +111,8 @@ public class PersonInforActivity extends SuperActivity {
             try {
                 if (v.getId() == R.id.cus_photo_from_dialog_layout_btn_album) {//Album
                     if (!PermissionManager.getInstance(PersonInforActivity.this).execute(PersonInforActivity.this, Constants.SELECT_PHOTO_CODE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE)){
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)){
                         Intent intent = new Intent(PersonInforActivity.this, AlbumActivity.class);
                         intent.setAction(AlbumActivity.EXTRAS_SIGLE_MODE);
                         startActivityForResult(intent, Constants.SELECT_PHOTO_CODE);

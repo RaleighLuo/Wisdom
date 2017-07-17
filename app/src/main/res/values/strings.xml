@@ -44,6 +44,8 @@
     <string name="notice">通知</string>
     <string name="announcement">公告</string>
     <string name="comment">评论</string>
+    <string name="wu">物</string>
+    <string name="ju">居</string>
 
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>
@@ -62,6 +64,7 @@
     <string name="contact_phone">联系电话</string>
     <string name="own_community">我的小区</string>
     <string name="contact_property">联系物业</string>
+    <string name="exit_account">退出当前账号</string>
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
 
