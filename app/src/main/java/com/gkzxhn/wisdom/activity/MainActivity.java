@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_layout_ib_sign://签到
                 startActivity(new Intent(this,SignActivity.class));
                 break;
+            case R.id.main_layout_tv_pay://缴费
+                startActivity(new Intent(this,PropertyPaymentActivity.class));
+                break;
         }
     }
 

@@ -69,7 +69,20 @@
     <string name="exit_account">退出当前账号</string>
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
-
+    <string name="payment">支付</string>
+    <string name="please_pay">请支付</string>
+    <string name="has_pay">已支付</string>
+    <string name="three_month">三个月</string>
+    <string name="six_month">六个月</string>
+    <string name="one_year">一年</string>
+    <string name="property_fee">物业费</string>
+    <string name="total_area">总面积</string>
+    <string name="property_fee_pay_success">已成功支付，感谢您的使用！</string>
+    <string name="select_payment_method">选择支付方式</string>
+    <string name="property_payment_hint">此次物业费缴费需要支付</string>
+    <string name="alipay_payment">支付宝支付</string>
+    <string name="weixin_payment">微信支付</string>
+    <string name="money_unit">￥</string>
     <!--话题-->
     <string name="own">我的</string>
     <string name="community">社区</string>

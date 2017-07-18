@@ -68,4 +68,16 @@
         <item name="chHead_textClickEffect">@drawable/common_head_btn_selector</item>
 
     </style>
+    <style name="custom_dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--设置文字颜色-->
+        <item name="colorAccent">@color/common_text_color</item>
+
+    </style>
 </resources>

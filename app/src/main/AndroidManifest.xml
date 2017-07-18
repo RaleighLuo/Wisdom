@@ -126,6 +126,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
 
         <activity
+            android:name=".activity.PropertyPaymentActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
+        <activity
             android:name=".activity.TopicDetailActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
