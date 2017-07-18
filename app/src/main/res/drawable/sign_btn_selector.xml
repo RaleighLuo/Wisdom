@@ -5,7 +5,7 @@
             <!-- solid的表示填充颜色 -->
             <solid android:color="#bb1c1b6e" />
             <corners
-                android:radius="2dp"/>
+                android:radius="3dp"/>
 
         </shape>
     </item>
@@ -14,7 +14,7 @@
             <!-- solid的表示填充颜色 -->
             <solid android:color="@color/colorPrimary" />
             <corners
-                android:radius="2dp"/>
+                android:radius="3dp"/>
         </shape>
     </item>
 </selector>
