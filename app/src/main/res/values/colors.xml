@@ -19,4 +19,7 @@
     <color name="common_dark_gray_text_color">#999999</color>
     <color name="common_line_color">#dddddd</color>
     <color name="red">#fd0101</color>
+
+    <color name="repair_progress_bg">#252b34</color>
+    <color name="repair_progress_text_color">#7d81ea</color>
 </resources>

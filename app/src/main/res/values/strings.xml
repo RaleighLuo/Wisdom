@@ -57,6 +57,8 @@
     <string name="detail">详情</string>
     <string name="delete">删除</string>
     <string name="publish">发布</string>
+    <string name="award">赏</string>
+    <string name="property_assignment_order">物业指派工单</string>
     <!--个人中心-->
     <string name="person_infor">个人中心</string>
     <string name="sign_hint">每日签到可得到1金币</string>
