@@ -130,6 +130,12 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.TakePhotoPreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AlbumTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
 
         <activity
             android:name=".activity.TopicDetailActivity"

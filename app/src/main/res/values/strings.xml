@@ -8,7 +8,8 @@
     <string name="take_photo">拍照</string>
     <string name="album">相册</string>
     <string name="please_input">请输入</string>
-
+    <string name="confirm">确定</string>
+    <string name="delete_photo_hint">是否删除该图片？</string>
     <string name="please_waiting">请稍候...</string>
     <string name="unexpected_errors">服务不可用，请稍后再试</string>
     <string name="user_not_authorized">登录已失效，请重新登录</string>
