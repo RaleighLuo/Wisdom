@@ -61,7 +61,7 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
-    public void onClickListenter(View view){
+    public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();

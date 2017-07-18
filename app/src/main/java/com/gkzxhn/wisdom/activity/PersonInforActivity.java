@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class PersonInforActivity extends SuperActivity {
     private CusPhotoFromDialog optionsDialog;//选择相册或拍照对话框
     private File PhotoFile = null;
     private ImageView ivPortrait;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +43,17 @@ public class PersonInforActivity extends SuperActivity {
         initControls();
         init();
     }
-    private void initControls(){
-        ivPortrait= (ImageView) findViewById(R.id.person_infor_layout_iv_portrait);
+
+    private void initControls() {
+        ivPortrait = (ImageView) findViewById(R.id.person_infor_layout_iv_portrait);
     }
-    private void init(){
+
+    private void init() {
 
     }
-    public void onClickListener(View view){
-        switch (view.getId()){
+
+    public void onClickListener(View view) {
+        switch (view.getId()) {
             case R.id.common_head_layout_iv_left://返回
                 finish();
                 break;
@@ -60,15 +65,20 @@ public class PersonInforActivity extends SuperActivity {
 
                 break;
             case R.id.person_infor_layout_tv_sign://每日签到
-                startActivity(new Intent(this,SignActivity.class));
+                startActivity(new Intent(this, SignActivity.class));
                 break;
             case R.id.person_infor_layout_tv_pay_record://缴费记录
-                startActivity(new Intent(this,PayRecordActivity.class));
+                startActivity(new Intent(this, PayRecordActivity.class));
                 break;
             case R.id.person_infor_layout_tv_repair_record://报修记录
-                startActivity(new Intent(this,RepairRecordActivity.class));
+                startActivity(new Intent(this, RepairRecordActivity.class));
                 break;
             case R.id.person_infor_layout_tv_contact_property://联系物业
+                if (!PermissionManager.getInstance(PersonInforActivity.this).execute(PersonInforActivity.this, Constants.PHONE_CODE,
+                        Manifest.permission.CALL_PHONE)) {
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400-988-999")));
+                }
+
                 break;
             case R.id.person_infor_layout_btn_login_off://退出当前账号
                 GKApplication.getInstance().exit();
@@ -173,20 +183,26 @@ public class PersonInforActivity extends SuperActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults.length>0&&grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            if (requestCode == Constants.TAKE_PHOTO_CODE) {//权限允许后拍照
-                PhotoFile = new File(Constants.SD_PHOTO_PATH, UUID
-                        .randomUUID().toString().replace("-", "")
-                        + Constants.ATTACH_TYPE_IMAGE_POSTFIX_JPEG);
-                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Set image file save path
-                CommonHelper.creatDirToSDCard(Constants.SD_PHOTO_PATH);
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(PhotoFile));
-                startActivityForResult(intentCamera, Constants.TAKE_PHOTO_CODE);
-            }else if(requestCode == Constants.SELECT_PHOTO_CODE){//权限允许后选择相册
-                Intent intent = new Intent(PersonInforActivity.this, AlbumActivity.class);
-                intent.setAction(AlbumActivity.EXTRAS_SIGLE_MODE);
-                startActivityForResult(intent, Constants.SELECT_PHOTO_CODE);
+            switch (requestCode){
+                case Constants.PHONE_CODE:
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400-988-999")));
+                    break;
+                case Constants.TAKE_PHOTO_CODE:
+                    PhotoFile = new File(Constants.SD_PHOTO_PATH, UUID
+                            .randomUUID().toString().replace("-", "")
+                            + Constants.ATTACH_TYPE_IMAGE_POSTFIX_JPEG);
+                    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    // Set image file save path
+                    CommonHelper.creatDirToSDCard(Constants.SD_PHOTO_PATH);
+                    intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(PhotoFile));
+                    startActivityForResult(intentCamera, Constants.TAKE_PHOTO_CODE);
+                    break;
+                case Constants.SELECT_PHOTO_CODE:
+                    Intent intent = new Intent(PersonInforActivity.this, AlbumActivity.class);
+                    intent.setAction(AlbumActivity.EXTRAS_SIGLE_MODE);
+                    startActivityForResult(intent, Constants.SELECT_PHOTO_CODE);
+                    break;
             }
         }
     }

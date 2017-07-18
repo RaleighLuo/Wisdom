@@ -52,6 +52,7 @@ public interface Constants {
     final int TAKE_PHOTO_CODE=0x104;
     final int RESIZE_REQUEST_CODE=0x105;
     final int EXTRAS_CODE=0x106;
+    final int PHONE_CODE=0x107;
     /*-------------------------------msg what-------------------------------------------------*/
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
 
