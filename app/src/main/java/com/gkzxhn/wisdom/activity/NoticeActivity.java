@@ -86,12 +86,9 @@ public class NoticeActivity extends  SuperFragmentActivity{
                 }
                 isScrolling = false;
             }
-
         }
-
         @Override
         public void onPageScrolled(int selectedTab, float arg1, int arg2) {
-
         }
 
         @Override
