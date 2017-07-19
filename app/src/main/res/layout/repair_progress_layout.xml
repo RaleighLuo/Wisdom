@@ -11,7 +11,7 @@
         android:scaleType="centerInside"
         android:padding="10dip"
         android:onClick="onClickListener"
-        android:src="@android:drawable/btn_star"
+        android:src="@drawable/ic_menu_backward"
         />
     <TextView
         android:id="@+id/repair_progress_layout_tv_status"
@@ -33,10 +33,14 @@
         android:textSize="20sp"
         android:textColor="@android:color/white"
         />
-    <View android:layout_height="10dip"
-        android:layout_marginTop="70dip"
+    <ProgressBar
+        android:id="@+id/repair_progress_layout_progress"
         android:layout_width="match_parent"
-        android:background="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dip"
+        android:progress="1"
+        android:max="3"
+        style="?android:attr/progressBarStyleHorizontal"
         />
     <ImageView
         android:id="@+id/repair_progress_layout_iv_award"

@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.PropertyFeeDetailActivity;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
@@ -32,7 +34,7 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                context.startActivity(new Intent(context, PropertyFeeDetailActivity.class));
             }
         });
 

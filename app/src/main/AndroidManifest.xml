@@ -108,6 +108,7 @@
             android:name=".activity.RepairProgressActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:theme="@style/RepairProgressTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
         <activity
             android:name=".activity.ComplaintActivity"
@@ -136,6 +137,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AlbumTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.PropertyFeeDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AlbumTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
 
         <activity
             android:name=".activity.TopicDetailActivity"

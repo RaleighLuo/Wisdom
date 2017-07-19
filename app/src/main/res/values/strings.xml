@@ -84,6 +84,7 @@
     <string name="alipay_payment">支付宝支付</string>
     <string name="weixin_payment">微信支付</string>
     <string name="money_unit">￥</string>
+    <string name="payment_detail">缴费详情</string>
     <!--话题-->
     <string name="own">我的</string>
     <string name="community">社区</string>
