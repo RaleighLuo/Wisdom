@@ -25,9 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="320dip"
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 app:layout_collapseMode="parallax">
-                <include layout="@layout/home_full_screen_layout"/>
+                <!--<include layout="@layout/home_full_screen_layout"/>-->
             </FrameLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -52,65 +53,5 @@
         android:elevation="0dip"
         app:layout_collapseMode="pin"
         app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:paddingLeft="@dimen/main_image_margin"
-        android:paddingRight="@dimen/main_image_margin"
-        android:paddingTop="@dimen/main_image_margin"
-        android:paddingBottom="10dip"
-        app:layout_behavior="com.gkzxhn.wisdom.behavior.AvatarImageBehavior"
-        android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_width"
-            android:src="@mipmap/small"
-            android:id="@+id/main_layout_iv_portrait"
-            app:border_color="@android:color/white"
-            app:border_width="2dp"
-            android:onClick="onClickListener"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2017年6月20号"
-            android:paddingTop="20dip"
-            android:layout_below="@+id/main_layout_iv_portrait"
-            android:textSize="@dimen/main_layout_date_text_size"
-            android:textColor="@android:color/white"
-            android:id="@+id/home_full_screen_layout_tv_date"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="星期三"
-            android:layout_marginLeft="25dip"
-            android:layout_toRightOf="@+id/home_full_screen_layout_tv_date"
-            android:textSize="@dimen/main_layout_date_text_size"
-            android:layout_alignTop="@+id/home_full_screen_layout_tv_date"
-            android:textColor="@android:color/white"
-            android:id="@+id/home_full_screen_layout_tv_week"
-            />
-        <TextView
-            android:paddingTop="15dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|center"
-            android:layout_below="@+id/home_full_screen_layout_tv_date"
-            android:text="八栋三单元1205"
-            android:id="@+id/home_full_screen_layout_tv_home_number"
-            android:textSize="@dimen/main_layout_home_number_text_size"
-            android:textColor="@android:color/white"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dip"
-            android:layout_below="@+id/home_full_screen_layout_tv_home_number"
-            android:text="海文花园"
-            android:id="@+id/home_full_screen_layout_tv_community_name"
-            android:textSize="@dimen/main_layout_community_name_text_size"
-            android:textStyle="bold"
-            android:textColor="@android:color/white" />
-    </RelativeLayout>
-
+    <include layout="@layout/home_full_screen_layout"/>
 </android.support.design.widget.CoordinatorLayout>
