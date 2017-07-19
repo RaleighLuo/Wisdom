@@ -37,6 +37,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayo
 
     private final Context mContext;
     private float mAvatarMaxSize;
+    private float margin;
 
     public AvatarImageBehavior(Context context, AttributeSet attrs) {
         mContext = context;
@@ -49,6 +50,7 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayo
 
     private void bindDimensions() {
         mAvatarMaxSize = mContext.getResources().getDimension(R.dimen.image_width);
+        margin=mContext.getResources().getDimension(R.dimen.main_image_margin);
 
     }
 
@@ -77,41 +79,55 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayo
 
         for(int i=1;i<childRoot.getChildCount();i++){
             childRoot.getChildAt(i);
-            TextView tvTitle= (TextView) childRoot.getChildAt(i);
-            int dimen=0;
-            float disSize=0;
-            int padingTop=0;
-            switch (tvTitle.getId()){
-                case R.id.home_full_screen_layout_tv_week:
-                case R.id.home_full_screen_layout_tv_date:
-                    dimen=R.dimen.main_layout_date_text_size;
-                    padingTop=mContext.getResources().getDimensionPixelSize(
-                            R.dimen.main_layout_date_padding_top);
-                    disSize=5*(1-expandedPercentageFactor);//[0-5的区间]
-                    break;
-                case R.id.home_full_screen_layout_tv_home_number:
-                    dimen=R.dimen.main_layout_home_number_text_size;
-                    padingTop=mContext.getResources().getDimensionPixelSize(
-                            R.dimen.main_layout_home_number_padding_top);
-                    disSize=25*(1-expandedPercentageFactor);//[0-25的区间]
-                    break;
-                case R.id.home_full_screen_layout_tv_community_name:
-                    padingTop=mContext.getResources().getDimensionPixelSize(
-                            R.dimen.main_layout_community_name_padding_top);
-                    dimen=R.dimen.main_layout_community_name_text_size;
-                    disSize=30*(1-expandedPercentageFactor);//区间 expandedPercentageFactor［0，1］换[0-30的区间]
-                    break;
+            View mChild=childRoot.getChildAt(i);
+                int dimen=0;
+                float disSize=0;
+                int padingTop=0;
+                TextView tvTitle;
+                switch (mChild.getId()){
+                    case R.id.home_full_screen_layout_tv_week:
+                    case R.id.home_full_screen_layout_tv_date:
+                        tvTitle= (TextView) mChild;
+                        dimen=R.dimen.main_layout_date_text_size;
+                        padingTop=mContext.getResources().getDimensionPixelSize(
+                                R.dimen.main_layout_date_padding_top);
+                        disSize=5*(1-expandedPercentageFactor);//[0-5的区间]
+                        int titleSize = mContext.getResources().getDimensionPixelSize(dimen);
+                        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize - disSize);
+                        //区间 expandedPercentageFactor［0，1］换区间［0.3-1］
+                        tvTitle.setPadding(0, (int) (padingTop * (0.7 * expandedPercentageFactor + 0.3)), 0, 0);
+                        break;
+                    case R.id.home_full_screen_layout_tv_home_number:
+                        tvTitle= (TextView) mChild;
+                        dimen=R.dimen.main_layout_home_number_text_size;
+                        padingTop=mContext.getResources().getDimensionPixelSize(
+                                R.dimen.main_layout_home_number_padding_top);
+                        disSize=25*(1-expandedPercentageFactor);//[0-25的区间]
+                        titleSize = mContext.getResources().getDimensionPixelSize(dimen);
+                        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize - disSize);
+                        //区间 expandedPercentageFactor［0，1］换区间［0.3-1］
+                        tvTitle.setPadding(0, (int) (padingTop * (0.7 * expandedPercentageFactor + 0.3)), 0, 0);
 
-            }
-            int titleSize=mContext.getResources().getDimensionPixelSize(dimen);
-            tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize-disSize);
-            //区间 expandedPercentageFactor［0，1］换区间［0.3-1］
-            tvTitle.setPadding(0, (int) (padingTop*(0.7*expandedPercentageFactor+0.3)),0,0);
+                        break;
+                    case R.id.home_full_screen_layout_tv_community_name:
+                        tvTitle= (TextView) mChild;
+                        padingTop=mContext.getResources().getDimensionPixelSize(
+                                R.dimen.main_layout_community_name_padding_top);
+                        dimen=R.dimen.main_layout_community_name_text_size;
+                        disSize=30*(1-expandedPercentageFactor);//区间 expandedPercentageFactor［0，1］换[0-30的区间]
+                        titleSize = mContext.getResources().getDimensionPixelSize(dimen);
+                        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize - disSize);
+                        //区间 expandedPercentageFactor［0，1］换区间［0.3-1］
+                        tvTitle.setPadding(0, (int) (padingTop * (0.7 * expandedPercentageFactor + 0.3)), 0, 0);
+
+                        break;
+                    default: //View
+                        mChild.setEnabled(expandedPercentageFactor>=0.9);
+                        mChild.setAlpha(expandedPercentageFactor);
+                        break;
+
+                }
         }
-//        Log.e("mStartToolbarPosition="+mStartToolbarPosition,"raleigh_test");
-//        Log.e("getStatusBarHeight()="+getStatusBarHeight(),"raleigh_test");
-//        Log.e("dependency.getY() ="+dependency.getY() ,"raleigh_test");
-//        Log.e("expandedPercentageFactor="+expandedPercentageFactor,"raleigh_test");
         int dis=expandedPercentageFactor==0?(mFinalHeight/2):(child.getHeight() / 2);
         // Y轴距离
         float distanceYToSubtract = ((mStartYPosition - mFinalYPosition)
@@ -120,29 +136,17 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayo
         // X轴距离
         float distanceXToSubtract = ((mStartXPosition - mFinalXPosition)
                 * (1f - expandedPercentageFactor)) + dis;
-
-//        Log.e("distanceXToSubtract="+distanceXToSubtract,"raleigh_test");
-//        Log.e("distanceYToSubtract="+distanceYToSubtract,"raleigh_test");
-//        Log.e("child.getWidth()="+child.getWidth(),"raleigh_test");
-//        Log.e("mStartXPosition="+mStartXPosition,"raleigh_test");
-//        Log.e("mFinalXPosition="+mFinalXPosition,"raleigh_test");
-//        Log.e("expandedPercentageFactor="+expandedPercentageFactor,"raleigh_test");
-//        Log.e("mStartYPosition - distanceYToSubtract="+(mStartYPosition - distanceYToSubtract),"raleigh_test");
-//        Log.e("mStartXPosition - distanceXToSubtract="+(mStartXPosition - distanceXToSubtract),"raleigh_test");
-
         // 高度减小
         float heightToSubtract = ((mStartHeight - mFinalHeight) * (1f - expandedPercentageFactor));
 
-        // 图片位置
-        child.setY(mStartYPosition - distanceYToSubtract);
-        child.setX(mStartXPosition - distanceXToSubtract);
+        child.setY(margin);
+        child.setX(margin);
 
         // 图片大小
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) child.getLayoutParams();
         lp.width = (int) (mStartHeight - heightToSubtract);
         lp.height = (int) (mStartHeight - heightToSubtract);
         child.setLayoutParams(lp);
-
         return true;
     }
 

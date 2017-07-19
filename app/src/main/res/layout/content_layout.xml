@@ -131,11 +131,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="20dip"
-        android:paddingLeft="20dip"
         android:id="@+id/main_layout_ll_big_menu"
         android:layout_below="@+id/main_layout_v_top_gap"
-        android:paddingRight="20dip"
         android:background="@android:color/white"
         android:paddingTop="60dip"
         android:layout_gravity="center_horizontal"
@@ -143,6 +140,8 @@
         <com.starlight.mobile.android.lib.view.CusTextView
             style="@style/main_pay_text_style"
             android:text="@string/pay"
+            android:layout_marginLeft="20dip"
+            android:layout_marginBottom="20dip"
             android:id="@+id/main_layout_tv_pay"
             android:drawableTop="@mipmap/pay"
             android:background="@drawable/main_pay_selector"
@@ -158,6 +157,7 @@
         <com.starlight.mobile.android.lib.view.CusTextView
             style="@style/main_pay_text_style"
             android:text="@string/repair"
+            android:layout_marginRight="20dip"
             android:id="@+id/main_layout_tv_repair"
             android:drawableTop="@mipmap/repair"
             android:layout_marginLeft="15dip"

@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
     private boolean mIsTheTitleContainerVisible = true;
-    View mLlTitleContainer; // Title的LinearLayout
-    FrameLayout mFlTitleContainer; // Title的FrameLayout
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
     NestedScrollView mNestedScrollView; // 标题栏Title
     RecyclerView mRecyclerView; // 工具栏
@@ -44,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
     private void initControls(){
-        mFlTitleContainer= (FrameLayout) findViewById(R.id.main_layout_fl_title);
-        mLlTitleContainer=findViewById(R.id.home_full_screen_layout_ll_title_container);
         mAblAppBar= (AppBarLayout) findViewById(R.id.main_layout_app_bar);
         mNestedScrollView= (NestedScrollView) findViewById(R.id.main_layout_nestedscrollview);
         mRecyclerView= (RecyclerView) findViewById(R.id.main_layout_recyclerView);
@@ -62,18 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
                 if(percentage>1)percentage=1;
                 if(percentage<0)percentage=0;
-                Log.e("percentage="+percentage+",isExpanded="+isExpanded,"raleigh_test");
                 if(percentage==1){
                     isExpanded=false;
                 } else if(percentage==0){
                     isExpanded=true;
                 }
-                handleAlphaOnTitle(percentage);
-
             }
         });
 
-        initParallaxValues(); // 自动滑动效果
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new NoticeAdapter(this));
         mNestedScrollView.setFillViewport(true);//NestedScrollView子项全屏
@@ -125,30 +117,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 设置自动滑动的动画效果
-    private void initParallaxValues() {
-        CollapsingToolbarLayout.LayoutParams petBackgroundLp =
-                (CollapsingToolbarLayout.LayoutParams) mFlTitleContainer.getLayoutParams();
-        petBackgroundLp.setParallaxMultiplier(PERCENTAGE_TO_HIDE_TITLE_DETAILS);
-        mFlTitleContainer.setLayoutParams(petBackgroundLp);
-    }
-
-
-    // 控制Title的显示
-    private void handleAlphaOnTitle(float percentage) {
-
-        if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if (mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mLlTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleContainerVisible = false;
-            }
-        } else {
-            if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mLlTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleContainerVisible = true;
-            }
-        }
-    }
 
     // 设置渐变的动画
     public static void startAlphaAnimation(View v, long duration, int visibility) {
