@@ -54,9 +54,9 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:paddingLeft="20dip"
-        android:paddingRight="20dip"
-        android:paddingTop="20dip"
+        android:paddingLeft="@dimen/main_image_margin"
+        android:paddingRight="@dimen/main_image_margin"
+        android:paddingTop="@dimen/main_image_margin"
         android:paddingBottom="10dip"
         app:layout_behavior="com.gkzxhn.wisdom.behavior.AvatarImageBehavior"
         android:layout_height="wrap_content">
