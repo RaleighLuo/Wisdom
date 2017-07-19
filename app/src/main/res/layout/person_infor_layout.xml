@@ -108,13 +108,16 @@
                 android:id="@+id/person_infor_layout_tv_phone"
                 android:layout_width="wrap_content"
                 android:text="13783832229"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="10dip"
                 android:textColor="@color/common_text_color"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_height="wrap_content"
                 />
             <View style="@style/common_line_style"
-                android:layout_margin="@dimen/margin"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -129,13 +132,13 @@
                 android:id="@+id/person_infor_layout_tv_community"
                 android:layout_width="wrap_content"
                 android:text="世纪国际华城"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="10dip"
                 android:textColor="@color/common_text_color"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_height="wrap_content"
                 />
             <View style="@style/common_line_style"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="10dip"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
                 />
