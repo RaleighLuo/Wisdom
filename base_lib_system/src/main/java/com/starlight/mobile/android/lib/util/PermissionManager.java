@@ -78,10 +78,13 @@ public class PermissionManager {
     /**
      * 执行请求一个权限
      */
-    public void execute(@NonNull Activity activity, int requestCode,String permission) {
+    public boolean execute(@NonNull Activity activity, int requestCode,String permission) {
+        boolean result=false;
         if (!isGranted(permission) && !isRevoked(permission)) {
+            result=true;
             requestPerissins(activity,requestCode, permission);
         }
+        return  result;
     }
 
 

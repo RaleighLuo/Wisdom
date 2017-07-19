@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this,ComplaintActivity.class));
                 break;
             case R.id.main_layout_ib_message://消息
+                startActivity(new Intent(this,NoticeActivity.class));
                 break;
             case R.id.main_layout_ib_service://服务
                 break;
