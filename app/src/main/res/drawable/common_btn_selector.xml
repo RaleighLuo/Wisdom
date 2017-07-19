@@ -3,9 +3,9 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <!-- solid的表示填充颜色 -->
-            <solid android:color="#bb1c1b6e" />
+            <solid android:color="#bb010138" />
             <corners
-                android:radius="8dp"/>
+                android:radius="5dp"/>
 
         </shape>
     </item>
@@ -14,7 +14,7 @@
             <!-- solid的表示填充颜色 -->
             <solid android:color="@color/colorPrimary" />
             <corners
-                android:radius="8dp"/>
+                android:radius="5dp"/>
         </shape>
     </item>
 </selector>

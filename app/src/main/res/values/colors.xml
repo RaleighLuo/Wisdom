@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1c1b6e</color>
-    <color name="colorPrimaryDark">#1c1b6e</color>
-    <color name="colorAccent">#1c1b6e</color>
+    <color name="colorPrimary">#010138</color>
     <color name="pay_color">#04c2aa</color>
     <color name="talking_color">#f6b379</color>
     <color name="repair_color">#4793f6</color>
     <color name="property_color">#6c6cc1</color>
     <color name="committee_color">#40b1b0</color>
+    <color name="main_color">#1517a6</color>
 
     <color name="common_hint_text_color">#999999</color>
     <color name="common_gray_title_color">#999999</color>

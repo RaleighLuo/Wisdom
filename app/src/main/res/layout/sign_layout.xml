@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_height="0dip">
         <com.starlight.mobile.android.lib.view.CusHeadView
             android:id="@+id/sign_layout_ch_head"
@@ -99,7 +99,7 @@
         >
         <View android:layout_width="5dip"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:layout_marginLeft="20dip"
             android:layout_marginTop="2dip"
             android:layout_marginBottom="2dip"

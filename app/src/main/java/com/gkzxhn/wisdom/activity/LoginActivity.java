@@ -42,15 +42,16 @@ public class LoginActivity extends SuperActivity implements ILoginView{
             case R.id.login_layout_btn_login://登录
                 String phone=etPhone.getText().toString().trim();
                 String code=etVerifyCode.getText().toString().trim();
-                if(phone.length()==0){
-                    showToast(getString(R.string.please_input)+getString(R.string.phone_number));
-                }else if(!Utils.isPhoneNumber(phone)){
-                    showToast(R.string.error_phone);
-                }else if(code.length()==0){
-                    showToast(getString(R.string.please_input)+getString(R.string.verfy_code));
-                }else{
-                    mPresenter.login(phone,code);
-                }
+//                if(phone.length()==0){
+//                    showToast(getString(R.string.please_input)+getString(R.string.phone_number));
+//                }else if(!Utils.isPhoneNumber(phone)){
+//                    showToast(R.string.error_phone);
+//                }else if(code.length()==0){
+//                    showToast(getString(R.string.please_input)+getString(R.string.verfy_code));
+//                }else{
+//                    mPresenter.login(phone,code);
+//                }
+                onSuccess();
                 break;
             case R.id.login_layout_tv_get_verify_code://获取验证码
                 phone=etPhone.getText().toString().trim();

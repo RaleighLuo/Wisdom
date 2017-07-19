@@ -3,15 +3,27 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="colorAccent">@android:color/black</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="android:textColorPrimary">@color/repair_progress_bg</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="android:textColorPrimary">@color/repair_progress_bg</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+    <style name="SignTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/repair_progress_bg</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
     <style name="SplashTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@color/colorPrimary</item>
@@ -90,9 +102,5 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
-    <style name="RepairProgressTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimaryDark">@color/repair_progress_bg</item>
-        <item name="android:textColorPrimary">@color/repair_progress_bg</item>
-        <item name="android:fitsSystemWindows">true</item>
-    </style>
+
 </resources>
