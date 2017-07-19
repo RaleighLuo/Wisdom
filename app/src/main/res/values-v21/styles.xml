@@ -19,6 +19,5 @@
         <item name="chHead_textColor">@color/common_text_color</item>
         <item name="chHead_imgClickEffect">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="chHead_textClickEffect">?android:attr/selectableItemBackgroundBorderless</item>
-
     </style>
 </resources>

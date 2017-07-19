@@ -95,5 +95,4 @@
         <item name="android:textColorPrimary">@color/repair_progress_bg</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
-
 </resources>
