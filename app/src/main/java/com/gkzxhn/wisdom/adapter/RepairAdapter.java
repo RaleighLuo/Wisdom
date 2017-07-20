@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.RepairDetailActivity;
 import com.gkzxhn.wisdom.activity.RepairProgressActivity;
 
 /**
@@ -33,7 +34,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context,RepairProgressActivity.class));
+                context.startActivity(new Intent(context,RepairDetailActivity.class));
             }
         });
 

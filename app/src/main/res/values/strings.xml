@@ -66,6 +66,8 @@
     <string name="money_total_hint">0.00</string>
     <string name="repair_award_default_title">恭喜发财，大吉大利</string>
     <string name="insert_money_into_red_packets">塞钱进红包</string>
+    <string name="repair_detail">报修详情</string>
+    <string name="view_progress">查看流程 >></string>
     <!--个人中心-->
     <string name="person_infor">个人中心</string>
     <string name="sign_hint">每日签到可得到1金币</string>
