@@ -25,6 +25,14 @@
         <item name="android:textColorPrimary">@color/repair_progress_bg</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
+    <style name="RepairProgressTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/repair_progress_bg</item>
+        <item name="colorAccent">@color/property_color</item>
+        <item name="colorPrimaryDark">@color/repair_progress_bg</item>
+        <item name="android:textColorPrimary">@color/repair_progress_bg</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
     <style name="SplashTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:windowNoTitle">true</item>

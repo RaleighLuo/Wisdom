@@ -42,16 +42,20 @@
         android:max="3"
         style="?android:attr/progressBarStyleHorizontal"
         />
-    <ImageView
-        android:id="@+id/repair_progress_layout_iv_award"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/award"
-        android:onClick="onClickListener"
         android:layout_marginTop="50dip"
-        android:scaleType="centerInside"
-        android:layout_marginBottom="50dip"
-        />
-
-
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/repair_progress_layout_iv_award"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/award"
+            android:onClick="onClickListener"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:layout_marginBottom="50dip"
+            />
+    </FrameLayout>
 </LinearLayout>

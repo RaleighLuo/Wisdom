@@ -108,6 +108,7 @@
             android:name=".activity.RepairProgressActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:theme="@style/RepairProgressTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
         <activity
             android:name=".activity.ComplaintActivity"
