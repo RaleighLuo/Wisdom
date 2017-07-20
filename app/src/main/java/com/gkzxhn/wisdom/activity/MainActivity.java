@@ -18,17 +18,12 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.adapter.MainAdapter;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    // 控制ToolBar的变量
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-
-    private static final int ALPHA_ANIMATIONS_DURATION = 200;
-
-    private boolean mIsTheTitleContainerVisible = true;
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
     NestedScrollView mNestedScrollView; // 标题栏Title
     RecyclerView mRecyclerView; // 工具栏
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new NoticeAdapter(this));
+        mRecyclerView.setAdapter(new MainAdapter(this));
         mNestedScrollView.setFillViewport(true);//NestedScrollView子项全屏
 //        mRecyclerView.setNestedScrollingEnabled(false);//解决滑动不流畅的问题
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

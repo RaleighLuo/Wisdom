@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingLeft="@dimen/margin"
+    android:paddingRight="@dimen/margin"
+    >
+    <View android:layout_width="5dip"
+        android:id="@+id/main_layout_v_newst_notice"
+        android:layout_gravity="center_vertical"
+        android:background="@color/property_color"
+        android:layout_height="15dip"/>
+    <TextView
+        android:id="@+id/main_layout_tv_newst_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/newst_notice"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingTop="@dimen/margin"
+        android:onClick="onClickListener"
+        android:clickable="true"
+        android:layout_weight="1"
+        android:textColor="@color/common_text_color"
+        android:paddingBottom="@dimen/margin"
+        android:layout_below="@+id/main_layout_ll_big_menu"
+        />
+    <TextView
+        android:id="@+id/main_layout_tv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more"
+        android:textSize="12sp"
+        android:clickable="true"
+        android:textColor="@color/common_light_text_color"
+        android:layout_gravity="center_vertical"
+        />
+</LinearLayout>
