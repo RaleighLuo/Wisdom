@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- solid的表示填充颜色 -->
+            <solid android:color="#bbe75432" />
+            <corners
+                android:radius="5dp"/>
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!-- solid的表示填充颜色 -->
+            <solid android:color="@color/red_package_color" />
+            <corners
+                android:radius="5dp"/>
+        </shape>
+    </item>
+</selector>

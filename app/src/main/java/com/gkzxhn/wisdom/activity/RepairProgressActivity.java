@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,6 +23,7 @@ public class RepairProgressActivity extends SuperActivity {
                 finish();
                 break;
             case R.id.repair_progress_layout_iv_award:
+                startActivity(new Intent(this,RepairRewardActivity.class));
                 break;
         }
     }
