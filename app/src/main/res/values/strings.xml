@@ -41,6 +41,7 @@
     <string name="complaint">投诉</string>
     <string name="property_phone">物业电话 400－1256-789</string>
     <string name="complaint_hint">请输入您的投诉意见，我们将不断为您改进。一经核实我们将尽快联系您～～～</string>
+    <string name="please_input_complaint_content">请输入投诉内容</string>
     <!--通知公告-->
     <string name="notice">通知</string>
     <string name="announcement">公告</string>

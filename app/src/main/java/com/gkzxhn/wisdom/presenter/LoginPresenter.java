@@ -68,6 +68,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
 
     }
     public void login(String phone,String code){
+       getView().startRefreshAnim();
         mModel.login(phone, code, new VolleyUtils.OnFinishedListener<String>() {
             @Override
             public void onSuccess(String response) {
@@ -76,8 +77,10 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 if(code==200){
                     String token=JSONUtil.getJSONObjectStringValue(json,"token");
                     getSharedPreferences().edit().putString(Constants.USER_TOKEN,token).commit();
+                    getView().startRefreshAnim();
                     getView().onSuccess();
                 }else{
+                    getView().startRefreshAnim();
                     getView().showToast(R.string.service_not_available);
                 }
             }

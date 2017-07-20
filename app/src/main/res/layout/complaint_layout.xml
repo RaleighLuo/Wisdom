@@ -8,8 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_back"
-        android:paddingRight="10dip"
-        android:layout_margin="@dimen/margin"
+        android:paddingTop="@dimen/margin"
+        android:paddingBottom="@dimen/margin"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="30dip"
+        android:scaleType="centerInside"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -23,6 +26,7 @@
         android:layout_marginBottom="10dip"
         />
     <TextView
+        android:id="@+id/complaint_layout_tv_tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/common_text_color"
@@ -35,6 +39,7 @@
         android:layout_marginRight="@dimen/margin"
         />
     <EditText
+        android:id="@+id/complaint_layout_et_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin"
@@ -58,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/commit"
+        android:onClick="onClickListener"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
         android:layout_marginBottom="15dip"
         android:layout_weight="0"
         android:layout_marginLeft="15dip"
