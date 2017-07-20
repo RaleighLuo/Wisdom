@@ -82,5 +82,14 @@ public class LoginActivity extends SuperActivity implements ILoginView{
     @Override
     public void onSuccess() {
         startActivity(new Intent(this,MainActivity.class));
+        finish();
+    }
+    @Override
+    public void onBackPressed() {
+        //回到Home主页
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 }
