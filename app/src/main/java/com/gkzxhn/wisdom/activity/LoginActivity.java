@@ -10,6 +10,7 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.presenter.LoginPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.ILoginView;
+import com.starlight.mobile.android.lib.util.CommonHelper;
 
 /**
  * Created by Raleigh.Luo on 17/7/14.
@@ -40,6 +41,7 @@ public class LoginActivity extends SuperActivity implements ILoginView{
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.login_layout_btn_login://登录
+                CommonHelper.clapseSoftInputMethod(this);
                 String phone=etPhone.getText().toString().trim();
                 String code=etVerifyCode.getText().toString().trim();
 //                if(phone.length()==0){
@@ -81,15 +83,18 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 
     @Override
     public void onSuccess() {
+        CommonHelper.clapseSoftInputMethod(this);
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }
     @Override
     public void onBackPressed() {
+        CommonHelper.clapseSoftInputMethod(this);
         //回到Home主页
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
     }
+
 }

@@ -134,6 +134,7 @@ public class PublishRepairActivity extends SuperActivity{
         }
     }
     public void onClickListener(View view) {
+        CommonHelper.clapseSoftInputMethod(this);
         switch (view.getId()) {
             case R.id.common_head_layout_iv_left:
                 finish();
@@ -166,6 +167,12 @@ public class PublishRepairActivity extends SuperActivity{
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        CommonHelper.clapseSoftInputMethod(this);
+        super.onBackPressed();
     }
 
     @Override
