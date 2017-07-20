@@ -16,8 +16,8 @@
     <string name="request_timeout_with_try">请求超时，请重试</string>
     <string name="service_not_available">服务不可用，请稍后再试</string>
     <string name="not_available_network_hint">当前网络不可用，请检查网络设置</string>
-
-
+    <string name="yuan">元</string>
+    <string name="money_unit">￥</string>
     <!--登录-->
     <string name="phone_number">手机号</string>
     <string name="get_verfy_code">获取验证码</string>
@@ -61,6 +61,11 @@
     <string name="publish">发布</string>
     <string name="award">赏</string>
     <string name="property_assignment_order">物业指派工单</string>
+    <string name="repair_award">打赏</string>
+    <string name="money_total">金额</string>
+    <string name="money_total_hint">0.00</string>
+    <string name="repair_award_default_title">恭喜发财，大吉大利</string>
+    <string name="insert_money_into_red_packets">塞钱进红包</string>
     <!--个人中心-->
     <string name="person_infor">个人中心</string>
     <string name="sign_hint">每日签到可得到1金币</string>
@@ -84,7 +89,7 @@
     <string name="property_payment_hint">此次物业费缴费需要支付</string>
     <string name="alipay_payment">支付宝支付</string>
     <string name="weixin_payment">微信支付</string>
-    <string name="money_unit">￥</string>
+
     <string name="payment_detail">缴费详情</string>
     <!--话题-->
     <string name="own">我的</string>
