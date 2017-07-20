@@ -11,22 +11,31 @@ import android.view.View;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.PayRecordAdapter;
+import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.PayRecordEntity;
+import com.gkzxhn.wisdom.presenter.CommonListPresenter;
+import com.gkzxhn.wisdom.view.ICommonListView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
+
+import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
  */
 
 public class PayRecordActivity extends SuperActivity   implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener{
+        CusSwipeRefreshLayout.OnLoadListener,ICommonListView<PayRecordEntity>{
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
     private View ivNodata;
     private DotsTextView tvLoading;
     private PayRecordAdapter adapter;
+    private CommonListPresenter<PayRecordEntity> mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,7 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
 
     }
     private void init(){
+        mPresenter=new CommonListPresenter<PayRecordEntity>(this,this,Constants.PAY_RECORD_TAB);
         findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(android.R.color.white);
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
@@ -85,9 +95,11 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
     }
 
-    public void stopRefreshUI() {
+    @Override
+    public void stopRefreshAnim() {
         handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
     }
+
 
     private Handler handler=new Handler(){
         @Override
@@ -123,4 +135,14 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
             }
         }
     };
+
+    @Override
+    public void updateItems(List<PayRecordEntity> datas) {
+
+    }
+
+    @Override
+    public void loadItems(List<PayRecordEntity> datas) {
+
+    }
 }

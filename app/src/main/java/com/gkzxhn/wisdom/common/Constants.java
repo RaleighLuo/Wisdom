@@ -55,6 +55,8 @@ public interface Constants {
     final int PHONE_CODE=0x107;
     /*-------------------------------msg what-------------------------------------------------*/
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
+     /*-------------------------------TAB-------------------------------------------------*/
+     final int PAY_RECORD_TAB=0x201;
 
 
 }
