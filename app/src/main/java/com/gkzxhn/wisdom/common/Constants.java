@@ -57,6 +57,8 @@ public interface Constants {
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
      /*-------------------------------TAB-------------------------------------------------*/
      final int PAY_RECORD_TAB=0x201;
+    final int REPAIR_PROGRESSING_TAB=0x202;
+    final int REPAIR_FINISHED_TAB=0x203;
 
 
 }

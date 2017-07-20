@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.fragment.RepairFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
@@ -38,8 +39,8 @@ public class RepairRecordActivity extends SuperFragmentActivity {
     }
     private void init(){
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new RepairFragment());
-        fragmentList.add(new RepairFragment());
+        fragmentList.add(getFragment(Constants.REPAIR_PROGRESSING_TAB));
+        fragmentList.add(getFragment(Constants.REPAIR_FINISHED_TAB));
         adapter=new ViewPagerAdapter(this,getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
@@ -47,6 +48,13 @@ public class RepairRecordActivity extends SuperFragmentActivity {
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         viewPager.addOnPageChangeListener(onPageChangeListener);
 
+    }
+    public RepairFragment getFragment(int TAB){
+        RepairFragment fragment=new RepairFragment();
+        Bundle bundle=new Bundle();
+        bundle.putInt(Constants.EXTRA_TAB,TAB);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {

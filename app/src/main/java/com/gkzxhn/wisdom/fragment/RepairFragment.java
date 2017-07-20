@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,9 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.RepairDetailActivity;
+import com.gkzxhn.wisdom.activity.RepairProgressActivity;
+import com.gkzxhn.wisdom.activity.RepairRewardActivity;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.RepairAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -34,6 +40,8 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
     private Context mActivity;
     private View parentView;
     private RepairAdapter adapter;
+    private int TAB;
+    private CheckConfirmDialog mCheckConfirmDialog;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -55,6 +63,14 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
 
     }
     private void init(){
+        TAB=getArguments().getInt(Constants.EXTRA_TAB);
+        mCheckConfirmDialog = new CheckConfirmDialog(mActivity);
+        mCheckConfirmDialog.setContent(getResources().getString(R.string.delete_repair_hint));
+        mCheckConfirmDialog.setYesBtnListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
@@ -69,10 +85,30 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
 //        //添加分割线
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
-        adapter=new RepairAdapter(mActivity);
+        adapter=new RepairAdapter(mActivity,TAB);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            switch (convertView.getId()){
+                case R.id.repair_item_layout_tv_right:
+                    if(TAB== Constants.REPAIR_PROGRESSING_TAB){//查看流程
+                        startActivity(new Intent(mActivity,RepairProgressActivity.class));
+                    }else{//删除
+                        if(!mCheckConfirmDialog.isShowing())mCheckConfirmDialog.show();
+                    }
+                    break;
+                default://查看详情
+                    startActivity(new Intent(mActivity,RepairDetailActivity.class));
+                    break;
+            }
+
+
+        }
+    };
 
     @Override
     public void onRefresh() {

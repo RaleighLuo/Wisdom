@@ -68,7 +68,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
 
     }
     public void login(String phone,String code){
-       getView().startRefreshAnim();
+//       getView().startRefreshAnim();
         mModel.login(phone, code, new VolleyUtils.OnFinishedListener<String>() {
             @Override
             public void onSuccess(String response) {
