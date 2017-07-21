@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.HouseRentalActivity;
 import com.gkzxhn.wisdom.activity.NoticeActivity;
 
 /**
@@ -54,7 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                     @Override
                     public void onClick(View v) {
                       context.startActivity(new Intent(context,position==0?
-                              NoticeActivity.class: NoticeActivity.class));
+                              NoticeActivity.class: HouseRentalActivity.class));
                     }
                 });
                 break;

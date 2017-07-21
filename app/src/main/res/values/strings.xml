@@ -51,6 +51,9 @@
     <string name="ju">居</string>
     <!--房屋租赁-->
     <string name="house_message">房源消息</string>
+    <string name="house_rental">房屋租售</string>
+    <string name="house_lease">租房</string>
+    <string name="house_sale">售房</string>
 
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>

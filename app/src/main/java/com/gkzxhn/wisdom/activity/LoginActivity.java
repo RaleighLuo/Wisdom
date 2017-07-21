@@ -51,7 +51,7 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 //                }else if(code.length()==0){
 //                    showToast(getString(R.string.please_input)+getString(R.string.verfy_code));
 //                }else{
-                    mPresenter.login(phone,code);
+//                    mPresenter.login(phone,code);
 //                }
                 onSuccess();
                 break;

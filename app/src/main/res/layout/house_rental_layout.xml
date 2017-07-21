@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/house_rental_layout_ch_head"
+        style="@style/common_head_style"
+        mAttr:chHead_leftImg="@mipmap/ic_back"
+        mAttr:chHead_title="@string/house_rental"
+        mAttr:chHead_rightText="@string/publish"
+        mAttr:chHead_title_padding_left="0dip" />
+    <View style="@style/common_line_style"/>
+
+    <RadioGroup
+        android:id="@+id/house_rental_layout_radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dip"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        >
+        <RadioButton
+            android:id="@+id/house_rental_layout_rb_first"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingLeft="40dip"
+            android:paddingRight="40dip"
+            android:layout_weight="1"
+            android:background="@drawable/blue_segment_shape_left_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/house_lease"
+            android:textColor="@color/blue_radiobutton_text_color" />
+        <RadioButton
+            android:id="@+id/house_rental_layout_rb_second"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:button="@null"
+            android:background="@drawable/blue_segment_shape_right_selector"
+            android:gravity="center"
+            android:paddingLeft="40dip"
+            android:paddingRight="40dip"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/house_sale"
+            android:textColor="@color/blue_radiobutton_text_color" />
+    </RadioGroup>
+    <com.starlight.mobile.android.lib.view.CusViewPager
+        android:id="@+id/house_rental_layout_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+</LinearLayout>
