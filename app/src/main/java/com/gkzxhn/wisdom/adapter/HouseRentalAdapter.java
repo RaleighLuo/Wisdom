@@ -14,17 +14,17 @@ import com.gkzxhn.wisdom.customview.cardslide.CardAdapter;
  * Created by Raleigh.Luo on 17/7/21.
  */
 
-public class HouseSaleAdapter  extends CardAdapter{
+public class HouseRentalAdapter extends CardAdapter{
     private Context context;
     private int TAB;
-    public HouseSaleAdapter(Context context,int TAB) {
+    public HouseRentalAdapter(Context context, int TAB) {
         this.context = context;
         this.TAB=TAB;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.house_sale_item_layout;
+        return R.layout.house_rental_item_layout;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class HouseSaleAdapter  extends CardAdapter{
     public Rect obtainDraggableArea(View view) {
         // 可滑动区域定制，该函数只会调用一次
         View contentView = view.findViewById(R.id.card_item_content);
-        View topLayout = view.findViewById(R.id.card_top_layout);
+        View topLayout = view.findViewById(R.id.house_rental_item_layout_rl_top);
         View bottomLayout = view.findViewById(R.id.card_bottom_layout);
         int left = view.getLeft() + contentView.getPaddingLeft() + topLayout.getPaddingLeft();
         int right = view.getRight() - contentView.getPaddingRight() - topLayout.getPaddingRight();
@@ -64,9 +64,9 @@ public class HouseSaleAdapter  extends CardAdapter{
         TextView tvImageNumber;
 
         public ViewHolder(View view) {
-            ivImage = (ImageView) view.findViewById(R.id.card_image_view);
-            maskView = view.findViewById(R.id.maskView);
-            tvImageNumber = (TextView) view.findViewById(R.id.card_pic_num);
+            ivImage = (ImageView) view.findViewById(R.id.house_rental_item_layout_iv_image);
+            maskView = view.findViewById(R.id.house_rental_item_layout_v_maskView);
+            tvImageNumber = (TextView) view.findViewById(R.id.house_rental_item_layout_tv_image_number);
         }
     }
 }

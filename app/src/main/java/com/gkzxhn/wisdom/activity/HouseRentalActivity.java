@@ -2,14 +2,12 @@ package com.gkzxhn.wisdom.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
-import com.gkzxhn.wisdom.fragment.HouseSaleFragment;
-import com.gkzxhn.wisdom.fragment.NoticeFragment;
+import com.gkzxhn.wisdom.fragment.HouseRentalFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 import com.starlight.mobile.android.lib.view.CusViewPager;
 
@@ -47,8 +45,8 @@ public class HouseRentalActivity  extends SuperFragmentActivity{
         setCurrentItem(currentTab);
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
     }
-    public HouseSaleFragment getFragment(int TAB){
-        HouseSaleFragment fragment=new HouseSaleFragment();
+    public HouseRentalFragment getFragment(int TAB){
+        HouseRentalFragment fragment=new HouseRentalFragment();
         Bundle bundle=new Bundle();
         bundle.putInt(Constants.EXTRA_TAB,TAB);
         fragment.setArguments(bundle);

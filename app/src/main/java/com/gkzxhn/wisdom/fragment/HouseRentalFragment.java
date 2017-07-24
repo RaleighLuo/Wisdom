@@ -9,20 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.adapter.HouseSaleAdapter;
+import com.gkzxhn.wisdom.adapter.HouseRentalAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.cardslide.CardSlidePanel;
-import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 
 /**
  * Created by Raleigh.Luo on 17/7/21.
  */
 
-public class HouseSaleFragment extends Fragment {
+public class HouseRentalFragment extends Fragment {
     private View parentView;
     private Context mActivity;
     private CardSlidePanel mCardSlidePanel;
-    private HouseSaleAdapter adapter;
+    private HouseRentalAdapter adapter;
     private int TAB;
     @Override
     public void onAttach(Context activity) {
@@ -31,17 +30,17 @@ public class HouseSaleFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        parentView = inflater.inflate(R.layout.house_sale_fragment_layout, container,false);
+        parentView = inflater.inflate(R.layout.house_rental_fragment_layout, container,false);
         initControls();
         init();
         return parentView;
     }
     private void initControls(){
-        mCardSlidePanel= (CardSlidePanel) parentView.findViewById(R.id.house_sale_fragment_layout_image_slide_panel);
+        mCardSlidePanel= (CardSlidePanel) parentView.findViewById(R.id.house_rental_fragment_layout_image_slide_panel);
     }
     private void init(){
         TAB=getArguments().getInt(Constants.EXTRA_TAB);
-        adapter=new HouseSaleAdapter(mActivity,TAB);
+        adapter=new HouseRentalAdapter(mActivity,TAB);
         mCardSlidePanel.setAdapter(adapter);
         mCardSlidePanel.setCardSwitchListener(mCardSwitchListener);
     }

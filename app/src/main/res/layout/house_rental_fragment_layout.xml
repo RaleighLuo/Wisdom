@@ -2,9 +2,9 @@
 <com.gkzxhn.wisdom.customview.cardslide.CardSlidePanel
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mAttr="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/house_sale_fragment_layout_image_slide_panel"
+    android:id="@+id/house_rental_fragment_layout_image_slide_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     mAttr:bottomMarginTop="38dp"
-    mAttr:itemMarginTop="10dp"
+    mAttr:itemMarginTop="0dp"
     mAttr:yOffsetStep="13dp" />
