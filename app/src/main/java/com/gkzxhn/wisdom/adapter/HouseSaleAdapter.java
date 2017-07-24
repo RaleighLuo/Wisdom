@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -25,11 +26,23 @@ public class HouseSaleAdapter  extends CardAdapter{
 
     @Override
     public int getCount() {
-        return 10;
+        return 40;
     }
 
     @Override
     public void bindView(View view, int index) {
 
+    }
+    @Override
+    public Rect obtainDraggableArea(View view) {
+        // 可滑动区域定制，该函数只会调用一次
+        View contentView = view.findViewById(R.id.card_item_content);
+        View topLayout = view.findViewById(R.id.card_top_layout);
+        View bottomLayout = view.findViewById(R.id.card_bottom_layout);
+        int left = view.getLeft() + contentView.getPaddingLeft() + topLayout.getPaddingLeft();
+        int right = view.getRight() - contentView.getPaddingRight() - topLayout.getPaddingRight();
+        int top = view.getTop() + contentView.getPaddingTop() + topLayout.getPaddingTop();
+        int bottom = view.getBottom() - contentView.getPaddingBottom() - bottomLayout.getPaddingBottom();
+        return new Rect(left, top, right, bottom);
     }
 }
