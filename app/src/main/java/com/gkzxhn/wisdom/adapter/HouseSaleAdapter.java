@@ -2,10 +2,12 @@ package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.cardslide.CardAdapter;
 
 /**
@@ -14,9 +16,10 @@ import com.gkzxhn.wisdom.customview.cardslide.CardAdapter;
 
 public class HouseSaleAdapter  extends CardAdapter{
     private Context context;
-
-    public HouseSaleAdapter(Context context) {
+    private int TAB;
+    public HouseSaleAdapter(Context context,int TAB) {
         this.context = context;
+        this.TAB=TAB;
     }
 
     @Override
@@ -31,7 +34,15 @@ public class HouseSaleAdapter  extends CardAdapter{
 
     @Override
     public void bindView(View view, int index) {
-
+        Object tag = view.getTag();
+        ViewHolder viewHolder;
+        if (null != tag) {
+            viewHolder = (ViewHolder) tag;
+        } else {
+            viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder);
+        }
+        viewHolder.ivImage.setBackgroundResource(TAB==Constants.HOUSE_LEASE_TAB?R.mipmap.lease_image:R.mipmap.sale_image);
     }
     @Override
     public Rect obtainDraggableArea(View view) {
@@ -44,5 +55,18 @@ public class HouseSaleAdapter  extends CardAdapter{
         int top = view.getTop() + contentView.getPaddingTop() + topLayout.getPaddingTop();
         int bottom = view.getBottom() - contentView.getPaddingBottom() - bottomLayout.getPaddingBottom();
         return new Rect(left, top, right, bottom);
+    }
+
+    class ViewHolder {
+
+        ImageView ivImage;
+        View maskView;
+        TextView tvImageNumber;
+
+        public ViewHolder(View view) {
+            ivImage = (ImageView) view.findViewById(R.id.card_image_view);
+            maskView = view.findViewById(R.id.maskView);
+            tvImageNumber = (TextView) view.findViewById(R.id.card_pic_num);
+        }
     }
 }

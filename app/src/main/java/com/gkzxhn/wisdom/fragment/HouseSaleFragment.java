@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.HouseSaleAdapter;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.cardslide.CardSlidePanel;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 
@@ -22,6 +23,7 @@ public class HouseSaleFragment extends Fragment {
     private Context mActivity;
     private CardSlidePanel mCardSlidePanel;
     private HouseSaleAdapter adapter;
+    private int TAB;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -38,7 +40,8 @@ public class HouseSaleFragment extends Fragment {
         mCardSlidePanel= (CardSlidePanel) parentView.findViewById(R.id.house_sale_fragment_layout_image_slide_panel);
     }
     private void init(){
-        adapter=new HouseSaleAdapter(mActivity);
+        TAB=getArguments().getInt(Constants.EXTRA_TAB);
+        adapter=new HouseSaleAdapter(mActivity,TAB);
         mCardSlidePanel.setAdapter(adapter);
         mCardSlidePanel.setCardSwitchListener(mCardSwitchListener);
     }

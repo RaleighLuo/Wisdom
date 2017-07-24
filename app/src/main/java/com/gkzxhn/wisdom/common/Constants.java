@@ -56,9 +56,10 @@ public interface Constants {
     /*-------------------------------msg what-------------------------------------------------*/
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
      /*-------------------------------TAB-------------------------------------------------*/
-     final int PAY_RECORD_TAB=0x201;
-    final int REPAIR_PROGRESSING_TAB=0x202;
-    final int REPAIR_FINISHED_TAB=0x203;
-
+     final int PAY_RECORD_TAB=0x201;//缴费记录
+    final int REPAIR_PROGRESSING_TAB=0x202;//维修列表－正在进行
+    final int REPAIR_FINISHED_TAB=0x203;//维修列表－完成
+    final int HOUSE_LEASE_TAB=0x204;//房屋租售－租房
+    final int HOUSE_SALE_TAB=0x205;//房屋租售－售房
 
 }

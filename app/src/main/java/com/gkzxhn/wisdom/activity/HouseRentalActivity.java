@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.fragment.HouseSaleFragment;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
@@ -37,16 +38,23 @@ public class HouseRentalActivity  extends SuperFragmentActivity{
         mRadioGroup= (RadioGroup) findViewById(R.id.house_rental_layout_radiogroup);
     }
     private void init(){
-//        viewPager.setCanScroll(false);
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new HouseSaleFragment());
-        fragmentList.add(new NoticeFragment());
+        fragmentList.add(getFragment(Constants.HOUSE_LEASE_TAB));
+        fragmentList.add(getFragment(Constants.HOUSE_SALE_TAB));
         adapter=new ViewPagerAdapter(this,getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         setCurrentItem(currentTab);
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
     }
+    public HouseSaleFragment getFragment(int TAB){
+        HouseSaleFragment fragment=new HouseSaleFragment();
+        Bundle bundle=new Bundle();
+        bundle.putInt(Constants.EXTRA_TAB,TAB);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -65,9 +73,9 @@ public class HouseRentalActivity  extends SuperFragmentActivity{
      * @param tab
      */
     private void setCurrentItem(int tab){
-//        viewPager.setCanScroll(true);
-        viewPager.setCurrentItem(tab);//滑动
-//        viewPager.setCanScroll(false);
+        viewPager.setCanScroll(true);
+        viewPager.setCurrentItem(tab,false);//滑动
+        viewPager.setCanScroll(false);
     }
     public void onClickListener(View view){
         switch (view.getId()){

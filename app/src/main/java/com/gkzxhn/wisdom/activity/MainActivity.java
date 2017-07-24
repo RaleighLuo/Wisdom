@@ -79,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_layout_tv_repair:
                 startActivity(new Intent(this,PublishRepairActivity.class));
                 break;
-            case R.id.main_layout_tv_newst_notice:
-                startActivity(new Intent(this,NoticeActivity.class));
-                break;
             case R.id.home_full_screen_layout_tv_pay_record://缴费记录
                 startActivity(new Intent(this,PayRecordActivity.class));
                 break;
