@@ -42,7 +42,7 @@ public class HouseSaleAdapter  extends CardAdapter{
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
         }
-        viewHolder.ivImage.setBackgroundResource(TAB==Constants.HOUSE_LEASE_TAB?R.mipmap.lease_image:R.mipmap.sale_image);
+        viewHolder.ivImage.setImageResource(TAB==Constants.HOUSE_LEASE_TAB?R.mipmap.lease_image:R.mipmap.sale_image);
     }
     @Override
     public Rect obtainDraggableArea(View view) {
