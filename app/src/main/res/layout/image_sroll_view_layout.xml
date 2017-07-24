@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	>
+	<com.gkzxhn.wisdom.customview.ImageScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="180dip"
+		android:id="@+id/imageScrollView" />
+	<!-- 一下代码和效果，暂时不用 -->
+	<com.gkzxhn.wisdom.customview.PageControlView
+		android:layout_width="fill_parent"
+		android:layout_height="10dip"
+		android:background="#8f00000f"
+		android:gravity="center"
+		android:paddingLeft="5dip"
+		android:paddingRight="5dip"
+		android:id="@+id/myPageControlView"
+		android:layout_alignBottom="@id/imageScrollView"
+		android:layout_alignLeft="@id/imageScrollView"
+		/>
+</RelativeLayout>

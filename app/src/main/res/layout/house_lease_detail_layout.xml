@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/person_infor_layout_ch_head"
+        style="@style/common_head_style"
+        mAttr:chHead_rightText="@string/publish"
+        mAttr:chHead_leftImg="@mipmap/ic_back"
+        mAttr:chHead_title="@string/house_lease"
+        mAttr:chHead_title_padding_left="0dip" />
+    <View style="@style/common_line_style"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.gkzxhn.wisdom.customview.ScrollImage
+                android:id="@+id/house_lease_detail_layout_scrollImage"
+                android:layout_width="fill_parent"
+                android:fillViewport="true"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/house_lease_detail_layout_tv_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/1"
+                android:paddingBottom="5dip"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="5dip"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignBottom="@+id/house_lease_detail_layout_scrollImage"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:textColor="@color/common_light_text_color"
+                android:background="@drawable/white_bg_shape"
+                />
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
