@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.starlight.mobile.android.lib.view.CusHeadView
-        android:id="@+id/person_infor_layout_ch_head"
+        android:id="@+id/house_lease_detail_layout_ch_head"
         style="@style/common_head_style"
         mAttr:chHead_rightText="@string/publish"
         mAttr:chHead_leftImg="@mipmap/ic_back"
@@ -14,8 +14,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:fillViewport="true"
+        android:layout_weight="1"
         android:layout_height="match_parent">
         <RelativeLayout
+            android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.gkzxhn.wisdom.customview.ScrollImage
@@ -29,10 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1/1"
-                android:paddingBottom="5dip"
+                android:paddingBottom="4dip"
                 android:paddingRight="10dip"
                 android:paddingLeft="10dip"
-                android:paddingTop="5dip"
+                android:paddingTop="4dip"
                 android:textSize="12sp"
                 android:layout_alignParentRight="true"
                 android:layout_alignBottom="@+id/house_lease_detail_layout_scrollImage"
@@ -40,7 +42,235 @@
                 android:layout_marginRight="@dimen/margin"
                 android:textColor="@color/common_light_text_color"
                 android:background="@drawable/white_bg_shape"
+
                 />
+
+            <TextView
+                android:id="@+id/house_lease_detail_layout_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="海威大夏 2室2厅2卫"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/common_text_color"
+                android:layout_below="@+id/house_lease_detail_layout_scrollImage"
+                android:layout_alignLeft="@+id/house_lease_detail_layout_tv_money"
+                android:layout_alignStart="@+id/house_lease_detail_layout_tv_money" />
+            <TextView
+                android:layout_alignTop="@+id/house_lease_detail_layout_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:id="@+id/house_lease_detail_layout_tv_area"
+                android:layout_height="wrap_content"
+                android:text="开福区－伍家岭南"
+                android:layout_marginRight="@dimen/margin"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/house_lease_detail_layout_tv_title"
+                android:textSize="10sp"
+                android:layout_alignLeft="@+id/house_lease_detail_layout_tv_title"
+                android:text="07-15"
+                android:layout_marginTop="10dip"
+                android:textColor="@color/common_dark_gray_text_color"
+                android:id="@+id/house_lease_detail_layout_tv_date"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="浏览：509人"
+                android:textColor="@color/common_dark_gray_text_color"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_alignTop="@+id/house_lease_detail_layout_tv_date"
+                android:layout_alignParentRight="true"
+                android:id="@+id/house_lease_detail_layout_tv_brow_time"
+                />
+            <View style="@style/common_line_style"
+                android:id="@+id/house_lease_detail_layout_v_date"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/house_lease_detail_layout_tv_date"
+                />
+            <TextView
+                android:id="@+id/house_lease_detail_layout_tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500元/月"
+                android:layout_below="@+id/house_lease_detail_layout_v_date"
+                android:layout_marginLeft="@dimen/margin"
+                android:textColor="@color/red"
+                android:textSize="22sp"
+                android:layout_marginBottom="@dimen/margin"
+                />
+            <View style="@style/common_line_style"
+                android:background="@color/common_bg_color"
+                android:layout_height="@dimen/margin"
+                android:layout_below="@+id/house_lease_detail_layout_tv_money"
+                android:id="@+id/house_lease_detail_layout_v_money"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/house_lease_detail_layout_v_money"
+                android:minHeight="50dip"
+                android:padding="@dimen/margin"
+                android:orientation="horizontal"
+                android:id="@+id/house_lease_detail_layout_ll_house_type"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dip"
+                    android:layout_height="40dip">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/house_type"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="12sp"
+                        android:textColor="@color/common_dark_gray_text_color"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2室2厅2卫"
+                        android:textColor="@color/common_text_color"
+                        android:id="@+id/house_lease_detail_layout_tv_house_type"
+                        android:layout_gravity="bottom|center_horizontal"
+                        />
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dip"
+                    android:layout_height="40dip">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/house_area"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="12sp"
+                        android:textColor="@color/common_dark_gray_text_color"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="121㎡"
+                        android:textColor="@color/common_text_color"
+                        android:id="@+id/house_lease_detail_layout_tv_house_area"
+                        android:layout_gravity="bottom|center_horizontal"
+                        />
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/house_lease_detail_layout_fl_method"
+                    android:layout_weight="1"
+                    android:layout_width="0dip"
+                    android:layout_height="40dip">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/method"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="12sp"
+                        android:textColor="@color/common_dark_gray_text_color"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="整租"
+                        android:textColor="@color/common_text_color"
+                        android:id="@+id/house_lease_detail_layout_tv_method"
+                        android:layout_gravity="bottom|center_horizontal"
+                        />
+                </FrameLayout>
+            </LinearLayout>
+            <View style="@style/common_line_style"
+                android:layout_below="@+id/house_lease_detail_layout_ll_house_type"
+                android:id="@+id/house_lease_detail_layout_v_house_type"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:id="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                android:layout_below="@+id/house_lease_detail_layout_v_house_type"
+                android:textColor="@color/common_dark_gray_text_color"
+                android:text="@string/residential_quarters_colon"
+                android:layout_alignLeft="@+id/house_lease_detail_layout_tv_title"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_height="wrap_content"
+                android:text="海威大厦"
+                android:layout_toLeftOf="@+id/house_lease_detail_layout_tv_floor_title"
+                android:textSize="12sp"
+                android:textColor="@color/common_text_color"
+                android:layout_toRightOf="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                android:id="@+id/house_lease_detail_layout_tv_residential_quarters"
+                android:layout_alignTop="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/floor_colon"
+                android:textSize="12sp"
+                android:layout_toLeftOf="@+id/house_lease_detail_layout_tv_floor"
+                android:textColor="@color/common_dark_gray_text_color"
+                android:id="@+id/house_lease_detail_layout_tv_floor_title"
+                android:layout_alignTop="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26层"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin"
+                android:textColor="@color/common_text_color"
+                android:id="@+id/house_lease_detail_layout_tv_floor"
+                android:layout_alignTop="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                />
+            <View style="@style/common_line_style"
+                android:background="@color/common_bg_color"
+                android:layout_height="@dimen/margin"
+                android:layout_below="@+id/house_lease_detail_layout_tv_residential_quarters_title"
+                android:id="@+id/house_lease_detail_layout_v_residential_quarters_title"
+                />
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/house_lease_detail_layout_tv_house_detail_title"
+                android:text="@string/house_detail"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/house_lease_detail_layout_v_residential_quarters_title"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignStart="@+id/textView" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/house_lease_detail_layout_tv_house_detail_title"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_alignLeft="@+id/house_lease_detail_layout_tv_title"
+                android:layout_marginBottom="@dimen/margin"
+                android:textColor="@color/common_light_text_color"
+                android:text="1、房间家具家电应有尽有、温馨舒适、干净整洁、诚心出租
+\n2、小区环境优美、自然氧吧！绿化率高、健身器材齐全、治安也非常好！自带幼儿园、是您理想的居家之选！！！！/
+\n3、出门就有公交车、地铁口、轻轨口、交通也是非常的方便！
+\n4、小区周边有德斯勤、红星广场、省植物园、化润万家、步步高广场
+\n另外本人还有还有大量的两房、三房可供您挑选理想的家 \n欢迎您的来电
+17375717357
+\n微信号13037413490"
+                android:id="@+id/textView" />
         </RelativeLayout>
     </ScrollView>
+    <include layout="@layout/i_house_lease_detail_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/house_lease_detail_layout_i_bottom"
+        />
 </LinearLayout>

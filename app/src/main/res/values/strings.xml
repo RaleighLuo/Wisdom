@@ -60,10 +60,31 @@
     <string name="method">方式</string>
     <string name="residential_quarters_colon">小区：</string>
     <string name="floor_colon">楼层：</string>
+    <string name="floor">楼层</string>
     <string name="house_detail">房屋详情</string>
     <string name="privacy_protection_hint">Ta开启了隐私保护</string>
-    <string name="view_phone">查看电话</string>
+    <string name="view_phone">拨打电话</string>
     <string name="chat">聊天</string>
+
+    <string name="house_lease_publish">租房发布</string>
+    <string name="house_sale_publish">售房发布</string>
+    <string name="please_input_committe_name">输入小区名称</string>
+    <string name="area">区域</string>
+    <string name="decorate">装修</string>
+    <string name="please_select">请选择</string>
+    <string name="rent_money">租金</string>
+    <string name="sale_money">售价</string>
+    <string name="please_input_something">请填写</string>
+    <string name="supplementary_information">补充信息</string>
+    <string name="title">标题</string>
+    <string name="title_hint">6-20字，不能填写电话</string>
+    <string name="house_description">房屋描述</string>
+    <string name="house_description_hint">房屋特征，周边配套，房东心态</string>
+    <string name="contact">联系人</string>
+    <string name="contact_method">联系方式</string>
+    <string name="please_input_contact">请输入联系人</string>
+    <string name="please_input_contact_phone">请输入联系电话</string>
+
 
 
     <!--报修-->

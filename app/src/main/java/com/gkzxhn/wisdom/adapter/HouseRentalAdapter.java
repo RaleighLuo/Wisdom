@@ -47,7 +47,9 @@ public class HouseRentalAdapter extends CardAdapter{
         viewHolder.maskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, HouseLeaseDetailActivity.class));
+                Intent intent=new Intent(context, HouseLeaseDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_TAB,TAB);
+                context.startActivity(intent);
             }
         });
         viewHolder.tvAddress.setText(TAB==Constants.HOUSE_LEASE_TAB?"伍家岭南":"梅溪湖");

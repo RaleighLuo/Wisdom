@@ -10,4 +10,12 @@
         <attr name="radiusX" format="dimension" />
         <attr name="radiusY" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="CusTextItem_Attrs">
+        <attr name="cti_title" format="reference" />
+        <attr name="cti_content" format="reference" />
+        <attr name="cti_title_size" format="dimension" />
+        <attr name="cti_content_size" format="dimension" />
+        <attr name="cti_title_color" format="reference" />
+        <attr name="cti_content_color" format="reference" />
+    </declare-styleable>
 </resources>

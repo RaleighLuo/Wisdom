@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -71,6 +72,7 @@ public class HouseRentalActivity  extends SuperFragmentActivity{
      * @param tab
      */
     private void setCurrentItem(int tab){
+        currentTab=tab;
         viewPager.setCanScroll(true);
         viewPager.setCurrentItem(tab,false);//滑动
         viewPager.setCanScroll(false);
@@ -79,6 +81,11 @@ public class HouseRentalActivity  extends SuperFragmentActivity{
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();
+                break;
+            case R.id.common_head_layout_tv_right:
+                Intent intent=new Intent(this,PublishHouseActivity.class);
+                intent.putExtra(Constants.EXTRA_TAB,currentTab==0?Constants.HOUSE_LEASE_TAB:Constants.HOUSE_SALE_TAB);
+                startActivity(intent);
                 break;
         }
     }
