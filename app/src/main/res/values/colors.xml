@@ -22,4 +22,6 @@
 
     <color name="repair_progress_bg">#252b34</color>
     <color name="repair_progress_text_color">#7d81ea</color>
+    <color name="orange_color">#ff7a04</color>
+
 </resources>
