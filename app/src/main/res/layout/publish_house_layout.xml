@@ -33,9 +33,9 @@
                 android:background="@null"
                 android:gravity="center"
                 android:padding="@dimen/margin"
-                android:text="@string/please_input_committe_name"
+                android:hint="@string/please_input_committe_name"
                 android:textColor="@color/common_text_color"
-                android:textColorHint="@color/common_hint_text_color"
+                android:textColorHint="@color/common_light_text_color"
                 android:textSize="14sp" />
 
             <View
