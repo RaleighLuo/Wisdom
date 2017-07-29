@@ -55,6 +55,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onClickListener"
                     mAttr:cti_content="@string/please_select"
                     mAttr:cti_title="@string/floor" />
 
@@ -69,6 +70,7 @@
                     android:id="@+id/publish_house_layout_cti_house_area"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
+                    android:onClick="onClickListener"
                     android:layout_weight="1"
                     mAttr:cti_content="@string/please_input_something"
                     mAttr:cti_title="@string/house_area" />
@@ -85,6 +87,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onClickListener"
                     mAttr:cti_content="@string/please_select"
                     mAttr:cti_title="@string/house_type" />
             </LinearLayout>
@@ -105,6 +108,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onClickListener"
                     mAttr:cti_content="@string/please_select"
                     mAttr:cti_title="@string/area" />
 
@@ -121,6 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     mAttr:cti_content="@string/please_input_something"
+                    android:onClick="onClickListener"
                     mAttr:cti_title="@string/rent_money" />
 
                 <View
@@ -135,6 +140,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onClickListener"
                     mAttr:cti_content="@string/please_select"
                     mAttr:cti_title="@string/decorate" />
             </LinearLayout>

@@ -58,6 +58,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                               NoticeActivity.class: HouseRentalActivity.class));
                     }
                 });
+                holder.itemView.findViewById(R.id.main_layout_tv_newst_notice).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        context.startActivity(new Intent(context,position==0?
+                                NoticeActivity.class: HouseRentalActivity.class));
+                    }
+                });
                 break;
             case NOTICE_TYPE:
                 break;

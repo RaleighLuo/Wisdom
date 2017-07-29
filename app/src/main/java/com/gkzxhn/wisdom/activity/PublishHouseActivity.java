@@ -20,6 +20,18 @@ public class PublishHouseActivity extends SuperActivity {
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
+            case R.id.publish_house_layout_cti_floor://楼层
+                break;
+            case R.id.publish_house_layout_cti_house_area://面积
+                break;
+            case R.id.publish_house_layout_cti_house_type://户型
+                break;
+            case R.id.publish_house_layout_cti_area://区域
+                break;
+            case R.id.publish_house_layout_cti_rent_money://租金
+                break;
+            case R.id.publish_house_layout_cti_decorate://装修
+                break;
         }
     }
 
