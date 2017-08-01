@@ -10,8 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.HouseLeaseDetailActivity;
 import com.gkzxhn.wisdom.activity.HouseRentalActivity;
 import com.gkzxhn.wisdom.activity.NoticeActivity;
+import com.gkzxhn.wisdom.common.Constants;
 
 /**
  * Created by Raleigh.Luo on 17/7/20.
@@ -38,7 +40,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 view= LayoutInflater.from(context).inflate(R.layout.notice_item_layout,null,false);
                 break;
             default://HOUSE_TYPE
-                view= LayoutInflater.from(context).inflate(R.layout.notice_item_layout,null,false);
+                view= LayoutInflater.from(context).inflate(R.layout.house_item_layout,null,false);
                 break;
         }
 
@@ -69,6 +71,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             case NOTICE_TYPE:
                 break;
             case HOUSE_TYPE:
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(context, HouseLeaseDetailActivity.class);
+                        intent.putExtra(Constants.EXTRA_TAB,Constants.HOUSE_LEASE_TAB);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
         }
     }

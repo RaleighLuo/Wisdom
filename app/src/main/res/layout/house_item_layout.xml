@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margin"
+    android:paddingLeft="@dimen/margin"
+    android:background="@drawable/common_item_click_selector"
+    >
+    <TextView
+        android:id="@+id/house_item_layout_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="海威大夏 2室2厅1卫"
+        android:textSize="12sp"
+        android:layout_marginRight="@dimen/margin"
+        android:textColor="@color/common_text_color"
+        />
+    <TextView
+        android:id="@+id/house_item_layout_tv_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="伍家岭南"
+        android:textColor="@color/common_text_color"
+        android:textSize="12sp"
+        android:layout_alignBottom="@+id/house_item_layout_tv_money"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="500元/月"
+        android:layout_marginRight="@dimen/margin"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:layout_marginTop="10dip"
+        android:layout_alignParentRight="true"
+        android:id="@+id/house_item_layout_tv_money"
+        android:layout_below="@+id/house_item_layout_tv_title"
+        />
+    <View style="@style/common_line_style"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_below="@+id/house_item_layout_tv_money"
+        />
+</RelativeLayout>

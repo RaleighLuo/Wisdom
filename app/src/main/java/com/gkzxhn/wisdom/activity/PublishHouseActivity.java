@@ -34,5 +34,4 @@ public class PublishHouseActivity extends SuperActivity {
                 break;
         }
     }
-
 }
