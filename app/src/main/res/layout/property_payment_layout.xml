@@ -14,17 +14,19 @@
         android:layout_below="@+id/property_payment_layout_ch_head"
         android:id="@+id/property_payment_layout_v_head"
         />
-    <TextView
+    <com.starlight.mobile.android.lib.view.CusTextView
         android:id="@+id/property_payment_layout_tv_title"
         android:layout_below="@+id/property_payment_layout_v_head"
         android:layout_width="match_parent"
         android:gravity="right"
         android:layout_margin="20dip"
-        android:drawableLeft="@mipmap/alipay"
+        android:drawableLeft="@mipmap/ic_property_pay"
         android:textSize="16sp"
         android:textColor="@color/common_text_color"
         android:layout_height="wrap_content"
         android:text="@string/property_payment"
+        mAttr:ctv_leftImg_width="20dip"
+        mAttr:ctv_leftImg_height="19dip"
         />
     <View
         style="@style/common_line_style"
