@@ -33,7 +33,7 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 
     }
     private void init(){
-        etPhone.setText("18163657553");
+        etPhone.setText("17303854825");
         mPresenter=new LoginPresenter(this,this);
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();
@@ -44,16 +44,15 @@ public class LoginActivity extends SuperActivity implements ILoginView{
                 CommonHelper.clapseSoftInputMethod(this);
                 String phone=etPhone.getText().toString().trim();
                 String code=etVerifyCode.getText().toString().trim();
-//                if(phone.length()==0){
-//                    showToast(getString(R.string.please_input)+getString(R.string.phone_number));
-//                }else if(!Utils.isPhoneNumber(phone)){
-//                    showToast(R.string.error_phone);
-//                }else if(code.length()==0){
+                if(phone.length()==0){
+                    showToast(getString(R.string.please_input)+getString(R.string.phone_number));
+                }else if(!Utils.isPhoneNumber(phone)){
+                    showToast(R.string.error_phone);
+//                }else if(code.length()==0){TODO
 //                    showToast(getString(R.string.please_input)+getString(R.string.verfy_code));
-//                }else{
-//                    mPresenter.login(phone,code);
-//                }
-                onSuccess();
+                }else{
+                    mPresenter.login(phone,code);
+                }
                 break;
             case R.id.login_layout_tv_get_verify_code://获取验证码
                 phone=etPhone.getText().toString().trim();

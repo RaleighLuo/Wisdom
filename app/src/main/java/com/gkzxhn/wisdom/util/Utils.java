@@ -9,7 +9,10 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,5 +72,18 @@ public class Utils {
             list.add(str);
         }
         return list;
+    }
+    public static String getDateFromTimeInMillis(long timeInMillis,SimpleDateFormat df) {
+        String result="";
+        if(timeInMillis>0) {
+            try {
+                Date date = new Date(timeInMillis);
+                //英文格式时间格式化
+                result = df.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 }

@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -12,13 +13,19 @@ import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.model.ILoginModel;
 import com.gkzxhn.wisdom.model.impl.LoginModel;
 import com.gkzxhn.wisdom.view.ILoginView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.util.JSONUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/17.
@@ -68,7 +75,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
 
     }
     public void login(String phone,String code){
-//       getView().startRefreshAnim();
+        getView().startRefreshAnim();
         mModel.login(phone, code, new VolleyUtils.OnFinishedListener<String>() {
             @Override
             public void onSuccess(String response) {
@@ -77,6 +84,25 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 if(code==200){
                     String token=JSONUtil.getJSONObjectStringValue(json,"token");
                     getSharedPreferences().edit().putString(Constants.USER_TOKEN,token).commit();
+                    List<RoomEntity> datas = new Gson().fromJson(JSONUtil.getJSONObjectStringValue(json,"rooms"), new TypeToken<List<RoomEntity>>() {
+                    }.getType());
+//                    if(datas.size()==1){
+                    RoomEntity roomEntity=datas.get(0);
+                    SharedPreferences.Editor editor=getSharedPreferences().edit();
+                    editor.putString(Constants.USER_BUILDINGID,roomEntity.getBuildingId());
+                    editor.putString(Constants.USER_BUILDINGNAME,roomEntity.getBuildingName());
+                    editor.putString(Constants.USER_REGIONID,roomEntity.getRegionId());
+                    editor.putString(Constants.USER_REGIONNAME,roomEntity.getRegionName());
+                    editor.putString(Constants.USER_RESIDENTIALAREASID,roomEntity.getResidentialAreasId());
+                    editor.putString(Constants.USER_RESIDENTIALAREASNAME,roomEntity.getResidentialAreasName());
+                    editor.putString(Constants.USER_ROOMID,roomEntity.getRoomId());
+                    editor.putString(Constants.USER_ROOMNAME,roomEntity.getRoomName());
+                    editor.putString(Constants.USER_UNITSID,roomEntity.getUnitsId());
+                    editor.putString(Constants.USER_UNITSNAME,roomEntity.getUnitsName());
+                    editor.commit();
+//                    }else{//选择
+//
+//                    }
                     getView().startRefreshAnim();
                     getView().onSuccess();
                 }else{

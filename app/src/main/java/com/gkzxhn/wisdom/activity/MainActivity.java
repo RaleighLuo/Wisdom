@@ -1,6 +1,8 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -15,11 +17,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.MainAdapter;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.util.Utils;
+import com.starlight.mobile.android.lib.util.ConvertUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     NestedScrollView mNestedScrollView; // 标题栏Title
     RecyclerView mRecyclerView; // 工具栏
     Toolbar mToolbar; // 工具栏
+    //Full screen
+    private CircleImageView ivPortrait;
+    private TextView tvCurrentDate,tvWeek,tvCommunity,tvCommunityDetail,
+            tvCarpetArea,tvHousingArea;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +52,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initControls();
         init();
+        initDetail();
     }
     private void initControls(){
         mAblAppBar= (AppBarLayout) findViewById(R.id.main_layout_app_bar);
         mNestedScrollView= (NestedScrollView) findViewById(R.id.main_layout_nestedscrollview);
         mRecyclerView= (RecyclerView) findViewById(R.id.main_layout_recyclerView);
         mToolbar= (Toolbar) findViewById(R.id.main_layout_toolbar);
+        ivPortrait= (CircleImageView) findViewById(R.id.main_layout_iv_portrait);
+        tvCurrentDate= (TextView) findViewById(R.id.home_full_screen_layout_tv_date);
+        tvWeek= (TextView) findViewById(R.id.home_full_screen_layout_tv_week);
+        tvCommunity= (TextView) findViewById(R.id.home_full_screen_layout_tv_community_name);
+        tvCommunityDetail= (TextView) findViewById(R.id.home_full_screen_layout_tv_home_number);
+        tvCarpetArea= (TextView) findViewById(R.id.home_full_screen_layout_tv_carpet_area_value);
+        tvHousingArea= (TextView) findViewById(R.id.home_full_screen_layout_tv_housing_area_value);
     }
     private void init(){
         mToolbar.setTitle("");
@@ -72,6 +97,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    private void initDetail(){
+        Calendar cal=Calendar.getInstance();
+        tvCurrentDate.setText(Utils.getDateFromTimeInMillis(cal.getTimeInMillis(),new SimpleDateFormat(
+                "yyyy年MM月dd日")));
+        String[] weeks=getResources().getStringArray(R.array.weeks);
+        tvWeek.setText(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
+        preferences=getSharedPreferences(Constants.USER_TABLE, Context.MODE_PRIVATE);
+        tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
+        tvCommunityDetail.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
+                preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){

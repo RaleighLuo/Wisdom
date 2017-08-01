@@ -20,19 +20,18 @@ public interface Constants {
     /*-------------------------------User Tab-------------------------------------------------*/
     final String USER_TABLE="user_table";
     final String USER_IS_UNAUTHORIZED="isUnauthorized";
-    final String USER_ID="user_id";
     final String USER_TOKEN="user_token";
-    final String USER_NAME="user_name";
-    final String USER_PHONE="user_phone";
-    final String USER_PORTRAIT="user_portrait";
-    final String USER_EMAIL="user_email";
-    final String USER_AREA="user_area";
-    final String USER_OCCUPATIONNO="user_occupationNo";
-    final String USER_LAWFIRMNAME="user_lawfirmName";
-    final String USER_YXACCESS="user_yxAccess";
-    final String USER_YXTOKEN="user_yxToken";
-    final String CLOSE_MESSAGE_NOTICE="close_message_notice";//关闭消息通知
-    final String USER_SIGNED_STATUS="user_signed_status";//签约状态：0-未签约；1-签约中；2-签约失败；3-签约成功
+
+    final String USER_BUILDINGID="user_buildingId";
+    final String USER_BUILDINGNAME="user_buildingName";
+    final String USER_REGIONID="user_regionId";
+    final String USER_REGIONNAME="user_regionName";
+    final String USER_RESIDENTIALAREASID="user_residentialAreasId";
+    final String USER_RESIDENTIALAREASNAME="user_residentialAreasName";
+    final String USER_ROOMID="user_roomId";
+    final String USER_ROOMNAME="user_roomName";
+    final String USER_UNITSID="user_unitsId";
+    final String USER_UNITSNAME="user_unitsName";
     /*-------------------------------Request URL-------------------------------------------------*/
     public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
     public final String DEMO_DOMAIN="http://10.10.10.119:3000";//开发环境
