@@ -3,6 +3,7 @@ package com.gkzxhn.wisdom.customview;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,50 +16,41 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.util.Utils;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
-import com.wx.wheelview.widget.WheelViewDialog;
 
 /**
  * Created by Raleigh.Luo on 17/8/1.
  */
 
-public class HouseTypeDialog extends Dialog {
+public class DecorateDialog extends Dialog {
     private Context context;
-    private WheelView<String> wvRoom,wvHall,wvGuards;
-    private TextView tvTitle,tvConfirm;
     private View.OnClickListener onClickListener;
+    private TextView tvConfirm;
+    private WheelView<String> mWheelView;
+    private int mArrayResId;
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-
-    public HouseTypeDialog(Context context) {
+    public DecorateDialog(@NonNull Context context,int arrayResId) {
         super(context, R.style.custom_dialog_style);
         this.context=context;
+        this.mArrayResId=arrayResId;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(LayoutInflater.from(context).inflate(R.layout.house_type_dialog_layout, null));
+        setContentView(LayoutInflater.from(context).inflate(R.layout.decorate_dialog_layout, null));
         init();
         measureWindow();
     }
     private void init(){
-        tvTitle= (TextView) findViewById(R.id.house_type_dialog_layout_tv_title);
-        tvConfirm= (TextView) findViewById(R.id.house_type_dialog_layout_tv_confirm);
+        tvConfirm= (TextView) findViewById(R.id.decorate_dialog_layout_tv_confirm);
+        mWheelView= (WheelView) findViewById(R.id.decorate_dialog_layout_wheel);
         tvConfirm.setOnClickListener(onClickListener);
-        wvRoom= (WheelView) findViewById(R.id.house_type_dialog_layout_wv_room);
-        initWheelView(wvRoom,R.array.house_type_room);
-        wvHall= (WheelView) findViewById(R.id.house_type_dialog_layout_wv_hall);
-        initWheelView(wvHall,R.array.house_type_hall);
-        wvGuards= (WheelView) findViewById(R.id.house_type_dialog_layout_wv_guards);
-        initWheelView(wvGuards,R.array.house_type_guards);
-    }
-    private void initWheelView(WheelView wheelView,int arrayResId){
-        wheelView.setWheelAdapter(new ArrayWheelAdapter(context)); // 文本数据源
-        wheelView.setSkin(WheelView.Skin.None); // common皮肤
-        wheelView.setWheelData(Utils.arrayToList(context.getResources().getStringArray(arrayResId)));  // 数据集合
-        wheelView.setLoop(true);
+        mWheelView.setWheelAdapter(new ArrayWheelAdapter(context)); // 文本数据源
+        mWheelView.setSkin(WheelView.Skin.None); // common皮肤
+        mWheelView.setWheelData(Utils.arrayToList(context.getResources().getStringArray(mArrayResId)));  // 数据集合
+        mWheelView.setLoop(true);
         WheelView.WheelViewStyle style=new WheelView.WheelViewStyle();
         //选中
         style.selectedTextSize=16;
@@ -66,22 +58,11 @@ public class HouseTypeDialog extends Dialog {
         // 未选中
         style.textColor=context.getResources().getColor(R.color.common_hint_text_color);
         style.textSize=10;
-        wheelView.setStyle(style);
-
-    }
-    public String  getRoom(){
-        return wvRoom.getSelectionItem();
-    }
-    public String  getHall(){
-        return wvHall.getSelectionItem();
-    }
-    public String  getGuards(){
-        return wvGuards.getSelectionItem();
+        mWheelView.setStyle(style);
     }
     public String getSelectedAll(){
-        return wvRoom==null?null:wvRoom.getSelectionItem()+wvHall.getSelectionItem()+wvGuards.getSelectionItem();
+        return mWheelView==null?null:mWheelView.getSelectionItem();
     }
-
     public void measureWindow(){
         Window dialogWindow = this.getWindow();
         WindowManager.LayoutParams params = dialogWindow.getAttributes();

@@ -85,7 +85,8 @@
     <string name="please_input_contact">请输入联系人</string>
     <string name="please_input_contact_phone">请输入联系电话</string>
     <string name="please_select_house_type">请选择户型</string>
-
+    <string name="please_select_decorate">请选择装修</string>
+    <string name="all_sale">整售</string>
 
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>
@@ -163,5 +164,16 @@
         <item>2卫</item>
         <item>3卫</item>
         <item>4卫</item>
+    </array>
+    <array name="decorate_type">
+        <item>简单装修</item>
+        <item>中等装修</item>
+        <item>精装修</item>
+        <item>豪华装修</item>
+        <item>毛坯</item>
+    </array>
+    <array name="rent_ways">
+        <item>合租</item>
+        <item>整租</item>
     </array>
 </resources>
