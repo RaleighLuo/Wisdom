@@ -34,9 +34,9 @@ public interface Constants {
     final String CLOSE_MESSAGE_NOTICE="close_message_notice";//关闭消息通知
     final String USER_SIGNED_STATUS="user_signed_status";//签约状态：0-未签约；1-签约中；2-签约失败；3-签约成功
     /*-------------------------------Request URL-------------------------------------------------*/
-    public final String RELEASE_DOMAIN="http://10.93.1.100:3000";//发布正式环境
+    public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
     public final String DEMO_DOMAIN="http://10.10.10.119:3000";//开发环境
-    public final String DOMAIN_NAME_XLS = DEMO_DOMAIN;
+    public final String DOMAIN_NAME_XLS = RELEASE_DOMAIN;
 
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//登录

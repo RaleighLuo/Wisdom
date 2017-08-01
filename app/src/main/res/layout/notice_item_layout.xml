@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_toRightOf="@+id/notice_item_layout_tv_icon"
         android:layout_height="wrap_content"
-        android:text="YYL666"
+        android:text="关于小区停电通知"
         android:textColor="@color/common_light_text_color"
         android:layout_alignTop="@+id/notice_item_layout_tv_icon"
         android:textSize="14sp"

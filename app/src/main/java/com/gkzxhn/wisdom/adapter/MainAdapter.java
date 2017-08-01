@@ -69,6 +69,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 });
                 break;
             case NOTICE_TYPE:
+                TextView tvLogo=(TextView)holder.itemView.findViewById(R.id.notice_item_layout_tv_icon);
+                tvLogo.setText(position==1?R.string.wu:R.string.ju);
+                tvLogo.setBackgroundResource(position==1?R.drawable.property_oval_shape:R.drawable.committee_oval_shape);
                 break;
             case HOUSE_TYPE:
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
