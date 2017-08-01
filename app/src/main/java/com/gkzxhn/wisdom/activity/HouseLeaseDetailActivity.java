@@ -38,7 +38,7 @@ public class HouseLeaseDetailActivity extends SuperActivity {
         int tab=getIntent().getIntExtra(Constants.EXTRA_TAB,Constants.HOUSE_LEASE_TAB);
         if(tab==Constants.HOUSE_SALE_TAB){
             tvMoney.setText("80万");
-            findViewById(R.id.house_lease_detail_layout_fl_method).setVisibility(View.GONE);
+            ((TextView)findViewById(R.id.house_lease_detail_layout_tv_method)).setText(R.string.all_sale);
         }
 
     }

@@ -60,7 +60,7 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/house_lease_detail_layout_tv_area"
                 android:layout_height="wrap_content"
-                android:text="开福区－伍家岭南"
+                android:text="中等装修"
                 android:layout_marginRight="@dimen/margin"
                 />
             <TextView

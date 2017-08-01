@@ -52,8 +52,8 @@ public class HouseRentalAdapter extends CardAdapter{
                 context.startActivity(intent);
             }
         });
-        viewHolder.tvAddress.setText(TAB==Constants.HOUSE_LEASE_TAB?"伍家岭南":"梅溪湖");
-        viewHolder.tvTitle.setText(TAB==Constants.HOUSE_LEASE_TAB?"海威大夏 2室2厅1卫":"达美D6 3室2厅1卫");
+        viewHolder.tvAddress.setText(TAB==Constants.HOUSE_LEASE_TAB?"3天前":"3天前");
+        viewHolder.tvTitle.setText(TAB==Constants.HOUSE_LEASE_TAB?"海威大夏 2室2厅1卫":"海威大夏 3室2厅1卫");
         viewHolder.tvMoney.setText(TAB==Constants.HOUSE_LEASE_TAB?"500元/月":"86万");
         viewHolder.ivImage.setImageResource(TAB==Constants.HOUSE_LEASE_TAB?R.mipmap.lease_image:R.mipmap.sale_image);
     }
@@ -71,11 +71,9 @@ public class HouseRentalAdapter extends CardAdapter{
     }
 
     class ViewHolder {
-
         ImageView ivImage;
         View maskView;
         TextView tvImageNumber,tvMoney,tvTitle,tvAddress;
-
         public ViewHolder(View view) {
             tvTitle = (TextView) view.findViewById(R.id.house_rental_item_layout_tv_title);
             tvAddress = (TextView) view.findViewById(R.id.house_rental_item_layout_tv_address);

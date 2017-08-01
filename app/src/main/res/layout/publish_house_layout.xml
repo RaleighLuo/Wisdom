@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="onClickListener"
-                    mAttr:cti_content="@string/please_select"
+                    mAttr:cti_content="@string/please_input_something"
                     mAttr:cti_title="@string/floor" />
 
                 <View
@@ -104,13 +104,13 @@
                 android:orientation="horizontal">
 
                 <com.gkzxhn.wisdom.customview.CusTextItem
-                    android:id="@+id/publish_house_layout_cti_area"
+                    android:id="@+id/publish_house_layout_cti_method"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="onClickListener"
                     mAttr:cti_content="@string/please_select"
-                    mAttr:cti_title="@string/area" />
+                    mAttr:cti_title="@string/method" />
 
                 <View
                     android:layout_width="1dip"
@@ -184,6 +184,7 @@
                 android:layout_toRightOf="@+id/publish_house_layout_tv_title"
                 android:background="@null"
                 android:gravity="right"
+                android:maxEms="20"
                 android:hint="@string/title_hint"
                 android:lines="1"
                 android:padding="@dimen/margin"
@@ -331,6 +332,7 @@
                 android:background="@null"
                 android:gravity="right"
                 android:hint="@string/please_input_contact_phone"
+                android:inputType="phone"
                 android:lines="1"
                 android:padding="10dip"
                 android:textSize="12sp" />
