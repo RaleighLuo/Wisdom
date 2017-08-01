@@ -33,7 +33,7 @@ public class LoginModel extends BaseModel implements ILoginModel {
         try {
             Map<String,String> params=new HashMap<>();
             params.put("phone",phone);
-//            params.put("code",verifyCode);
+            params.put("code",verifyCode);
             params.put("user_type","owner");
             volleyUtils.post(Constants.REQUEST_LOGIN_URL,params,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {

@@ -27,6 +27,7 @@
     <string name="error_phone">输入的手机号码不正确</string>
     <string name="recive_verify_code">你收到一条验证码消息</string>
     <string name="verify_code_is">[智慧社区]验证码：</string>
+    <string name="reset_send">重新发送</string>
     <!--主页-->
     <string name="pay">缴费</string>
     <string name="talking">话题</string>
