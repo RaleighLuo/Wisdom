@@ -319,7 +319,7 @@
                 android:layout_marginLeft="@dimen/margin"
 
                 android:gravity="center_vertical"
-                android:text="@string/contact"
+                android:text="@string/contact_method"
                 android:textSize="12sp" />
 
             <EditText

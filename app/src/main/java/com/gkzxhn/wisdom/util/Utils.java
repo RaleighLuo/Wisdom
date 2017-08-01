@@ -9,6 +9,9 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Raleigh.Luo on 17/7/12.
  */
@@ -59,5 +62,12 @@ public class Utils {
         String telRegex = "[1][3456789]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (TextUtils.isEmpty(mobiles)) return false;
         else return mobiles.matches(telRegex);
+    }
+    public static List<String> arrayToList(String[] array){
+        List<String> list=new ArrayList<>();
+        for(String str:array){
+            list.add(str);
+        }
+        return list;
     }
 }

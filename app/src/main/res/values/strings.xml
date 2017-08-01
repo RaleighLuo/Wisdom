@@ -84,7 +84,7 @@
     <string name="contact_method">联系方式</string>
     <string name="please_input_contact">请输入联系人</string>
     <string name="please_input_contact_phone">请输入联系电话</string>
-
+    <string name="please_select_house_type">请选择户型</string>
 
 
     <!--报修-->
@@ -144,4 +144,24 @@
     <string name="sign_in_day">连续签到天数</string>
     <string name="sign_describe">签到说明</string>
     <string name="sign_describe_hint">每天签到一次，获取对应积分；连续签到，积分更多哦！</string>
+    <!--Array-->
+    <array name="house_type_room">
+        <item>1室</item>
+        <item>2室</item>
+        <item>3室</item>
+        <item>4室</item>
+    </array>
+    <array name="house_type_hall">
+        <item>1厅</item>
+        <item>2厅</item>
+        <item>3厅</item>
+        <item>4厅</item>
+    </array>
+
+    <array name="house_type_guards">
+        <item>1卫</item>
+        <item>2卫</item>
+        <item>3卫</item>
+        <item>4卫</item>
+    </array>
 </resources>
