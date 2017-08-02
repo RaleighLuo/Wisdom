@@ -124,7 +124,7 @@ public class UploadHelper {
         @Override
         protected JSONObject doInBackground(Void... params) {
             JSONObject json=new JSONObject();
-            String path=new ImageHelper().compressImage(filePath, Constants.SD_PHOTO_PATH);//鍘嬬缉鍥剧墖
+            String path=new ImageHelper().compressImage(filePath, Constants.SD_PHOTO_PATH,mUploadFileName);//鍘嬬缉鍥剧墖
             try {
                 if(path!=null)filePath=path;
                 File file=new File(filePath);
@@ -156,7 +156,6 @@ public class UploadHelper {
                      * 这里重点注意： name里面的值为服务端需要key 只有这个key 才可以得到对应的文件
                      * filename是文件的名字，包含后缀名的 比如:abc.png
                      */
-                    String filename=mUploadFileName+".jpg";
                     String key="";
                     switch (mUploadUrl){
                         case Constants.UPLOAD_PROFILE_URL:
@@ -167,8 +166,9 @@ public class UploadHelper {
                             break;
                     }
 
-                    sb.append("Content-Disposition: form-data; name=\""+key+"\"; filename=\""+filename+"\""+LINE_END);
-                    sb.append("Content-Type: application/json; charset="+CHARSET+LINE_END);
+                    sb.append("Content-Disposition: form-data; name=\""+key+"\"; filename=\""+file.getName()+"\""+LINE_END);
+//                    sb.append("Content-Type: application/octet-stream; charset="+CHARSET+LINE_END);
+                    sb.append("Content-Type: image/jpeg; charset="+CHARSET+LINE_END);
                     sb.append(LINE_END);
                     dos.write(sb.toString().getBytes());
                     InputStream is = new FileInputStream(file);

@@ -60,7 +60,15 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         stopRefreshAnim();
         //下载头像
         String url=mPresenter.getSharedPreferences().getString(Constants.USER_PORTRAIT,"");
-        if(url.length()>0)ImageLoader.getInstance().displayImage(url,ivPortrait,Utils.getOptions(R.mipmap.person_portrait));
+        if(url.length()>0){
+            File file=GKApplication.getInstance().getImageLoadCache().get(url);
+            if(file!=null&&file.exists()){
+                Bitmap mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                ivPortrait.setImageBitmap(mBitmap);
+            }else {
+                ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_portrait));
+            }
+        }
 
     }
 

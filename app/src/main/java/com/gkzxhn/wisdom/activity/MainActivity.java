@@ -3,6 +3,8 @@ package com.gkzxhn.wisdom.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -24,10 +26,12 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.MainAdapter;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.util.ConvertUtil;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,7 +104,15 @@ public class MainActivity extends AppCompatActivity {
         });
         //下载头像
         String url=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getString(Constants.USER_PORTRAIT,"");
-        if(url.length()>0) ImageLoader.getInstance().displayImage(url,ivPortrait,Utils.getOptions(R.mipmap.person_home));
+        if(url.length()>0){
+            File file=GKApplication.getInstance().getImageLoadCache().get(url);
+            if(file!=null&&file.exists()){
+                Bitmap mBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                ivPortrait.setImageBitmap(mBitmap);
+            }else {
+                ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_home));
+            }
+        }
 
     }
     private void initDetail(){
