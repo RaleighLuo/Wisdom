@@ -25,6 +25,7 @@ import com.gkzxhn.wisdom.adapter.MainAdapter;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.util.ConvertUtil;
 
 import java.text.SimpleDateFormat;
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //下载头像
+        String url=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getString(Constants.USER_PORTRAIT,"");
+        if(url.length()>0) ImageLoader.getInstance().displayImage(url,ivPortrait,Utils.getOptions(R.mipmap.person_home));
+
     }
     private void initDetail(){
         Calendar cal=Calendar.getInstance();

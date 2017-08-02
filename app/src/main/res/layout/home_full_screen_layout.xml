@@ -13,7 +13,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_width"
-        android:src="@mipmap/small"
+        android:src="@mipmap/person_home"
         android:id="@+id/main_layout_iv_portrait"
         app:border_color="@android:color/white"
         app:border_width="2dp"

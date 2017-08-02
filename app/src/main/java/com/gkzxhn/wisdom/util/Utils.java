@@ -1,12 +1,15 @@
 package com.gkzxhn.wisdom.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
 import java.text.SimpleDateFormat;
@@ -85,5 +88,16 @@ public class Utils {
             }
         }
         return result;
+    }
+    public static DisplayImageOptions getOptions(int defualtImgRes) {
+        return new DisplayImageOptions.Builder()
+                .showImageOnLoading(defualtImgRes)//默认加载的图片
+                .showImageForEmptyUri(defualtImgRes)//下载地址不存在
+
+                .showImageOnFail(defualtImgRes).cacheInMemory(false).cacheOnDisk(true)//加载失败的图
+                //	.displayer(new RoundedBitmapDisplayer(0))  设置圆角，设置后不能使用loadimage方法，项目并不需要圆角
+                .bitmapConfig(Bitmap.Config.RGB_565)    //设置图片的质量
+                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)    //设置图片的缩放类型，该方法可以有效减少内存的占用
+                .build();
     }
 }

@@ -19,6 +19,8 @@
     <string name="yuan">元</string>
     <string name="money_unit">￥</string>
     <string name="more">更多</string>
+
+
     <!--登录-->
     <string name="phone_number">手机号</string>
     <string name="get_verfy_code">获取验证码</string>
@@ -134,6 +136,8 @@
     <string name="own_community">我的小区</string>
     <string name="contact_property">联系物业</string>
     <string name="exit_account">退出当前账号</string>
+    <string name="upload_portrait_success">已上传头像</string>
+    <string name="upload_portrait_faild">上传头像失败</string>
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
     <string name="payment">支付</string>

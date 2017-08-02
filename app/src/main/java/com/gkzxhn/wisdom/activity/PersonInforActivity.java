@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,7 +18,10 @@ import android.widget.ImageView;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.presenter.PersonInforPresenter;
 import com.gkzxhn.wisdom.util.Utils;
+import com.gkzxhn.wisdom.view.IPersonInforView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.activity.CutPhotoActivity;
 import com.starlight.mobile.android.lib.album.AlbumActivity;
 import com.starlight.mobile.android.lib.util.CommonHelper;
@@ -31,10 +35,12 @@ import java.util.UUID;
  * Created by Raleigh.Luo on 17/7/12.
  */
 
-public class PersonInforActivity extends SuperActivity {
+public class PersonInforActivity extends SuperActivity implements IPersonInforView{
     private CusPhotoFromDialog optionsDialog;//选择相册或拍照对话框
     private File PhotoFile = null;
     private ImageView ivPortrait;
+    private PersonInforPresenter mPresenter;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,12 @@ public class PersonInforActivity extends SuperActivity {
     }
 
     private void init() {
+        mPresenter=new PersonInforPresenter(this,this);
+        mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
+        stopRefreshAnim();
+        //下载头像
+        String url=mPresenter.getSharedPreferences().getString(Constants.USER_PORTRAIT,"");
+        if(url.length()>0)ImageLoader.getInstance().displayImage(url,ivPortrait,Utils.getOptions(R.mipmap.person_portrait));
 
     }
 
@@ -107,6 +119,7 @@ public class PersonInforActivity extends SuperActivity {
                     Bitmap mBitmap = BitmapFactory.decodeFile(imagePath);
                     if (mBitmap != null) {
                         ivPortrait.setImageBitmap(mBitmap);
+                        mPresenter.uploadPortrait(imagePath);
                     }
                     break;
             }
@@ -205,5 +218,15 @@ public class PersonInforActivity extends SuperActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    public void startRefreshAnim() {
+        if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
+    }
+
+    @Override
+    public void stopRefreshAnim() {
+        if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
     }
 }
