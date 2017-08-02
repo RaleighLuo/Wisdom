@@ -98,10 +98,13 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(MainActivity.this,PersonInforActivity.class));
-                return false;
+                startActivityForResult(new Intent(MainActivity.this,PersonInforActivity.class),Constants.EXTRA_CODE);
+                return true;
             }
         });
+        updatePortrait();
+    }
+    private void updatePortrait(){
         //下载头像
         String url=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getString(Constants.USER_PORTRAIT,"");
         if(url.length()>0){
@@ -113,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_home));
             }
         }
-
     }
     private void initDetail(){
         Calendar cal=Calendar.getInstance();
@@ -177,5 +179,13 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.EXTRA_CODE){
+            updatePortrait();
+        }
     }
 }
