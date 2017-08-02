@@ -303,7 +303,10 @@
                 android:gravity="right"
                 android:hint="@string/please_input_contact"
                 android:lines="1"
-                android:padding="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
+                android:paddingBottom="15dip"
+                android:paddingRight="10dip"
                 android:textSize="12sp" />
 
             <View
@@ -334,7 +337,10 @@
                 android:hint="@string/please_input_contact_phone"
                 android:inputType="phone"
                 android:lines="1"
-                android:padding="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
+                android:paddingBottom="15dip"
+                android:paddingRight="10dip"
                 android:textSize="12sp" />
         </RelativeLayout>
     </ScrollView>

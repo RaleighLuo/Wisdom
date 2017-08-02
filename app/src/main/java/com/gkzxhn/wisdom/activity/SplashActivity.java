@@ -43,7 +43,7 @@ public class SplashActivity extends Activity {
                 startActivity(intent);
                 finish();
             }else if(msg.what==TO_MAIN_PAGE){
-                Intent intent = new Intent(SplashActivity.this, PublishHouseActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
