@@ -130,6 +130,7 @@ public class PublishHouseActivity extends SuperActivity {
                 }
             });
         }else{
+            ctiMoney.getTvTitle().setText(R.string.sale_money);
             ctiRentWay.getTvContent().setText(R.string.all_sale);
             ctiRentWay.setOnClickListener(null);
         }
