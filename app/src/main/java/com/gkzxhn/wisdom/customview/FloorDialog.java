@@ -82,6 +82,7 @@ public class FloorDialog extends Dialog {
         etCurrentFloor.setFocusableInTouchMode(true);
         //请求获得焦点
         etCurrentFloor.requestFocus();
+        if(currentFloor.length()>0)etCurrentFloor.setSelection(currentFloor.length());//光标在最后
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

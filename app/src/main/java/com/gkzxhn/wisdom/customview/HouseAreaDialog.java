@@ -24,7 +24,7 @@ public class HouseAreaDialog extends Dialog {
     private Context context;
     private View.OnClickListener onClickListener;
     private EditText etArea;
-    private String area;
+    private String area="";
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
@@ -71,6 +71,7 @@ public class HouseAreaDialog extends Dialog {
         etArea.setFocusableInTouchMode(true);
         //请求获得焦点
         etArea.requestFocus();
+        if(area.length()>0)etArea.setSelection(area.length());//光标在最后
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

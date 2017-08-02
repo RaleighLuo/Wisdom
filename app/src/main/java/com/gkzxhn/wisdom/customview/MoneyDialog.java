@@ -26,7 +26,7 @@ public class MoneyDialog extends Dialog {
     private Context context;
     private View.OnClickListener onClickListener;
     private EditText etMoney;
-    private String money;
+    private String money="";
     private int TAB;
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
@@ -81,6 +81,7 @@ public class MoneyDialog extends Dialog {
         etMoney.setFocusableInTouchMode(true);
         //请求获得焦点
         etMoney.requestFocus();
+        if(money.length()>0)etMoney.setSelection(money.length());//光标在最后
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
