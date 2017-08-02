@@ -144,6 +144,8 @@ public class UploadHelper {
                 conn.setRequestProperty("connection", "keep-alive");
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
+                //Header auth认证
+                conn.setRequestProperty("Authorization", Constants.UPLOAD_FILE_AUTHORIZATION);
                 if(file!=null) {
 
                     OutputStream outputSteam=conn.getOutputStream();

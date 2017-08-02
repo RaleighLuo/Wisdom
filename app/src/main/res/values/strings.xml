@@ -159,6 +159,8 @@
     <string name="own">我的</string>
     <string name="community">社区</string>
     <string name="like">赞</string>
+    <string name="topic_publish">话题发布</string>
+    <string name="topic_publish_hint">请输入要发布的内容</string>
     <!--签到-->
     <string name="click_sign">点击签到</string>
     <string name="sign">签到</string>

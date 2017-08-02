@@ -19,6 +19,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 
 /**
  * Created by baidu on 17/1/12.
@@ -77,7 +79,7 @@ public class GKApplication extends Application {
                 //自定义缓存路径
                 .diskCache(imageLoadCache)
                 .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
-                .imageDownloader(new BaseImageDownloader(getApplicationContext(), 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
+                .imageDownloader(new ImageLoaderWithCookie(getApplicationContext(), 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
                 //		  .discCacheFileNameGenerator(new Md5FileNameGenerator())//将保存的时候的URI名称用MD5 加密 ,.new HashCodeFileNameGenerator()//使用HASHCODE对UIL进行加密命名
                 // .imageDownloader(new Httpclie(5 * 1000, 20 * 1000)) //
                 // connectTimeout (5 s), readTimeout (20 s)
@@ -109,5 +111,18 @@ public class GKApplication extends Application {
             .imageScaleType(ImageScaleType.IN_SAMPLE_INT)    //设置图片的缩放类型，该方法可以有效减少内存的占用
             .build();
 
+    public class ImageLoaderWithCookie extends BaseImageDownloader {
+        public ImageLoaderWithCookie(Context context,int connectTimeout, int readTimeout) {
+            super(context,connectTimeout,readTimeout);
+        }
+
+        @Override
+        protected HttpURLConnection createConnection(String url, Object extra) throws IOException {
+            HttpURLConnection connection = super.createConnection(url, extra);
+            //Header auth认证
+            connection.setRequestProperty("Authorization",Constants.UPLOAD_FILE_AUTHORIZATION);//extra就是SessionId，何时传入，见第三步
+            return connection;
+        }
+    }
 
 }
