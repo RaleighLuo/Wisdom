@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg_color"
+    >
+    <View style="@style/common_line_style"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/money_dialog_layout_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/common_light_text_color"
+            android:text="@string/please_input_house_lease_money_infor"
+            />
+        <TextView
+            android:id="@+id/money_dialog_layout_tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:background="@drawable/common_item_click_selector"
+            android:padding="@dimen/margin"
+            android:textColor="@color/colorPrimary"
+            />
+    </FrameLayout>
+    <View style="@style/common_line_style"/>
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin"
+        android:gravity="center"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lease_money"
+            android:textSize="12sp"
+            android:id="@+id/money_dialog_layout_tv_money"
+            android:textColor="@color/holo_green_light"
+            />
+        <EditText
+            android:id="@+id/money_dialog_layout_et_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dip"
+            android:maxEms="5"
+            android:gravity="center_horizontal"
+            android:ems="5"
+            android:textColor="@color/common_text_color"
+            android:inputType="numberDecimal"
+            />
+        <TextView
+            android:id="@+id/money_dialog_layout_tv_money_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lease_money_unit"
+            android:textSize="12sp"
+            android:textColor="@color/common_text_color"
+            />
+
+    </LinearLayout>
+</LinearLayout>

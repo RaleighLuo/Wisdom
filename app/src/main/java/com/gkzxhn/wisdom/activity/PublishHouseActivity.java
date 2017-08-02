@@ -10,7 +10,9 @@ import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CusTextItem;
 import com.gkzxhn.wisdom.customview.DecorateDialog;
 import com.gkzxhn.wisdom.customview.FloorDialog;
+import com.gkzxhn.wisdom.customview.HouseAreaDialog;
 import com.gkzxhn.wisdom.customview.HouseTypeDialog;
+import com.gkzxhn.wisdom.customview.MoneyDialog;
 
 /**
  * Created by Raleigh.Luo on 17/7/28.
@@ -20,7 +22,9 @@ public class PublishHouseActivity extends SuperActivity {
     private HouseTypeDialog mHouseTypeDialog;
     private DecorateDialog mDecorateDialog,mRentWayDialog;
     private FloorDialog mFloorDialog;
-    private CusTextItem ctiHouseType,ctiDecorate,ctiRentWay,ctiFloor;
+    private HouseAreaDialog mHouseAreaDialog;
+    private MoneyDialog mMoneyDialog;
+    private CusTextItem ctiHouseType,ctiDecorate,ctiRentWay,ctiFloor,ctiHouseArea,ctiMoney;
     private int TAB;
     private EditText etCommitteName,etTitle,etContent,etContact,etPhone;
     @Override
@@ -40,6 +44,8 @@ public class PublishHouseActivity extends SuperActivity {
         ctiRentWay= (CusTextItem) findViewById(R.id.publish_house_layout_cti_method);
         ctiDecorate= (CusTextItem) findViewById(R.id.publish_house_layout_cti_decorate);
         ctiHouseType= (CusTextItem) findViewById(R.id.publish_house_layout_cti_house_type);
+        ctiHouseArea= (CusTextItem) findViewById(R.id.publish_house_layout_cti_house_area);
+        ctiMoney= (CusTextItem) findViewById(R.id.publish_house_layout_cti_rent_money);
     }
 
 
@@ -48,6 +54,10 @@ public class PublishHouseActivity extends SuperActivity {
         super.onConfigurationChanged(newConfig);
         mHouseTypeDialog.measureWindow();
         mDecorateDialog.measureWindow();
+        mRentWayDialog.measureWindow();
+        mFloorDialog.measureWindow();
+        mHouseAreaDialog.measureWindow();
+        mMoneyDialog.measureWindow();
     }
 
     private void init(){
@@ -83,6 +93,32 @@ public class PublishHouseActivity extends SuperActivity {
                 }
             }
         });
+        mHouseAreaDialog =new HouseAreaDialog(this);
+        mHouseAreaDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHouseAreaDialog.getContent().length()==0){
+                    showToast(R.string.please_input_house_area);
+                }else{
+                    if (mHouseAreaDialog != null && mHouseAreaDialog.isShowing())
+                        mHouseAreaDialog.dismiss();
+                    ctiHouseArea.getTvContent().setText(mHouseAreaDialog.getContent());
+                }
+            }
+        });
+        mMoneyDialog=new MoneyDialog(this,TAB);
+        mMoneyDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mMoneyDialog.getContent().length()==0){
+                    showToast(TAB==Constants.HOUSE_LEASE_TAB?R.string.please_input_house_lease_money:R.string.please_input_house_sale_money);
+                }else{
+                    if (mMoneyDialog != null && mMoneyDialog.isShowing())
+                        mMoneyDialog.dismiss();
+                    ctiMoney.getTvContent().setText(mMoneyDialog.getContent());
+                }
+            }
+        });
         if(TAB==Constants.HOUSE_LEASE_TAB) {//房屋出租发布
             mRentWayDialog = new DecorateDialog(this, R.array.rent_ways);
             mRentWayDialog.setOnClickListener(new View.OnClickListener() {
@@ -104,11 +140,10 @@ public class PublishHouseActivity extends SuperActivity {
                 finish();
                 break;
             case R.id.publish_house_layout_cti_floor://楼层
-                if(!mFloorDialog.isShowing()){
-                    if(!mFloorDialog.isShowing()) mFloorDialog.show();
-                }
+                if(!mFloorDialog.isShowing()) mFloorDialog.show();
                 break;
             case R.id.publish_house_layout_cti_house_area://面积
+                if(!mHouseAreaDialog.isShowing()) mHouseAreaDialog.show();
                 break;
             case R.id.publish_house_layout_cti_house_type://户型
                 if(!mHouseTypeDialog.isShowing())mHouseTypeDialog.show();
@@ -117,6 +152,7 @@ public class PublishHouseActivity extends SuperActivity {
                 if(TAB==Constants.HOUSE_LEASE_TAB&&mRentWayDialog!=null&&!mRentWayDialog.isShowing())mRentWayDialog.show();
                 break;
             case R.id.publish_house_layout_cti_rent_money://租金
+                if(!mMoneyDialog.isShowing()) mMoneyDialog.show();
                 break;
             case R.id.publish_house_layout_cti_decorate://装修
                 if(!mDecorateDialog.isShowing())mDecorateDialog.show();

@@ -126,7 +126,7 @@
                     android:layout_weight="1"
                     mAttr:cti_content="@string/please_input_something"
                     android:onClick="onClickListener"
-                    mAttr:cti_title="@string/rent_money" />
+                    mAttr:cti_title="@string/lease_money" />
 
                 <View
                     android:layout_width="1dip"

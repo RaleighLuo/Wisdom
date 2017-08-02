@@ -73,7 +73,7 @@
     <string name="area">区域</string>
     <string name="decorate">装修</string>
     <string name="please_select">请选择</string>
-    <string name="rent_money">租金</string>
+    <string name="lease_money">租金</string>
     <string name="sale_money">售价</string>
     <string name="please_input_something">请填写</string>
     <string name="supplementary_information">补充信息</string>
@@ -88,13 +88,23 @@
     <string name="please_select_house_type">请选择户型</string>
     <string name="please_select_decorate">请选择装修</string>
     <string name="please_input_floor_infor">请填写楼层</string>
+    <string name="please_input_area_infor">请填写面积</string>
+    <string name="please_input_house_lease_money_infor">请填写租金</string>
+    <string name="please_input_house_sale_money_infor">请填写售价</string>
     <string name="all_sale">整售</string>
     <string name="belong_floor">所在楼层</string>
     <string name="all_floor">，整栋</string>
     <string name="floor_unit">楼</string>
+    <string name="house_area_unit">平方米</string>
+    <string name="lease_money_unit">元/月</string>
+    <string name="sale_money_unit">万</string>
 
     <string name="please_input_belong_floor">请输入所在楼层数</string>
     <string name="please_input_all_floor">请输入整栋层数</string>
+    <string name="please_input_house_area">请输入房屋面积</string>
+
+    <string name="please_input_house_lease_money">请输入租金</string>
+    <string name="please_input_house_sale_money">请输入售价</string>
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>
     <string name="repair_type">报修类别</string>
