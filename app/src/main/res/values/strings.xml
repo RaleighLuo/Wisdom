@@ -87,8 +87,14 @@
     <string name="please_input_contact_phone">请输入联系电话</string>
     <string name="please_select_house_type">请选择户型</string>
     <string name="please_select_decorate">请选择装修</string>
+    <string name="please_input_floor_infor">请填写楼层</string>
     <string name="all_sale">整售</string>
+    <string name="belong_floor">所在楼层</string>
+    <string name="all_floor">，整栋</string>
+    <string name="floor_unit">楼</string>
 
+    <string name="please_input_belong_floor">请输入所在楼层数</string>
+    <string name="please_input_all_floor">请输入整栋层数</string>
     <!--报修-->
     <string name="please_describe_question">请简单描述问题</string>
     <string name="repair_type">报修类别</string>

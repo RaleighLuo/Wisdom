@@ -3,11 +3,13 @@ package com.gkzxhn.wisdom.activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CusTextItem;
 import com.gkzxhn.wisdom.customview.DecorateDialog;
+import com.gkzxhn.wisdom.customview.FloorDialog;
 import com.gkzxhn.wisdom.customview.HouseTypeDialog;
 
 /**
@@ -17,8 +19,10 @@ import com.gkzxhn.wisdom.customview.HouseTypeDialog;
 public class PublishHouseActivity extends SuperActivity {
     private HouseTypeDialog mHouseTypeDialog;
     private DecorateDialog mDecorateDialog,mRentWayDialog;
-    private CusTextItem ctiHouseType,ctiDecorate,ctiRentWay;
+    private FloorDialog mFloorDialog;
+    private CusTextItem ctiHouseType,ctiDecorate,ctiRentWay,ctiFloor;
     private int TAB;
+    private EditText etCommitteName,etTitle,etContent,etContact,etPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +31,17 @@ public class PublishHouseActivity extends SuperActivity {
         init();
     }
     private void initControls(){
+        etCommitteName= (EditText) findViewById(R.id.publish_house_layout_et_committe_name);
+        etTitle= (EditText) findViewById(R.id.publish_house_layout_et_title);
+        etContent= (EditText) findViewById(R.id.publish_house_layout_et_house_description);
+        etContact= (EditText) findViewById(R.id.publish_house_layout_et_contact);
+        etPhone= (EditText) findViewById(R.id.publish_house_layout_et_contact_phone);
+        ctiFloor= (CusTextItem) findViewById(R.id.publish_house_layout_cti_floor);
         ctiRentWay= (CusTextItem) findViewById(R.id.publish_house_layout_cti_method);
         ctiDecorate= (CusTextItem) findViewById(R.id.publish_house_layout_cti_decorate);
         ctiHouseType= (CusTextItem) findViewById(R.id.publish_house_layout_cti_house_type);
     }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -57,7 +68,21 @@ public class PublishHouseActivity extends SuperActivity {
                 ctiDecorate.getTvContent().setText(mDecorateDialog.getSelectedAll());
             }
         });
-
+        mFloorDialog =new FloorDialog(this);
+        mFloorDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mFloorDialog.getCurrentFloor().length()==0){
+                    showToast(R.string.please_input_belong_floor);
+                }else if(mFloorDialog.getAllFloor().length()==0){
+                    showToast(R.string.please_input_all_floor);
+                }else{
+                    if (mFloorDialog != null && mFloorDialog.isShowing())
+                        mFloorDialog.dismiss();
+                    ctiFloor.getTvContent().setText(mFloorDialog.getContent());
+                }
+            }
+        });
         if(TAB==Constants.HOUSE_LEASE_TAB) {//房屋出租发布
             mRentWayDialog = new DecorateDialog(this, R.array.rent_ways);
             mRentWayDialog.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +104,9 @@ public class PublishHouseActivity extends SuperActivity {
                 finish();
                 break;
             case R.id.publish_house_layout_cti_floor://楼层
+                if(!mFloorDialog.isShowing()){
+                    if(!mFloorDialog.isShowing()) mFloorDialog.show();
+                }
                 break;
             case R.id.publish_house_layout_cti_house_area://面积
                 break;
@@ -94,5 +122,12 @@ public class PublishHouseActivity extends SuperActivity {
                 if(!mDecorateDialog.isShowing())mDecorateDialog.show();
                 break;
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(mFloorDialog.isShowing()) mFloorDialog.dismiss();
     }
 }
