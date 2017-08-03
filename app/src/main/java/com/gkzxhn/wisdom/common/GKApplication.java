@@ -101,9 +101,9 @@ public class GKApplication extends Application {
         return imageLoadCache;
     }
     private DisplayImageOptions options = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.mipmap.ic_launcher)//默认加载的图片
-            .showImageForEmptyUri(R.mipmap.ic_launcher)//下载地址不存在
-            .showImageOnFail(R.mipmap.ic_launcher).cacheInMemory(false).cacheOnDisk(true)//加载失败的图
+            .showImageOnLoading(R.mipmap.ic_imageloading)//默认加载的图片
+            .showImageForEmptyUri(R.mipmap.ic_imageload_failed)//下载地址不存在
+            .showImageOnFail(R.mipmap.ic_imageload_failed).cacheInMemory(false).cacheOnDisk(true)//加载失败的图
             //	.displayer(new RoundedBitmapDisplayer(0))  设置圆角，设置后不能使用loadimage方法，项目并不需要圆角
             .bitmapConfig(Bitmap.Config.RGB_565)    //设置图片的质量
             .imageScaleType(ImageScaleType.IN_SAMPLE_INT)    //设置图片的缩放类型，该方法可以有效减少内存的占用
