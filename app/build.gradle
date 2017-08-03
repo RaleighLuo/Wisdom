@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName '1.0.1'
     }
     buildTypes {
         release {
@@ -28,8 +28,11 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.android.support:cardview-v7:23.1.0'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    compile 'com.facebook.rebound:rebound:0.3.8'//CardSlide
-    compile 'com.wx.wheelview:wheelview:1.3.3'//滚轮
-    compile 'com.google.code.gson:gson:2.8.0'//Gson解析
+    compile 'com.facebook.rebound:rebound:0.3.8'
+    //CardSlide
+    compile 'com.wx.wheelview:wheelview:1.3.3'
+    //滚轮
+    compile 'com.google.code.gson:gson:2.8.0'
+    //Gson解析
     compile project(':base_lib_system')
 }
