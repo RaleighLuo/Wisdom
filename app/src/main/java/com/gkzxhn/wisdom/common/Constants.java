@@ -23,6 +23,10 @@ public interface Constants {
     final String USER_TOKEN="user_token";
     final String USER_ID="user_id";
     final String USER_PORTRAIT="user_portrait";
+    final String USER_NAME="user_name";
+    final String USER_PHONE="user_phone";
+    final String USER_NICKNAME="user_nickname";
+    final String USER_GENDER="user_gender";
 
     final String USER_BUILDINGID="user_buildingId";
     final String USER_BUILDINGNAME="user_buildingName";
@@ -34,6 +38,8 @@ public interface Constants {
     final String USER_ROOMNAME="user_roomName";
     final String USER_UNITSID="user_unitsId";
     final String USER_UNITSNAME="user_unitsName";
+    final String USER_USEDAREA="user_usedArea";
+    final String USER_FLOORAREA="user_floorArea";
     /*-------------------------------Request URL-------------------------------------------------*/
     public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
     public final String DEMO_DOMAIN="http://10.10.10.119:3000";//开发环境

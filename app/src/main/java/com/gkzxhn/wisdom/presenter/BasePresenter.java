@@ -2,17 +2,21 @@ package com.gkzxhn.wisdom.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Build;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.model.IBaseModel;
+import com.gkzxhn.wisdom.async.AsynHelper;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IBaseView;
 import com.starlight.mobile.android.lib.util.HttpStatus;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -27,7 +31,7 @@ public class BasePresenter<M extends IBaseModel,V extends IBaseView> {
     protected M mModel;
     protected WeakReference<V> mWeakView;
     protected final int SUCCESS_CODE=0,FAILD_CODE=-1;
-
+    private AsynHelper asynHelper;
     public BasePresenter(Context context, M mModel, V view){
         this.mModel=mModel;
         if(context!=null)mWeakContext=new WeakReference<Context>(context);
@@ -50,9 +54,34 @@ public class BasePresenter<M extends IBaseModel,V extends IBaseView> {
         }
     }
 
-
+    /**
+     * 启动异步任务
+     *
+     * @param tag
+     * @param params
+     */
+    protected void startAsynTask(AsynHelper.AsynHelperTag tag, AsynHelper.TaskFinishedListener taskFinishedListener, Object... params) {
+        try {
+            if (asynHelper != null) {
+                if (asynHelper.getStatus() == AsyncTask.Status.RUNNING) asynHelper.cancel(true);
+                asynHelper = null;
+            }
+            asynHelper = new AsynHelper(tag);
+            asynHelper.setOnTaskFinishedListener(taskFinishedListener);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                asynHelper.executeOnExecutor(Executors.newCachedThreadPool(), params);
+            } else {
+                asynHelper.execute(params);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public  void onDestory(){
-
+        if (asynHelper != null) {
+            if (asynHelper.getStatus() == AsyncTask.Status.RUNNING) asynHelper.cancel(true);
+            asynHelper = null;
+        }
         if(mModel!=null)mModel.stopAllReuqst();
     }
     public V getView(){

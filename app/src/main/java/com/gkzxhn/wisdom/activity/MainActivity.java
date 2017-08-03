@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
         tvCommunityDetail.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
                 preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
+        tvCarpetArea.setText(preferences.getFloat(Constants.USER_USEDAREA,0)+getString(R.string.square_meter));
+        tvHousingArea.setText(preferences.getFloat(Constants.USER_FLOORAREA,0)+getString(R.string.square_meter));
     }
     private boolean isExpanded=true;
     public void onClickListener(View view){

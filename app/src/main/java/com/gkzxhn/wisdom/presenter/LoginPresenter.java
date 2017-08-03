@@ -11,6 +11,7 @@ import android.widget.RemoteViews;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.async.AsynHelper;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.RoomEntity;
@@ -82,29 +83,21 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 JSONObject json=JSONUtil.getJSONObject(response);
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(json,"code"));
                 if(code==200){
-                    String token=JSONUtil.getJSONObjectStringValue(json,"token");
+                    String token= JSONUtil.getJSONObjectStringValue(json,"token");
                     getSharedPreferences().edit().putString(Constants.USER_TOKEN,token).commit();
-                    List<RoomEntity> datas = new Gson().fromJson(JSONUtil.getJSONObjectStringValue(json,"rooms"), new TypeToken<List<RoomEntity>>() {
-                    }.getType());
-//                    if(datas.size()==1){
-                    RoomEntity roomEntity=datas.get(0);
-                    SharedPreferences.Editor editor=getSharedPreferences().edit();
-                    editor.putString(Constants.USER_BUILDINGID,roomEntity.getBuildingId());
-                    editor.putString(Constants.USER_BUILDINGNAME,roomEntity.getBuildingName());
-                    editor.putString(Constants.USER_REGIONID,roomEntity.getRegionId());
-                    editor.putString(Constants.USER_REGIONNAME,roomEntity.getRegionName());
-                    editor.putString(Constants.USER_RESIDENTIALAREASID,roomEntity.getResidentialAreasId());
-                    editor.putString(Constants.USER_RESIDENTIALAREASNAME,roomEntity.getResidentialAreasName());
-                    editor.putString(Constants.USER_ROOMID,roomEntity.getRoomId());
-                    editor.putString(Constants.USER_ROOMNAME,roomEntity.getRoomName());
-                    editor.putString(Constants.USER_UNITSID,roomEntity.getUnitsId());
-                    editor.putString(Constants.USER_UNITSNAME,roomEntity.getUnitsName());
-                    editor.commit();
-//                    }else{//选择
-//
-//                    }
-                    getView().startRefreshAnim();
-                    getView().onSuccess();
+                    startAsynTask(AsynHelper.AsynHelperTag.LOGIN_TAG, new AsynHelper.TaskFinishedListener() {
+                        @Override
+                        public void back(Object object) {
+                            if(object==null){//只有一套房屋
+                                getView().startRefreshAnim();
+                                getView().onSuccess();
+                            }else{//多房屋
+//                                TODO
+                                List<RoomEntity> datas= (List<RoomEntity>) object;
+                            }
+
+                        }
+                    }, JSONUtil.getJSONObjectStringValue(json,"profile"));
                 }else{
                     getView().startRefreshAnim();
                     getView().showToast(R.string.service_not_available);

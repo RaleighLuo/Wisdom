@@ -25,6 +25,24 @@ public class RoomEntity {
     private String roomName;
     private String unitsId;
     private String unitsName;
+    private float usedArea;
+    private float floorArea;
+
+    public float getUsedArea() {
+        return usedArea;
+    }
+
+    public void setUsedArea(float usedArea) {
+        this.usedArea = usedArea;
+    }
+
+    public float getFloorArea() {
+        return floorArea;
+    }
+
+    public void setFloorArea(float floorArea) {
+        this.floorArea = floorArea;
+    }
 
     public String getBuildingId() {
         return buildingId == null ? "" : buildingId;

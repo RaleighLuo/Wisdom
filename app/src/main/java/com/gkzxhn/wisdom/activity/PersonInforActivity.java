@@ -3,6 +3,7 @@ package com.gkzxhn.wisdom.activity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
@@ -41,6 +43,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private ImageView ivPortrait;
     private PersonInforPresenter mPresenter;
     private ProgressDialog mProgress;
+    private TextView tvHouseNumber,tvPhone,tvCommunity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,10 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     }
 
     private void initControls() {
+        tvHouseNumber= (TextView) findViewById(R.id.person_infor_layout_tv_house_number);
         ivPortrait = (ImageView) findViewById(R.id.person_infor_layout_iv_portrait);
+        tvPhone= (TextView) findViewById(R.id.person_infor_layout_tv_phone);
+        tvCommunity= (TextView) findViewById(R.id.person_infor_layout_tv_community);
     }
 
     private void init() {
@@ -69,7 +75,11 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                 ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_portrait));
             }
         }
-
+        SharedPreferences preferences=mPresenter.getSharedPreferences();
+        tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
+        tvHouseNumber.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
+                preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
+        tvPhone.setText(preferences.getString(Constants.USER_PHONE,""));
     }
 
     public void onClickListener(View view) {
