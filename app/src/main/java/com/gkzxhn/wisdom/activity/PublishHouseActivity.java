@@ -13,6 +13,7 @@ import com.gkzxhn.wisdom.customview.FloorDialog;
 import com.gkzxhn.wisdom.customview.HouseAreaDialog;
 import com.gkzxhn.wisdom.customview.HouseTypeDialog;
 import com.gkzxhn.wisdom.customview.MoneyDialog;
+import com.starlight.mobile.android.lib.util.CommonHelper;
 
 /**
  * Created by Raleigh.Luo on 17/7/28.
@@ -136,6 +137,7 @@ public class PublishHouseActivity extends SuperActivity {
         }
     }
     public void onClickListener(View view){
+        CommonHelper.clapseSoftInputMethod(this);
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();

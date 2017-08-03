@@ -20,6 +20,20 @@
     <string name="money_unit">￥</string>
     <string name="more">更多</string>
 
+    <!--相册覆盖类库-->
+    <string name="album_all_photos">所有图片</string>
+    <string name="album_preview">预览</string>
+    <string name="album_photos">图片</string>
+    <string name="album_pictures">张图片</string>
+    <string name="album_picture">张图片</string>
+    <string name="album_loading">正在加载</string>
+    <string name="album_cutting">请稍后</string>
+    <string name="album_no_sd_card">没有SD卡</string>
+    <string name="album_no_photo">没有图片</string>
+    <string name="album_finish">完成</string>
+    <string name="album_select">选择</string>
+    <string name="album_up_to">最多</string>
+    <string name="lib_confirm">确定</string>
 
     <!--登录-->
     <string name="phone_number">手机号</string>
@@ -161,6 +175,7 @@
     <string name="like">赞</string>
     <string name="topic_publish">话题发布</string>
     <string name="topic_publish_hint">请输入要发布的内容</string>
+    <string name="del">删</string>
     <!--签到-->
     <string name="click_sign">点击签到</string>
     <string name="sign">签到</string>
