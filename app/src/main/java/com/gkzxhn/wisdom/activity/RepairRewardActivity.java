@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.starlight.mobile.android.lib.util.CommonHelper;
 
 /**
  * Created by Raleigh.Luo on 17/7/20.
@@ -30,6 +31,7 @@ public class RepairRewardActivity extends SuperActivity {
 
     }
     public void onClickListener(View view){
+        CommonHelper.clapseSoftInputMethod(this);
         switch (view.getId()){
             case R.id.repair_reward_layout_tv_submit:// 塞钱
                 break;
