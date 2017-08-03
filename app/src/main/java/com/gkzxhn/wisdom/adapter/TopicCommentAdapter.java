@@ -16,6 +16,11 @@ import com.gkzxhn.wisdom.R;
 
 public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapter.ViewHolder> {
     private Context context;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public TopicCommentAdapter(Context context) {
         this.context = context;
@@ -28,7 +33,19 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.tvLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.ivComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
 
     }
 
@@ -38,8 +55,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvName,tvDate,tvContent,tvLikeNumber;
-        private ImageView ivPortrait,ivLike,ivComment;
+        private TextView tvName,tvDate,tvContent,tvLikeNumber,tvLike;
+        private ImageView ivPortrait,ivComment;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -48,8 +65,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             tvContent= (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_content);
             tvLikeNumber= (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_like);
             ivPortrait= (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_portrait);
-            ivLike= (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_date);
-            ivComment= (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_portrait);
+            tvLike= (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_like);
+            ivComment= (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_comment);
 
         }
     }

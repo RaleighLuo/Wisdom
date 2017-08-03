@@ -17,7 +17,7 @@ public class RepairRewardActivity extends SuperActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.repair_record_layout);
+        setContentView(R.layout.repair_reward_layout);
         initControls();
         init();
     }

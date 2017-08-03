@@ -28,6 +28,7 @@ public class MoneyDialog extends Dialog {
     private EditText etMoney;
     private String money="";
     private int TAB;
+    private Handler handler=new Handler();
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
@@ -82,7 +83,7 @@ public class MoneyDialog extends Dialog {
         //请求获得焦点
         etMoney.requestFocus();
         if(money.length()>0)etMoney.setSelection(money.length());//光标在最后
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //调用系统输入法

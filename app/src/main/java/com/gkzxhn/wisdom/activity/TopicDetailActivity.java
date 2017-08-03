@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,10 +8,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicCommentAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CommentDialog;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -26,6 +32,9 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private View ivNodata;
     private DotsTextView tvLoading;
     private TopicCommentAdapter adapter;
+    private CommentDialog mCommentDialog;
+    private TextView tvLike;
+    private ImageView ivLike;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +43,8 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         init();
     }
     private void initControls(){
+        tvLike= (TextView) findViewById(R.id.topic_detial_layout_tv_like);
+        ivLike= (ImageView) findViewById(R.id.topic_detial_layout_iv_like);
         tvLoading= (DotsTextView) findViewById(R.id.common_loading_layout_tv_load);
         ivNodata=findViewById(R.id.common_no_data_layout_iv_image);
         mRecyclerView= (RecyclerView) findViewById(R.id.common_list_layout_rv_list);
@@ -41,6 +52,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
 
     }
     private void init(){
+        mCommentDialog=new CommentDialog(this);
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
@@ -56,9 +68,20 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new TopicCommentAdapter(this);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
+
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            if(!mCommentDialog.isShowing()){
+                mCommentDialog.show();
+                mCommentDialog.setHint(R.string.reply_colon);
+            }
+        }
+    };
 
     @Override
     public void onRefresh() {
@@ -74,6 +97,21 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();
+                break;
+            case R.id.topic_detial_layout_ll_like://点赞 已点赞enabel＝false
+                if(tvLike.isEnabled()){//已经点赞咯
+                    tvLike.setEnabled(false);
+                    ivLike.setColorFilter(null);
+                }else{//没有点赞
+                    tvLike.setEnabled(true);
+                    ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+                }
+                break;
+            case R.id.topic_detial_layout_ll_comment://评论
+                if(!mCommentDialog.isShowing()){
+                    mCommentDialog.show();
+                    mCommentDialog.setHint(R.string.comment);
+                }
                 break;
         }
     }
@@ -121,4 +159,16 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        if(mCommentDialog!=null&&mCommentDialog.isShowing())mCommentDialog.dismiss();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mCommentDialog.measureWindow();
+    }
 }

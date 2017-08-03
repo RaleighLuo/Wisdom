@@ -43,10 +43,10 @@ public interface Constants {
     /*-------------------------------Request URL-------------------------------------------------*/
     public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
     public final String DEMO_DOMAIN="http://10.93.1.104:3000";//开发环境
-    public final String DOMAIN_NAME_XLS = DEMO_DOMAIN;
+    public final String DOMAIN_NAME_XLS = RELEASE_DOMAIN;
     public final String RELEASE_FILE_DOMAIN="http://123.57.7.159:1339";//发布正式环境
     public final String DEMO_FILE_DOMAIN="http://10.93.1.104:1339";//开发环境
-    public final String DOMAIN_NAME_FILE_XLS = DEMO_FILE_DOMAIN;
+    public final String DOMAIN_NAME_FILE_XLS = RELEASE_FILE_DOMAIN;
 
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String UPLOAD_PROFILE_URL=DOMAIN_NAME_FILE_XLS+"/profile";//头像图片

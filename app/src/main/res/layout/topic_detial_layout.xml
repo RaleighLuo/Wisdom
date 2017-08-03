@@ -86,7 +86,7 @@
         />
 
     <TextView
-        android:id="@+id/topic_detial_layout_tv_like"
+        android:id="@+id/topic_detial_layout_tv_like_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/common_light_text_color"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/topic_detial_layout_tv_like"
+        android:layout_alignTop="@+id/topic_detial_layout_tv_like_title"
         android:textColor="@color/common_light_text_color"
         android:text="3"
         />
@@ -116,5 +116,80 @@
         android:layout_below="@+id/topic_detial_layout_v_like_number"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_above="@+id/topic_detial_layout_v_bottom"
         />
+    <View
+        style="@style/common_line_style"
+        android:layout_above="@+id/topic_detial_layout_ll_bottom"
+        android:id="@+id/topic_detial_layout_v_bottom"
+        />
+    <LinearLayout
+        android:id="@+id/topic_detial_layout_ll_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/common_bg_color"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/topic_detial_layout_ll_comment"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onClickListener"
+            android:background="@drawable/common_item_click_selector"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="15dip"
+                android:src="@mipmap/comment"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comment"
+                android:paddingTop="10dip"
+                android:gravity="center"
+                android:layout_marginLeft="10dip"
+                android:paddingBottom="10dip"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="1dip"
+            android:layout_marginTop="7dip"
+            android:layout_marginBottom="7dip"
+            android:background="@color/common_gray_title_color"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/topic_detial_layout_ll_like"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onClickListener"
+            android:background="@drawable/common_item_click_selector"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/topic_detial_layout_iv_like"
+                android:layout_width="15dip"
+                android:layout_height="15dip"
+                android:src="@mipmap/like"
+                />
+            <TextView
+                android:id="@+id/topic_detial_layout_tv_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/like"
+                android:paddingTop="10dip"
+                android:gravity="center"
+                android:enabled="false"
+                android:textColor="@color/like_text_color"
+                android:layout_marginLeft="10dip"
+                android:paddingBottom="10dip"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

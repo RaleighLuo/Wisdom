@@ -35,17 +35,11 @@
         android:layout_marginLeft="5dip"
         android:textColor="@color/common_light_text_color"
         android:textSize="12sp"
+        android:drawablePadding="8dip"
+        android:drawableLeft="@mipmap/like"
         android:layout_alignTop="@+id/topic_comment_layout_iv_comment"
         android:layout_toLeftOf="@+id/topic_comment_layout_iv_comment"
         android:id="@+id/topic_comment_layout_tv_like"
-        />
-    <ImageView
-        android:id="@+id/topic_comment_layout_iv_date"
-        android:layout_width="14dip"
-        android:layout_toLeftOf="@+id/topic_comment_layout_tv_like"
-        android:layout_alignTop="@+id/topic_comment_layout_tv_like"
-        android:layout_height="14dip"
-        android:src="@drawable/like_btn_selector"
         />
 
     <TextView

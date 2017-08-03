@@ -24,7 +24,7 @@ public class FloorDialog extends Dialog {
     private View.OnClickListener onClickListener;
     private EditText etCurrentFloor,etAllFloor;
     private String currentFloor="",allFloor="";
-
+    private Handler handler=new Handler();
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
@@ -83,7 +83,7 @@ public class FloorDialog extends Dialog {
         //请求获得焦点
         etCurrentFloor.requestFocus();
         if(currentFloor.length()>0)etCurrentFloor.setSelection(currentFloor.length());//光标在最后
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //调用系统输入法
