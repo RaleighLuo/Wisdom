@@ -8,7 +8,7 @@
         android:id="@+id/notice_layout_ch_head"
         style="@style/common_head_style"
         mAttr:chHead_leftImg="@mipmap/ic_back"
-        mAttr:chHead_title="@string/notice"
+        mAttr:chHead_title="@string/notice_message"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
     <RadioGroup
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:paddingBottom="7dip"
             android:paddingTop="7dip"
-            android:text="@string/announcement"
+            android:text="@string/notice"
             android:textColor="@color/common_text_color" />
         <RadioButton
             android:id="@+id/notice_layout_rb_second"
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:paddingBottom="7dip"
             android:paddingTop="7dip"
-            android:text="@string/comment"
+            android:text="@string/message"
             android:textColor="@color/common_text_color" />
     </RadioGroup>
     <View style="@style/common_line_style"

@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:maxLines="1"
+            android:textColor="@color/common_text_color"
             android:ellipsize="end"
             android:text="说起消防系统，报警器经常会莫名其妙的响起，联系保安，保安告诉我们开关在哪，关掉完事。"
             />
@@ -79,7 +80,7 @@
             android:maxLines="3"
             android:text="消防系统不怎么完善"
             android:padding="5dip"
-            android:visibility="gone"
+            android:gravity="center_vertical"
             android:background="@color/common_bg_color"
             android:textColor="@color/common_light_text_color"
             android:textSize="12sp"
