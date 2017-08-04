@@ -9,7 +9,9 @@ import android.widget.RadioGroup;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.fragment.MessageFragment;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
+import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
+import com.starlight.mobile.android.lib.view.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +23,9 @@ import java.util.List;
 
 public class NoticeActivity extends  SuperFragmentActivity{
     private ViewPager viewPager;
-    private ViewPagerAdapter adapter;
+    private PagerTabAdapter adapter;
     private int currentTab=0;
-    private RadioGroup mRadioGroup;
-    private boolean isScrolling=false;
+    private PagerSlidingTabStrip mTabs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,60 +34,30 @@ public class NoticeActivity extends  SuperFragmentActivity{
         init();
     }
     private void initControl(){
+        mTabs = (PagerSlidingTabStrip) findViewById(R.id.notice_layout_tabs);
         viewPager= (ViewPager) findViewById(R.id.notice_layout_viewPager);
-        mRadioGroup= (RadioGroup) findViewById(R.id.notice_layout_radiogroup);
     }
     private void init(){
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         fragmentList.add(new NoticeFragment());
         fragmentList.add(new MessageFragment());
-        adapter=new ViewPagerAdapter(this,getSupportFragmentManager(), fragmentList);
+        List<String>   titleList    = new ArrayList<String>();
+        titleList.add(getString(R.string.notice));
+        titleList.add(getString(R.string.message));
+        adapter=new PagerTabAdapter(getSupportFragmentManager(), fragmentList, titleList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(currentTab, true);
-        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
-        viewPager.addOnPageChangeListener(onPageChangeListener);
+        mTabs.setViewPager(viewPager);
+        mTabs.setOnPageChangeListener(onPageChangeListener);
 
     }
 
-    private RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            if(!isScrolling) {
-                isScrolling=true;
-                switch (checkedId){
-                    case R.id.notice_layout_rb_first:
-                        viewPager.setCurrentItem(0);//滑动
-                        break;
-                    case R.id.notice_layout_rb_second:
-                        viewPager.setCurrentItem(1);//滑动
-                        break;
-                }
-                isScrolling=false;
-            }
-
-        }
-    };
     private ViewPager.OnPageChangeListener onPageChangeListener=new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int selectedTab) {
             currentTab=selectedTab;
-            if(!isScrolling) {
-                isScrolling = true;
-                switch (selectedTab){
-                    case 0:
-                        if(mRadioGroup.getCheckedRadioButtonId()!=R.id.notice_layout_rb_first)
-                            mRadioGroup.check(R.id.notice_layout_rb_first);
-
-                        break;
-                    case 1:
-                        if(mRadioGroup.getCheckedRadioButtonId()!=R.id.notice_layout_rb_second)
-                            mRadioGroup.check(R.id.notice_layout_rb_second);
-                        break;
-                }
-                isScrolling = false;
-            }
         }
         @Override
         public void onPageScrolled(int selectedTab, float arg1, int arg2) {

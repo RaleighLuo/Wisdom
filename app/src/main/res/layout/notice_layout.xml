@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mAttr="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
     <com.starlight.mobile.android.lib.view.CusHeadView
         android:id="@+id/notice_layout_ch_head"
@@ -11,46 +11,21 @@
         mAttr:chHead_title="@string/notice_message"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
-    <RadioGroup
-        android:id="@+id/notice_layout_radiogroup"
+    <com.starlight.mobile.android.lib.view.PagerSlidingTabStrip
+        android:id="@+id/notice_layout_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/common_head_height"
         android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingTop="5dip"
-        android:layout_gravity="center"
-        android:paddingBottom="5dip"
-        android:paddingLeft="15dip"
-        android:layout_centerHorizontal="true"
-        android:paddingRight="15dip" >
-        <RadioButton
-            android:id="@+id/notice_layout_rb_first"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dip"
-            android:textSize="12sp"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center"
-            android:paddingBottom="7dip"
-            android:paddingTop="7dip"
-            android:text="@string/notice"
-            android:textColor="@color/common_text_color" />
-        <RadioButton
-            android:id="@+id/notice_layout_rb_second"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:layout_marginLeft="-1dip"
-            android:button="@null"
-            android:gravity="center"
-            android:paddingBottom="7dip"
-            android:paddingTop="7dip"
-            android:text="@string/message"
-            android:textColor="@color/common_text_color" />
-    </RadioGroup>
+        mAttr:pstsTextSelectedColor="@color/common_light_text_color"
+        mAttr:pstsTextUnSelectedColor="@color/common_light_text_color"
+        mAttr:pstsShouldExpand="true"
+        mAttr:pstsIndicatorColor="@color/colorPrimary"
+        mAttr:pstsTabPaddingLeftRight="5dp"
+        mAttr:pstsIndicatorHeight="2dp"
+        mAttr:pstsTextAllCaps="false"
+        mAttr:pstsUnderlineHeight="0dip"
+        mAttr:pstsDividerColor="@android:color/white"
+        />
     <View style="@style/common_line_style"
         android:layout_height="10dip"
         android:background="@color/common_bg_color"
