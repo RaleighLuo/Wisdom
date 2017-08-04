@@ -45,6 +45,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private ProgressDialog mProgress;
     private TextView tvHouseNumber,tvPhone,tvCommunity;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

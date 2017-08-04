@@ -180,6 +180,7 @@
     <string name="del">删</string>
     <string name="send">发送</string>
     <string name="reply_colon">回复:</string>
+    <string name="publish_success">发布成功</string>
     <!--签到-->
     <string name="click_sign">点击签到</string>
     <string name="sign">签到</string>

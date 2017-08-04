@@ -14,6 +14,7 @@
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
     <EditText
+        android:id="@+id/publish_topic_layout_et_content"
         android:layout_width="match_parent"
         android:layout_height="120dip"
         android:background="@android:color/white"

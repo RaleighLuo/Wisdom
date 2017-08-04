@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.fragment.TopicFragment;
 import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
@@ -75,8 +76,16 @@ public class TopicActivity extends SuperFragmentActivity{
                 finish();
                 break;
             case R.id.common_head_layout_iv_right://发布话题
-                startActivity(new Intent(this,PublishTopicActivity.class));
+                startActivityForResult(new Intent(this,PublishTopicActivity.class), Constants.EXTRA_CODE);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.EXTRA_CODE&&resultCode==RESULT_OK){
+            showToast(R.string.publish_success);
         }
     }
 }

@@ -41,18 +41,19 @@ public interface Constants {
     final String USER_USEDAREA="user_usedArea";
     final String USER_FLOORAREA="user_floorArea";
     /*-------------------------------Request URL-------------------------------------------------*/
-    public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
-    public final String DEMO_DOMAIN="http://10.93.1.104:3000";//开发环境
-    public final String DOMAIN_NAME_XLS = RELEASE_DOMAIN;
     public final String RELEASE_FILE_DOMAIN="http://123.57.7.159:1339";//发布正式环境
     public final String DEMO_FILE_DOMAIN="http://10.93.1.104:1339";//开发环境
     public final String DOMAIN_NAME_FILE_XLS = RELEASE_FILE_DOMAIN;
-
-    final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String UPLOAD_PROFILE_URL=DOMAIN_NAME_FILE_XLS+"/profile";//头像图片
     final String UPLOAD_TOPICS_URL=DOMAIN_NAME_FILE_XLS+"/topics";//话题图片
-    final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//登录
 
+    public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
+    public final String DEMO_DOMAIN="http://10.93.1.104:3000";//开发环境
+    public final String DOMAIN_NAME_XLS = RELEASE_DOMAIN;
+    final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
+    final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//获取验证码
+    final String REQUEST_PUBLISH_TOPIC_URL=DOMAIN_NAME_XLS+"/residentials";//话题
+//    post /residentials/residential_id/topics  参数 { topic: { title, content, topic_images_attributes} } 发表话题
     //上传图片的auth认证
     final String UPLOAD_FILE_AUTHORIZATION="523b87c4419da5f9186dbe8aa90f37a3876b95e448fe2abf5bf7e4753d5aa25fe88caa7ed96d4a2e89c01f839891b74362bb2450d352f1e4c3d4f7d8d51f5c65";
     /*-------------------------------Request Code-------------------------------------------------*/
