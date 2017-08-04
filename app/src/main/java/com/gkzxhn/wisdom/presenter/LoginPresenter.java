@@ -99,7 +99,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                         }
                     }, JSONUtil.getJSONObjectStringValue(json,"profile"));
                 }else{
-                    getView().startRefreshAnim();
+                    getView().stopRefreshAnim();
                     getView().showToast(R.string.service_not_available);
                 }
             }

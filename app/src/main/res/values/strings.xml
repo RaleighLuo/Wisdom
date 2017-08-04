@@ -66,6 +66,8 @@
     <string name="comment">评论</string>
     <string name="wu">物</string>
     <string name="ju">居</string>
+    <string name="message">消息</string>
+    <string name="notice_message">通知消息</string>
     <!--房屋租赁-->
     <string name="house_message">房源消息</string>
     <string name="house_rental">房屋租售</string>
