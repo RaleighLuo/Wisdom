@@ -16,8 +16,8 @@
             android:id="@+id/publish_topic_item_layout_iv_image"
             />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:text="@string/del"
             android:textSize="16sp"
             android:clickable="true"

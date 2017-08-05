@@ -48,7 +48,6 @@ public class PublishTopicPresenter extends BasePresenter<IPublishTopicModel,IPub
         mUploadHelper.setUploadFinishListener(new UploadHelper.UploadFinishListener() {
             @Override
             public void onSuccess(String message, String filePath) {
-                getView().stopRefreshAnim();
                 JSONObject json= JSONUtil.getJSONObject(message);
                 String url=JSONUtil.getJSONObjectStringValue(json,"url");
                 getView().uploadPhotoSuccess(url);
@@ -57,7 +56,7 @@ public class PublishTopicPresenter extends BasePresenter<IPublishTopicModel,IPub
             @Override
             public void onFailed(String error) {
                 getView().stopRefreshAnim();
-                getView().showToast(R.string.upload_portrait_faild);
+                getView().showToast(R.string.upload_image_faild);
             }
         });
         //上传图片命名规则， 随机数_timestamp.jpg

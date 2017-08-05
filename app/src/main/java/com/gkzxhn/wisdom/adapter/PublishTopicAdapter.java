@@ -23,24 +23,73 @@ public class PublishTopicAdapter extends RecyclerView.Adapter<PublishTopicAdapte
     private Context context;
     private List<PhotoEntity> mDatas =new ArrayList<>();
     private AlbumImageLoader mAlbumImageLoader;
+    private OnItemClickListener onItemClickListener;
+    private int mShowDelPosition=-1;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     public PublishTopicAdapter(Context context) {
         this.context = context;
         mAlbumImageLoader=new AlbumImageLoader(3, AlbumImageLoader.Type.LIFO);
     }
+
+    /**添加项
+     * @param path
+     */
     public void addItem(String path){
         mDatas.add(new PhotoEntity(path));
         notifyDataSetChanged();
     }
+
+    /**添加数组项
+     * @param paths
+     */
     public void addItems(List<String> paths){
         for(String path:paths){
             mDatas.add(new PhotoEntity(path));
         }
         notifyDataSetChanged();
     }
+
+    /**更新所有数据
+     * @param paths
+     */
+    public void updateItems(List<String> paths){
+        mDatas.clear();
+        for(String path:paths){
+            mDatas.add(new PhotoEntity(path));
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 清除数据
+     */
+    public void clear(){
+        mDatas.clear();
+        notifyDataSetChanged();
+    }
+    public boolean  recoveryDelPosition(){
+        if(mShowDelPosition!=-1) {
+            mShowDelPosition = -1;
+            notifyDataSetChanged();
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
+    /**添加url
+     * @param url
+     * @param position
+     */
     public void addUrl(String url,int position){
         mDatas.get(position).setImageUrl(url);
     }
     public void removeItem(int position){
+        mShowDelPosition=-1;
         mDatas.remove(position);
         notifyDataSetChanged();
     }
@@ -55,12 +104,39 @@ public class PublishTopicAdapter extends RecyclerView.Adapter<PublishTopicAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.tvDel.setVisibility(mShowDelPosition==position?View.VISIBLE:View.GONE);
         if(position<mDatas.size()) {
             mAlbumImageLoader.loadImage(mDatas.get(position).getLocalPath(), holder.ivImage);
         }else{
             holder.ivImage.setImageResource(R.mipmap.ic_imageloading);
         }
+        holder.ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(position<mDatas.size())
+                    if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
+        holder.tvDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(position<mDatas.size())
+                    if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
+        holder.ivImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(position<mDatas.size()){
+                    mShowDelPosition=position;
+                    holder.tvDel.setVisibility(View.VISIBLE);
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        });
     }
     public int getPhotoCount(){
         return mDatas.size();
@@ -71,6 +147,13 @@ public class PublishTopicAdapter extends RecyclerView.Adapter<PublishTopicAdapte
             if(entity.getImageUrl().length()>0)url.add(entity.getImageUrl());
         }
         return  url;
+    }
+    public List<String> getLocalPaths(){
+        List<String> paths=new ArrayList<>();
+        for(PhotoEntity entity:mDatas){
+            paths.add(entity.getLocalPath());
+        }
+        return  paths;
     }
 
     @Override

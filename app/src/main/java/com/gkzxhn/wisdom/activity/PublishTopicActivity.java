@@ -18,8 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.PublishTopicAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.presenter.PublishTopicPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IPublishTopicView;
@@ -29,6 +31,7 @@ import com.starlight.mobile.android.lib.util.PermissionManager;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +69,7 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter=new PublishTopicAdapter(this);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
     }
     public void onClickListener(View view){
@@ -92,6 +96,22 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
                 break;
         }
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            switch (convertView.getId()){
+                case R.id.publish_topic_item_layout_iv_image://查看大图
+                    Intent intent=new Intent(PublishTopicActivity.this,TakePhotoPreviewActivity.class);
+                    intent.putExtra(Constants.EXTRAS, (Serializable) adapter.getLocalPaths());
+                    intent.putExtra(Constants.EXTRA_POSITION, position);
+                    startActivityForResult(intent,Constants.EXTRA_CODE);
+                    break;
+                case R.id.publish_topic_item_layout_tv_del://删除
+                    adapter.removeItem(position);
+                    break;
+            }
+        }
+    };
 
     @Override
     public void startRefreshAnim() {
@@ -139,6 +159,14 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
                 case Constants.TAKE_PHOTO_CODE://拍照
                     if (resultCode == RESULT_OK) {
                         adapter.addItem(mPhotoFile.getAbsolutePath());
+                    }
+                    break;
+                case Constants.EXTRA_CODE:
+                    List<String> list=(List<String>) data.getSerializableExtra(Constants.EXTRAS);
+                    if(list==null){
+                        adapter.clear();
+                    }else if(list.size()!=adapter.getPhotoCount()) {
+                        adapter.updateItems(list);
                     }
                     break;
             }
@@ -193,9 +221,6 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults.length>0&&grantResults[0] == PackageManager.PERMISSION_GRANTED){
             switch (requestCode){
-                case Constants.PHONE_CODE:
-                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400-988-999")));
-                    break;
                 case Constants.TAKE_PHOTO_CODE:
                     mPhotoFile = new File(Constants.SD_PHOTO_PATH, UUID
                             .randomUUID().toString().replace("-", "")
@@ -212,8 +237,15 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
                     intent.setAction(AlbumActivity.EXTRAS_SIGLE_MODE);
                     startActivityForResult(intent, Constants.SELECT_PHOTO_CODE);
                     break;
+
             }
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(!adapter.recoveryDelPosition()) {
+            super.onBackPressed();
+        }
+    }
 }
