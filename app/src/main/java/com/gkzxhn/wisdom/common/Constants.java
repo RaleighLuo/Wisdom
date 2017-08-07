@@ -2,6 +2,9 @@ package com.gkzxhn.wisdom.common;
 
 import android.os.Environment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/3/6 0006.
  */
@@ -52,8 +55,8 @@ public interface Constants {
     public final String DOMAIN_NAME_XLS = DEMO_DOMAIN;
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//获取验证码
-    final String REQUEST_PUBLISH_TOPIC_URL=DOMAIN_NAME_XLS+"/residentials";//话题
-//    post /residentials/residential_id/topics  参数 { topic: { title, content, topic_images_attributes} } 发表话题
+    final String REQUEST_TOPIC_URL =DOMAIN_NAME_XLS+"/residentials";//话题
+    //    post /residentials/residential_id/topics  参数 { topic: { title, content, topic_images_attributes} } 发表话题
     //上传图片的auth认证
     final String UPLOAD_FILE_AUTHORIZATION="523b87c4419da5f9186dbe8aa90f37a3876b95e448fe2abf5bf7e4753d5aa25fe88caa7ed96d4a2e89c01f839891b74362bb2450d352f1e4c3d4f7d8d51f5c65";
     /*-------------------------------Request Code-------------------------------------------------*/
@@ -70,11 +73,16 @@ public interface Constants {
     final int PHONE_CODE=0x107;
     /*-------------------------------msg what-------------------------------------------------*/
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
-     /*-------------------------------TAB-------------------------------------------------*/
-     final int PAY_RECORD_TAB=0x201;//缴费记录
+    /*-------------------------------TAB-------------------------------------------------*/
+    final int PAY_RECORD_TAB=0x201;//缴费记录
     final int REPAIR_PROGRESSING_TAB=0x202;//维修列表－正在进行
     final int REPAIR_FINISHED_TAB=0x203;//维修列表－完成
     final int HOUSE_LEASE_TAB=0x204;//房屋租售－租房
     final int HOUSE_SALE_TAB=0x205;//房屋租售－售房
+    final int TOPIC_LIST_TAB=0x206;//话题列表
+    final int LOGIN_TAB=0x207;//登录
+    final Map<Integer,String> ANALYSIS_KEY_MAP=new HashMap<Integer,String>(){{
+        put(Constants.TOPIC_LIST_TAB,"topics");
+     }};
 
 }

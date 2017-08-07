@@ -57,16 +57,15 @@ public class BasePresenter<M extends IBaseModel,V extends IBaseView> {
     /**
      * 启动异步任务
      *
-     * @param tag
      * @param params
      */
-    protected void startAsynTask(AsynHelper.AsynHelperTag tag, AsynHelper.TaskFinishedListener taskFinishedListener, Object... params) {
+    protected void startAsynTask(int TAB, AsynHelper.TaskFinishedListener taskFinishedListener, Object... params) {
         try {
             if (asynHelper != null) {
                 if (asynHelper.getStatus() == AsyncTask.Status.RUNNING) asynHelper.cancel(true);
                 asynHelper = null;
             }
-            asynHelper = new AsynHelper(tag);
+            asynHelper = new AsynHelper(TAB);
             asynHelper.setOnTaskFinishedListener(taskFinishedListener);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 asynHelper.executeOnExecutor(Executors.newCachedThreadPool(), params);

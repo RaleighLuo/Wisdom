@@ -13,6 +13,16 @@
         android:layout_marginRight="10dip"
         android:src="@mipmap/topic_portrait"
         />
+    <ImageView
+        android:id="@+id/topic_item_layout_iv_image"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:visibility="gone"
+        android:src="@mipmap/ic_imageloading"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_alignTop="@+id/topic_item_layout_tv_name"
+        />
     <TextView
         android:id="@+id/topic_item_layout_tv_name"
         android:layout_width="wrap_content"

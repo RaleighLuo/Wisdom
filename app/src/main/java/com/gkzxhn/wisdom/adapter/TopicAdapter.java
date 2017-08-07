@@ -5,8 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.entity.TopicEntity;
+import com.gkzxhn.wisdom.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
@@ -15,6 +24,8 @@ import com.gkzxhn.wisdom.R;
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
     private Context context;
     private OnItemClickListener onItemClickListener;
+    private List<TopicEntity> mDatas=new ArrayList<>();
+
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -24,6 +35,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         this.context = context;
     }
 
+    public void upateItems(List<TopicEntity> list){
+        mDatas.clear();
+        if(list!=null&&list.size()>0)mDatas.addAll(list);
+        notifyDataSetChanged();
+
+    }
+    public void loadItems(List<TopicEntity> list){
+        if(list!=null&&list.size()>0) {
+            mDatas.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.topic_item_layout,null,false);
@@ -32,6 +55,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        TopicEntity entity=mDatas.get(position);
+        holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
+        holder.tvLike.setText(String.valueOf(entity.getLikeCount()));
+        holder.tvContent.setText(entity.getContent());
+        holder.tvName.setText(entity.getNickname());
+        ImageLoader.getInstance().displayImage(entity.getPortraitUrl(),holder.ivPortrait);
+        holder.tvDate.setText(Utils.getDateFromTimeInMillis(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,13 +73,22 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mDatas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        private ImageView ivPortrait,ivImage;
+        private TextView tvName,tvDate,tvContent,tvLike,tvComment;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ivPortrait= (ImageView) itemView.findViewById(R.id.topic_item_layout_iv_portrait);
+            ivImage= (ImageView) itemView.findViewById(R.id.topic_item_layout_iv_image);
+            tvName= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_name);
+            tvDate= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_date);
+            tvContent= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_content);
+            tvLike= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_like);
+            tvComment= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_comment);
         }
     }
 }

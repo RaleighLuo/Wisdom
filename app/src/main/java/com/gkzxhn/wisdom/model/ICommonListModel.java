@@ -9,5 +9,6 @@ import org.json.JSONObject;
  */
 
 public interface ICommonListModel extends IBaseModel {
+    public int getTAB();
     public void request(int currentPage, int pageSize,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
 }

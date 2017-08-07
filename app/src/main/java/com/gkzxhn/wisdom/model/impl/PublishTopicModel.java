@@ -7,9 +7,7 @@ import com.gkzxhn.wisdom.model.IPublishTopicModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Raleigh.Luo on 17/8/4.
@@ -31,7 +29,7 @@ public class PublishTopicModel extends BaseModel implements IPublishTopicModel {
                 }
                 params.put("images_attributes",imageArray);
             }
-            String url=String.format("%s/%s/topics",Constants.REQUEST_PUBLISH_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
+            String url=String.format("%s/%s/topics",Constants.REQUEST_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
             volleyUtils.post(url,params,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();

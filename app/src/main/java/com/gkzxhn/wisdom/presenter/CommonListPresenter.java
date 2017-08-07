@@ -4,10 +4,15 @@ import android.content.Context;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.async.AsynHelper;
 import com.gkzxhn.wisdom.async.VolleyUtils;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.model.ICommonListModel;
 import com.gkzxhn.wisdom.model.impl.CommonListModel;
 import com.gkzxhn.wisdom.view.ICommonListView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.util.JSONUtil;
 
@@ -30,15 +35,24 @@ public class CommonListPresenter<T> extends BasePresenter<ICommonListModel,IComm
         }
         mModel.request(currentPage, PAGE_SIZE, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(final JSONObject response) {
                 try {
                     int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
                     if(code==200){
-                        List<T> mData = null;
-                        if (mData != null && mData.size() > 0) currentPage++;
+                        startAsynTask(mModel.getTAB(), new AsynHelper.TaskFinishedListener() {
+                            @Override
+                            public void back(Object object) {
+                                List<T> mData = (List<T>) object;
+                                if (mData != null && mData.size() > 0) currentPage++;
+                                if(isRefresh)getView().updateItems(mData);
+                                else getView().updateItems(mData);
+                                getView().stopRefreshAnim();
+
+                            }
+                        }, JSONUtil.getJSONObjectStringValue(response,Constants.ANALYSIS_KEY_MAP.get(mModel.getTAB())));
                     } else {
                         getView().stopRefreshAnim();
-                        getView().showToast(JSONUtil.getJSONObjectStringValue(response,"msg"));
+                        getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                     }
                 } catch (Exception e) {
                     getView().stopRefreshAnim();

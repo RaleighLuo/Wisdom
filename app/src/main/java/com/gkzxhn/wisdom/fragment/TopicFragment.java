@@ -3,6 +3,8 @@ package com.gkzxhn.wisdom.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,19 +15,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.SuperFragmentActivity;
 import com.gkzxhn.wisdom.activity.TopicDetailActivity;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicAdapter;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.TopicEntity;
+import com.gkzxhn.wisdom.presenter.CommonListPresenter;
+import com.gkzxhn.wisdom.view.ICommonListView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
+
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
  */
 
 public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener{
+        CusSwipeRefreshLayout.OnLoadListener,ICommonListView<TopicEntity>{
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
     private View ivNodata;
@@ -33,6 +42,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private Context mActivity;
     private View parentView;
     private TopicAdapter adapter;
+    private CommonListPresenter<TopicEntity> mPresenter;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -71,6 +81,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         adapter=new TopicAdapter(mActivity);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
+        mPresenter=new CommonListPresenter<>(mActivity,this, Constants.TOPIC_LIST_TAB);
         onRefresh();
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
@@ -82,12 +93,80 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        mSwipeRefresh.setRefreshing(false);
+        mPresenter.request(true);
 
     }
 
     @Override
     public void onLoad() {
-        mSwipeRefresh.setLoading(false);
+        mPresenter.request(false);
     }
+
+    @Override
+    public void startRefreshAnim() {
+//使用handler刷新页面状态,主要解决vNoDataHint显示问题
+        handler.sendEmptyMessage(Constants.START_REFRESH_UI);
+    }
+
+    @Override
+    public void stopRefreshAnim() {
+//使用handler刷新页面状态,主要解决vNoDataHint显示问题
+        handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
+    }
+
+    @Override
+    public void showToast(int testResId) {
+        ((SuperFragmentActivity)mActivity).showToast(testResId);
+    }
+
+    @Override
+    public void showToast(String showText) {
+        ((SuperFragmentActivity)mActivity).showToast(showText);
+    }
+
+    @Override
+    public void updateItems(List<TopicEntity> datas) {
+        adapter.upateItems(datas);
+
+    }
+
+    @Override
+    public void loadItems(List<TopicEntity> datas) {
+        adapter.loadItems(datas);
+    }
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what==Constants.START_REFRESH_UI){
+                if (adapter == null || adapter.getItemCount() == 0) {
+                    if (ivNodata.isShown()) {
+                        ivNodata.setVisibility(View.GONE);
+                    }
+                    tvLoading.setVisibility(View.VISIBLE);
+                    if (!tvLoading.isPlaying()) {
+
+                        tvLoading.showAndPlay();
+                    }
+                    if (mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(false);
+                } else {
+                    if (!mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(true);
+                }
+            }else if(msg.what== Constants.STOP_REFRESH_UI){
+                if (tvLoading.isPlaying() || tvLoading.isShown()) {
+                    tvLoading.hideAndStop();
+                    tvLoading.setVisibility(View.GONE);
+                }
+                if (!mSwipeRefresh.isShown()) mSwipeRefresh.setVisibility(View.VISIBLE);
+                if (mSwipeRefresh.isRefreshing()) mSwipeRefresh.setRefreshing(false);
+                if (mSwipeRefresh.isLoading()) mSwipeRefresh.setLoading(false);
+                if (adapter == null || adapter.getItemCount() == 0) {
+
+                    if (!ivNodata.isShown()) ivNodata.setVisibility(View.VISIBLE);
+                } else {
+                    if (ivNodata.isShown()) ivNodata.setVisibility(View.GONE);
+                }
+            }
+        }
+    };
 }

@@ -85,7 +85,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 if(code==200){
                     String token= JSONUtil.getJSONObjectStringValue(json,"token");
                     getSharedPreferences().edit().putString(Constants.USER_TOKEN,token).commit();
-                    startAsynTask(AsynHelper.AsynHelperTag.LOGIN_TAG, new AsynHelper.TaskFinishedListener() {
+                    startAsynTask(Constants.LOGIN_TAB, new AsynHelper.TaskFinishedListener() {
                         @Override
                         public void back(Object object) {
                             if(object==null){//只有一套房屋

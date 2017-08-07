@@ -1,6 +1,5 @@
 package com.gkzxhn.wisdom.async;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -8,15 +7,14 @@ import android.os.AsyncTask;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.entity.RoomEntity;
+import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.starlight.mobile.android.lib.util.JSONUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -33,10 +31,10 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
 							}
 	 * */
     private TaskFinishedListener taskFinishedListener;
-    private AsynHelperTag target;
-    public AsynHelper(AsynHelperTag tag) {
+    private int TAB;
+    public AsynHelper(int TAB) {
         super();
-        this.target=tag;
+        this.TAB=TAB;
     }
     public void setOnTaskFinishedListener(
             TaskFinishedListener taskFinishedListener) {
@@ -46,18 +44,12 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
     public interface TaskFinishedListener {
         public void back(Object object);
     }
-    public enum AsynHelperTag{
-        DEFUALT_TAG,
-        LOGIN_TAG,
-
-    }
     @Override
     protected Object doInBackground(Object... params) {
         Object result=null;
         try {
-            if(target!=null) {
-                switch (target){
-                    case LOGIN_TAG:
+                switch (TAB){
+                    case Constants.LOGIN_TAB:
                         SharedPreferences preferences= GKApplication.getInstance().getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE);
                         String response = (String) params[0];
                         JSONObject json=JSONUtil.getJSONObject(response);
@@ -89,8 +81,11 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
                         }
                         editor.commit();
                         break;
+                    case Constants.TOPIC_LIST_TAB:
+                        response= (String) params[0];
+                        result = new Gson().fromJson(response, new TypeToken<List<TopicEntity>>() {}.getType());
+                        break;
                 }
-            }
         }catch (Exception ex){
             ex.printStackTrace();
         }finally {
@@ -102,7 +97,7 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
     @Override
     protected void onPostExecute(Object result) {
         try {
-            if (target!=null&&taskFinishedListener != null) {
+            if (taskFinishedListener != null) {
                 taskFinishedListener.back(result);
             }
         } catch (Exception e) {
