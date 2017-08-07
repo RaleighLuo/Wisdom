@@ -180,9 +180,13 @@
     <string name="del">删</string>
     <string name="send">发送</string>
     <string name="reply_colon">回复:</string>
+    <string name="topic_detail">话题详情</string>
     <string name="publish_success">发布成功</string>
     <string name="upload_image_faild">上传图片失败</string>
+    <string name="browse">浏览</string>
+    <string name="time">次</string>
     <!--签到-->
+    <string name="back">返回</string>
     <string name="click_sign">点击签到</string>
     <string name="sign">签到</string>
     <string name="coin">金币</string>

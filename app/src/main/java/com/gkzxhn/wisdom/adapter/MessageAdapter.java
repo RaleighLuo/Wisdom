@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.TopicDetailActivity;
+import com.gkzxhn.wisdom.common.Constants;
 
 /**
  * Created by Raleigh.Luo on 17/8/4.
@@ -45,7 +46,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, TopicDetailActivity.class));
+                Intent intent=new Intent(context, TopicDetailActivity.class);
+//                intent.putExtra(Constants.EXTRA,);
+                context.startActivity(intent);
             }
         });
 

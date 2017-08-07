@@ -14,7 +14,7 @@
             style="@style/common_head_style"
             android:background="@android:color/transparent"
             mAttr:chHead_leftImg="@mipmap/sign_white"
-            mAttr:chHead_rightText="@string/sign"
+            mAttr:chHead_rightText="@string/back"
             mAttr:chHead_textColor="@android:color/white"
             />
         <TextView

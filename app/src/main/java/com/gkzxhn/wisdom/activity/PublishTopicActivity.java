@@ -248,4 +248,10 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
             super.onBackPressed();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestory();
+        super.onDestroy();
+    }
 }

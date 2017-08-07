@@ -61,7 +61,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvLike.setText(String.valueOf(entity.getLikeCount()));
         holder.tvContent.setText(entity.getContent());
         holder.tvName.setText(entity.getUser().getNickname());
-        ImageLoader.getInstance().displayImage(entity.getUser().getUserPortrait(),holder.ivPortrait);
+        ImageLoader.getInstance().displayImage(entity.getUser().getUserPortrait(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
         holder.tvDate.setText(Utils.getFormateTime(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +81,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return mDatas.size();
+    }
+    public String getItemsId(int position){
+        return mDatas.get(position).getId();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

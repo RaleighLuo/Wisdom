@@ -87,7 +87,9 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
         public void onClickListener(View convertView, int position) {
-            startActivity(new Intent(mActivity, TopicDetailActivity.class));
+            Intent intent=new Intent(mActivity, TopicDetailActivity.class);
+            intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
+            mActivity.startActivity(intent);
         }
     };
 

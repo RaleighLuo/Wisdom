@@ -148,6 +148,13 @@
             android:theme="@style/AlbumTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
         <activity
+            android:name=".activity.OnlinePhotoPreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AlbumTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
+        <activity
             android:name=".activity.PropertyFeeDetailActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"

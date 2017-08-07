@@ -57,7 +57,7 @@ public class SignActivity extends SuperActivity implements ISignView{
     }
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.common_head_layout_iv_left:
+            case R.id.common_head_layout_tv_right:
                 finish();
                 break;
             case R.id.sign_layout_iv_sign://签到
@@ -91,5 +91,10 @@ public class SignActivity extends SuperActivity implements ISignView{
         editor.putInt(Constants.SERIES_SIGN_DAY,mDistanceDay+1);
         editor.putLong(Constants.LAST_SERIES_SIGN_DATE, Calendar.getInstance().getTimeInMillis());
         editor.commit();
+    }
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestory();
+        super.onDestroy();
     }
 }
