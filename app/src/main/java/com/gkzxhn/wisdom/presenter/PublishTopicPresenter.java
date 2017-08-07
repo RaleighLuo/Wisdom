@@ -11,6 +11,7 @@ import com.gkzxhn.wisdom.model.impl.PublishTopicModel;
 import com.gkzxhn.wisdom.util.UploadHelper;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IPublishTopicView;
+import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.util.JSONUtil;
 
 import org.json.JSONObject;
@@ -32,8 +33,15 @@ public class PublishTopicPresenter extends BasePresenter<IPublishTopicModel,IPub
         mModel.publish(content, imagUrls, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
-                getView().stopRefreshAnim();
-                getView().onSuccess();
+                int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
+                if(code==200){
+                    getView().stopRefreshAnim();
+                    getView().onSuccess();
+                }else{
+                    getView().stopRefreshAnim();
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
+                }
+
             }
 
             @Override
