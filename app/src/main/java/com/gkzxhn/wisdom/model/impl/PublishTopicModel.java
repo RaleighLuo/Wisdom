@@ -4,6 +4,7 @@ import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.model.IPublishTopicModel;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -20,8 +21,17 @@ public class PublishTopicModel extends BaseModel implements IPublishTopicModel {
         try {
             JSONObject params=new JSONObject();
             params.put("content",content);
-            if(imageUrls!=null&&imageUrls.size()>0)params.put("topic_images_attributes",imageUrls);
-            volleyUtils.post(Constants.REQUEST_VERIFY_CODE_URL,params,REQUEST_TAG,onFinishedListener);
+            if(imageUrls!=null&&imageUrls.size()>0){
+                JSONArray imageArray=new JSONArray();
+                for (String url:imageUrls){
+                    JSONObject json=new JSONObject();
+                    json.put("image_url",url);
+                    imageArray.put(json);
+                }
+                params.put("topic_images_attributes",imageArray);
+            }
+            String url=String.format("%s/%s/topics",Constants.REQUEST_PUBLISH_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
+            volleyUtils.post(url,params,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
         }
