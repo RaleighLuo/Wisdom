@@ -13,24 +13,14 @@
         android:layout_marginRight="10dip"
         android:src="@mipmap/topic_portrait"
         />
-    <ImageView
-        android:id="@+id/topic_item_layout_iv_image"
-        android:layout_width="52dip"
-        android:layout_height="52dip"
-        android:visibility="visible"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_imageloading"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_alignTop="@+id/topic_item_layout_tv_name"
-        />
     <TextView
         android:id="@+id/topic_item_layout_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="YYL666"
+        android:layout_marginRight="@dimen/margin"
         android:textSize="14sp"
-        android:textColor="@color/common_text_color"
+        android:textColor="@color/property_color"
         android:layout_alignTop="@+id/topic_item_layout_iv_portrait"
         android:layout_toRightOf="@+id/topic_item_layout_iv_portrait"
         />
@@ -50,13 +40,21 @@
         android:layout_height="wrap_content"
         android:textColor="@color/common_text_color"
         android:text="求助解决？"
+        android:layout_marginRight="@dimen/margin"
         android:textSize="13sp"
-        android:layout_marginRight="10dip"
-        android:layout_toLeftOf="@+id/topic_item_layout_iv_image"
-        android:layout_marginTop="5dip"
+        android:layout_marginTop="2dip"
         android:layout_below="@+id/topic_item_layout_tv_date"
-        android:layout_toRightOf="@+id/topic_item_layout_iv_portrait"
-         />
+        android:layout_alignLeft="@+id/topic_item_layout_tv_name"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginTop="5dip"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_alignLeft="@+id/topic_item_layout_tv_name"
+        android:id="@+id/topic_item_layout_rv_image"
+        android:layout_below="@+id/topic_item_layout_tv_content"
+        />
     <ImageView
         android:id="@+id/topic_item_layout_iv_comment"
         android:layout_width="19dip"
@@ -64,7 +62,7 @@
         android:src="@drawable/comment_btn_selector"
         android:layout_alignLeft="@+id/topic_item_layout_tv_name"
         android:layout_marginTop="5dip"
-        android:layout_below="@+id/topic_item_layout_tv_content"
+        android:layout_below="@+id/topic_item_layout_rv_image"
         />
     <TextView
         android:id="@+id/topic_item_layout_tv_comment"
@@ -84,8 +82,7 @@
         android:layout_height="16dip"
         android:layout_toLeftOf="@+id/topic_item_layout_tv_like"
         android:src="@drawable/like_btn_selector"
-        android:layout_marginTop="10dip"
-        android:layout_below="@+id/topic_item_layout_tv_content"
+        android:layout_alignTop="@+id/topic_item_layout_iv_comment"
         />
     <TextView
         android:id="@+id/topic_item_layout_tv_like"
@@ -103,6 +100,6 @@
         style="@style/common_light_line_style"
         android:layout_marginTop="7dip"
         android:layout_alignLeft="@+id/topic_item_layout_tv_name"
-        android:layout_below="@+id/topic_item_layout_tv_like"
+        android:layout_below="@+id/topic_item_layout_iv_comment"
         />
 </RelativeLayout>

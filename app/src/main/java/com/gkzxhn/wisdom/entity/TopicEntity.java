@@ -21,20 +21,24 @@ public class TopicEntity {
     private int commentCount;//评论数
     @SerializedName("created_at")
     private String date;
-    //    @Expose  //gson忽略字段
-//    private String nickname;
-//    @Expose  //gson忽略字段
-//    private String portraitUrl;
-//    @Expose  //gson忽略字段
-//    private String user_type;
     @SerializedName("user_id")
     private String userId;
     private User user;
+    private int viewed;
     private List<String> images;
+
+    public int getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(int viewed) {
+        this.viewed = viewed;
+    }
 
     public User getUser() {
         return user;
     }
+
 
     public void setUser(User user) {
         this.user = user;
