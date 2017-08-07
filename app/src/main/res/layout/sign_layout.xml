@@ -75,6 +75,7 @@
             android:layout_alignBottom="@+id/sign_layout_iv_sign_size"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/sign_layout_tv_series_sign_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
@@ -133,15 +134,17 @@
             android:layout_width="match_parent"
             android:layout_below="@id/sign_layout_tv_sign_describe_hint"
             android:layout_height="match_parent">
+
+
+
             <ImageView
+                android:id="@+id/sign_layout_iv_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/sign_bg"
-                android:onClick="onClickListener"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="center"
-                android:id="@+id/sign_layout_iv_sign"
-                />
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="onClickListener"
+                android:src="@mipmap/sign_bg" />
             <TextView
                 android:id="@+id/sign_layout_tv_sign"
                 android:layout_width="wrap_content"

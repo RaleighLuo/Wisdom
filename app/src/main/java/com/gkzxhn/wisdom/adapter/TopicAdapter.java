@@ -12,6 +12,7 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.starlight.mobile.android.lib.util.ConvertUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,15 +60,21 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
         holder.tvLike.setText(String.valueOf(entity.getLikeCount()));
         holder.tvContent.setText(entity.getContent());
-        holder.tvName.setText(entity.getNickname());
-        ImageLoader.getInstance().displayImage(entity.getPortraitUrl(),holder.ivPortrait);
-        holder.tvDate.setText(Utils.getDateFromTimeInMillis(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
+        holder.tvName.setText(entity.getUser().getNickname());
+        ImageLoader.getInstance().displayImage(entity.getUser().getUserPortrait(),holder.ivPortrait);
+        holder.tvDate.setText(Utils.getFormateTime(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
+        if(entity.getImages()!=null&&entity.getImages().size()>0){
+            holder.ivImage.setVisibility(View.VISIBLE);
+            ImageLoader.getInstance().displayImage(entity.getImages().get(0),holder.ivImage);
+        }else{
+            holder.ivImage.setVisibility(View.GONE);
+        }
 
     }
 

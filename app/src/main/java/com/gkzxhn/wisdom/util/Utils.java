@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -100,4 +101,30 @@ public class Utils {
                 .imageScaleType(ImageScaleType.IN_SAMPLE_INT)    //设置图片的缩放类型，该方法可以有效减少内存的占用
                 .build();
     }
+
+    /**
+     * Convert String date to Date
+     * @param date date for String format
+     * @return Date object
+     */
+    public static String getFormateTime(String date,SimpleDateFormat formate) {
+        String result = null;
+        //2017-08-07T14:52:35.000+08:00
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+            //去掉时区部分的冒号
+            date = date.replaceAll(":[^:]*$", "00");
+            Date dateTime = df.parse(date);
+            result = formate.format(dateTime);
+        } catch (Exception e) {
+            try {
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                Date dateTime = df.parse(date);
+                result = formate.format(dateTime);
+            } catch (Exception e2) {
+            }
+        }
+        return result;
+    }
+
 }

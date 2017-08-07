@@ -30,7 +30,7 @@ public class PublishTopicModel extends BaseModel implements IPublishTopicModel {
                 params.put("images_attributes",imageArray);
             }
             String url=String.format("%s/%s/topics",Constants.REQUEST_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
-            volleyUtils.post(url,params,REQUEST_TAG,onFinishedListener);
+            volleyUtils.post(url,new JSONObject().put("topic",params),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
         }

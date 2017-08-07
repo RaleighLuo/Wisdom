@@ -188,6 +188,8 @@
     <string name="coin">金币</string>
     <string name="sign_in_day">连续签到天数</string>
     <string name="sign_describe">签到说明</string>
+    <string name="sign_success">签到成功</string>
+    <string name="today_has_sign">今日已签到</string>
     <string name="sign_describe_hint">每天签到一次，获取对应积分；连续签到，积分更多哦！</string>
     <!--Array-->
     <array name="house_type_room">

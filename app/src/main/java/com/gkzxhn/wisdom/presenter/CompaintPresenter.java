@@ -35,7 +35,7 @@ public class CompaintPresenter extends BasePresenter<ICompaintModel,IComplaintVi
                 if(code==200){
                     getView().onSuccess();
                 }else{
-                    getView().showToast(JSONUtil.getJSONObjectStringValue(json,"msg"));
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(json,"message"));
                 }
             }
 

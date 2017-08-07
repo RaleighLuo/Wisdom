@@ -43,6 +43,10 @@ public interface Constants {
     final String USER_UNITSNAME="user_unitsName";
     final String USER_USEDAREA="user_usedArea";
     final String USER_FLOORAREA="user_floorArea";
+
+    final String TODAY_IS_SIGN="today_is_sign";//今天是否已经签到
+    final String LAST_SERIES_SIGN_DATE="last_series_sign_date";//最近一次连续签到日期
+    final String SERIES_SIGN_DAY="series_sign_day";//连续签到天数
     /*-------------------------------Request URL-------------------------------------------------*/
     public final String RELEASE_FILE_DOMAIN="http://123.57.7.159:1339";//发布正式环境
     public final String DEMO_FILE_DOMAIN="http://10.93.1.104:1339";//开发环境
@@ -56,7 +60,7 @@ public interface Constants {
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//获取验证码
     final String REQUEST_TOPIC_URL =DOMAIN_NAME_XLS+"/residentials";//话题
-    //    post /residentials/residential_id/topics  参数 { topic: { title, content, topic_images_attributes} } 发表话题
+    final String REQUEST_USER_URL =DOMAIN_NAME_XLS+"/users";//签到，修改用户信息
     //上传图片的auth认证
     final String UPLOAD_FILE_AUTHORIZATION="523b87c4419da5f9186dbe8aa90f37a3876b95e448fe2abf5bf7e4753d5aa25fe88caa7ed96d4a2e89c01f839891b74362bb2450d352f1e4c3d4f7d8d51f5c65";
     /*-------------------------------Request Code-------------------------------------------------*/

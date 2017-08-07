@@ -68,7 +68,7 @@ public class PublishTopicPresenter extends BasePresenter<IPublishTopicModel,IPub
             }
         });
         //上传图片命名规则， 随机数_timestamp.jpg
-        String uploadName= UUID.randomUUID().toString().replace("-", "")
+        String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
                 +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_TOPICS_URL,uploadName);
     }
