@@ -123,7 +123,10 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<RelativeLayo
                         break;
                     default: //View
                         mChild.setEnabled(expandedPercentageFactor>=0.9);
-                        mChild.setAlpha(expandedPercentageFactor);
+//                        mChild.setAlpha(expandedPercentageFactor);
+                        //为显示透明度效果好点
+                        float alpha= expandedPercentageFactor==1?expandedPercentageFactor:(expandedPercentageFactor/2);
+                        mChild.setAlpha(alpha);
                         break;
 
                 }

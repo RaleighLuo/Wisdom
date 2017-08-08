@@ -37,7 +37,6 @@ public class UploadHelper {
     private boolean isPhoto=true;
     private final String RESPONSE_CODE="responseCode";
     private final String RESPONSE_MESSAGE="responseMessage";
-    private final String FILE_PATH="filePath";
     private String mUploadUrl=null;//上传地址
     private String mUploadFileName=null;
     public UploadHelper(){
@@ -95,7 +94,6 @@ public class UploadHelper {
                 code = result.getInt(RESPONSE_CODE);
 
                 String message=result.getString(RESPONSE_MESSAGE);
-                String filePath=result.getString(FILE_PATH);
                 if(code== HttpStatus.SC_CREATED||code== HttpStatus.SC_OK)
                 {
                     listener.onSuccess(message,filePath);
@@ -198,7 +196,7 @@ public class UploadHelper {
                      */
                     json.put(RESPONSE_CODE,conn.getResponseCode());
                     json.put(RESPONSE_MESSAGE,result);
-                    json.put(FILE_PATH,filePath);
+                    if(file.exists())file.delete();
                 }
             } catch (Exception e){
                 e.printStackTrace();
