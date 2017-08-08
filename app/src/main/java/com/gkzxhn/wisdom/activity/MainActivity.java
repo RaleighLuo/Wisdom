@@ -7,34 +7,26 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.MainAdapter;
-import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.starlight.mobile.android.lib.util.ConvertUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initControls();
         init();
-        initDetail();
+
     }
     private void initControls(){
         mAblAppBar= (AppBarLayout) findViewById(R.id.main_layout_app_bar);
@@ -102,11 +94,22 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        updatePortrait();
+        Calendar cal=Calendar.getInstance();
+        tvCurrentDate.setText(Utils.getDateFromTimeInMillis(cal.getTimeInMillis(),new SimpleDateFormat(
+                "yyyy年MM月dd日")));
+        String[] weeks=getResources().getStringArray(R.array.weeks);
+        tvWeek.setText(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
+        updatePersonInfor();
     }
-    private void updatePortrait(){
+    private void updatePersonInfor(){
+        preferences=getSharedPreferences(Constants.USER_TABLE, Context.MODE_PRIVATE);
+        tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
+        tvCommunityDetail.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
+                preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
+        tvCarpetArea.setText(preferences.getFloat(Constants.USER_USEDAREA,0)+getString(R.string.square_meter));
+        tvHousingArea.setText(preferences.getFloat(Constants.USER_FLOORAREA,0)+getString(R.string.square_meter));
         //下载头像
-        String url=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getString(Constants.USER_PORTRAIT,"");
+        String url= preferences.getString(Constants.USER_PORTRAIT,"");
         if(url.length()>0){
             File file=GKApplication.getInstance().getImageLoadCache().get(url);
             if(file!=null&&file.exists()){
@@ -117,19 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private void initDetail(){
-        Calendar cal=Calendar.getInstance();
-        tvCurrentDate.setText(Utils.getDateFromTimeInMillis(cal.getTimeInMillis(),new SimpleDateFormat(
-                "yyyy年MM月dd日")));
-        String[] weeks=getResources().getStringArray(R.array.weeks);
-        tvWeek.setText(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
-        preferences=getSharedPreferences(Constants.USER_TABLE, Context.MODE_PRIVATE);
-        tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
-        tvCommunityDetail.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
-                preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
-        tvCarpetArea.setText(preferences.getFloat(Constants.USER_USEDAREA,0)+getString(R.string.square_meter));
-        tvHousingArea.setText(preferences.getFloat(Constants.USER_FLOORAREA,0)+getString(R.string.square_meter));
-    }
+
     private boolean isExpanded=true;
     public void onClickListener(View view){
         switch (view.getId()){
@@ -186,8 +177,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Constants.EXTRA_CODE){
-            updatePortrait();
+        if(requestCode==Constants.EXTRA_CODE&&resultCode==RESULT_OK){
+            updatePersonInfor();
         }
     }
 }

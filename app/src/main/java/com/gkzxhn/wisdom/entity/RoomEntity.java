@@ -1,5 +1,7 @@
 package com.gkzxhn.wisdom.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Raleigh.Luo on 17/8/1.
  *
@@ -14,7 +16,7 @@ package com.gkzxhn.wisdom.entity;
 //          "roomName": "1501",
 //          "unitsId": 1,
 //          "unitsName": "一单元"
-public class RoomEntity {
+public class RoomEntity implements Serializable{
     private String buildingId;
     private String buildingName;
     private String regionId;

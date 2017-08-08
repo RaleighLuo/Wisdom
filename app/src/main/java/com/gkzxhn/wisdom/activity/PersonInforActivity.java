@@ -33,6 +33,8 @@ import com.starlight.mobile.android.lib.util.PermissionManager;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -46,6 +48,8 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private PersonInforPresenter mPresenter;
     private ProgressDialog mProgress;
     private TextView tvHouseNumber,tvPhone,tvCommunity,tvNickname;
+    private List<RoomEntity> mRoomList=null;
+    private int mResultCode=RESULT_CANCELED;
 
 
     @Override
@@ -79,18 +83,26 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                 ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_portrait));
             }
         }
+        updateCommunity();
+        tvPhone.setText(mPresenter.getSharedPreferences().getString(Constants.USER_PHONE,""));
+        tvNickname.setText(mPresenter.getSharedPreferences().getString(Constants.USER_NICKNAME,""));
+        mPresenter.requestUserInfor();//请求个人信息
+    }
+
+    /**
+     * 更新小区信息
+     */
+    private void updateCommunity(){
         SharedPreferences preferences=mPresenter.getSharedPreferences();
         tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
         tvHouseNumber.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
                 preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
-        tvPhone.setText(preferences.getString(Constants.USER_PHONE,""));
-        tvNickname.setText(preferences.getString(Constants.USER_NICKNAME,""));
-        mPresenter.requestUserInfor();//请求个人信息
     }
 
     public void onClickListener(View view) {
         switch (view.getId()) {
             case R.id.common_head_layout_iv_left://返回
+                setResult(mResultCode);
                 finish();
                 break;
             case R.id.person_infor_layout_iv_portrait://头像
@@ -122,6 +134,11 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                 startActivityForResult(new Intent(this,AlterNicknameActivity.class),Constants.EXTRA_CODE);
                 break;
             case R.id.person_infor_layout_tv_community://切换小区
+                if(mRoomList!=null) {
+                    Intent intent = new Intent(this, ChangeCommunityActivity.class);
+                    intent.putExtra(Constants.EXTRA, (Serializable) mRoomList);
+                    startActivityForResult(intent, Constants.EXTRAS_CODE);
+                }
                 break;
         }
     }
@@ -147,13 +164,20 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                     Bitmap mBitmap = BitmapFactory.decodeFile(imagePath);
                     if (mBitmap != null) {
                         ivPortrait.setImageBitmap(mBitmap);
+                        mResultCode=RESULT_OK;
                         mPresenter.uploadPortrait(imagePath);
                     }
                     break;
-                case Constants.EXTRA_CODE:
+                case Constants.EXTRA_CODE://修改昵称
                     if (resultCode == RESULT_OK) {
                         showToast(R.string.update_nickname_success);
                         tvNickname.setText(mPresenter.getSharedPreferences().getString(Constants.USER_NICKNAME, ""));
+                    }
+                    break;
+                case Constants.EXTRAS_CODE://切换小区
+                    if (resultCode == RESULT_OK) {
+                        mResultCode=RESULT_OK;
+                        updateCommunity();
                     }
                     break;
             }
@@ -266,6 +290,12 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
 
     @Override
     public void update(UserEntity entity) {
+        mRoomList=entity.getRoomList();
+    }
 
+    @Override
+    public void onBackPressed() {
+        setResult(mResultCode);
+        super.onBackPressed();
     }
 }
