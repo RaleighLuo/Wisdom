@@ -41,10 +41,9 @@ public class PersonInforPresenter extends BasePresenter<IPersonInforModel,IPerso
                     getView().update(entity);
                 }
             }
-
             @Override
             public void onFailed(VolleyError error) {
-
+                showErrors(error);
             }
         });
     }
