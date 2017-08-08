@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.entity.RoomEntity;
+import com.gkzxhn.wisdom.entity.UserEntity;
 import com.gkzxhn.wisdom.presenter.PersonInforPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IPersonInforView;
@@ -81,6 +83,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         tvHouseNumber.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
                 preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
         tvPhone.setText(preferences.getString(Constants.USER_PHONE,""));
+        mPresenter.requestUserInfor();//请求个人信息
     }
 
     public void onClickListener(View view) {
@@ -247,5 +250,10 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     @Override
     public void stopRefreshAnim() {
         if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
+    }
+
+    @Override
+    public void update(UserEntity entity) {
+
     }
 }

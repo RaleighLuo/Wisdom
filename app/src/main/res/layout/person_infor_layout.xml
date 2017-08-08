@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:background="@android:color/white"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_width="72dip"
                 android:layout_height="72dip"
                 android:layout_marginTop="20dip"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:onClick="onClickListener"
                 android:src="@mipmap/person_portrait"
                 />
@@ -38,6 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="海文花园8栋1216"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/person_infor_layout_iv_portrait"
                 android:layout_marginTop="10dip"
                 android:textColor="@color/common_text_color"
                 android:layout_gravity="center_horizontal"
@@ -47,6 +49,8 @@
                 android:layout_marginLeft="20dip"
                 android:layout_marginRight="20dip"
                 android:layout_marginTop="15dip"
+                android:layout_below="@+id/person_infor_layout_tv_house_number"
+                android:id="@+id/person_infor_layout_ll_coin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -96,34 +100,14 @@
                     android:textColor="@android:color/white"
                     />
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contact_phone"
-                android:textSize="12sp"
-                android:textColor="@color/common_hint_text_color"
-                android:layout_marginLeft="@dimen/margin"
-                />
-            <TextView
-                android:id="@+id/person_infor_layout_tv_phone"
-                android:layout_width="wrap_content"
-                android:text="13783832229"
-                android:layout_marginTop="10dip"
-                android:textColor="@color/common_text_color"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_height="wrap_content"
-                />
-            <View style="@style/common_line_style"
-                android:layout_marginTop="10dip"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="@dimen/margin"
-                />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/own_community"
                 android:textSize="12sp"
+                android:id="@+id/person_infor_layout_tv_community_title"
+                android:layout_below="@+id/person_infor_layout_ll_coin"
                 android:layout_marginTop="5dip"
                 android:textColor="@color/common_hint_text_color"
                 android:layout_marginLeft="@dimen/margin"
@@ -133,6 +117,50 @@
                 android:layout_width="wrap_content"
                 android:text="世纪国际华城"
                 android:layout_marginTop="10dip"
+                android:layout_below="@+id/person_infor_layout_tv_community_title"
+                android:textColor="@color/common_text_color"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_height="wrap_content"
+                />
+            <View style="@style/common_line_style"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_below="@+id/person_infor_layout_tv_community"
+                android:id="@+id/person_infor_layout_v_community"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:background="@drawable/repair_progress_btn_selector"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_alignTop="@+id/person_infor_layout_tv_community_title"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:text="@string/change_community"
+                />
+            <TextView
+                android:id="@+id/person_infor_layout_tv_phone_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_phone"
+                android:layout_below="@+id/person_infor_layout_v_community"
+                android:textSize="12sp"
+                android:textColor="@color/common_hint_text_color"
+                android:layout_marginLeft="@dimen/margin"
+                />
+            <TextView
+                android:id="@+id/person_infor_layout_tv_phone"
+                android:layout_width="wrap_content"
+                android:text="13783832229"
+                android:layout_below="@+id/person_infor_layout_tv_phone_title"
+                android:layout_marginTop="10dip"
                 android:textColor="@color/common_text_color"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_height="wrap_content"
@@ -141,6 +169,8 @@
                 android:layout_marginTop="10dip"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
+                android:layout_below="@+id/person_infor_layout_tv_phone"
+                android:id="@+id/person_infor_layout_v_phone"
                 />
 
             <TextView
@@ -148,6 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pay_record"
+                android:layout_below="@+id/person_infor_layout_v_phone"
                 android:textSize="12sp"
                 android:background="@drawable/common_item_click_selector"
                 android:onClick="onClickListener"
@@ -160,12 +191,15 @@
             <View style="@style/common_line_style"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginLeft="@dimen/margin"
+                android:layout_below="@+id/person_infor_layout_tv_pay_record"
+                android:id="@+id/person_infor_layout_v_pay_record"
                 />
             <TextView
                 android:id="@+id/person_infor_layout_tv_repair_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/repair_record"
+                android:layout_below="@+id/person_infor_layout_v_pay_record"
                 android:background="@drawable/common_item_click_selector"
                 android:textSize="12sp"
                 android:onClick="onClickListener"
@@ -177,6 +211,8 @@
                 />
             <View style="@style/common_line_style"
                 android:layout_marginRight="@dimen/margin"
+                android:layout_below="@+id/person_infor_layout_tv_repair_record"
+                android:id="@+id/person_infor_layout_v_repair_record"
                 android:layout_marginLeft="@dimen/margin"
                 />
             <TextView
@@ -186,6 +222,7 @@
                 android:text="@string/contact_property"
                 android:onClick="onClickListener"
                 android:clickable="true"
+                android:layout_below="@+id/person_infor_layout_v_repair_record"
                 android:background="@drawable/common_item_click_selector"
                 android:textSize="12sp"
                 android:paddingTop="20dip"
@@ -197,8 +234,9 @@
             <View style="@style/common_line_style"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginLeft="@dimen/margin"
+                android:layout_below="@+id/person_infor_layout_tv_contact_property"
                 />
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
     <Button
         android:id="@+id/person_infor_layout_btn_login_off"

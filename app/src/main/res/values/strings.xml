@@ -154,6 +154,10 @@
     <string name="exit_account">退出当前账号</string>
     <string name="upload_portrait_success">已上传头像</string>
     <string name="upload_portrait_faild">上传头像失败</string>
+    <string name="update_portrait_faild">更新头像失败</string>
+    <string name="update_nickname_faild">修改昵称失败</string>
+    <string name="update_nickname_success">修改昵称成功</string>
+    <string name="change_community">切换小区</string>
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
     <string name="payment">支付</string>
