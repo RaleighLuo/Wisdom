@@ -216,7 +216,6 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             params.height=RelativeLayout.LayoutParams.WRAP_CONTENT;
             rvTopicImages.setLayoutParams(params);
         }
-
         tvDate.setText(Utils.getFormateTime(entity.getCreatedDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
         tvName.setText(entity.getUser().getNickname());
         tvViewTime.setText(getString(R.string.browse)+entity.getViewed()+getString(R.string.time));
