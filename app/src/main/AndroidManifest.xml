@@ -171,6 +171,11 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.ChangeCommunityActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
 
         <activity
             android:name=".activity.TopicDetailActivity"
