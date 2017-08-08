@@ -61,7 +61,7 @@ public class PersonInforPresenter extends BasePresenter<IPersonInforModel,IPerso
                         getView().showToast(R.string.upload_portrait_success);
                     } else if (nickname != null) {
                         getSharedPreferences().edit().putString(Constants.USER_NICKNAME, nickname).commit();
-                        getView().showToast(R.string.update_nickname_success);
+                        getView().update(null);//借用
                     }
                 }else{
                     getView().showToast(portraitUrl != null?R.string.upload_portrait_faild:R.string.update_nickname_faild);

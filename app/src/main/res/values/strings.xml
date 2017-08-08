@@ -19,6 +19,7 @@
     <string name="yuan">元</string>
     <string name="money_unit">￥</string>
     <string name="more">更多</string>
+    <string name="save">保存</string>
 
     <!--相册覆盖类库-->
     <string name="album_all_photos">所有图片</string>
@@ -158,6 +159,10 @@
     <string name="update_nickname_faild">修改昵称失败</string>
     <string name="update_nickname_success">修改昵称成功</string>
     <string name="change_community">切换小区</string>
+    <string name="own_nickname">我的昵称</string>
+    <string name="alter_nickname">修改昵称</string>
+    <string name="please_input_nickname">请输入昵称</string>
+    <string name="input_nickname_hint">好昵称可以让邻居们更容易记住你</string>
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
     <string name="payment">支付</string>

@@ -45,7 +45,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private ImageView ivPortrait;
     private PersonInforPresenter mPresenter;
     private ProgressDialog mProgress;
-    private TextView tvHouseNumber,tvPhone,tvCommunity;
+    private TextView tvHouseNumber,tvPhone,tvCommunity,tvNickname;
 
 
     @Override
@@ -57,6 +57,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     }
 
     private void initControls() {
+        tvNickname= (TextView) findViewById(R.id.person_infor_layout_tv_nickname);
         tvHouseNumber= (TextView) findViewById(R.id.person_infor_layout_tv_house_number);
         ivPortrait = (ImageView) findViewById(R.id.person_infor_layout_iv_portrait);
         tvPhone= (TextView) findViewById(R.id.person_infor_layout_tv_phone);
@@ -83,6 +84,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         tvHouseNumber.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
                 preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
         tvPhone.setText(preferences.getString(Constants.USER_PHONE,""));
+        tvNickname.setText(preferences.getString(Constants.USER_NICKNAME,""));
         mPresenter.requestUserInfor();//请求个人信息
     }
 
@@ -112,10 +114,14 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                         Manifest.permission.CALL_PHONE)) {
                     startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "400-988-999")));
                 }
-
                 break;
             case R.id.person_infor_layout_btn_login_off://退出当前账号
                 GKApplication.getInstance().exit();
+                break;
+            case R.id.person_infor_layout_tv_nickname://修改昵称
+                startActivityForResult(new Intent(this,AlterNicknameActivity.class),Constants.EXTRA_CODE);
+                break;
+            case R.id.person_infor_layout_tv_community://切换小区
                 break;
         }
     }
@@ -142,6 +148,12 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                     if (mBitmap != null) {
                         ivPortrait.setImageBitmap(mBitmap);
                         mPresenter.uploadPortrait(imagePath);
+                    }
+                    break;
+                case Constants.EXTRA_CODE:
+                    if (resultCode == RESULT_OK) {
+                        showToast(R.string.update_nickname_success);
+                        tvNickname.setText(mPresenter.getSharedPreferences().getString(Constants.USER_NICKNAME, ""));
                     }
                     break;
             }

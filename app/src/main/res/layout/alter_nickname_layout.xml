@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/person_infor_layout_ch_head"
+        style="@style/common_head_style"
+        mAttr:chHead_leftImg="@mipmap/ic_back"
+        mAttr:chHead_rightText="@string/save"
+        mAttr:chHead_title="@string/alter_nickname"
+        mAttr:chHead_title_padding_left="0dip" />
+    <View style="@style/common_line_style"/>
+    <EditText
+        android:ellipsize="end"
+        android:id="@+id/alter_nickname_layout_et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textColorHint="@color/common_hint_text_color"
+        android:textColor="@color/common_text_color"
+        android:background="@drawable/grey_empty_shape"
+        android:layout_margin="@dimen/margin"
+        android:padding="10dip"
+        android:hint="@string/please_input_nickname"
+        android:textSize="14sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/common_hint_text_color"
+        android:layout_marginLeft="25dip"
+        android:text="@string/input_nickname_hint"
+        />
+
+</LinearLayout>
