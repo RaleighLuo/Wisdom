@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mAttr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@android:color/white"
@@ -15,128 +15,12 @@
         android:id="@+id/topic_detial_layout_v_head"
         android:layout_below="@+id/topic_detial_layout_ch_head"
         />
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/topic_detial_layout_iv_portrait"
-        android:layout_width="52dip"
-        android:layout_height="52dip"
-        android:src="@mipmap/topic_portrait"
-        android:layout_marginRight="15dip"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginTop="20dip"
-        android:layout_below="@+id/topic_detial_layout_v_head"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/topic_detial_layout_iv_portrait"
-        android:layout_toRightOf="@id/topic_detial_layout_iv_portrait"
-        android:textColor="@color/property_color"
-        android:layout_marginRight="10dip"
-        android:layout_toLeftOf="@+id/topic_detial_layout_tv_view_time"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_view_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:textColor="@color/common_gray_title_color"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/topic_detial_layout_tv_name"
-        android:layout_marginRight="@dimen/margin"
-        />
 
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/topic_detial_layout_tv_name"
-        android:layout_below="@+id/topic_detial_layout_tv_name"
-        android:textSize="10sp"
-        android:textColor="@color/common_gray_title_color"
-        android:layout_marginTop="2dip"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:layout_marginRight="@dimen/margin"
-        android:textColor="@color/common_text_color"
-        android:layout_marginTop="5dip"
-        android:layout_alignLeft="@+id/topic_detial_layout_tv_name"
-        android:layout_below="@+id/topic_detial_layout_tv_date"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/topic_detial_layout_rv_image"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dip"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_height="0dip"
-        android:layout_alignLeft="@+id/topic_detial_layout_tv_name"
-        android:layout_below="@+id/topic_detial_layout_tv_content"
-        />
-
-    <View  android:layout_width="match_parent"
-        android:id="@+id/topic_detial_layout_v_content"
-        android:layout_height="@dimen/margin"
-        android:background="@color/common_bg_color"
-        android:layout_below="@+id/topic_detial_layout_rv_image"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/common_light_text_color"
-        android:text="@string/comment"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="@dimen/margin"
-        android:layout_below="@+id/topic_detial_layout_v_content"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_comment_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/topic_detial_layout_tv_comment"
-        android:layout_toRightOf="@+id/topic_detial_layout_tv_comment"
-        android:textColor="@color/common_light_text_color"
-        android:text="0"
-        />
-
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_like_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/common_light_text_color"
-        android:text="@string/like"
-        android:layout_toLeftOf="@+id/topic_detial_layout_tv_like_number"
-        android:layout_alignTop="@+id/topic_detial_layout_tv_comment"
-        android:layout_marginRight="10dip"
-        />
-    <TextView
-        android:id="@+id/topic_detial_layout_tv_like_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/topic_detial_layout_tv_like_title"
-        android:textColor="@color/common_light_text_color"
-        android:text="0"
-        />
-
-    <View  android:layout_width="match_parent"
-        android:id="@+id/topic_detial_layout_v_like_number"
-        android:layout_height="@dimen/margin"
-        android:background="@color/common_bg_color"
-        android:layout_below="@+id/topic_detial_layout_tv_comment"
-        />
     <include layout="@layout/common_list_layout"
-        android:layout_below="@+id/topic_detial_layout_v_like_number"
+        android:layout_below="@+id/topic_detial_layout_v_head"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_above="@+id/topic_detial_layout_v_bottom"
         />
     <View
@@ -145,6 +29,7 @@
         android:id="@+id/topic_detial_layout_v_bottom"
         />
     <LinearLayout
+        android:layout_weight="0"
         android:id="@+id/topic_detial_layout_ll_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -213,4 +98,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

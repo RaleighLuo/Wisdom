@@ -60,6 +60,7 @@ public interface Constants {
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//获取验证码
     final String REQUEST_TOPIC_URL =DOMAIN_NAME_XLS+"/residentials";//话题
+    final String REQUEST_TOPIC_OPERATE_URL =DOMAIN_NAME_XLS+"/topics";//话题-评论
     final String REQUEST_USER_URL =DOMAIN_NAME_XLS+"/users";//签到，修改用户信息
     //上传图片的auth认证
     final String UPLOAD_FILE_AUTHORIZATION="523b87c4419da5f9186dbe8aa90f37a3876b95e448fe2abf5bf7e4753d5aa25fe88caa7ed96d4a2e89c01f839891b74362bb2450d352f1e4c3d4f7d8d51f5c65";

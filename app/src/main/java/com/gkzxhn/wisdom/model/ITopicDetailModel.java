@@ -9,5 +9,10 @@ import org.json.JSONObject;
  */
 
 public interface ITopicDetailModel extends IBaseModel  {
-    public void request(String id,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void publishComments(String content,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void requestComments(int currentPage, int pageSize,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void delete(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void deleteComment(String commentId,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+
 }

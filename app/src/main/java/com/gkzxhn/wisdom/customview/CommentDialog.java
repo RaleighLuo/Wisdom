@@ -30,6 +30,12 @@ public class CommentDialog  extends Dialog {
     private EditText etContent;
     private TextView tvSend;
     private Handler handler=new Handler();
+    private View.OnClickListener onClickListener;
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
     public CommentDialog(@NonNull Context context) {
         super(context, R.style.custom_translucent_dialog_style);
         this.context = context;
@@ -65,12 +71,7 @@ public class CommentDialog  extends Dialog {
             }
         });
 
-        findViewById(R.id.comment_dialog_layout_tv_send).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        findViewById(R.id.comment_dialog_layout_tv_send).setOnClickListener(onClickListener);
     }
     public void measureWindow(){
         Window dialogWindow = this.getWindow();
@@ -85,6 +86,10 @@ public class CommentDialog  extends Dialog {
     }
     public void setHint(int resId){
         etContent.setHint(resId);
+    }
+
+    public String getContent() {
+        return etContent!=null?etContent.getText().toString().trim():"";
     }
 
     @Override
