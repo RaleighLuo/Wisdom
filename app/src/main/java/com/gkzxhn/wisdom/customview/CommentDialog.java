@@ -31,6 +31,15 @@ public class CommentDialog  extends Dialog {
     private TextView tvSend;
     private Handler handler=new Handler();
     private View.OnClickListener onClickListener;
+    private int position=-1;//position=-1 话题评论
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;

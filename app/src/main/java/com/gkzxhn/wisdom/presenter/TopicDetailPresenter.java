@@ -143,14 +143,14 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
     /**删除评论
      * @param commentId
      */
-    public void deleteComment(String commentId){
+    public void deleteComment(String commentId, final int position, final int subPosition){
         getView().showProgress();
         mModel.deleteComment(commentId, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
-
+                    getView().deleteCommentSuccess(position,subPosition);
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }

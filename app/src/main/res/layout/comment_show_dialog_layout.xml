@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/comment_show_dialog_layout_tv_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/copy"
+        android:paddingLeft="70dip"
+        android:paddingRight="70dip"
+        android:paddingTop="@dimen/margin"
+        android:paddingBottom="@dimen/margin"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:background="@drawable/common_item_click_selector"
+        android:textColor="@color/common_light_text_color"
+        />
+    <View style="@style/common_line_style"
+        android:id="@+id/comment_show_dialog_layout_v_line"
+        />
+    <TextView
+        android:id="@+id/comment_show_dialog_layout_tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:paddingLeft="50dip"
+        android:paddingRight="50dip"
+        android:background="@drawable/common_item_click_selector"
+        android:paddingTop="@dimen/margin"
+        android:paddingBottom="@dimen/margin"
+        android:textColor="@color/red"
+        />
 
 </LinearLayout>

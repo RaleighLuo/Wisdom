@@ -28,14 +28,17 @@
         android:layout_height="wrap_content"
         android:textSize="10sp"
         android:text="@string/delete"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingBottom="10dip"
-        android:textColor="@color/property_color"
+        android:paddingBottom="4dip"
+        android:paddingTop="4dip"
+        android:clickable="true"
+        android:background="@drawable/comment_delete_selector"
+        android:textColor="@color/common_light_text_color"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/topic_detial_layout_tv_name"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="@dimen/margin"
         />
 
     <TextView

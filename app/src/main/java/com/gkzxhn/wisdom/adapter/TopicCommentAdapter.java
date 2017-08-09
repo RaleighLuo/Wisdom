@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
-import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.util.Utils;
@@ -35,6 +34,11 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     private List<TopicCommentEntity> mDatas=new ArrayList<>();
     private TopicDetailEntity mTopicInfor;
     private String mUserId;
+    private OnItemLongClickListener onItemLongClickListener;
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
 
     public void updateHead(TopicDetailEntity entity){
         this.mTopicInfor=entity;
@@ -108,7 +112,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position==0){
             if(mTopicInfor!=null) {
                 ImageLoader.getInstance().displayImage(mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
@@ -131,7 +135,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     holder.tvHeaderDel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+                            if(onItemClickListener!=null)onItemClickListener.onClickListener(v,0);
                         }
                     });
                 }else{
@@ -177,11 +181,31 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                         onItemClickListener.onClickListener(v, mPosition);
                 }
             });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(onItemLongClickListener!=null)onItemLongClickListener.onLongClickListener(v,mPosition);
+                    return true;
+                }
+            });
         }
 
     }
     public String getItemsId(int position){
         return mDatas.get(position).getId();
+    }
+    public TopicCommentEntity getItem(int position){
+        return mDatas.get(position);
+    }
+
+    /**
+     * @param position mData中的position
+     * @param subPosition
+     */
+    public void removeItem(int position,int subPosition){
+        if(subPosition==-1){
+            mDatas.remove(position+1);//头部＋1
+        }
     }
 
     @Override

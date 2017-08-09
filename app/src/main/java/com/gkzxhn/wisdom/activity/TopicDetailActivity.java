@@ -1,6 +1,9 @@
 package com.gkzxhn.wisdom.activity;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,10 +18,12 @@ import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
+import com.gkzxhn.wisdom.adapter.OnItemLongClickListener;
 import com.gkzxhn.wisdom.adapter.TopicCommentAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.customview.CommentDialog;
+import com.gkzxhn.wisdom.customview.CommentShowDialog;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.presenter.TopicDetailPresenter;
@@ -48,6 +53,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private ProgressDialog mProgress;
     private boolean isLike=false;
     private String mUserId=null;
+    private CommentShowDialog mCommentShowDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,17 +92,44 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
 //        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new TopicCommentAdapter(this,mPresenter.getSharedPreferences().getString(Constants.USER_ID,""));
         adapter.setOnItemClickListener(onItemClickListener);
+        adapter.setOnItemLongClickListener(onItemLongClickListener);
         mRecyclerView.setAdapter(adapter);
         mUserId=mPresenter.getSharedPreferences().getString(Constants.USER_ID,"");
         mPresenter.request();
     }
+    private OnItemLongClickListener onItemLongClickListener=new OnItemLongClickListener() {
+        @Override
+        public void onLongClickListener(View convertView, int position) {
+            //评论功能 删除 回复 复制
+            if(mCommentShowDialog==null){
+                mCommentShowDialog=new CommentShowDialog(TopicDetailActivity.this);
+                mCommentShowDialog.setOnClickListener(onClickListener);
+            }
+            if(!mCommentShowDialog.isShowing())mCommentShowDialog.show();
+            mCommentShowDialog.setPosition(position);
+            mCommentShowDialog.showDelete(adapter.getItemsId(position).equals(mUserId));
+        }
+    };
     private View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.comment_dialog_layout_tv_send:
                     if(mCommentDialog.isShowing())mCommentDialog.dismiss();
-                    mPresenter.publishComments(mCommentDialog.getContent());
+                    if(mCommentDialog.getPosition()==-1) {//评论话题
+                        mPresenter.publishComments(mCommentDialog.getContent());
+                    }else{//回复评论
+
+                    }
+                    break;
+                case R.id.comment_show_dialog_layout_tv_copy://评论－复制
+                    String content=adapter.getItem(mCommentShowDialog.getPosition()).getContent();
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    cm.setPrimaryClip(ClipData.newPlainText(content,content));
+                    showToast(R.string.has_copy_hint);
+                    break;
+                case R.id.comment_show_dialog_layout_tv_delete://评论－删除
+                    mPresenter.deleteComment(adapter.getItemsId(mCommentShowDialog.getPosition()),mCommentShowDialog.getPosition(),-1);
                     break;
             }
 
@@ -112,6 +145,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                 case R.id.topic_comment_layout_iv_comment://评论回复
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
+                        mCommentDialog.setPosition(position);
                         mCommentDialog.setHint(R.string.reply_colon);
                     }
                     break;
@@ -130,7 +164,12 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                     }
                     if(!confirmDialog.isShowing())confirmDialog.show();
                     break;
-                case R.id.topic_comment_layout_rl_root://评论功能 删除 回复 复制
+                case R.id.topic_comment_layout_rl_root:
+                    if(!mCommentDialog.isShowing()){
+                        mCommentDialog.show();
+                        mCommentDialog.setPosition(position);
+                        mCommentDialog.setHint(R.string.reply_colon);
+                    }
                     break;
             }
 
@@ -164,6 +203,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             case R.id.topic_detial_layout_ll_comment://话题评论
                 if(!mCommentDialog.isShowing()){
                     mCommentDialog.show();
+                    mCommentDialog.setPosition(-1);
                     mCommentDialog.setHint(R.string.comment);
                 }
                 break;
@@ -220,6 +260,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         mPresenter.onDestory();
         if(confirmDialog!=null&&confirmDialog.isShowing())confirmDialog.dismiss();
         if(mCommentDialog!=null&&mCommentDialog.isShowing())mCommentDialog.dismiss();
+        if(mCommentShowDialog!=null&&mCommentShowDialog.isShowing())mCommentShowDialog.dismiss();
         super.onDestroy();
     }
 
@@ -254,6 +295,11 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         Toast.makeText(getApplicationContext(),R.string.delete_topic_success,Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void deleteCommentSuccess(int position, int subPosition) {
+        adapter.removeItem(position,subPosition);
     }
 
     @Override

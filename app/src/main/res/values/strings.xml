@@ -196,6 +196,8 @@
     <string name="time">次</string>
     <string name="delete_topic_hint">确定删除该话题？</string>
     <string name="delete_topic_success">已删除话题</string>
+    <string name="copy">复制</string>
+    <string name="has_copy_hint">已复制到剪贴板</string>
     <!--签到-->
     <string name="back">返回</string>
     <string name="click_sign">点击签到</string>
