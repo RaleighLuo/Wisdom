@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.async.VolleyUtils;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.model.ITopicDetailModel;
@@ -27,6 +28,10 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
     public TopicDetailPresenter(Context context, ITopicDetailView view,String topicId) {
         super(context, new TopicDetailModel(topicId), view);
     }
+
+    /**
+     * 请求话题详情
+     */
     public void request(){
         getView().startRefreshAnim();
         mModel.request(new VolleyUtils.OnFinishedListener<JSONObject>() {
@@ -51,13 +56,20 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
     }
 
-    public void publishComments(String content){
+    /**发布评论
+     * @param content
+     */
+    public void publishComments(final String content){
         getView().showProgress();
         mModel.publishComment(content, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
+                    //TODO
+                    TopicCommentEntity entity=new TopicCommentEntity();
+                    entity.setContent(content);
+                    getView().publishCommentSuccess(entity);
 
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
@@ -72,6 +84,10 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
 
     }
+
+    /**请求评论列表
+     * @param isRefresh
+     */
     public void requestComments(final boolean isRefresh){
         if(isRefresh){
             currentPage=FIRST_PAGE;
@@ -99,6 +115,10 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             }
         });
     }
+
+    /**
+     * 删除话题
+     */
     public void delete(){
         getView().showProgress();
         mModel.delete(new VolleyUtils.OnFinishedListener<JSONObject>() {
@@ -119,6 +139,10 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             }
         });
     }
+
+    /**删除评论
+     * @param commentId
+     */
     public void deleteComment(String commentId){
         getView().showProgress();
         mModel.deleteComment(commentId, new VolleyUtils.OnFinishedListener<JSONObject>() {
@@ -139,12 +163,17 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             }
         });
     }
+
+    /**
+     * 点赞／取消点赞 －话题
+     */
     public void requestLike(){
         mModel.requestLike(new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code = ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "code"));
                 if (code == 200) {
+//                    int likes=ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "likes"));
                     getView().likeFinished(true);
                 } else {
                     getView().likeFinished(false);
@@ -158,12 +187,18 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             }
         });
     }
+
+    /**点赞／取消点赞－评论
+     * @param commentId
+     * @param position
+     */
     public void requestCommentLike(final String commentId,final int position){
         mModel.requestCommentLike(commentId,new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code = ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "code"));
                 if (code == 200) {
+//                    int isLike=ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "likes"));
                     getView().commentLikeFinished(true,commentId,position);
                 } else {
                     getView().commentLikeFinished(false,commentId,position);

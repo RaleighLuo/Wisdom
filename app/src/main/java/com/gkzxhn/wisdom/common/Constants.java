@@ -78,6 +78,9 @@ public interface Constants {
     final int PHONE_CODE=0x107;
     /*-------------------------------msg what-------------------------------------------------*/
     public final int START_REFRESH_UI=1,STOP_REFRESH_UI=2;//msg what
+    final int LIKE_STATUS =1;//点赞
+    final int LIKE_CANCEL_STATUS =0;//取消点赞
+    final int LIKE_DEFAULT_STATUS =-1;//默认
     /*-------------------------------TAB-------------------------------------------------*/
     final int PAY_RECORD_TAB=0x201;//缴费记录
     final int REPAIR_PROGRESSING_TAB=0x202;//维修列表－正在进行

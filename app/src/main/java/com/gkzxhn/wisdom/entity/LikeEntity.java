@@ -10,10 +10,6 @@ public class LikeEntity {
     @SerializedName("user_id")
     private String userId;
 
-    public LikeEntity(String userId) {
-        this.userId = userId;
-    }
-
     public String getUserId() {
         return userId == null ? "" : userId;
     }

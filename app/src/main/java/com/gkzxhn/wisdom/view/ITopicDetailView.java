@@ -18,4 +18,5 @@ public interface ITopicDetailView extends IBaseView{
     void dismissProgress();
     void likeFinished(boolean isSuccess);
     void commentLikeFinished(boolean isSuccess,String commentId,int position);
+    void publishCommentSuccess(TopicCommentEntity comment);
 }

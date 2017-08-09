@@ -26,6 +26,8 @@ public class TopicEntity {
     private User user;
     private int viewed;
     private List<String> images;
+    @Expose
+    private List<String> likeUsers;//点赞数-个人使用
 
     public int getViewed() {
         return viewed;
@@ -91,13 +93,18 @@ public class TopicEntity {
             this.content = content;
     }
 
-    public List<LikeEntity> getLikes() {
-        if(likes==null)likes=new ArrayList<>();
-        return likes;
+    public List<String> getLikeUsers() {
+        if(likeUsers==null)likeUsers=new ArrayList<>();
+        if(likeUsers.size()==0&&likes!=null){
+            for(LikeEntity entity:likes){
+                likeUsers.add(entity.getUserId());
+            }
+        }
+        return likeUsers;
     }
 
-    public void setLikes(List<LikeEntity> likes) {
-        this.likes = likes;
+    public void setLikeUsers(List<String> likeUsers) {
+        this.likeUsers = likeUsers;
     }
 
     public int getCommentCount() {

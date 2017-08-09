@@ -6,14 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
-import com.gkzxhn.wisdom.entity.LikeEntity;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.util.Utils;
@@ -49,26 +48,39 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         this.context = context;
         mUserId=userId;
     }
+    public void addItem(TopicCommentEntity entity){
+        mDatas.add(0,entity);
+        notifyDataSetChanged();
+    }
 
     /**
-     * @param isSuccess
+     *
      * @param commentId
      * @param position  mData中的position
      */
     public void commentLikeFinished(boolean isSuccess, String commentId, int position){
-        if(commentId.equals(getItemsId(position))) {
-            if (isSuccess) mDatas.get(position).getLikes().add(new LikeEntity(mUserId));
-            notifyItemChanged(position+1);
-        }else{
-            for(TopicCommentEntity entity:mDatas){
+        int mPositon=position;
+        if(!commentId.equals(getItemsId(position))) {
+            mPositon=-1;
+            for(int i=0;i<mDatas.size();i++){
+                TopicCommentEntity entity=mDatas.get(i);
                 if(entity.getId().equals(commentId)){
-                    if (isSuccess) mDatas.get(position).getLikes().add(new LikeEntity(mUserId));
-                    notifyItemChanged(position+1);
+                    mPositon=i;
                     break;
                 }
             }
-
         }
+        if(mPositon!=-1) {
+            if(isSuccess){
+                //已经点赞－》取消点赞
+                if (mDatas.get(mPositon).getLikeUsers().contains(mUserId))
+                    mDatas.get(mPositon).getLikeUsers().remove(mUserId);
+                else// 点赞
+                    mDatas.get(mPositon).getLikeUsers().add(mUserId);
+            }
+            notifyItemChanged(mPositon + 1);//第一项是头部，所以＋1
+        }
+
     }
     public void updateItems(List<TopicCommentEntity> comments){
         mDatas.clear();
@@ -101,7 +113,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             if(mTopicInfor!=null) {
                 ImageLoader.getInstance().displayImage(mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
-                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikes().size() + "");
+                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikeUsers().size() + "");
                 holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
                 holder.mOnlineTopicAdapter.updateItems(mTopicInfor.getImages());
                 if (holder.mOnlineTopicAdapter.getItemCount() > 0) {
@@ -130,8 +142,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             final int mPosition=position-1;
             final TopicCommentEntity entity = mDatas.get(mPosition);
             holder.tvContent.setText(entity.getContent());
-            holder.rbLike.setText(String.valueOf(entity.getLikes().size()));
-            if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞咯
+            holder.rbLike.setText(String.valueOf(entity.getLikeUsers().size()));
+            if(entity.getLikeUsers().contains(mUserId)){//已经点赞咯
                 holder.rbLike.setChecked(true);
             }else{//没有点赞
                 holder.rbLike.setChecked(false);
@@ -142,8 +154,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             holder.rbLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.rbLike.setText(String.valueOf(entity.getLikes().size()+1));
-                    if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞咯->取消点赞
+                    if(entity.getLikeUsers().contains(mUserId)){//已经点赞咯->取消点赞
                         holder.rbLike.setChecked(false);
                     }else{//没有点赞－点赞
                         holder.rbLike.setChecked(true);

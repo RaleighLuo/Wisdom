@@ -19,13 +19,11 @@ import com.gkzxhn.wisdom.adapter.TopicCommentAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.customview.CommentDialog;
-import com.gkzxhn.wisdom.entity.LikeEntity;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.presenter.TopicDetailPresenter;
 import com.gkzxhn.wisdom.view.ITopicDetailView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
-import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
 
 import java.util.List;
@@ -234,7 +232,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void update(TopicDetailEntity entity) {
         adapter.updateHead(entity);
-        if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞
+        if(entity.getLikeUsers().contains(mUserId)){//已经点赞
             isLike=true;
             tvLike.setEnabled(true);
             ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
@@ -269,17 +267,20 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
     }
 
+    /**点赞完成
+     * @param isSuccess
+     */
     @Override
     public void likeFinished(boolean isSuccess) {
-        if(!isSuccess){//恢复
-            if(isLike){//已经点赞咯
+        if(!isSuccess) {//请求失败－恢复
+            if (isLike) {//已经点赞咯
                 tvLike.setEnabled(true);
                 ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
-            }else{//没有点赞
+            } else {//没有点赞
                 tvLike.setEnabled(false);
                 ivLike.setColorFilter(null);
             }
-        }else{//成功点赞
+        }else{
             isLike=!isLike;
         }
     }
@@ -287,5 +288,10 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void commentLikeFinished(boolean isSuccess, String commentId, int position) {
         adapter.commentLikeFinished(isSuccess,commentId,position);
+    }
+
+    @Override
+    public void publishCommentSuccess(TopicCommentEntity comment) {
+        adapter.addItem(comment);
     }
 }

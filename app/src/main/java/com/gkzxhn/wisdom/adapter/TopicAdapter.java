@@ -62,7 +62,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         TopicEntity entity=mDatas.get(position);
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
-        holder.tvLike.setText(String.valueOf(entity.getLikes().size()));
+        holder.tvLike.setText(String.valueOf(entity.getLikeUsers().size()));
         holder.tvContent.setText(entity.getContent());
         holder.tvName.setText(entity.getUser().getNickname());
         ImageLoader.getInstance().displayImage(entity.getUser().getUserPortrait(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));

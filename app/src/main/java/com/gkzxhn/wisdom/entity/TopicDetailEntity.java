@@ -27,7 +27,21 @@ public class TopicDetailEntity {
     private List<LikeEntity> likes;
     private List<String> images;
     private TopicEntity.User user;
+    @Expose
+    private List<String> likeUsers;//点赞数－-个人使用
+    public List<String> getLikeUsers() {
+        if(likeUsers==null)likeUsers=new ArrayList<>();
+        if(likeUsers.size()==0&&likes!=null){
+            for(LikeEntity entity:likes){
+                likeUsers.add(entity.getUserId());
+            }
+        }
+        return likeUsers;
+    }
 
+    public void setLikeUsers(List<String> likeUsers) {
+        this.likeUsers = likeUsers;
+    }
     public TopicEntity.User getUser() {
         return user;
     }
@@ -52,14 +66,6 @@ public class TopicDetailEntity {
         this.commentCount = commentCount;
     }
 
-    public List<LikeEntity> getLikes() {
-        if(likes==null)likes=new ArrayList<>();
-        return likes;
-    }
-
-    public void setLikes(List<LikeEntity> likes) {
-        this.likes = likes;
-    }
 
     public List<String> getImages() {
         return images;
