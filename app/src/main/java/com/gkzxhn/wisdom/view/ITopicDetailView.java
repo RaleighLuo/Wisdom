@@ -13,4 +13,9 @@ public interface ITopicDetailView extends IBaseView{
     void update(TopicDetailEntity entity);
     void updateComment(List<TopicCommentEntity> comments);
     void loadComment(List<TopicCommentEntity> comments);
+    void deleteTopicSuccess();
+    void showProgress();
+    void dismissProgress();
+    void likeFinished(boolean isSuccess);
+    void commentLikeFinished(boolean isSuccess,String commentId,int position);
 }

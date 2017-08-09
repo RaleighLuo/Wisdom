@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.activity;
 
+import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,12 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicCommentAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.customview.CommentDialog;
+import com.gkzxhn.wisdom.entity.LikeEntity;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.presenter.TopicDetailPresenter;
@@ -42,6 +46,10 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private String id=null;
     private TextView tvLike;
     private ImageView ivLike;
+    private CheckConfirmDialog confirmDialog;
+    private ProgressDialog mProgress;
+    private boolean isLike=false;
+    private String mUserId=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +60,14 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private void initControls(){
         tvLike = (TextView) findViewById(R.id.topic_detial_layout_tv_like);
         ivLike = (ImageView) findViewById(R.id.topic_detial_layout_iv_like);
-         tvLoading= (DotsTextView) findViewById(R.id.common_loading_layout_tv_load);
+        tvLoading= (DotsTextView) findViewById(R.id.common_loading_layout_tv_load);
         ivNodata=findViewById(R.id.common_no_data_layout_iv_image);
         mRecyclerView= (RecyclerView) findViewById(R.id.common_list_layout_rv_list);
         mSwipeRefresh= (CusSwipeRefreshLayout) findViewById(R.id.common_list_layout_swipeRefresh);
-           }
+    }
     private void init(){
+        mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
+        dismissProgress();
         id=getIntent().getStringExtra(Constants.EXTRA);
         mPresenter=new TopicDetailPresenter(this,this,id);
         mCommentDialog=new CommentDialog(this);
@@ -74,11 +84,12 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
-        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
-        adapter=new TopicCommentAdapter(this);
+//        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
+//        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        adapter=new TopicCommentAdapter(this,mPresenter.getSharedPreferences().getString(Constants.USER_ID,""));
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
+        mUserId=mPresenter.getSharedPreferences().getString(Constants.USER_ID,"");
         mPresenter.request();
     }
     private View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -97,13 +108,31 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         @Override
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
-                case R.id.topic_comment_layout_tv_like:
+                case R.id.topic_comment_layout_rb_like://评论点赞
+                    mPresenter.requestCommentLike(adapter.getItemsId(position),position);
                     break;
-                case R.id.topic_comment_layout_iv_comment:
+                case R.id.topic_comment_layout_iv_comment://评论回复
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
                         mCommentDialog.setHint(R.string.reply_colon);
                     }
+                    break;
+                case R.id.topic_detial_layout_tv_delete://删除话题
+                    if(confirmDialog==null) {
+                        confirmDialog = new CheckConfirmDialog(TopicDetailActivity.this);
+                        confirmDialog.setContent(getResources().getString(R.string.delete_topic_hint));
+                        confirmDialog.setYesBtnListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (confirmDialog != null && confirmDialog.isShowing())
+                                    confirmDialog.dismiss();
+                                mPresenter.delete();
+                            }
+                        });
+                    }
+                    if(!confirmDialog.isShowing())confirmDialog.show();
+                    break;
+                case R.id.topic_comment_layout_rl_root://评论功能 删除 回复 复制
                     break;
             }
 
@@ -124,16 +153,17 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
-            case R.id.topic_detial_layout_ll_like://点赞 已点赞enabel＝false
-                if(tvLike.isEnabled()){//已经点赞咯
+            case R.id.topic_detial_layout_ll_like://话题点赞 已点赞enabel＝false
+                if(isLike){//已经点赞咯,->取消点赞
                     tvLike.setEnabled(false);
                     ivLike.setColorFilter(null);
-                }else{//没有点赞
+                }else{//没有点赞，－>点赞
                     tvLike.setEnabled(true);
                     ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
                 }
+                mPresenter.requestLike();
                 break;
-            case R.id.topic_detial_layout_ll_comment://评论
+            case R.id.topic_detial_layout_ll_comment://话题评论
                 if(!mCommentDialog.isShowing()){
                     mCommentDialog.show();
                     mCommentDialog.setHint(R.string.comment);
@@ -190,6 +220,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     protected void onDestroy() {
         mPresenter.onDestory();
+        if(confirmDialog!=null&&confirmDialog.isShowing())confirmDialog.dismiss();
         if(mCommentDialog!=null&&mCommentDialog.isShowing())mCommentDialog.dismiss();
         super.onDestroy();
     }
@@ -203,6 +234,11 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void update(TopicDetailEntity entity) {
         adapter.updateHead(entity);
+        if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞
+            isLike=true;
+            tvLike.setEnabled(true);
+            ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+        }
     }
 
     @Override
@@ -213,5 +249,43 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void loadComment(List<TopicCommentEntity> comments) {
         adapter.loadItems(comments);
+    }
+
+    @Override
+    public void deleteTopicSuccess() {
+        Toast.makeText(getApplicationContext(),R.string.delete_topic_success,Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void showProgress() {
+        if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
+
+    }
+
+    @Override
+    public void dismissProgress() {
+        if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
+    }
+
+    @Override
+    public void likeFinished(boolean isSuccess) {
+        if(!isSuccess){//恢复
+            if(isLike){//已经点赞咯
+                tvLike.setEnabled(true);
+                ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+            }else{//没有点赞
+                tvLike.setEnabled(false);
+                ivLike.setColorFilter(null);
+            }
+        }else{//成功点赞
+            isLike=!isLike;
+        }
+    }
+
+    @Override
+    public void commentLikeFinished(boolean isSuccess, String commentId, int position) {
+        adapter.commentLikeFinished(isSuccess,commentId,position);
     }
 }

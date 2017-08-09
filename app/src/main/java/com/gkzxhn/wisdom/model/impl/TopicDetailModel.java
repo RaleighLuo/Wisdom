@@ -27,7 +27,7 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
     @Override
-    public void publishComments(String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+    public void publishComment(String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
             String url=String.format("%s/%s/comments", Constants.REQUEST_TOPIC_OPERATE_URL, topicId);
             JSONObject params=new JSONObject();
@@ -64,6 +64,28 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         try{
             String url=String.format("%s/%s/comments/%s", Constants.REQUEST_TOPIC_OPERATE_URL,topicId, commentId);
             volleyUtils.delete(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+
+    @Override
+    public void requestLike(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/topics/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+                    topicId);
+            volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+
+    @Override
+    public void requestCommentLike(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+                    topicId,commentId);
+            volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
         }

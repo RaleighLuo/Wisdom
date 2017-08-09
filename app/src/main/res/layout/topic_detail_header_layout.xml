@@ -10,7 +10,7 @@
         android:src="@mipmap/topic_portrait"
         android:layout_marginRight="15dip"
         android:layout_marginLeft="@dimen/margin"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="@dimen/margin"
         android:layout_below="@+id/topic_detial_layout_v_head"
         />
     <TextView
@@ -19,19 +19,23 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/topic_detial_layout_iv_portrait"
         android:layout_toRightOf="@id/topic_detial_layout_iv_portrait"
-        android:textColor="@color/common_text_color"
-        android:layout_marginRight="10dip"
-        android:layout_toLeftOf="@+id/topic_detial_layout_tv_view_time"
+        android:textColor="@color/property_color"
+        android:layout_toLeftOf="@+id/topic_detial_layout_tv_delete"
         />
     <TextView
-        android:id="@+id/topic_detial_layout_tv_view_time"
+        android:id="@+id/topic_detial_layout_tv_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:textColor="@color/common_gray_title_color"
+        android:text="@string/delete"
+        android:visibility="gone"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="10dip"
+        android:textColor="@color/property_color"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/topic_detial_layout_tv_name"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginRight="5dip"
         />
 
     <TextView

@@ -194,6 +194,8 @@
     <string name="upload_image_faild">上传图片失败</string>
     <string name="browse">浏览</string>
     <string name="time">次</string>
+    <string name="delete_topic_hint">确定删除该话题？</string>
+    <string name="delete_topic_success">已删除话题</string>
     <!--签到-->
     <string name="back">返回</string>
     <string name="click_sign">点击签到</string>

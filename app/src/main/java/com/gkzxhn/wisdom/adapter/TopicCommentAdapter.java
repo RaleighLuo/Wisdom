@@ -6,17 +6,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
+import com.gkzxhn.wisdom.entity.LikeEntity;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
+import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,15 +35,40 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     private final int HEADER_TAG=0,DEFUALT_TAG=1;
     private List<TopicCommentEntity> mDatas=new ArrayList<>();
     private TopicDetailEntity mTopicInfor;
+    private String mUserId;
+
     public void updateHead(TopicDetailEntity entity){
         this.mTopicInfor=entity;
+        notifyItemChanged(0);
     }
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public TopicCommentAdapter(Context context) {
+    public TopicCommentAdapter(Context context,String userId) {
         this.context = context;
+        mUserId=userId;
+    }
+
+    /**
+     * @param isSuccess
+     * @param commentId
+     * @param position  mData中的position
+     */
+    public void commentLikeFinished(boolean isSuccess, String commentId, int position){
+        if(commentId.equals(getItemsId(position))) {
+            if (isSuccess) mDatas.get(position).getLikes().add(new LikeEntity(mUserId));
+            notifyItemChanged(position+1);
+        }else{
+            for(TopicCommentEntity entity:mDatas){
+                if(entity.getId().equals(commentId)){
+                    if (isSuccess) mDatas.get(position).getLikes().add(new LikeEntity(mUserId));
+                    notifyItemChanged(position+1);
+                    break;
+                }
+            }
+
+        }
     }
     public void updateItems(List<TopicCommentEntity> comments){
         mDatas.clear();
@@ -68,12 +96,12 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if(position==0){
             if(mTopicInfor!=null) {
                 ImageLoader.getInstance().displayImage(mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
-                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikeCount() + "");
+                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikes().size() + "");
                 holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
                 holder.mOnlineTopicAdapter.updateItems(mTopicInfor.getImages());
                 if (holder.mOnlineTopicAdapter.getItemCount() > 0) {
@@ -81,18 +109,45 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
                     holder.rvHeaderTopicImages.setLayoutParams(params);
                 }
-                holder.tvHeaderDate.setText(Utils.getFormateTime(mTopicInfor.getCreatedDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
+                String date=Utils.getFormateTime(mTopicInfor.getCreatedDate(), new SimpleDateFormat("MM月dd日 HH:mm"));
+
+                String viewTime=context.getString(R.string.browse) + mTopicInfor.getViewed() + context.getString(R.string.time);
+                holder.tvHeaderDate.setText(date+"\u3000"+viewTime);
                 holder.tvHeaderName.setText(mTopicInfor.getUser().getNickname());
-                holder.tvHeaderViewTime.setText(context.getString(R.string.browse) + mTopicInfor.getViewed() + context.getString(R.string.time));
+                if(mTopicInfor.getUserId().equals(mUserId)){//是本人发布的话题，才可以删除
+                    holder.tvHeaderDel.setVisibility(View.VISIBLE);
+                    holder.tvHeaderDel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+                        }
+                    });
+                }else{
+                    holder.tvHeaderDel.setVisibility(View.GONE);
+                }
             }
         }else {
             final int mPosition=position-1;
-            TopicCommentEntity entity = mDatas.get(mPosition);
+            final TopicCommentEntity entity = mDatas.get(mPosition);
             holder.tvContent.setText(entity.getContent());
-            holder.tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
-            holder.tvLike.setOnClickListener(new View.OnClickListener() {
+            holder.rbLike.setText(String.valueOf(entity.getLikes().size()));
+            if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞咯
+                holder.rbLike.setChecked(true);
+            }else{//没有点赞
+                holder.rbLike.setChecked(false);
+            }
+            holder.tvDate.setText("8月9日 11:10");
+//            TODO holder.tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
+            //设置点击事件
+            holder.rbLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    holder.rbLike.setText(String.valueOf(entity.getLikes().size()+1));
+                    if(entity.getLikes().contains(new LikeEntity(mUserId))){//已经点赞咯->取消点赞
+                        holder.rbLike.setChecked(false);
+                    }else{//没有点赞－点赞
+                        holder.rbLike.setChecked(true);
+                    }
                     if (onItemClickListener != null)
                         onItemClickListener.onClickListener(v, mPosition);
                 }
@@ -104,8 +159,18 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                         onItemClickListener.onClickListener(v, mPosition);
                 }
             });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {//是本人发布的评论，可以进行删除
+                    if (onItemClickListener != null)
+                        onItemClickListener.onClickListener(v, mPosition);
+                }
+            });
         }
 
+    }
+    public String getItemsId(int position){
+        return mDatas.get(position).getId();
     }
 
     @Override
@@ -117,22 +182,23 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         //header
         private ImageView ivHeaderPortrait;
         private TextView tvHeaderName,tvHeaderDate,tvHeaderContent,tvHeaderCommentCount,
-                tvHeaderLikeCount,tvHeaderViewTime;
+                tvHeaderLikeCount, tvHeaderDel;
         private RecyclerView rvHeaderTopicImages;
         private OnlineTopicAdapter mOnlineTopicAdapter;
         //Comment
-        private TextView tvName,tvDate,tvContent,tvLikeNumber,tvLike;
+        private TextView tvName,tvDate,tvContent,tvLikeNumber;
         private ImageView ivPortrait,ivComment;
+        private RadioButtonPlus rbLike;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            if (itemView.getId() != R.id.topic_detial_header_layout_root) {
+            if (itemView.getId() == R.id.topic_comment_layout_rl_root) {
                 tvName = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_name);
                 tvDate = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_date);
                 tvContent = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_content);
-                tvLikeNumber = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_like);
+                tvLikeNumber = (TextView) itemView.findViewById(R.id.topic_comment_layout_rb_like);
                 ivPortrait = (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_portrait);
-                tvLike = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_like);
+                rbLike = (RadioButtonPlus) itemView.findViewById(R.id.topic_comment_layout_rb_like);
                 ivComment = (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_comment);
             }else{
                 ivHeaderPortrait= (ImageView) itemView.findViewById(R.id.topic_detial_layout_iv_portrait);
@@ -142,7 +208,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 rvHeaderTopicImages= (RecyclerView) itemView.findViewById(R.id.topic_detial_layout_rv_image);
                 tvHeaderCommentCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_comment_number);
                 tvHeaderLikeCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_like_number);
-                tvHeaderViewTime= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_view_time);
+                tvHeaderDel = (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_delete);
                 rvHeaderTopicImages.setHasFixedSize(true);
                 rvHeaderTopicImages.setLayoutManager(new FullyGridLayoutManager(context,2));
                 rvHeaderTopicImages.setItemAnimator(new DefaultItemAnimator());

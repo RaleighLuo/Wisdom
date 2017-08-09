@@ -6,6 +6,7 @@ import com.starlight.mobile.android.lib.util.JSONUtil;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +16,7 @@ import java.util.List;
 public class TopicEntity {
     private String id;
     private String content;
-    @SerializedName("likes")
-    private int likeCount;//点赞数
+    private List<LikeEntity> likes;//点赞数
     @SerializedName("comments_amount")
     private int commentCount;//评论数
     @SerializedName("created_at")
@@ -91,12 +91,13 @@ public class TopicEntity {
             this.content = content;
     }
 
-    public int getLikeCount() {
-        return likeCount;
+    public List<LikeEntity> getLikes() {
+        if(likes==null)likes=new ArrayList<>();
+        return likes;
     }
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setLikes(List<LikeEntity> likes) {
+        this.likes = likes;
     }
 
     public int getCommentCount() {

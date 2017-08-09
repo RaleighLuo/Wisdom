@@ -1,6 +1,10 @@
 package com.gkzxhn.wisdom.entity;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/8.
@@ -11,11 +15,42 @@ public class TopicCommentEntity {
     private String nickname;
     @SerializedName("user_image")
     private String portrait;
-    @SerializedName("user_id")
+    //    @SerializedName("user_id")
+    @Expose
     private String userId;
     private String content;
-    @SerializedName("created_at")
+    //    @SerializedName("created_at")
+    @Expose
     private String date;
+    @Expose
+    private List<LikeEntity> likes;
+
+    public String getNickname() {
+        return nickname == null ? "" : nickname;
+    }
+
+    public void setNickname(String nickname) {
+        if (nickname != null && !nickname.equals("null"))
+            this.nickname = nickname;
+    }
+
+    public String getPortrait() {
+        return portrait == null ? "" : portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        if (portrait != null && !portrait.equals("null"))
+            this.portrait = portrait;
+    }
+
+    public List<LikeEntity> getLikes() {
+        if(likes==null)likes=new ArrayList<>();
+        return likes;
+    }
+
+    public void setLikes(List<LikeEntity> likes) {
+        this.likes = likes;
+    }
 
     public String getId() {
         return id == null ? "" : id;

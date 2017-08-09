@@ -1,7 +1,9 @@
 package com.gkzxhn.wisdom.entity;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +24,7 @@ public class TopicDetailEntity {
     private String updatedDate;
     @SerializedName("comments_amount")
     private int commentCount;
-    @SerializedName("likes")
-    private int likeCount;
+    private List<LikeEntity> likes;
     private List<String> images;
     private TopicEntity.User user;
 
@@ -51,12 +52,13 @@ public class TopicDetailEntity {
         this.commentCount = commentCount;
     }
 
-    public int getLikeCount() {
-        return likeCount;
+    public List<LikeEntity> getLikes() {
+        if(likes==null)likes=new ArrayList<>();
+        return likes;
     }
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setLikes(List<LikeEntity> likes) {
+        this.likes = likes;
     }
 
     public List<String> getImages() {

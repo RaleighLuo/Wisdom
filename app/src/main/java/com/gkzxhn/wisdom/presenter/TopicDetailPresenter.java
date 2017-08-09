@@ -3,10 +3,10 @@ package com.gkzxhn.wisdom.presenter;
 import android.content.Context;
 
 import com.android.volley.VolleyError;
+import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
-import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.model.ITopicDetailModel;
 import com.gkzxhn.wisdom.model.impl.TopicDetailModel;
 import com.gkzxhn.wisdom.view.ITopicDetailView;
@@ -52,8 +52,8 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
     }
 
     public void publishComments(String content){
-        getView().startRefreshAnim();
-        mModel.publishComments(content, new VolleyUtils.OnFinishedListener<JSONObject>() {
+        getView().showProgress();
+        mModel.publishComment(content, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
@@ -62,7 +62,7 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
-                getView().stopRefreshAnim();
+                getView().dismissProgress();
             }
 
             @Override
@@ -81,8 +81,9 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
-                if(code==200){
-                    List<TopicCommentEntity> list=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"comments"), new TypeToken<List<TopicCommentEntity>>() {}.getType());
+                if(code==200){//TODO
+                    String comment=JSONUtil.getJSONObjectStringValue(JSONUtil.getJSONObject(response,"comments"),"comments");
+                    List<TopicCommentEntity> list=new Gson().fromJson(comment, new TypeToken<List<TopicCommentEntity>>() {}.getType());
                     if (list != null && list.size() > 0) currentPage++;
                     if(isRefresh)getView().updateComment(list);
                     else getView().loadComment(list);
@@ -99,17 +100,17 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
     }
     public void delete(){
-        getView().startRefreshAnim();
+        getView().showProgress();
         mModel.delete(new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
-
+                    getView().deleteTopicSuccess();
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
-                getView().stopRefreshAnim();
+                getView().dismissProgress();
             }
 
             @Override
@@ -119,7 +120,7 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
     }
     public void deleteComment(String commentId){
-        getView().startRefreshAnim();
+        getView().showProgress();
         mModel.deleteComment(commentId, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -129,7 +130,7 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
-                getView().stopRefreshAnim();
+                getView().dismissProgress();
             }
 
             @Override
@@ -138,5 +139,48 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             }
         });
     }
+    public void requestLike(){
+        mModel.requestLike(new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code = ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "code"));
+                if (code == 200) {
+                    getView().likeFinished(true);
+                } else {
+                    getView().likeFinished(false);
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(response, "message"));
+                }
+            }
+            @Override
+            public void onFailed(VolleyError error) {
+                getView().likeFinished(false);
+                getView().showToast(R.string.unexpected_errors);
+            }
+        });
+    }
+    public void requestCommentLike(final String commentId,final int position){
+        mModel.requestCommentLike(commentId,new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code = ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "code"));
+                if (code == 200) {
+                    getView().commentLikeFinished(true,commentId,position);
+                } else {
+                    getView().commentLikeFinished(false,commentId,position);
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(response, "message"));
+                }
+            }
+            @Override
+            public void onFailed(VolleyError error) {
+                getView().commentLikeFinished(false,commentId,position);
+                getView().showToast(R.string.unexpected_errors);
+            }
+        });
+    }
 
+    @Override
+    protected void stopAnim() {
+        super.stopAnim();
+        getView().dismissProgress();
+    }
 }
