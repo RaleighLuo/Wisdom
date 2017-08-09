@@ -123,9 +123,9 @@ public class UploadHelper {
         protected JSONObject doInBackground(Void... params) {
             JSONObject json=new JSONObject();
             String path=new ImageHelper().compressImage(filePath, Constants.SD_PHOTO_PATH,mUploadFileName);//鍘嬬缉鍥剧墖
+            if(path!=null)filePath=path;
+            File file=new File(filePath);
             try {
-                if(path!=null)filePath=path;
-                File file=new File(filePath);
                 String BOUNDARY = UUID.randomUUID().toString(); //杈圭晫鏍囪瘑 闅忔満鐢熸垚
                 String PREFIX = "--" , LINE_END = "\r\n";
                 String CONTENT_TYPE = "multipart/form-data"; //多部分方式上传
@@ -200,6 +200,7 @@ public class UploadHelper {
                 }
             } catch (Exception e){
                 e.printStackTrace();
+                if(file.exists())file.delete();
             }
             return json;
         }
