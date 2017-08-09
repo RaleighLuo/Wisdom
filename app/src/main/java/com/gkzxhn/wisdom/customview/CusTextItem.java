@@ -41,6 +41,7 @@ public class CusTextItem extends LinearLayout {
         //获取title属性值,默认为：空字符串
         tvContent.setText(a.getResourceId(R.styleable.CusTextItem_Attrs_cti_content, R.string.empty));
         tvContent.setTextColor(getResources().getColor(contentColor));
+        a.recycle();
 
     }
 
