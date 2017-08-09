@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.fragment.TopicFragment;
 import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
@@ -86,6 +87,15 @@ public class TopicActivity extends SuperFragmentActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.EXTRA_CODE&&resultCode==RESULT_OK){
             showToast(R.string.publish_success);
+            onRefresh();
         }
+    }
+
+    /**
+     * 每个页面都刷新数据
+     */
+    public void onRefresh(){
+        ((TopicFragment)adapter.getItem(0)).onRefresh();
+        ((TopicFragment)adapter.getItem(1)).onRefresh();
     }
 }

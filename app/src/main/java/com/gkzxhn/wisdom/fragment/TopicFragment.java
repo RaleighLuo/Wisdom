@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.SuperFragmentActivity;
+import com.gkzxhn.wisdom.activity.TopicActivity;
 import com.gkzxhn.wisdom.activity.TopicDetailActivity;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicAdapter;
@@ -89,7 +91,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         public void onClickListener(View convertView, int position) {
             Intent intent=new Intent(mActivity, TopicDetailActivity.class);
             intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
-            mActivity.startActivity(intent);
+            startActivityForResult(intent,Constants.EXTRA_CODE);
         }
     };
 
@@ -171,4 +173,12 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.EXTRA_CODE&&resultCode== Activity.RESULT_OK){
+            ((TopicActivity)mActivity).onRefresh();
+        }
+    }
 }
