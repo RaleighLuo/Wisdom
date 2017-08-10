@@ -115,7 +115,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            adapter=new OnlineTopicAdapter(context);
+            adapter=new OnlineTopicAdapter(context,false);
             mRecyclerView.setAdapter(adapter);
         }
     }

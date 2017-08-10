@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.DivisionImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.Serializable;
@@ -23,9 +24,15 @@ import java.util.List;
 public class OnlineTopicAdapter extends RecyclerView.Adapter<OnlineTopicAdapter.ViewHolder>{
     private Context context;
     private List<String> mDatas =new ArrayList<>();
+    private boolean needChangeSize=false;
 
-    public OnlineTopicAdapter(Context context) {
+    /**
+     * @param context
+     * @param needChangeSize
+     */
+    public OnlineTopicAdapter(Context context,boolean needChangeSize) {
         this.context = context;
+        this.needChangeSize=needChangeSize;
     }
     /**更新所有数据
      * @param paths
@@ -40,12 +47,19 @@ public class OnlineTopicAdapter extends RecyclerView.Adapter<OnlineTopicAdapter.
 
     @Override
     public OnlineTopicAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.publish_topic_item_layout,null,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.online_topic_item_layout,null,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        if(needChangeSize) {
+            if (getItemCount() <= 2) {//heigh=width*1/1
+                holder.ivImage.setDivisor(1, 1);
+            } else {//heigh=width*1/2
+                holder.ivImage.setDivisor(2, 3);
+            }
+        }
         ImageLoader.getInstance().displayImage(mDatas.get(position),holder.ivImage);
         holder.ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +79,10 @@ public class OnlineTopicAdapter extends RecyclerView.Adapter<OnlineTopicAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView ivImage;
+        private DivisionImageView ivImage;
         public ViewHolder(View itemView) {
             super(itemView);
-            ivImage= (ImageView) itemView.findViewById(R.id.publish_topic_item_layout_iv_image);
+            ivImage= (DivisionImageView) itemView.findViewById(R.id.publish_topic_item_layout_iv_image);
         }
     }
 }

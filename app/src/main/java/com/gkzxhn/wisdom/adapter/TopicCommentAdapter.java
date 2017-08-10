@@ -247,7 +247,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 rvHeaderTopicImages.setHasFixedSize(true);
                 rvHeaderTopicImages.setLayoutManager(new FullyGridLayoutManager(context,2));
                 rvHeaderTopicImages.setItemAnimator(new DefaultItemAnimator());
-                mOnlineTopicAdapter=new OnlineTopicAdapter(context);
+                mOnlineTopicAdapter=new OnlineTopicAdapter(context,true);
                 rvHeaderTopicImages.setAdapter(mOnlineTopicAdapter);
             }
         }
