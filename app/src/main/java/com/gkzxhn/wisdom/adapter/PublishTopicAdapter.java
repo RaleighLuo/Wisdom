@@ -109,7 +109,7 @@ public class PublishTopicAdapter extends RecyclerView.Adapter<PublishTopicAdapte
         if(position<mDatas.size()) {
             mAlbumImageLoader.loadImage(mDatas.get(position).getLocalPath(), holder.ivImage);
         }else{
-            holder.ivImage.setImageResource(R.mipmap.ic_imageloading);
+            holder.ivImage.setImageResource(R.mipmap.default_image);
         }
         holder.ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
