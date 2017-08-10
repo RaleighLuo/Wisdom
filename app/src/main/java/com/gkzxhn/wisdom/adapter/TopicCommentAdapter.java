@@ -115,7 +115,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position==0){
             if(mTopicInfor!=null) {
-                ImageLoader.getInstance().displayImage(mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
+                ImageLoader.getInstance().displayImage(mTopicInfor.getUser()==null?"":mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
                 holder.tvHeaderLikeCount.setText(mTopicInfor.getLikeUsers().size() + "");
                 holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
@@ -129,7 +129,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
 
                 String viewTime=context.getString(R.string.browse) + mTopicInfor.getViewed() + context.getString(R.string.time);
                 holder.tvHeaderDate.setText(date+"\u3000"+viewTime);
-                holder.tvHeaderName.setText(mTopicInfor.getUser().getNickname());
+                holder.tvHeaderName.setText(mTopicInfor.getUser()==null?"":mTopicInfor.getUser().getNickname());
                 if(mTopicInfor.getUserId().equals(mUserId)){//是本人发布的话题，才可以删除
                     holder.tvHeaderDel.setVisibility(View.VISIBLE);
                     holder.tvHeaderDel.setOnClickListener(new View.OnClickListener() {

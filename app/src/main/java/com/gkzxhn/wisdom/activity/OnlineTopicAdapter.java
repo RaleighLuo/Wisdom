@@ -59,6 +59,8 @@ public class OnlineTopicAdapter extends RecyclerView.Adapter<OnlineTopicAdapter.
             } else {//heigh=width*1/2
                 holder.ivImage.setDivisor(2, 3);
             }
+        }else{
+            holder.ivImage.setDivisor(3, 4);
         }
         ImageLoader.getInstance().displayImage(mDatas.get(position),holder.ivImage);
         holder.ivImage.setOnClickListener(new View.OnClickListener() {

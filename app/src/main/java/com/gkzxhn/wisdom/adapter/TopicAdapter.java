@@ -64,8 +64,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
         holder.tvLike.setText(String.valueOf(entity.getLikeUsers().size()));
         holder.tvContent.setText(entity.getContent());
-        holder.tvName.setText(entity.getUser().getNickname());
-        ImageLoader.getInstance().displayImage(entity.getUser().getUserPortrait(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
+        holder.tvName.setText(entity.getUser()==null?"":entity.getUser().getNickname());
+        ImageLoader.getInstance().displayImage(entity.getUser()==null?"":entity.getUser().getUserPortrait(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
         String date=Utils.getFormateTime(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm"));
         String viewTime=context.getString(R.string.browse)+entity.getViewed()+context.getString(R.string.time);
         holder.tvDate.setText(date+"\u3000"+viewTime);
