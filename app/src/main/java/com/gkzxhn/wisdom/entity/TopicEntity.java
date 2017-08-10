@@ -121,39 +121,5 @@ public class TopicEntity {
         this.commentCount = commentCount;
     }
 
-    public  class User {
-        private String nickname;
-        @SerializedName("user_image")
-        private String userPortrait;
-        @SerializedName("user_type")
-        private String userType;
-
-        public String getNickname() {
-            return nickname == null ? "" : nickname;
-        }
-
-        public void setNickname(String nickname) {
-            if (nickname != null && !nickname.equals("null"))
-                this.nickname = nickname;
-        }
-
-        public String getUserPortrait() {
-            return userPortrait == null ? "" : userPortrait;
-        }
-
-        public void setUserPortrait(String userPortrait) {
-            if (userPortrait != null && !userPortrait.equals("null"))
-                this.userPortrait = userPortrait;
-        }
-
-        public String getUserType() {
-            return userType == null ? "" : userType;
-        }
-
-        public void setUserType(String userType) {
-            if (userType != null && !userType.equals("null"))
-                this.userType = userType;
-        }
-    }
 
 }
