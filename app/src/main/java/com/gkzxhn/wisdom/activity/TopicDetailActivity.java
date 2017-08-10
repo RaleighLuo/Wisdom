@@ -273,11 +273,11 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void update(TopicDetailEntity entity) {
         adapter.updateHead(entity);
-        if(entity.getLikeUsers().contains(mUserId)){//已经点赞
-            isLike=true;
-            tvLike.setEnabled(true);
-            ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
-        }
+//        if(entity.getLikeUsers().contains(mUserId)){//已经点赞
+//            isLike=true;
+//            tvLike.setEnabled(true);
+//            ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+//TODO        }
     }
 
     @Override

@@ -123,7 +123,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             if(mTopicInfor!=null) {
                 ImageLoader.getInstance().displayImage(mTopicInfor.getUser()==null?"":mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
-                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikeUsers().size() + "");
+                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikesCount() + "");
                 holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
                 holder.mOnlineTopicAdapter.updateItems(mTopicInfor.getImages());
                 if (holder.mOnlineTopicAdapter.getItemCount() > 0) {
@@ -215,13 +215,14 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 spannableString.setSpan(colorSpan, 0, name.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 tvTitle.setText(spannableString);
             }
-            if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     context.startActivity(new Intent(context, CommentDetailActivity.class));
                 }
             });
+            if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
+
         }
     }
     public String getItemsId(int position){
