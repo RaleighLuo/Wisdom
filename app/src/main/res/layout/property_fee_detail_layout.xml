@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:gravity="right"
         android:layout_margin="20dip"
-        android:drawableLeft="@mipmap/alipay"
+        android:drawableLeft="@mipmap/ic_property_pay"
         android:textSize="16sp"
         android:textColor="@color/common_text_color"
         android:layout_height="wrap_content"
