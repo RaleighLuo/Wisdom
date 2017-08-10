@@ -13,7 +13,11 @@ import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.CommentDetailAdapter;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CommentDialog;
+import com.gkzxhn.wisdom.entity.TopicCommentEntity;
+import com.gkzxhn.wisdom.view.ICommentDetailView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -23,7 +27,7 @@ import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
  */
 
 public class CommentDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener{
+        CusSwipeRefreshLayout.OnLoadListener,ICommentDetailView{
     private CommentDetailAdapter adapter;
     private ImageView ivPortrait;
     private TextView tvName,tvDate,tvContent,tvComment,tvCommentCount;
@@ -33,6 +37,7 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
     private View ivNodata;
     private DotsTextView tvLoading;
     private ProgressDialog mProgress;
+    private CommentDialog mCommentDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +73,7 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter=new CommentDetailAdapter(this);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         rbLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +81,38 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
                 rbLike.setChecked(!rbLike.isChecked());
             }
         });
+        mCommentDialog=new CommentDialog(this);
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            switch (convertView.getId()){
+                case R.id.comment_detail_item_layout_rb_like:
+                    break;
+                case R.id.comment_detail_item_layout_rl_root:
+                    if(!mCommentDialog.isShowing()){
+                        mCommentDialog.show();
+                        mCommentDialog.setPosition(position);
+                        mCommentDialog.setHint(R.string.reply_colon);
+                    }
+                    break;
+            }
+
+        }
+    };
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
                 finish();
+                break;
+            case R.id.comment_detail_layout_tv_comment://回复评论
+                if(!mCommentDialog.isShowing()){
+                    mCommentDialog.show();
+                    mCommentDialog.setPosition(-1);
+                    mCommentDialog.setHint(R.string.reply_colon);
+                }
+                break;
+            case R.id.comment_detail_layout_rb_like://评论点赞
                 break;
         }
     }
@@ -150,5 +183,20 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
     protected void onDestroy() {
 //        mPresenter.onDestory();
         super.onDestroy();
+    }
+
+    @Override
+    public void likeFinish(boolean isSuccess) {
+
+    }
+
+    @Override
+    public void commentSuccess(TopicCommentEntity entity) {
+
+    }
+
+    @Override
+    public void replayLikeFinish(int position, boolean isSuccess) {
+
     }
 }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/comment_detail_layout_ch_head"
+        style="@style/common_head_style"
+        mAttr:chHead_leftImg="@mipmap/ic_back"
+        mAttr:chHead_title="@string/comment_detail"
+        mAttr:chHead_title_padding_left="0dip" />
+    <View style="@style/common_line_style"
+        android:layout_below="@+id/comment_detail_layout_ch_head"
+        android:id="@+id/comment_detail_layout_v_head"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:src="@mipmap/topic_portrait"
+        android:layout_below="@+id/comment_detail_layout_v_head"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:id="@+id/comment_detail_layout_iv_portrait"
+        />
+    <TextView
+        android:id="@+id/comment_detail_layout_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX"
+        android:textColor="@color/common_text_color"
+        android:layout_toRightOf="@+id/comment_detail_layout_iv_portrait"
+        android:layout_alignTop="@+id/comment_detail_layout_iv_portrait"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01-10 10:09"
+        android:textSize="10sp"
+        android:textColor="@color/common_dark_gray_text_color"
+        android:layout_alignLeft="@+id/comment_detail_layout_tv_name"
+        android:id="@+id/comment_detail_layout_tv_date"
+        android:layout_below="@+id/comment_detail_layout_tv_name"
+        />
+    <TextView
+        android:id="@+id/comment_detail_layout_tv_content"
+        android:text="XXXXX"
+        android:textSize="13sp"
+        android:textColor="@color/common_light_text_color"
+        android:layout_alignLeft="@+id/comment_detail_layout_tv_date"
+        android:layout_marginTop="5dip"
+        android:layout_below="@+id/comment_detail_layout_tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.starlight.mobile.android.lib.view.RadioButtonPlus
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:onClick="onClickListener"
+        android:paddingRight="10dip"
+        android:paddingBottom="5dip"
+        android:textColor="@color/like_check_text_color"
+        android:textSize="12sp"
+        android:button="@null"
+        mAttr:radio_left_height="16dip"
+        mAttr:radio_left_width="17dip"
+        android:drawablePadding="5dip"
+        android:layout_marginTop="10dip"
+        android:layout_below="@+id/comment_detail_layout_tv_content"
+        android:layout_alignLeft="@+id/comment_detail_layout_tv_content"
+        android:drawableLeft="@drawable/like_check_selector"
+        android:id="@+id/comment_detail_layout_rb_like"
+        />
+    <com.starlight.mobile.android.lib.view.CusTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:clickable="true"
+        android:onClick="onClickListener"
+        android:id="@+id/comment_detail_layout_tv_comment"
+        android:layout_marginLeft="@dimen/margin"
+        mAttr:ctv_leftImg_height="15dip"
+        mAttr:ctv_leftImg_width="15dip"
+        android:drawablePadding="5dip"
+        android:layout_alignTop="@+id/comment_detail_layout_rb_like"
+        android:layout_toRightOf="@+id/comment_detail_layout_rb_like"
+        android:drawableLeft="@mipmap/comment"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复评论(10条)"
+        android:textColor="@color/common_light_text_color"
+        android:textSize="12sp"
+        android:layout_marginTop="30dip"
+        android:layout_marginBottom="10dip"
+        android:layout_below="@+id/comment_detail_layout_tv_comment"
+        android:layout_alignLeft="@+id/comment_detail_layout_iv_portrait"
+        android:id="@+id/comment_detail_layout_tv_comment_title"
+        />
+
+    <include layout="@layout/common_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_below="@+id/comment_detail_layout_tv_comment_title"
+        />
+
+</RelativeLayout>

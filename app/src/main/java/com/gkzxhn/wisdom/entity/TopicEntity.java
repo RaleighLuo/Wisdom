@@ -16,18 +16,46 @@ import java.util.List;
 public class TopicEntity {
     private String id;
     private String content;
-    private List<LikeEntity> likes;//点赞数
     @SerializedName("comments_amount")
     private int commentCount;//评论数
     @SerializedName("created_at")
     private String date;
     @SerializedName("user_id")
     private String userId;
-    private User user;
     private int viewed;
+    private String nickname;
+    @SerializedName("user_image")
+    private String portraitUrl;
+    @SerializedName("likes_amount")
+    private int likesCount;
+    @SerializedName("images_url")
     private List<String> images;
-    @Expose
-    private List<String> likeUsers;//点赞数-个人使用
+
+    public String getNickname() {
+        return nickname == null ? "" : nickname;
+    }
+
+    public void setNickname(String nickname) {
+        if (nickname != null && !nickname.equals("null"))
+            this.nickname = nickname;
+    }
+
+    public String getPortraitUrl() {
+        return portraitUrl == null ? "" : portraitUrl;
+    }
+
+    public void setPortraitUrl(String portraitUrl) {
+        if (portraitUrl != null && !portraitUrl.equals("null"))
+            this.portraitUrl = portraitUrl;
+    }
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
 
     public int getViewed() {
         return viewed;
@@ -37,14 +65,6 @@ public class TopicEntity {
         this.viewed = viewed;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<String> getImages() {
         return images;
@@ -91,20 +111,6 @@ public class TopicEntity {
     public void setContent(String content) {
         if (content != null && !content.equals("null"))
             this.content = content;
-    }
-
-    public List<String> getLikeUsers() {
-        if(likeUsers==null)likeUsers=new ArrayList<>();
-        if(likeUsers.size()==0&&likes!=null){
-            for(LikeEntity entity:likes){
-                likeUsers.add(entity.getUserId());
-            }
-        }
-        return likeUsers;
-    }
-
-    public void setLikeUsers(List<String> likeUsers) {
-        this.likeUsers = likeUsers;
     }
 
     public int getCommentCount() {
