@@ -154,6 +154,7 @@ public class PublishTopicAdapter extends RecyclerView.Adapter<PublishTopicAdapte
             paths.add(entity.getLocalPath());
         }
         return  paths;
+
     }
 
     @Override
