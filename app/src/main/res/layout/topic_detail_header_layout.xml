@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/topic_detial_layout_iv_portrait"
         android:layout_toRightOf="@id/topic_detial_layout_iv_portrait"
-        android:textColor="@color/property_color"
+        android:textColor="@color/blue_text_color"
         android:layout_toLeftOf="@+id/topic_detial_layout_tv_delete"
         />
     <TextView

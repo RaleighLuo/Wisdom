@@ -198,6 +198,10 @@
     <string name="delete_topic_success">已删除话题</string>
     <string name="copy">复制</string>
     <string name="has_copy_hint">已复制到剪贴板</string>
+    <string name="total_replay">共6条回复></string>
+    <string name="comment_detail">评论详情</string>
+    <string name="replay_comment">回复评论</string>
+    <string name="strip">条</string>
     <!--签到-->
     <string name="back">返回</string>
     <string name="click_sign">点击签到</string>

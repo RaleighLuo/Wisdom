@@ -1,16 +1,22 @@
 package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.CommentDetailActivity;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
@@ -188,8 +194,35 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     return true;
                 }
             });
+            dealReplay(holder.llReplayLayout);
+
         }
 
+    }
+
+    /**回复面板
+     * @param replayLayout
+     */
+    private void dealReplay(LinearLayout replayLayout){
+        if(!replayLayout.isShown())replayLayout.setVisibility(View.VISIBLE);
+        for(int i=0;i<replayLayout.getChildCount();i++){
+            TextView tvTitle= (TextView) replayLayout.getChildAt(i);
+            if(tvTitle.getId()!=R.id.i_topic_comment_replay_layout_tv_count) {
+                String name = "张三";
+                String text = name + "：量子卫星提前实现三大科学目标:未来一年将开展多项空间实验";
+                SpannableString spannableString = new SpannableString(text);
+                ForegroundColorSpan colorSpan = new ForegroundColorSpan(context.getResources().getColor(R.color.blue_text_color));
+                spannableString.setSpan(colorSpan, 0, name.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                tvTitle.setText(spannableString);
+            }
+            if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context, CommentDetailActivity.class));
+                }
+            });
+        }
     }
     public String getItemsId(int position){
         return mDatas.get(position).getId();
@@ -224,6 +257,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         private TextView tvName,tvDate,tvContent,tvLikeNumber;
         private ImageView ivPortrait,ivComment;
         private RadioButtonPlus rbLike;
+        private LinearLayout llReplayLayout;//回复
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -235,6 +269,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 ivPortrait = (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_portrait);
                 rbLike = (RadioButtonPlus) itemView.findViewById(R.id.topic_comment_layout_rb_like);
                 ivComment = (ImageView) itemView.findViewById(R.id.topic_comment_layout_iv_comment);
+                llReplayLayout= (LinearLayout) itemView.findViewById(R.id.i_topic_comment_replay_layout_root);
             }else{
                 ivHeaderPortrait= (ImageView) itemView.findViewById(R.id.topic_detial_layout_iv_portrait);
                 tvHeaderName= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_name);

@@ -86,7 +86,11 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
-
+        <activity
+            android:name=".activity.CommentDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
         <activity
             android:name=".activity.RepairRecordActivity"
             android:configChanges="orientation|screenSize"
