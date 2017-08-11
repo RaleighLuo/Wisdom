@@ -8,7 +8,7 @@
     <color name="blue_text_color">#5a92e5</color>
     <color name="committee_color">#40b1b0</color>
     <color name="main_color">#1517a6</color>
-
+    <color name="common_button_color">#666666</color>
     <color name="common_hint_text_color">#999999</color>
     <color name="common_gray_title_color">#999999</color>
     <color name="common_text_color">#333333</color>

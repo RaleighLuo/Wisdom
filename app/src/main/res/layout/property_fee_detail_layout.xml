@@ -183,9 +183,6 @@
         android:text="@string/payment"
         android:visibility="invisible"
         android:onClick="onClickListener"
-        android:layout_alignLeft="@+id/property_fee_detail_layout_tv_title"
-        android:layout_alignRight="@+id/property_fee_detail_layout_tv_title"
-        android:layout_marginBottom="20dip"
         android:textColor="@android:color/white"
         />
 </RelativeLayout>

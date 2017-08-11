@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.OnlinePhotoPreviewActivity;
 import com.gkzxhn.wisdom.common.Constants;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.starlight.mobile.android.lib.view.photoview.PhotoView;
-import com.starlight.mobile.android.lib.view.photoview.PhotoViewAttacher;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -234,7 +234,7 @@ public class PublishTopicActivity extends SuperActivity implements IPublishTopic
                     break;
                 case Constants.SELECT_PHOTO_CODE:
                     Intent intent = new Intent(PublishTopicActivity.this, AlbumActivity.class);
-                    intent.setAction(AlbumActivity.EXTRAS_SIGLE_MODE);
+                    intent.putExtra(AlbumActivity.EXTRA_IMAGE_SELECT_COUNT,adapter.getItemCount()-adapter.getPhotoCount());
                     startActivityForResult(intent, Constants.SELECT_PHOTO_CODE);
                     break;
 

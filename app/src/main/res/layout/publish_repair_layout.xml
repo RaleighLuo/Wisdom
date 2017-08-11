@@ -14,57 +14,6 @@
         mAttr:chHead_title="@string/repair"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
-    <EditText
-        android:id="@+id/publish_repair_layout_et_content"
-        android:layout_width="match_parent"
-        android:layout_height="150dip"
-        android:layout_marginTop="5dip"
-        android:hint="@string/please_describe_question"
-        android:gravity="top"
-        android:textSize="14sp"
-        android:layout_margin="@dimen/margin"
-        android:padding="5dip"
-        android:textColor="@color/common_text_color"
-        android:textColorHint="@color/common_hint_text_color"
-        android:background="@drawable/edit_grey_shape"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_gravity="right"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/publish_repair_layout_iv_third"
-            android:layout_width="60dip"
-            android:visibility="invisible"
-            android:onClick="onClickListener"
-            android:layout_height="60dip"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/repair_take_photo"
-            />
-        <ImageView
-            android:id="@+id/publish_repair_layout_iv_second"
-            android:layout_width="60dip"
-            android:layout_height="60dip"
-            android:visibility="invisible"
-            android:scaleType="centerCrop"
-            android:onClick="onClickListener"
-            android:layout_marginLeft="5dip"
-            android:src="@mipmap/repair_take_photo"
-            />
-        <ImageView
-            android:id="@+id/publish_repair_layout_iv_first"
-            android:layout_width="60dip"
-            android:layout_height="60dip"
-            android:onClick="onClickListener"
-            android:scaleType="centerCrop"
-            android:layout_marginLeft="5dip"
-            android:src="@mipmap/repair_take_photo"
-            />
-    </LinearLayout>
     <ScrollView   android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -73,15 +22,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/margin"
             android:layout_height="match_parent">
-
+            <!--<TextView-->
+                <!--android:id="@+id/publish_repair_layout_tv_belong_community"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="国际华城 八栋三单元1205"-->
+                <!--android:clickable="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="12sp"-->
+                <!--android:layout_marginTop="@dimen/margin"-->
+                <!--android:layout_marginLeft="20dip"-->
+                <!--android:layout_marginRight="20dip"-->
+                <!--android:onClick="onClickListener"-->
+                <!--android:textColor="@color/blue_text_color"-->
+                <!--android:layout_marginBottom="10dip"/>-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/repair_type"
                 android:textSize="12sp"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="15dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
                 android:textColor="@color/common_light_text_color"
                 />
             <TextView
@@ -89,6 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="电梯故障"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
                 android:clickable="true"
                 android:drawableRight="@android:drawable/arrow_down_float"
                 android:background="@drawable/common_item_click_selector"
@@ -97,54 +62,46 @@
                 android:paddingTop="10dip"
                 android:paddingBottom="10dip"
                 />
-            <View style="@style/common_line_style"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/belong_community"
-                android:textSize="12sp"
-                android:layout_marginTop="@dimen/margin"
-                android:textColor="@color/common_light_text_color"
-                />
-            <TextView
-                android:id="@+id/publish_repair_layout_tv_belong_community"
+            <EditText
+                android:id="@+id/publish_repair_layout_et_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="国际华城"
-                android:clickable="true"
-                android:onClick="onClickListener"
-                android:textColor="@color/common_text_color"
-                android:layout_marginBottom="10dip"
+                android:layout_height="120dip"
+                android:background="@android:color/white"
+                android:elevation="8dip"
+                android:hint="@string/please_describe_question"
+                android:gravity="top"
+                android:padding="10dip"
+                android:textSize="14sp"
                 android:layout_marginTop="10dip"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
                 />
-            <View style="@style/common_line_style"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/address_detail"
-                android:textSize="12sp"
-                android:layout_marginTop="@dimen/margin"
-                android:textColor="@color/common_light_text_color"
-                />
-            <TextView
-                android:id="@+id/publish_repair_layout_tv_address_detail"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="八栋三单元1205"
-                android:clickable="true"
-                android:onClick="onClickListener"
-                android:textColor="@color/common_text_color"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="10dip"
-                />
-            <View style="@style/common_line_style"
-                />
-            <View android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="wrap_content">
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/publish_repair_layout_recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_height="wrap_content"/>
+                <!--android:tint="@android:color/white"图片渲染成白色-->
+                <ImageView
+                    android:id="@+id/publish_repair_layout_iv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/topic_add"
+                    android:padding="10dip"
+                    android:onClick="onClickListener"
+                    android:scaleType="centerInside"
+                    android:tint="@android:color/white"
+                    android:background="@drawable/black_oval_selector"
+                    android:layout_gravity="center"
+                    />
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
     <Button
@@ -154,10 +111,7 @@
         android:text="@string/commit"
         android:layout_marginTop="10dip"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="@dimen/margin"
         android:layout_weight="0"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
         android:background="@drawable/common_btn_selector"
         />
 </LinearLayout>

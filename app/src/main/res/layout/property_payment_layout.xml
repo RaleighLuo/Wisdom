@@ -201,9 +201,6 @@
         android:background="@drawable/common_btn_selector"
         android:text="@string/payment"
         android:onClick="onClickListener"
-        android:layout_alignLeft="@+id/property_payment_layout_tv_title"
-        android:layout_alignRight="@+id/property_payment_layout_tv_title"
-        android:layout_marginBottom="20dip"
         android:textColor="@android:color/white"
         />
 </RelativeLayout>
