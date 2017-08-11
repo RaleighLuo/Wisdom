@@ -135,16 +135,16 @@
             android:layout_below="@id/sign_layout_tv_sign_describe_hint"
             android:layout_height="match_parent">
 
-
-
             <ImageView
                 android:id="@+id/sign_layout_iv_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
                 android:layout_gravity="center"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:onClick="onClickListener"
-                android:src="@mipmap/sign_bg" />
+                android:src="@drawable/grey_oval_shape"
+                android:padding="15dip"
+                android:background="@drawable/black_oval_shape"
+                />
             <TextView
                 android:id="@+id/sign_layout_tv_sign"
                 android:layout_width="wrap_content"
