@@ -98,7 +98,7 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){//TODO
-                    String comment=JSONUtil.getJSONObjectStringValue(JSONUtil.getJSONObject(response,"comments"),"comments");
+                    String comment=JSONUtil.getJSONObjectStringValue(response,"comments");
                     List<TopicCommentEntity> list=new Gson().fromJson(comment, new TypeToken<List<TopicCommentEntity>>() {}.getType());
                     if (list != null && list.size() > 0) currentPage++;
                     if(isRefresh)getView().updateComment(list);

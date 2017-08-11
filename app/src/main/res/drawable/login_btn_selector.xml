@@ -3,7 +3,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <!-- solid的表示填充颜色 -->
-            <solid android:color="@color/property_color" />
+            <solid android:color="@color/common_light_text_color" />
             <corners
                 android:radius="50dp"/>
             <stroke
