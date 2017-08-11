@@ -1,9 +1,11 @@
 package com.gkzxhn.wisdom.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
@@ -44,13 +46,10 @@ public class BasePresenter<M extends IBaseModel,V extends IBaseView> {
     protected void unauthorized(){//login has expired
         Context mContext=mWeakContext==null?null:mWeakContext.get();
         if(mContext!=null&&!sharedPreferences.getBoolean(Constants.USER_IS_UNAUTHORIZED,false)) {
+            Toast.makeText(GKApplication.getInstance(), R.string.user_not_authorized, Toast.LENGTH_SHORT).show();
+            GKApplication.getInstance().exit();
+            ((Activity)mContext).finish();
             //清除别名
-//            Toast.makeText(GKApplication.getInstance(), R.string.user_not_authorized, Toast.LENGTH_SHORT).show();
-//            GKApplication.getInstance().clearAccount();
-//            Intent intent = new Intent(mContext, LoginActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            mContext.startActivity(intent);
-//            ((Activity) mContext).finish();
         }
     }
 
