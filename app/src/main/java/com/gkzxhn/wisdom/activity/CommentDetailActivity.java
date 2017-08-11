@@ -22,6 +22,8 @@ import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
 
+import java.util.List;
+
 /**
  * Created by Raleigh.Luo on 17/8/10.
  */
@@ -183,6 +185,16 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
     protected void onDestroy() {
 //        mPresenter.onDestory();
         super.onDestroy();
+    }
+
+    @Override
+    public void updateItems(List<TopicCommentEntity> mDatas) {
+
+    }
+
+    @Override
+    public void loadItems(List<TopicCommentEntity> mDatas) {
+
     }
 
     @Override

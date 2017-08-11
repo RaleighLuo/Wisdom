@@ -28,7 +28,15 @@ public class TopicDetailEntity {
     private int likesCount;
     private List<String> images;
     private User user;
+    private boolean likeable;
 
+    public boolean isLikeable() {
+        return likeable;
+    }
+
+    public void setLikeable(boolean likeable) {
+        this.likeable = likeable;
+    }
     public int getLikesCount() {
         return likesCount;
     }

@@ -15,7 +15,13 @@ public class CommentDetailPresenter extends BasePresenter<ICommentDetailModel,IC
     public CommentDetailPresenter(Context context, ICommentDetailView view) {
         super(context, new CommentDetailModel(), view);
     }
+    public void requestReplayList(boolean isRefresh,String commentId){
+
+    }
     public void like(String id){
+
+    }
+    public void delete(String commentId){
 
     }
 }

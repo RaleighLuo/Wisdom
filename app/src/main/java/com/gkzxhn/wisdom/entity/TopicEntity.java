@@ -30,6 +30,15 @@ public class TopicEntity {
     private int likesCount;
     @SerializedName("images_url")
     private List<String> images;
+    private boolean likeable;
+
+    public boolean isLikeable() {
+        return likeable;
+    }
+
+    public void setLikeable(boolean likeable) {
+        this.likeable = likeable;
+    }
 
     public String getNickname() {
         return nickname == null ? "" : nickname;

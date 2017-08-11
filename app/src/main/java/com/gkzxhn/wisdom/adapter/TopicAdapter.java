@@ -17,6 +17,7 @@ import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
+import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,7 +63,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         TopicEntity entity=mDatas.get(position);
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
-        holder.tvLike.setText(String.valueOf(entity.getLikesCount()));
+        holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
+        holder.rbLike.setChecked(!entity.isLikeable());
         holder.tvContent.setText(entity.getContent());
         holder.tvName.setText(entity.getNickname());
         ImageLoader.getInstance().displayImage(entity.getPortraitUrl(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
@@ -99,7 +101,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView ivPortrait;
-        private TextView tvName,tvDate,tvContent,tvLike,tvComment;
+        private TextView tvName,tvDate,tvContent,tvComment;
+        private RadioButtonPlus rbLike;
         private RecyclerView mRecyclerView;
         private OnlineTopicAdapter adapter;
 
@@ -110,7 +113,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             tvName= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_name);
             tvDate= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_date);
             tvContent= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_content);
-            tvLike= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_like);
+            rbLike= (RadioButtonPlus) itemView.findViewById(R.id.topic_item_layout_tv_like);
             tvComment= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_comment);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
