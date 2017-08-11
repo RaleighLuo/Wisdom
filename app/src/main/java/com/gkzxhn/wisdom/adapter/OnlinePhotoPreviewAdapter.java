@@ -20,11 +20,11 @@ import java.util.List;
  * Created by Raleigh.Luo on 17/8/7.
  */
 
-public class OnLinePhotoPreviewAdapter   extends PagerAdapter {
+public class OnlinePhotoPreviewAdapter extends PagerAdapter {
     private Context context;
     private List<String> list=new ArrayList<String>();
     private PhotoViewAttacher.OnShortTouchListener onShortTouchListener;
-    public OnLinePhotoPreviewAdapter(Context context, List<String> list, PhotoViewAttacher.OnShortTouchListener onShortTouchListener){
+    public OnlinePhotoPreviewAdapter(Context context, List<String> list, PhotoViewAttacher.OnShortTouchListener onShortTouchListener){
         this.context = context;
         this.list.addAll(list);//不要用赋值，否则就是同一个变量了
         this.onShortTouchListener=onShortTouchListener;

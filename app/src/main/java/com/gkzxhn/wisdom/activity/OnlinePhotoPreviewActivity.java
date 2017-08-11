@@ -8,13 +8,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.adapter.OnLinePhotoPreviewAdapter;
-import com.gkzxhn.wisdom.adapter.TakePhotoPreviewAdapter;
+import com.gkzxhn.wisdom.adapter.OnlinePhotoPreviewAdapter;
 import com.gkzxhn.wisdom.common.Constants;
-import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.starlight.mobile.android.lib.view.CusHeadView;
 import com.starlight.mobile.android.lib.view.photoview.PhotoViewAttacher;
 
@@ -30,7 +27,7 @@ public class OnlinePhotoPreviewActivity extends Activity {
     private CusHeadView chHead;
     private ViewPager mViewPager;
     private int currentPosition=0;
-    private OnLinePhotoPreviewAdapter adapter;
+    private OnlinePhotoPreviewAdapter adapter;
     private boolean isUpdate=false;
     @Override
     protected void onCreate(Bundle arg0) {
@@ -51,7 +48,7 @@ public class OnlinePhotoPreviewActivity extends Activity {
             if(intent!=null){
                 currentPosition=intent.getIntExtra(Constants.EXTRA_POSITION,0);
                 List<String> list= (List<String>) intent.getSerializableExtra(Constants.EXTRAS);
-                adapter=new OnLinePhotoPreviewAdapter(this,list,onShortTouchListener);
+                adapter=new OnlinePhotoPreviewAdapter(this,list,onShortTouchListener);
                 mViewPager.setAdapter(adapter);
                 mViewPager.setCurrentItem(currentPosition);
                 mViewPager.addOnPageChangeListener(onPageChangeListener);

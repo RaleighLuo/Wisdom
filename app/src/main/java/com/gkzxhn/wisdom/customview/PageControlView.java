@@ -37,8 +37,8 @@ public class PageControlView extends LinearLayout implements
 			LayoutParams layoutParams = new LayoutParams(
 					LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT);
-			layoutParams.leftMargin = 8;
-			layoutParams.rightMargin = 8;
+			layoutParams.leftMargin = 4;
+			layoutParams.rightMargin = 4;
 			iv.setLayoutParams(layoutParams);
 			this.addView(iv);
 		}
