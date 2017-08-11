@@ -27,7 +27,8 @@ public class CommonListModel extends BaseModel implements ICommonListModel{
             String url="";
             switch (TAB){
                 case Constants.TOPIC_LIST_TAB:
-                    url=String.format("%s/%s/topics",Constants.REQUEST_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
+                    url=String.format("%s/%s/topics?page=%s&limit=%s",Constants.REQUEST_TOPIC_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
+                            currentPage,pageSize);
                     break;
             }
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);

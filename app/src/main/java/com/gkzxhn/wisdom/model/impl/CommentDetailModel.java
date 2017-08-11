@@ -11,11 +11,11 @@ import org.json.JSONObject;
  */
 
 public class CommentDetailModel extends BaseModel implements ICommentDetailModel {
-    @Override
-    public void comment(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
-        try {
-            String url="";
 
+    @Override
+    public void requestReplayList(String commentId, int currentPage, int pageSize, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/comments?page=%s&limit=%s", Constants.REQUEST_TOPIC_OPERATE_URL, commentId,currentPage,pageSize);
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
@@ -23,12 +23,35 @@ public class CommentDetailModel extends BaseModel implements ICommentDetailModel
     }
 
     @Override
-    public void like(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
-        try {
-            String url="";
-            volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
+    public void publishComment(String commentId, String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/comments", Constants.REQUEST_TOPIC_OPERATE_URL, commentId);
+            JSONObject params=new JSONObject();
+            params.put("content",content);
+            volleyUtils.post(url,new JSONObject().put("comment",params),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
         }
+    }
+
+    @Override
+    public void like(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+//        try{
+//            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+//                    topicId,commentId);
+//            volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+//        } catch (Exception authFailureError) {
+//            authFailureError.printStackTrace();
+//        }
+    }
+
+    @Override
+    public void delete(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+//        try{
+//            String url=String.format("%s/%s/comments/%s", Constants.REQUEST_TOPIC_OPERATE_URL,topicId, commentId);
+//            volleyUtils.delete(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+//        } catch (Exception authFailureError) {
+//            authFailureError.printStackTrace();
+//        }
     }
 }

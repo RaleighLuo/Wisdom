@@ -15,4 +15,7 @@ public class CommentDetailPresenter extends BasePresenter<ICommentDetailModel,IC
     public CommentDetailPresenter(Context context, ICommentDetailView view) {
         super(context, new CommentDetailModel(), view);
     }
+    public void like(String id){
+
+    }
 }

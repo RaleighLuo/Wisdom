@@ -9,6 +9,8 @@ import org.json.JSONObject;
  */
 
 public interface ICommentDetailModel extends IBaseModel {
-    void comment(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
-    public void like(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void requestReplayList(String commentId,int currentPage, int pageSize,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void publishComment(String commentId,String content,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void like(String commentId,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void delete(String commentId,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
 }

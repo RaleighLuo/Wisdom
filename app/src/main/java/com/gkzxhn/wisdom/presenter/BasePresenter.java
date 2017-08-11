@@ -26,7 +26,7 @@ public class BasePresenter<M extends IBaseModel,V extends IBaseView> {
     protected WeakReference<Context> mWeakContext;
     protected final String UNAUTHCODE="401";
     protected final int PAGE_SIZE=20;
-    protected final int FIRST_PAGE=1;
+    protected final int FIRST_PAGE=0;
     protected int currentPage=FIRST_PAGE;
     protected M mModel;
     protected WeakReference<V> mWeakView;
