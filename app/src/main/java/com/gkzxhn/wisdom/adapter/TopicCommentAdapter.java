@@ -43,6 +43,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     private TopicDetailEntity mTopicInfor;
     private String mUserId;
     private OnItemLongClickListener onItemLongClickListener;
+    private TextView tvTopicCommentCount,tvTopicLikeCount;
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         this.onItemLongClickListener = onItemLongClickListener;
@@ -60,9 +61,32 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         this.context = context;
         mUserId=userId;
     }
+
+    /**发布评论
+     * @param entity
+     */
     public void addItem(TopicCommentEntity entity){
+        mTopicInfor.setCommentCount(mTopicInfor.getCommentCount()+1);
+        tvTopicCommentCount.setText(String.valueOf(mTopicInfor.getCommentCount()));
         mDatas.add(0,entity);
-        notifyDataSetChanged();
+        notifyItemRangeChanged(1,mDatas.size());
+    }
+    /**删除评论
+     * @param position mData中的position
+     * @param subPosition
+     */
+    public void removeItem(int position,int subPosition){
+        if(subPosition==-1){
+            mTopicInfor.setCommentCount(mTopicInfor.getCommentCount()-1>0?mTopicInfor.getCommentCount()-1:0);
+            tvTopicCommentCount.setText(String.valueOf(mTopicInfor.getCommentCount()));
+            mDatas.remove(position);//头部＋1
+            notifyItemRemoved(position+1);
+        }
+    }
+
+    public void updateLikeNumber(boolean isLike){
+        mTopicInfor.setLikesCount(isLike?mTopicInfor.getLikesCount()+1:mTopicInfor.getLikesCount()-1>0?mTopicInfor.getLikesCount()-1:0);
+        tvTopicLikeCount.setText(String.valueOf(mTopicInfor.getLikesCount()));
     }
 
     /**
@@ -130,8 +154,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             if(mTopicInfor!=null) {
                 ImageLoader.getInstance().displayImage(mTopicInfor.getPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
-                holder.tvHeaderLikeCount.setText(mTopicInfor.getLikesCount() + "");
-                holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
+                tvTopicLikeCount.setText(mTopicInfor.getLikesCount() + "");
+                tvTopicCommentCount.setText(mTopicInfor.getCommentCount() + "");
                 holder.mOnlineTopicAdapter.updateItems(mTopicInfor.getImages());
                 if (holder.mOnlineTopicAdapter.getItemCount() > 0) {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.rvHeaderTopicImages.getLayoutParams();
@@ -265,15 +289,6 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         return mDatas.get(position);
     }
 
-    /**
-     * @param position mData中的position
-     * @param subPosition
-     */
-    public void removeItem(int position,int subPosition){
-        if(subPosition==-1){
-            mDatas.remove(position+1);//头部＋1
-        }
-    }
 
     @Override
     public int getItemCount() {
@@ -283,8 +298,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     class ViewHolder extends RecyclerView.ViewHolder{
         //header
         private ImageView ivHeaderPortrait;
-        private TextView tvHeaderName,tvHeaderDate,tvHeaderContent,tvHeaderCommentCount,
-                tvHeaderLikeCount, tvHeaderDel;
+        private TextView tvHeaderName,tvHeaderDate,tvHeaderContent,
+                 tvHeaderDel;
         private RecyclerView rvHeaderTopicImages;
         private OnlineTopicAdapter mOnlineTopicAdapter;
         //Comment
@@ -296,6 +311,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             if (itemView.getId() == R.id.topic_comment_layout_rl_root) {
+
                 tvName = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_name);
                 tvDate = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_date);
                 tvContent = (TextView) itemView.findViewById(R.id.topic_comment_layout_tv_content);
@@ -310,8 +326,8 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 tvHeaderContent= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_content);
                 tvHeaderDate= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_date);
                 rvHeaderTopicImages= (RecyclerView) itemView.findViewById(R.id.topic_detial_layout_rv_image);
-                tvHeaderCommentCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_comment_number);
-                tvHeaderLikeCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_like_number);
+                tvTopicCommentCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_comment_number);
+                tvTopicLikeCount= (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_like_number);
                 tvHeaderDel = (TextView) itemView.findViewById(R.id.topic_detial_layout_tv_delete);
                 rvHeaderTopicImages.setHasFixedSize(true);
                 rvHeaderTopicImages.setLayoutManager(new FullyGridLayoutManager(context,2));

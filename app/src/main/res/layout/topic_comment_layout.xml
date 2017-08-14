@@ -3,6 +3,7 @@
     xmlns:mAttr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:id="@+id/topic_comment_layout_rl_root"
+    android:background="@drawable/common_item_click_selector"
     android:layout_height="match_parent">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/topic_comment_layout_iv_portrait"

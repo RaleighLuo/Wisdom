@@ -328,6 +328,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             }
         }else{
             isLike=!isLike;
+            adapter.updateLikeNumber(isLike);
         }
     }
 
