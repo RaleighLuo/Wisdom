@@ -15,30 +15,52 @@ public class TopicCommentEntity {
     private String nickname;
     @SerializedName("user_image")
     private String portrait;
-    //    @SerializedName("user_id")
-    @Expose
+    @SerializedName("user_id")
     private String userId;
     private String content;
-    //    @SerializedName("created_at")
-    @Expose
+    @SerializedName("created_at")
     private String date;
-    @Expose
-    private List<LikeEntity> likes;
-    @Expose
-    private List<String> likeUsers;//点赞数-个人使用
+    @SerializedName("likes_amount")
+    private int likesCount;
+    private int likeable;
 
-    public List<String> getLikeUsers() {
-        if(likeUsers==null)likeUsers=new ArrayList<>();
-        if(likeUsers.size()==0&&likes!=null){
-            for(LikeEntity entity:likes){
-                likeUsers.add(entity.getUserId());
-            }
-        }
-        return likeUsers;
+    //    @SerializedName("comments_amount")
+    @Expose
+    private int commentCount;//评论数
+    @Expose
+    private List<TopicReplayEntity> replays;//临时评论回复列表
+
+    public List<TopicReplayEntity> getReplays() {
+        if(replays==null)replays=new ArrayList<>();
+        return replays;
     }
 
-    public void setLikeUsers(List<String> likeUsers) {
-        this.likeUsers = likeUsers;
+    public void setReplays(List<TopicReplayEntity> replays) {
+        this.replays = replays;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public boolean isLikeable() {
+        return likeable==1;
+    }
+
+    public void setLikeable(boolean likeable) {
+        this.likeable = likeable?1:0;
     }
 
     public String getNickname() {

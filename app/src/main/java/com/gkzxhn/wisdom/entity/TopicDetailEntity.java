@@ -26,16 +26,37 @@ public class TopicDetailEntity {
     private int commentCount;
     @SerializedName("likes_amount")
     private int likesCount;
+    @SerializedName("images_url")
     private List<String> images;
-    private User user;
-    private boolean likeable;
+    private int likeable;
+    private String nickname;
+    @SerializedName("user_image")
+    private String portrait;
+
+    public String getPortrait() {
+        return portrait == null ? "" : portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        if (portrait != null && !portrait.equals("null"))
+            this.portrait = portrait;
+    }
+
+    public String getNickname() {
+        return nickname == null ? "" : nickname;
+    }
+
+    public void setNickname(String nickname) {
+        if (nickname != null && !nickname.equals("null"))
+            this.nickname = nickname;
+    }
 
     public boolean isLikeable() {
-        return likeable;
+        return likeable==1;
     }
 
     public void setLikeable(boolean likeable) {
-        this.likeable = likeable;
+        this.likeable = likeable?1:0;
     }
     public int getLikesCount() {
         return likesCount;
@@ -43,14 +64,6 @@ public class TopicDetailEntity {
 
     public void setLikesCount(int likesCount) {
         this.likesCount = likesCount;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public int getViewed() {
@@ -133,38 +146,4 @@ public class TopicDetailEntity {
     }
 
 
-    public  class User {
-        private String nickname;
-        @SerializedName("user_image")
-        private String userPortrait;
-        @SerializedName("user_type")
-        private String userType;
-
-        public String getNickname() {
-            return nickname == null ? "" : nickname;
-        }
-
-        public void setNickname(String nickname) {
-            if (nickname != null && !nickname.equals("null"))
-                this.nickname = nickname;
-        }
-
-        public String getUserPortrait() {
-            return userPortrait == null ? "" : userPortrait;
-        }
-
-        public void setUserPortrait(String userPortrait) {
-            if (userPortrait != null && !userPortrait.equals("null"))
-                this.userPortrait = userPortrait;
-        }
-
-        public String getUserType() {
-            return userType == null ? "" : userType;
-        }
-
-        public void setUserType(String userType) {
-            if (userType != null && !userType.equals("null"))
-                this.userType = userType;
-        }
-    }
 }

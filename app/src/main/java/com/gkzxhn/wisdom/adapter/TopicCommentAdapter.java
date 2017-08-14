@@ -18,8 +18,10 @@ import android.widget.TextView;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.CommentDetailActivity;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
+import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
@@ -83,10 +85,15 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         if(mPositon!=-1) {
             if(isSuccess){
                 //已经点赞－》取消点赞
-                if (mDatas.get(mPositon).getLikeUsers().contains(mUserId))
-                    mDatas.get(mPositon).getLikeUsers().remove(mUserId);
-                else// 点赞
-                    mDatas.get(mPositon).getLikeUsers().add(mUserId);
+                if (!mDatas.get(mPositon).isLikeable()){
+                    mDatas.get(mPositon).setLikeable(true);
+                    int count=mDatas.get(mPositon).getLikesCount()-1;
+                    mDatas.get(mPositon).setLikesCount(count<0?0:count);
+                }
+                else {// 点赞
+                    mDatas.get(mPositon).setLikesCount(mDatas.get(mPositon).getLikesCount()+1);
+                    mDatas.get(mPositon).setLikeable(false);
+                }
             }
             notifyItemChanged(mPositon + 1);//第一项是头部，所以＋1
         }
@@ -121,7 +128,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position==0){
             if(mTopicInfor!=null) {
-                ImageLoader.getInstance().displayImage(mTopicInfor.getUser()==null?"":mTopicInfor.getUser().getUserPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
+                ImageLoader.getInstance().displayImage(mTopicInfor.getPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
                 holder.tvHeaderLikeCount.setText(mTopicInfor.getLikesCount() + "");
                 holder.tvHeaderCommentCount.setText(mTopicInfor.getCommentCount() + "");
@@ -135,7 +142,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
 
                 String viewTime=context.getString(R.string.browse) + mTopicInfor.getViewed() + context.getString(R.string.time);
                 holder.tvHeaderDate.setText(date+"\u3000"+viewTime);
-                holder.tvHeaderName.setText(mTopicInfor.getUser()==null?"":mTopicInfor.getUser().getNickname());
+                holder.tvHeaderName.setText(mTopicInfor.getNickname());
                 if(mTopicInfor.getUserId().equals(mUserId)){//是本人发布的话题，才可以删除
                     holder.tvHeaderDel.setVisibility(View.VISIBLE);
                     holder.tvHeaderDel.setOnClickListener(new View.OnClickListener() {
@@ -151,20 +158,22 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         }else {
             final int mPosition=position-1;
             final TopicCommentEntity entity = mDatas.get(mPosition);
+            //下载头像
+            ImageLoader.getInstance().displayImage(entity.getPortrait(),holder.ivPortrait);
             holder.tvContent.setText(entity.getContent());
-            holder.rbLike.setText(String.valueOf(entity.getLikeUsers().size()));
-            if(entity.getLikeUsers().contains(mUserId)){//已经点赞咯
+            holder.tvName.setText(entity.getNickname());
+            holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
+            if(!entity.isLikeable()){//已经点赞咯
                 holder.rbLike.setChecked(true);
             }else{//没有点赞
                 holder.rbLike.setChecked(false);
             }
-            holder.tvDate.setText("8月9日 11:10");
-//            TODO holder.tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
+            holder.tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
             //设置点击事件
             holder.rbLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(entity.getLikeUsers().contains(mUserId)){//已经点赞咯->取消点赞
+                    if(!entity.isLikeable()){//已经点赞咯->取消点赞
                         holder.rbLike.setChecked(false);
                     }else{//没有点赞－点赞
                         holder.rbLike.setChecked(true);
@@ -194,36 +203,57 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     return true;
                 }
             });
-            dealReplay(holder.llReplayLayout);
-
+            dealReplay(holder.llReplayLayout,entity.getCommentCount(),entity.getReplays());
         }
 
     }
 
     /**回复面板
      * @param replayLayout
+     * @param commentCount
+     * @param replays  取前三个，刚刚本人回复的
      */
-    private void dealReplay(LinearLayout replayLayout){
-        if(!replayLayout.isShown())replayLayout.setVisibility(View.VISIBLE);
-        for(int i=0;i<replayLayout.getChildCount();i++){
-            TextView tvTitle= (TextView) replayLayout.getChildAt(i);
-            if(tvTitle.getId()!=R.id.i_topic_comment_replay_layout_tv_count) {
-                String name = "张三";
-                String text = name + "：量子卫星提前实现三大科学目标:未来一年将开展多项空间实验";
-                SpannableString spannableString = new SpannableString(text);
-                ForegroundColorSpan colorSpan = new ForegroundColorSpan(context.getResources().getColor(R.color.blue_text_color));
-                spannableString.setSpan(colorSpan, 0, name.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                tvTitle.setText(spannableString);
-            }
-            tvTitle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    context.startActivity(new Intent(context, CommentDetailActivity.class));
+    private void dealReplay(LinearLayout replayLayout, int commentCount, List<TopicReplayEntity> replays){
+        if(commentCount>0){
+            if(!replayLayout.isShown())replayLayout.setVisibility(View.VISIBLE);
+            for(int i=0;i<replayLayout.getChildCount();i++){
+                TextView tvTitle= (TextView) replayLayout.getChildAt(i);
+                if(tvTitle.getId()==R.id.i_topic_comment_replay_layout_tv_count) {
+                    tvTitle.setText(String.format("%s%s%s",context.getString(R.string.total),commentCount,context.getString(R.string.replay_count)));
+                    if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
+                    tvTitle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            context.startActivity(new Intent(context, CommentDetailActivity.class));
+                        }
+                    });
+                }else if(replays.size()>i){
+                    final TopicReplayEntity replay=replays.get(i);
+                    String name =replay.getNickname();
+                    String text = String.format("%s: %s",name,replay.getContent());
+                    SpannableString spannableString = new SpannableString(text);
+                    ForegroundColorSpan colorSpan = new ForegroundColorSpan(context.getResources().getColor(R.color.blue_text_color));
+                    spannableString.setSpan(colorSpan, 0, name.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    tvTitle.setText(spannableString);
+                    if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
+                    tvTitle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(context, CommentDetailActivity.class);
+                            intent.putExtra(Constants.EXTRA,replay.getId());
+                            intent.putExtra(Constants.EXTRAS,replay.getUserId());
+                            intent.putExtra(Constants.EXTRA_TAB,replay.getNickname());
+                            context.startActivity(intent);
+                        }
+                    });
+                }else{
+                    if(tvTitle.isShown())tvTitle.setVisibility(View.GONE);
                 }
-            });
-            if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
-
+            }
+        }else{
+            if(replayLayout.isShown())replayLayout.setVisibility(View.GONE);
         }
+
     }
     public String getItemsId(int position){
         return mDatas.get(position).getId();

@@ -69,6 +69,7 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
                     //TODO
                     TopicCommentEntity entity=new TopicCommentEntity();
                     entity.setContent(content);
+                    entity.setLikeable(true);
                     getView().publishCommentSuccess(entity);
 
                 }else{
