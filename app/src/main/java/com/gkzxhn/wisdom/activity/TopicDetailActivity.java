@@ -107,7 +107,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             }
             if(!mCommentShowDialog.isShowing())mCommentShowDialog.show();
             mCommentShowDialog.setPosition(position);
-            mCommentShowDialog.showDelete(adapter.getItemsId(position).equals(mUserId));
+            mCommentShowDialog.showDelete(adapter.getItemsUserId(position).equals(mUserId));
         }
     };
     private View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -146,7 +146,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
                         mCommentDialog.setPosition(position);
-                        mCommentDialog.setHint(R.string.reply_colon);
+                        mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
                     }
                     break;
                 case R.id.topic_detial_layout_tv_delete://删除话题
@@ -168,7 +168,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
                         mCommentDialog.setPosition(position);
-                        mCommentDialog.setHint(R.string.reply_colon);
+                        mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
                     }
                     break;
             }

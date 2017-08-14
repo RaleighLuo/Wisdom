@@ -10,6 +10,7 @@ import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.model.ITopicDetailModel;
 import com.gkzxhn.wisdom.model.impl.TopicDetailModel;
+import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.ITopicDetailView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,6 +19,8 @@ import com.starlight.mobile.android.lib.util.JSONUtil;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -70,6 +73,9 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
                     TopicCommentEntity entity=new TopicCommentEntity();
                     entity.setContent(content);
                     entity.setLikeable(true);
+                    entity.setPortrait(getSharedPreferences().getString(Constants.USER_PORTRAIT,""));
+                    entity.setNickname(getSharedPreferences().getString(Constants.USER_NICKNAME,""));
+                    entity.setDate(Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz")));
                     getView().publishCommentSuccess(entity);
 
                 }else{

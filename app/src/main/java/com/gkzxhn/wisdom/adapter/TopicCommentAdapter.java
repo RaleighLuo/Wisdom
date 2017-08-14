@@ -258,6 +258,9 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     public String getItemsId(int position){
         return mDatas.get(position).getId();
     }
+    public String getItemsUserId(int position){
+        return mDatas.get(position).getUserId();
+    }
     public TopicCommentEntity getItem(int position){
         return mDatas.get(position);
     }

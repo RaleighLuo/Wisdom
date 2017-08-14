@@ -96,6 +96,9 @@ public class CommentDialog  extends Dialog {
     public void setHint(int resId){
         etContent.setHint(resId);
     }
+    public void setHint(String  hint){
+        etContent.setHint(hint);
+    }
 
     public String getContent() {
         return etContent!=null?etContent.getText().toString().trim():"";
