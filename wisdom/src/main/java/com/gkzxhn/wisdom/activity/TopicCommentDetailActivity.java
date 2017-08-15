@@ -108,8 +108,6 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         @Override
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
-//                case R.id.comment_detail_item_layout_rb_like:
-//                    break;
                 case R.id.comment_detail_item_layout_rl_root:
                     if(mCommentShowDialog==null){
                         mCommentShowDialog=new CommentShowDialog(TopicCommentDetailActivity.this);
@@ -117,7 +115,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
                     }
                     if(!mCommentShowDialog.isShowing())mCommentShowDialog.show();
                     mCommentShowDialog.setPosition(position);
-//                    mCommentShowDialog.showDelete(adapter.getItemsUserId(position).equals(mUserId));
+                    mCommentShowDialog.showDelete(adapter.getItemsUserId(position).equals(mUserId));
                     break;
             }
 
@@ -134,7 +132,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
                 switch (v.getId()) {
                     case R.id.comment_dialog_layout_tv_send://回复评论
                         if(mCommentDialog.isShowing())mCommentDialog.dismiss();//关闭对话框
-                       mPresenter.publishReplay(mCommentEnity.getTopicId(),mCommentDialog.getContent());
+                        mPresenter.publishReplay(mCommentEnity.getTopicId(),mCommentDialog.getContent());
                         break;
                     case R.id.comment_show_dialog_layout_tv_copy://评论－复制到剪贴板
                         String content=adapter.getItem(mCommentShowDialog.getPosition()).getContent();
@@ -159,12 +157,12 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
                 if(checkReady()&&!mCommentDialog.isShowing()){
                     mCommentDialog.show();
                     mCommentDialog.setPosition(-1);
-                    mCommentDialog.setHint(R.string.reply_colon);
+                    mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),mCommentEnity.getNickname()));
                 }
                 break;
             case R.id.comment_detail_layout_rb_like://评论点赞
                 if(checkReady()) {
-                    rbLike.setChecked(!rbLike.isChecked());
+                    rbLike.setChecked(mCommentEnity.isLikeable());
                     mPresenter.like(mCommentEnity.getTopicId());
                 }
                 break;
@@ -273,6 +271,13 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
 
     @Override
     public void likeFinish(boolean isSuccess) {
+        if(isSuccess) {
+            mCommentEnity.setLikeable(!mCommentEnity.isLikeable());
+            mCommentEnity.setLikesCount(mCommentEnity.isLikeable()?mCommentEnity.getLikesCount()-1:mCommentEnity.getLikesCount()+1);
+            rbLike.setText(mCommentEnity.getCommentCount());
+        }
+
+        rbLike.setChecked(!mCommentEnity.isLikeable());
 
     }
 
@@ -296,6 +301,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
             tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
             tvContent.setText(entity.getContent());
             tvComment.setText(String.valueOf(entity.getCommentCount()));
+            rbLike.setChecked(!entity.isLikeable());
             rbLike.setText(entity.getLikesCount());
             tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), entity.getReplayCount(),
                     getString(R.string.strip)));

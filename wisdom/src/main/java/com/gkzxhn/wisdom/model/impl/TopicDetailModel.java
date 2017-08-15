@@ -16,6 +16,14 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         this.topicId = topicId;
     }
 
+    public TopicDetailModel() {
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
+
     @Override
     public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{

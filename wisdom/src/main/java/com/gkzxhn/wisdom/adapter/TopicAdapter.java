@@ -15,7 +15,6 @@ import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
 import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 
@@ -39,7 +38,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     public TopicAdapter(Context context) {
         this.context = context;
+
     }
+    public void like(int position,boolean isSuccess){
+        if(position>=0&&position<mDatas.size()) {
+            if (isSuccess) {
+                TopicEntity entity=mDatas.get(position);
+                entity.setLikeable(!entity.isLikeable());
+                entity.setLikesCount(entity.isLikeable()?entity.getLikesCount()-1:entity.getLikesCount()+1);
+            }
+            notifyItemChanged(position);
+        }
+    }
+
 
     public void upateItems(List<TopicEntity> list){
         mDatas.clear();
@@ -61,7 +72,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        TopicEntity entity=mDatas.get(position);
+        final TopicEntity entity=mDatas.get(position);
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
         holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
         holder.rbLike.setChecked(!entity.isLikeable());
@@ -74,6 +85,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
+        holder.rbLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RadioButtonPlus)v).setChecked(entity.isLikeable());
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
@@ -113,7 +131,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             tvName= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_name);
             tvDate= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_date);
             tvContent= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_content);
-            rbLike= (RadioButtonPlus) itemView.findViewById(R.id.topic_item_layout_tv_like);
+            rbLike= (RadioButtonPlus) itemView.findViewById(R.id.topic_item_layout_rb_like);
             tvComment= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_comment);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));

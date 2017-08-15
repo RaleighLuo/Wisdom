@@ -82,16 +82,20 @@
         android:text="0"
         android:textColor="@color/like_check_text_color"
         android:textSize="12sp"
+        android:paddingTop="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
         android:button="@null"
         mAttr:radio_left_height="12dip"
         mAttr:radio_left_width="13dip"
         android:drawablePadding="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_alignParentRight="true"
         android:drawableLeft="@drawable/like_check_selector"
-        android:id="@+id/topic_item_layout_tv_like"
+        android:id="@+id/topic_item_layout_rb_like"
         android:layout_alignBaseline="@+id/topic_item_layout_tv_comment"
         android:layout_alignBottom="@+id/topic_item_layout_tv_comment"
-        android:layout_alignRight="@+id/topic_item_layout_rv_image"
-        android:layout_alignEnd="@+id/topic_item_layout_rv_image" />
+         />
 
     <View
         style="@style/common_light_line_style"

@@ -15,19 +15,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.SuperFragmentActivity;
 import com.gkzxhn.wisdom.activity.TopicActivity;
 import com.gkzxhn.wisdom.activity.TopicDetailActivity;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.TopicAdapter;
+import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicEntity;
+import com.gkzxhn.wisdom.model.impl.TopicDetailModel;
 import com.gkzxhn.wisdom.presenter.CommonListPresenter;
 import com.gkzxhn.wisdom.view.ICommonListView;
+import com.starlight.mobile.android.lib.util.ConvertUtil;
+import com.starlight.mobile.android.lib.util.JSONUtil;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -45,6 +52,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private View parentView;
     private TopicAdapter adapter;
     private CommonListPresenter<TopicEntity> mPresenter;
+    private TopicDetailModel mModel;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -66,6 +74,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
 
     }
     private void init(){
+        mModel=new TopicDetailModel();
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
@@ -89,16 +98,52 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
         public void onClickListener(View convertView, int position) {
-            Intent intent=new Intent(mActivity, TopicDetailActivity.class);
-            intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
-            startActivityForResult(intent,Constants.EXTRA_CODE);
+            switch (convertView.getId()){
+                case R.id.topic_item_layout_rb_like://点赞
+                    requestLike(position);
+                    break;
+                default:
+                    Intent intent=new Intent(mActivity, TopicDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
+                    startActivityForResult(intent,Constants.EXTRA_CODE);
+                    break;
+            }
+
         }
     };
+
+    private void requestLike(final int position){
+        mModel.setTopicId(adapter.getItemsId(position));
+        mModel.requestLike(new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code = ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response, "code"));
+                if (code == 200) {
+                    adapter.like(position,true);
+                } else {
+                    adapter.like(position,false);
+                    showToast(JSONUtil.getJSONObjectStringValue(response, "message"));
+                }
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+                adapter.like(position,false);
+                showToast(R.string.unexpected_errors);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.onDestory();
+        mModel.stopAllReuqst();
+        super.onDestroy();
+    }
 
     @Override
     public void onRefresh() {
         mPresenter.request(true);
-
     }
 
     @Override
