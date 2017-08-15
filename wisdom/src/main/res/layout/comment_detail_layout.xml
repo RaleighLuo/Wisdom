@@ -30,7 +30,6 @@
         android:id="@+id/comment_detail_layout_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XX"
         android:textColor="@color/common_text_color"
         android:layout_toRightOf="@+id/comment_detail_layout_iv_portrait"
         android:layout_alignTop="@+id/comment_detail_layout_iv_portrait"
@@ -38,7 +37,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="01-10 10:09"
         android:textSize="10sp"
         android:textColor="@color/common_dark_gray_text_color"
         android:layout_alignLeft="@+id/comment_detail_layout_tv_name"
@@ -47,7 +45,6 @@
         />
     <TextView
         android:id="@+id/comment_detail_layout_tv_content"
-        android:text="XXXXX"
         android:textSize="13sp"
         android:textColor="@color/common_light_text_color"
         android:layout_alignLeft="@+id/comment_detail_layout_tv_date"
@@ -77,7 +74,7 @@
     <com.starlight.mobile.android.lib.view.CusTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
+        android:text="0"
         android:clickable="true"
         android:onClick="onClickListener"
         android:id="@+id/comment_detail_layout_tv_comment"
@@ -92,7 +89,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="回复评论(10条)"
+        android:text="回复评论(0条)"
         android:textColor="@color/common_light_text_color"
         android:textSize="12sp"
         android:layout_marginTop="30dip"
