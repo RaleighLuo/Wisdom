@@ -237,7 +237,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     return true;
                 }
             });
-            dealReplay(holder.llReplayLayout,entity.getCommentCount(),entity.getReplays());
+            dealReplay(mPosition,holder.llReplayLayout,entity.getCommentCount(),entity.getReplays());
         }
 
     }
@@ -247,7 +247,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
      * @param commentCount
      * @param replays  取前三个，刚刚本人回复的
      */
-    private void dealReplay(LinearLayout replayLayout, int commentCount, List<TopicReplayEntity> replays){
+    private void dealReplay(final int postion,  LinearLayout replayLayout, int commentCount, List<TopicReplayEntity> replays){
         if(commentCount>0){
             if(!replayLayout.isShown())replayLayout.setVisibility(View.VISIBLE);
             for(int i=0;i<replayLayout.getChildCount();i++){
@@ -255,12 +255,6 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 if(tvTitle.getId()==R.id.i_topic_comment_replay_layout_tv_count) {
                     tvTitle.setText(String.format("%s%s%s",context.getString(R.string.total),commentCount,context.getString(R.string.replay_count)));
                     if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
-                    tvTitle.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            context.startActivity(new Intent(context, TopicCommentDetailActivity.class));
-                        }
-                    });
                 }else if(replays.size()>i){
                     final TopicReplayEntity replay=replays.get(i);
                     String name =replay.getNickname();
@@ -270,23 +264,26 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     spannableString.setSpan(colorSpan, 0, name.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                     tvTitle.setText(spannableString);
                     if(!tvTitle.isShown())tvTitle.setVisibility(View.VISIBLE);
-                    tvTitle.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent=new Intent(context, TopicCommentDetailActivity.class);
-                            intent.putExtra(Constants.EXTRA,replay.getId());
-                            intent.putExtra(Constants.EXTRAS,replay.getUserId());
-                            intent.putExtra(Constants.EXTRA_TAB,replay.getNickname());
-                            context.startActivity(intent);
-                        }
-                    });
+
                 }else{
                     if(tvTitle.isShown())tvTitle.setVisibility(View.GONE);
                 }
+                tvTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(onItemClickListener!=null)onItemClickListener.onClickListener(v,postion);
+                    }
+                });
             }
         }else{
             if(replayLayout.isShown())replayLayout.setVisibility(View.GONE);
         }
+        replayLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,postion);
+            }
+        });
 
     }
     public String getItemsId(int position){

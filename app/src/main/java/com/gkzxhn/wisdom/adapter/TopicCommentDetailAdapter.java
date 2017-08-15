@@ -5,14 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.entity.TopicReplayEntity;
-import com.starlight.mobile.android.lib.view.RadioButtonPlus;
+import com.gkzxhn.wisdom.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * Created by Raleigh.Luo on 17/8/10.
  */
 
-public class CommentDetailAdapter extends RecyclerView.Adapter<CommentDetailAdapter.ViewHolder> {
+public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicCommentDetailAdapter.ViewHolder> {
     private Context context;
     private OnItemClickListener onItemClickListener;
     private List<TopicReplayEntity> mDatas=new ArrayList<>();
@@ -29,8 +30,34 @@ public class CommentDetailAdapter extends RecyclerView.Adapter<CommentDetailAdap
         this.onItemClickListener = onItemClickListener;
     }
 
-    public CommentDetailAdapter(Context context) {
+    public TopicCommentDetailAdapter(Context context) {
         this.context = context;
+    }
+    public TopicReplayEntity getItem(int position){
+        return mDatas.get(position);
+    }
+
+    /**移除项Byposition
+     * @param position
+     */
+    public void removeItem(int position){
+        if(position>=0&&position<mDatas.size()) {
+            mDatas.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+    public void addItem(TopicReplayEntity entity){
+        if(entity!=null){
+            mDatas.add(0,entity);
+            notifyDataSetChanged();
+        }
+
+    }
+    public String getItemsId(int position){
+        return mDatas.get(position).getId();
+    }
+    public String getItemsUserId(int position){
+        return mDatas.get(position).getUserId();
     }
 
     @Override
@@ -41,36 +68,50 @@ public class CommentDetailAdapter extends RecyclerView.Adapter<CommentDetailAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
+        TopicReplayEntity entity=mDatas.get(position);
+        ImageLoader.getInstance().displayImage(entity.getPortrait(),holder.ivPortrait, Utils.getOptions(R.mipmap.topic_portrait));
+        holder.tvContent.setText(entity.getContent());
+        holder.tvName.setText(entity.getNickname());
+        holder.tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
-        holder.rbLike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                holder.rbLike.setChecked(!holder.rbLike.isChecked());
-            }
-        });
+
     }
+    public void updateItems(List<TopicReplayEntity> datas){
+        this.mDatas.clear();
+        if(datas!=null&&datas.size()>0){
+            mDatas.addAll(datas);
+        }
+        notifyDataSetChanged();
+
+    }
+    public void loadItems(List<TopicReplayEntity> datas){
+        if(datas!=null&&datas.size()>0){
+            mDatas.addAll(datas);
+            notifyDataSetChanged();
+        }
+
+    }
+
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mDatas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView ivPortrait;
         public TextView tvName,tvContent,tvDate;
-        public RadioButtonPlus rbLike;
         public ViewHolder(View itemView) {
             super(itemView);
             ivPortrait= (ImageView) itemView.findViewById(R.id.comment_detail_item_layout_iv_portrait);
             tvName= (TextView) itemView.findViewById(R.id.comment_detail_item_layout_tv_name);
             tvContent= (TextView) itemView.findViewById(R.id.comment_detail_item_layout_tv_content);
             tvDate= (TextView) itemView.findViewById(R.id.comment_detail_item_layout_tv_date);
-            rbLike= (RadioButtonPlus) itemView.findViewById(R.id.comment_detail_item_layout_rb_like);
         }
     }
 }

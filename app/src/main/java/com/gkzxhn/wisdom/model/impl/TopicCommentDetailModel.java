@@ -17,11 +17,20 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
     public TopicCommentDetailModel(String commentId) {
         this.commentId = commentId;
     }
-
     @Override
-    public void requestReplayList( int currentPage, int pageSize, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+    public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/comments?page=%s&limit=%s", Constants.REQUEST_TOPIC_OPERATE_URL, commentId,currentPage,pageSize);
+            String url=String.format("%s/%s/comment/%s", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+                    commentId);
+            volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+    @Override
+    public void requestReplayList(String topicId,int currentPage, int pageSize, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/comments/%s/subcomments?page=%s&limit=%s", Constants.REQUEST_TOPIC_OPERATE_URL, topicId,commentId,currentPage,pageSize);
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
             authFailureError.printStackTrace();
@@ -41,14 +50,27 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
     }
 
     @Override
-    public void like(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
-
+    public void like(String topicId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+                    topicId,commentId);
+            volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
-
+    public void delete(String topicId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/comments/%s", Constants.REQUEST_TOPIC_OPERATE_URL,topicId, commentId);
+            volleyUtils.delete(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
     }
+
+
 
 
 }

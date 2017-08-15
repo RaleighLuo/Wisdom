@@ -1,6 +1,8 @@
 package com.gkzxhn.wisdom.view;
 
+import com.gkzxhn.wisdom.entity.TopicCommentDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
+import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 
 import java.util.List;
 
@@ -9,9 +11,12 @@ import java.util.List;
  */
 
 public interface ITopicCommentDetailView extends IBaseView {
-    void updateItems(List<TopicCommentEntity> mDatas);
-    void loadItems(List<TopicCommentEntity> mDatas);
+    void showProgress();
+    void dismissProgress();
+    void updateItems(List<TopicReplayEntity> mDatas);
+    void loadItems(List<TopicReplayEntity> mDatas);
     void likeFinish(boolean isSuccess);
-    void commentSuccess(TopicCommentEntity entity);
-    void replayLikeFinish(int position,boolean isSuccess);
+    void commentSuccess(TopicReplayEntity entity);
+    void update(TopicCommentDetailEntity entity);
+    void deleteSuccess(int position);
 }
