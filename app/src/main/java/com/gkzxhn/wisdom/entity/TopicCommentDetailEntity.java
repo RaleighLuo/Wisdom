@@ -3,15 +3,14 @@ package com.gkzxhn.wisdom.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Raleigh.Luo on 17/8/8.
+ * Created by Raleigh.Luo on 17/8/15.
  */
 
-public class TopicCommentEntity implements Serializable{
+public class TopicCommentDetailEntity {
     private String id;
     private String nickname;
     @SerializedName("user_image")
@@ -26,16 +25,24 @@ public class TopicCommentEntity implements Serializable{
     private int likeable;
     @SerializedName("comments_amount")
     private int commentCount;//评论数
-    @Expose
-    private List<TopicReplayEntity> replays;//临时评论回复列表
+    private int replayCount;//回复数
+    private String topicId;
 
-    public List<TopicReplayEntity> getReplays() {
-        if(replays==null)replays=new ArrayList<>();
-        return replays;
+    public String getTopicId() {
+        return topicId == null ? "" : topicId;
     }
 
-    public void setReplays(List<TopicReplayEntity> replays) {
-        this.replays = replays;
+    public void setTopicId(String topicId) {
+        if (topicId != null && !topicId.equals("null"))
+            this.topicId = topicId;
+    }
+
+    public int getReplayCount() {
+        return replayCount;
+    }
+
+    public void setReplayCount(int replayCount) {
+        this.replayCount = replayCount;
     }
 
     public int getCommentCount() {

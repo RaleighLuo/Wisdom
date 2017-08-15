@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import com.gkzxhn.wisdom.view.ITopicDetailView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -47,7 +49,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private TopicCommentAdapter adapter;
     private CommentDialog mCommentDialog;
     private TopicDetailPresenter mPresenter;
-    private String id=null;
+    private String mTopicId =null;
     private TextView tvLike;
     private ImageView ivLike;
     private CheckConfirmDialog confirmDialog;
@@ -62,6 +64,10 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         initControls();
         init();
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         tvLike = (TextView) findViewById(R.id.topic_detial_layout_tv_like);
         ivLike = (ImageView) findViewById(R.id.topic_detial_layout_iv_like);
@@ -70,13 +76,22 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         mRecyclerView= (RecyclerView) findViewById(R.id.common_list_layout_rv_list);
         mSwipeRefresh= (CusSwipeRefreshLayout) findViewById(R.id.common_list_layout_swipeRefresh);
     }
+
+    /**
+     * 初始化值
+     */
     private void init(){
+        //初始化进度条
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         dismissProgress();
-        id=getIntent().getStringExtra(Constants.EXTRA);
-        mPresenter=new TopicDetailPresenter(this,this,id);
+        //获取上一个页面的id
+        mTopicId =getIntent().getStringExtra(Constants.EXTRA);
+        //初始化presenter  网络请求
+        mPresenter=new TopicDetailPresenter(this,this, mTopicId);
+        //初始化评论输入对话框
         mCommentDialog=new CommentDialog(this);
         mCommentDialog.setOnClickListener(onClickListener);
+        //初始化加载列表动画
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
@@ -86,18 +101,24 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         // improve performance if you know that changes in content
         // do not change the size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//设置为横向LayoutManager
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
 //        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
 //        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        //初始化评论列表适配器
         adapter=new TopicCommentAdapter(this,mPresenter.getSharedPreferences().getString(Constants.USER_ID,""));
         adapter.setOnItemClickListener(onItemClickListener);
         adapter.setOnItemLongClickListener(onItemLongClickListener);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);//设置适配器
         mUserId=mPresenter.getSharedPreferences().getString(Constants.USER_ID,"");
+        //请求话题详情
         mPresenter.request();
     }
+
+    /**
+     * 长按评论监听器
+     */
     private OnItemLongClickListener onItemLongClickListener=new OnItemLongClickListener() {
         @Override
         public void onLongClickListener(View convertView, int position) {
@@ -111,47 +132,55 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
             mCommentShowDialog.showDelete(adapter.getItemsUserId(position).equals(mUserId));
         }
     };
+    /**
+     * 评论输入对话框监听器
+     */
     private View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.comment_dialog_layout_tv_send:
-                    if(mCommentDialog.isShowing())mCommentDialog.dismiss();
+                case R.id.comment_dialog_layout_tv_send://发布评论
+                    if(mCommentDialog.isShowing())mCommentDialog.dismiss();//关闭对话框
                     if(mCommentDialog.getPosition()==-1) {//评论话题
                         mPresenter.publishComments(mCommentDialog.getContent());
                     }else{//回复评论
                         mPresenter.publishReplay(mCommentDialog.getPosition(),adapter.getItemsId(mCommentDialog.getPosition()),mCommentDialog.getContent());
                     }
                     break;
-                case R.id.comment_show_dialog_layout_tv_copy://评论－复制
+                case R.id.comment_show_dialog_layout_tv_copy://评论－复制到剪贴板
                     String content=adapter.getItem(mCommentShowDialog.getPosition()).getContent();
                     ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     cm.setPrimaryClip(ClipData.newPlainText(content,content));
                     showToast(R.string.has_copy_hint);
                     break;
                 case R.id.comment_show_dialog_layout_tv_delete://评论－删除
+                    //请求删除评论
                     mPresenter.deleteComment(adapter.getItemsId(mCommentShowDialog.getPosition()),mCommentShowDialog.getPosition(),-1);
                     break;
             }
 
         }
     };
+    /**
+     * 评论列表点击事件
+     */
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
-                case R.id.topic_comment_layout_rb_like://评论点赞
+                case R.id.topic_comment_layout_rb_like://评论点赞－发请求
                     mPresenter.requestCommentLike(adapter.getItemsId(position),position);
                     break;
-                case R.id.topic_comment_layout_iv_comment://评论回复
+                case R.id.topic_comment_layout_iv_comment://评论回复－弹出对话框
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
-                        mCommentDialog.setPosition(position);
+                        mCommentDialog.setPosition(position);//记住位置
+                        //设置默认提示
                         mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
                     }
                     break;
                 case R.id.topic_detial_layout_tv_delete://删除话题
-                    if(confirmDialog==null) {
+                    if(confirmDialog==null) {//提示对话框
                         confirmDialog = new CheckConfirmDialog(TopicDetailActivity.this);
                         confirmDialog.setContent(getResources().getString(R.string.delete_topic_hint));
                         confirmDialog.setYesBtnListener(new View.OnClickListener() {
@@ -159,36 +188,51 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                             public void onClick(View v) {
                                 if (confirmDialog != null && confirmDialog.isShowing())
                                     confirmDialog.dismiss();
-                                mPresenter.delete();
+                                mPresenter.delete();//点击确定后，请求删除话题
                             }
                         });
                     }
-                    if(!confirmDialog.isShowing())confirmDialog.show();
+                    if(!confirmDialog.isShowing())confirmDialog.show();//显示提示对话框
                     break;
-                case R.id.topic_comment_layout_rl_root:
+                case R.id.topic_comment_layout_rl_root://回复评论－弹出回复对话
                     if(!mCommentDialog.isShowing()){
                         mCommentDialog.show();
                         mCommentDialog.setPosition(position);
                         mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
                     }
                     break;
+                default://跳转到评论详情页面
+                    Intent intent=new Intent(TopicDetailActivity.this, TopicCommentDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA,  adapter.getItemsId(position));
+                    startActivity(intent);
+                    break;
             }
 
         }
     };
 
+    /**刷新
+     *
+     */
     @Override
     public void onRefresh() {
         mPresenter.requestComments(true);
     }
 
+    /**
+     * 加载
+     */
     @Override
     public void onLoad() {
         mPresenter.requestComments(false);
     }
+
+    /**本页layout 点击事件
+     * @param view
+     */
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.common_head_layout_iv_left:
+            case R.id.common_head_layout_iv_left://返回按钮
                 finish();
                 break;
             case R.id.topic_detial_layout_ll_like://话题点赞 已点赞enabel＝false
@@ -256,6 +300,9 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         }
     };
 
+    /**
+     * 释放资源，避免窗口溢出
+     */
     @Override
     protected void onDestroy() {
         mPresenter.onDestory();
@@ -265,12 +312,18 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         super.onDestroy();
     }
 
+    /**横竖屏切换时，调整Ui
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mCommentDialog.measureWindow();
     }
 
+    /**更新话题详情
+     * @param entity
+     */
     @Override
     public void update(TopicDetailEntity entity) {
         adapter.updateHead(entity);
@@ -281,16 +334,25 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         }
     }
 
+    /**更新评论列表
+     * @param comments
+     */
     @Override
     public void updateComment(List<TopicCommentEntity> comments) {
         adapter.updateItems(comments);
     }
 
+    /**加载评论列表
+     * @param comments
+     */
     @Override
     public void loadComment(List<TopicCommentEntity> comments) {
         adapter.loadItems(comments);
     }
 
+    /**
+     * 删除话题成功
+     */
     @Override
     public void deleteTopicSuccess() {
         Toast.makeText(getApplicationContext(),R.string.delete_topic_success,Toast.LENGTH_SHORT).show();
@@ -298,6 +360,10 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         finish();
     }
 
+    /**删除评论成功
+     * @param position
+     * @param subPosition
+     */
     @Override
     public void deleteCommentSuccess(int position, int subPosition) {
         adapter.removeItem(position,subPosition);
@@ -333,16 +399,28 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         }
     }
 
+    /**评论点赞完成
+     * @param isSuccess
+     * @param commentId
+     * @param position
+     */
     @Override
     public void commentLikeFinished(boolean isSuccess, String commentId, int position) {
         adapter.commentLikeFinished(isSuccess,commentId,position);
     }
 
+    /**发布评论成功
+     * @param comment
+     */
     @Override
     public void publishCommentSuccess(TopicCommentEntity comment) {
         adapter.addItem(comment);
     }
 
+    /**发布评论回复
+     * @param position
+     * @param comment
+     */
     @Override
     public void publishReplaySuccess(int position,TopicReplayEntity comment) {
         adapter.addReplay(position,comment);

@@ -9,37 +9,42 @@
         android:id="@+id/comment_detail_item_layout_iv_portrait"
         android:layout_width="25dip"
         android:layout_height="25dip"
-        android:layout_margin="@dimen/margin"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="10dip"
         android:src="@mipmap/topic_portrait"
         />
     <TextView
         android:id="@+id/comment_detail_item_layout_tv_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/comment_detail_item_layout_tv_date"
         android:textColor="@color/blue_text_color"
+        android:layout_marginRight="10dip"
         android:layout_toRightOf="@+id/comment_detail_item_layout_iv_portrait"
         android:layout_alignTop="@+id/comment_detail_item_layout_iv_portrait"
         android:layout_height="wrap_content"
         android:text="YYL666"
         android:textSize="12sp"
         />
-    <com.starlight.mobile.android.lib.view.RadioButtonPlus
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:layout_alignParentRight="true"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingBottom="5dip"
-        android:textColor="@color/like_check_text_color"
-        android:textSize="12sp"
-        android:button="@null"
-        mAttr:radio_left_height="13dip"
-        mAttr:radio_left_width="15dip"
-        android:drawablePadding="5dip"
-        android:drawableLeft="@drawable/like_check_selector"
-        android:layout_alignTop="@+id/comment_detail_item_layout_tv_name"
-        android:id="@+id/comment_detail_item_layout_rb_like"
-        />
+    <!--<com.starlight.mobile.android.lib.view.RadioButtonPlus-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="0"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:paddingLeft="10dip"-->
+        <!--android:paddingRight="10dip"-->
+        <!--android:paddingBottom="5dip"-->
+        <!--android:textColor="@color/like_check_text_color"-->
+        <!--android:textSize="12sp"-->
+        <!--android:button="@null"-->
+        <!--mAttr:radio_left_height="13dip"-->
+        <!--mAttr:radio_left_width="15dip"-->
+        <!--android:drawablePadding="5dip"-->
+        <!--android:drawableLeft="@drawable/like_check_selector"-->
+        <!--android:layout_alignTop="@+id/comment_detail_item_layout_tv_name"-->
+        <!--android:id="@+id/comment_detail_item_layout_rb_like"-->
+        <!--/>-->
 
     <TextView
         android:id="@+id/comment_detail_item_layout_tv_date"
@@ -47,9 +52,10 @@
         android:layout_height="wrap_content"
         android:text="6-19 08:07"
         android:textSize="9sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin"
         android:textColor="@color/common_gray_title_color"
-        android:layout_alignLeft="@+id/comment_detail_item_layout_tv_name"
-        android:layout_below="@+id/comment_detail_item_layout_tv_name"
+        android:layout_alignTop="@+id/comment_detail_item_layout_tv_name"
         />
     <TextView
         android:id="@+id/comment_detail_item_layout_tv_content"
@@ -57,16 +63,11 @@
         android:layout_height="wrap_content"
         android:text="哈哈哈。。。"
         android:textSize="12sp"
-        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginBottom="10dip"
         android:layout_marginRight="@dimen/margin"
         android:textColor="@color/common_text_color"
         android:layout_marginTop="5dip"
         android:layout_alignLeft="@+id/comment_detail_item_layout_tv_name"
-        android:layout_below="@+id/comment_detail_item_layout_tv_date"
+        android:layout_below="@+id/comment_detail_item_layout_tv_name"
         />
-    <View style="@style/common_light_line_style"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_below="@+id/comment_detail_item_layout_tv_content"
-        />
-
 </RelativeLayout>

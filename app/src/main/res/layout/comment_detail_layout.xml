@@ -105,8 +105,6 @@
     <include layout="@layout/common_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_marginLeft="@dimen/margin"
         android:layout_marginBottom="@dimen/margin"
         android:layout_below="@+id/comment_detail_layout_tv_comment_title"
         />
