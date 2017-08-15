@@ -2,6 +2,7 @@ package com.gkzxhn.wisdom.view;
 
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
+import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface ITopicDetailView extends IBaseView{
     void likeFinished(boolean isSuccess);
     void commentLikeFinished(boolean isSuccess,String commentId,int position);
     void publishCommentSuccess(TopicCommentEntity comment);
+    void publishReplaySuccess(TopicReplayEntity comment);
 }

@@ -19,6 +19,11 @@ public interface ITopicDetailModel extends IBaseModel  {
      * @param onFinishedListener
      */
     public void publishComment(String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    /**发布回复
+     * @param content
+     * @param onFinishedListener
+     */
+    public void publishReplay(String commentId,String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
 
     /**请求评论列表
      * @param currentPage

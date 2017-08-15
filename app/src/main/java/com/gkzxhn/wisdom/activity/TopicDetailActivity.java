@@ -26,6 +26,7 @@ import com.gkzxhn.wisdom.customview.CommentDialog;
 import com.gkzxhn.wisdom.customview.CommentShowDialog;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
+import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 import com.gkzxhn.wisdom.presenter.TopicDetailPresenter;
 import com.gkzxhn.wisdom.view.ITopicDetailView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
@@ -119,7 +120,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                     if(mCommentDialog.getPosition()==-1) {//评论话题
                         mPresenter.publishComments(mCommentDialog.getContent());
                     }else{//回复评论
-
+                        mPresenter.publishReplay(adapter.getItemsId(mCommentDialog.getPosition()),mCommentDialog.getContent());
                     }
                     break;
                 case R.id.comment_show_dialog_layout_tv_copy://评论－复制
@@ -340,5 +341,10 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void publishCommentSuccess(TopicCommentEntity comment) {
         adapter.addItem(comment);
+    }
+
+    @Override
+    public void publishReplaySuccess(TopicReplayEntity comment) {
+        showToast("成功");
     }
 }

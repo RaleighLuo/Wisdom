@@ -39,6 +39,18 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     }
 
     @Override
+    public void publishReplay(String commentId,String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try{
+            String url=String.format("%s/%s/comments/%s/subcomments", Constants.REQUEST_TOPIC_OPERATE_URL, topicId,commentId);
+            JSONObject params=new JSONObject();
+            params.put("content",content);
+            volleyUtils.post(url,new JSONObject().put("comment",params),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+
+    @Override
     public void requestComments(int currentPage, int pageSize, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
             String url=String.format("%s/%s/comments", Constants.REQUEST_TOPIC_OPERATE_URL, topicId);

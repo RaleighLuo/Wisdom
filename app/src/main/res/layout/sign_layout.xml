@@ -140,6 +140,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="120dip"
                 android:layout_height="120dip"
+                android:onClick="onClickListener"
                 android:layout_gravity="center"
                 android:src="@drawable/grey_oval_shape"
                 android:padding="15dip"
@@ -152,6 +153,7 @@
                 android:layout_gravity="center"
                 android:onClick="onClickListener"
                 android:text="@string/click_sign"
+                android:clickable="true"
                 android:textColor="@android:color/white"
                 android:gravity="center"
                 />

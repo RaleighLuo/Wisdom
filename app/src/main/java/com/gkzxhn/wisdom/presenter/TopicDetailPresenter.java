@@ -91,6 +91,26 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
 
     }
+    public void publishReplay(String commentId,String content){
+        getView().showProgress();
+        mModel.publishReplay(commentId,content, new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
+                if(code==200){
+                    getView().publishReplaySuccess(null);
+                }else{
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
+                }
+                getView().dismissProgress();
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+                showErrors(error);
+            }
+        });
+    }
 
     /**请求评论列表
      * @param isRefresh
