@@ -14,13 +14,12 @@ public class TopicReplayEntity {
     private String nickname;
     @SerializedName("user_image")
     private String portrait;
-    //    @SerializedName("user_id")
-    @Expose
+    @SerializedName("user_id")
     private String userId;
     private String content;
-    //    @SerializedName("created_at")
-    @Expose
+    @SerializedName("created_at")
     private String date;
+
 
     public String getDate() {
         return date;

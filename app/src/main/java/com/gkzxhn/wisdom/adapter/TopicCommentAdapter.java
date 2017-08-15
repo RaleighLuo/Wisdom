@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.activity.CommentDetailActivity;
+import com.gkzxhn.wisdom.activity.TopicCommentDetailActivity;
 import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
@@ -70,6 +70,16 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         tvTopicCommentCount.setText(String.valueOf(mTopicInfor.getCommentCount()));
         mDatas.add(0,entity);
         notifyItemRangeChanged(1,mDatas.size());
+    }
+    /**发布回复
+     * @param position mData中的position
+     * @param entity
+     */
+    public void addReplay(int position,TopicReplayEntity entity){
+        TopicCommentEntity comment=mDatas.get(position);
+        comment.getReplays().add(entity);
+        comment.setCommentCount(comment.getCommentCount()+1);
+        notifyItemChanged(position+1);
     }
     /**删除评论
      * @param position mData中的position
@@ -183,7 +193,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
             final int mPosition=position-1;
             final TopicCommentEntity entity = mDatas.get(mPosition);
             //下载头像
-            ImageLoader.getInstance().displayImage(entity.getPortrait(),holder.ivPortrait);
+            ImageLoader.getInstance().displayImage(entity.getPortrait(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
             holder.tvContent.setText(entity.getContent());
             holder.tvName.setText(entity.getNickname());
             holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
@@ -248,7 +258,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     tvTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            context.startActivity(new Intent(context, CommentDetailActivity.class));
+                            context.startActivity(new Intent(context, TopicCommentDetailActivity.class));
                         }
                     });
                 }else if(replays.size()>i){
@@ -263,7 +273,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                     tvTitle.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(context, CommentDetailActivity.class);
+                            Intent intent=new Intent(context, TopicCommentDetailActivity.class);
                             intent.putExtra(Constants.EXTRA,replay.getId());
                             intent.putExtra(Constants.EXTRAS,replay.getUserId());
                             intent.putExtra(Constants.EXTRA_TAB,replay.getNickname());
@@ -299,7 +309,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         //header
         private ImageView ivHeaderPortrait;
         private TextView tvHeaderName,tvHeaderDate,tvHeaderContent,
-                 tvHeaderDel;
+                tvHeaderDel;
         private RecyclerView rvHeaderTopicImages;
         private OnlineTopicAdapter mOnlineTopicAdapter;
         //Comment

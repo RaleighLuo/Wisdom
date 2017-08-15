@@ -17,7 +17,8 @@ import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CommentDialog;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
-import com.gkzxhn.wisdom.view.ICommentDetailView;
+import com.gkzxhn.wisdom.presenter.TopicCommentDetailPresenter;
+import com.gkzxhn.wisdom.view.ITopicCommentDetailView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -26,10 +27,11 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/10.
+ * 评论详情
  */
 
-public class CommentDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener,ICommentDetailView{
+public class TopicCommentDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
+        CusSwipeRefreshLayout.OnLoadListener,ITopicCommentDetailView {
     private CommentDetailAdapter adapter;
     private ImageView ivPortrait;
     private TextView tvName,tvDate,tvContent,tvComment,tvCommentCount;
@@ -40,6 +42,7 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
     private DotsTextView tvLoading;
     private ProgressDialog mProgress;
     private CommentDialog mCommentDialog;
+    private TopicCommentDetailPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class CommentDetailActivity extends SuperActivity implements CusSwipeRefr
         mSwipeRefresh= (CusSwipeRefreshLayout) findViewById(R.id.common_list_layout_swipeRefresh);
     }
     private void init(){
+        mPresenter=new TopicCommentDetailPresenter(this,this,null);
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         dismissProgress();
         mSwipeRefresh.setOnRefreshListener(this);

@@ -8,6 +8,7 @@ import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
+import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 import com.gkzxhn.wisdom.model.ITopicDetailModel;
 import com.gkzxhn.wisdom.model.impl.TopicDetailModel;
 import com.gkzxhn.wisdom.util.Utils;
@@ -70,14 +71,12 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
                     //TODO
-                    TopicCommentEntity entity=new TopicCommentEntity();
-                    entity.setContent(content);
+                    TopicCommentEntity entity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"comment"),TopicCommentEntity.class);
                     entity.setLikeable(true);
+                    entity.setLikesCount(0);
                     entity.setPortrait(getSharedPreferences().getString(Constants.USER_PORTRAIT,""));
                     entity.setNickname(getSharedPreferences().getString(Constants.USER_NICKNAME,""));
-                    entity.setDate(Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz")));
                     getView().publishCommentSuccess(entity);
-
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
@@ -91,14 +90,17 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
         });
 
     }
-    public void publishReplay(String commentId,String content){
+    public void publishReplay(final int position,String commentId,String content){
         getView().showProgress();
         mModel.publishReplay(commentId,content, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
-                    getView().publishReplaySuccess(null);
+                    TopicReplayEntity entity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"sub_comments"),TopicReplayEntity.class);
+                    entity.setPortrait(getSharedPreferences().getString(Constants.USER_PORTRAIT,""));
+                    entity.setNickname(getSharedPreferences().getString(Constants.USER_NICKNAME,""));
+                    getView().publishReplaySuccess(position,entity);
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }

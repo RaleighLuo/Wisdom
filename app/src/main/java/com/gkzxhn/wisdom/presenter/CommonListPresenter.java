@@ -45,7 +45,7 @@ public class CommonListPresenter<T> extends BasePresenter<ICommonListModel,IComm
                                 List<T> mData = (List<T>) object;
                                 if (mData != null && mData.size() > 0) currentPage++;
                                 if(isRefresh)getView().updateItems(mData);
-                                else getView().updateItems(mData);
+                                else getView().loadItems(mData);
                                 getView().stopRefreshAnim();
 
                             }

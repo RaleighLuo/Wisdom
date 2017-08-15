@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Raleigh.Luo on 17/8/10.
  */
 
-public interface ICommentDetailView extends IBaseView {
+public interface ITopicCommentDetailView extends IBaseView {
     void updateItems(List<TopicCommentEntity> mDatas);
     void loadItems(List<TopicCommentEntity> mDatas);
     void likeFinish(boolean isSuccess);
