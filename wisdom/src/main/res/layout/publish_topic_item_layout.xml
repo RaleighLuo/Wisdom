@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_margin="2dip"
         android:padding="5dip"
-        android:background="#d9eaeb"
+        android:background="@color/border_color"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.gkzxhn.wisdom.customview.DivisionImageView
