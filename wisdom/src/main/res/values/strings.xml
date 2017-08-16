@@ -186,6 +186,7 @@
     <string name="order_number">订单号</string>
     <string name="payment_succuss">支付成功</string>
     <string name="payment_date">创建时间</string>
+    <string name="please_select_payment_month">请选择缴纳月数</string>
     <!--话题-->
     <string name="own">我的</string>
     <string name="community">社区</string>

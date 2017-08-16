@@ -37,6 +37,12 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
                 context.startActivity(new Intent(context, PropertyFeeDetailActivity.class));
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
     }
 
     @Override
