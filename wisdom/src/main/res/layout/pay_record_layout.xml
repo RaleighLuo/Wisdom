@@ -11,9 +11,9 @@
         mAttr:chHead_title="@string/pay_record"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dip"
-        android:background="@color/common_bg_color"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dip"-->
+        <!--android:background="@color/common_bg_color"/>-->
     <include layout="@layout/common_list_layout" />
 </LinearLayout>

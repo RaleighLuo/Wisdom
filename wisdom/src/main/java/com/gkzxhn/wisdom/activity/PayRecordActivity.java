@@ -65,8 +65,8 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
-//        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-//        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new PayRecordAdapter(this);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
