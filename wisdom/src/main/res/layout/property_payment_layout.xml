@@ -109,7 +109,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/property_fee"
+        android:text="@string/property_manager_fee"
         android:textColor="@color/common_gray_title_color"
         android:gravity="center"
         android:textSize="12sp"

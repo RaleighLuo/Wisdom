@@ -171,6 +171,7 @@
     <string name="three_month">三个月</string>
     <string name="six_month">六个月</string>
     <string name="one_year">一年</string>
+    <string name="property_manager_fee">物业管理费</string>
     <string name="property_fee">物业费</string>
     <string name="total_area">总面积</string>
     <string name="property_fee_pay_success">已成功支付，感谢您的使用！</string>
@@ -180,6 +181,11 @@
     <string name="weixin_payment">微信支付</string>
 
     <string name="payment_detail">缴费详情</string>
+    <string name="payment_method">支付方式</string>
+    <string name="payment_type">缴费类型</string>
+    <string name="order_number">订单号</string>
+    <string name="payment_succuss">支付成功</string>
+    <string name="payment_date">创建时间</string>
     <!--话题-->
     <string name="own">我的</string>
     <string name="community">社区</string>
