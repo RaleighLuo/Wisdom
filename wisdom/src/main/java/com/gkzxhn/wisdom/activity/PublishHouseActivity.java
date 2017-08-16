@@ -2,10 +2,14 @@ package com.gkzxhn.wisdom.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.adapter.PublishHouseAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CusTextItem;
 import com.gkzxhn.wisdom.customview.DecorateDialog;
@@ -14,6 +18,7 @@ import com.gkzxhn.wisdom.customview.HouseAreaDialog;
 import com.gkzxhn.wisdom.customview.HouseTypeDialog;
 import com.gkzxhn.wisdom.customview.MoneyDialog;
 import com.starlight.mobile.android.lib.util.CommonHelper;
+import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
 
 /**
  * Created by Raleigh.Luo on 17/7/28.
@@ -27,7 +32,9 @@ public class PublishHouseActivity extends SuperActivity {
     private MoneyDialog mMoneyDialog;
     private CusTextItem ctiHouseType,ctiDecorate,ctiRentWay,ctiFloor,ctiHouseArea,ctiMoney;
     private int TAB;
-    private EditText etCommitteName,etTitle,etContent,etContact,etPhone;
+    private EditText etCommitteName,etContent,etContact,etPhone;
+    private RecyclerView mRecyclerView;
+    private PublishHouseAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +43,8 @@ public class PublishHouseActivity extends SuperActivity {
         init();
     }
     private void initControls(){
+        mRecyclerView= (RecyclerView) findViewById(R.id.publish_house_layout_rv_images);
         etCommitteName= (EditText) findViewById(R.id.publish_house_layout_et_committe_name);
-        etTitle= (EditText) findViewById(R.id.publish_house_layout_et_title);
         etContent= (EditText) findViewById(R.id.publish_house_layout_et_house_description);
         etContact= (EditText) findViewById(R.id.publish_house_layout_et_contact);
         etPhone= (EditText) findViewById(R.id.publish_house_layout_et_contact_phone);
@@ -62,6 +69,13 @@ public class PublishHouseActivity extends SuperActivity {
     }
 
     private void init(){
+        mRecyclerView.setHasFixedSize(true);
+        FullyGridLayoutManager i=new FullyGridLayoutManager(this,4);
+        i.setReverseLayout(true);
+        mRecyclerView.setLayoutManager(new FullyGridLayoutManager(this,4));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter=new PublishHouseAdapter(this);
+        mRecyclerView.setAdapter(adapter);
         TAB=getIntent().getIntExtra(Constants.EXTRA_TAB,Constants.HOUSE_LEASE_TAB);
         mHouseTypeDialog=new HouseTypeDialog(this);
         mHouseTypeDialog.setOnClickListener(new View.OnClickListener() {

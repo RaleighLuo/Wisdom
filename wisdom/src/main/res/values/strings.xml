@@ -88,7 +88,7 @@
 
     <string name="house_lease_publish">租房发布</string>
     <string name="house_sale_publish">售房发布</string>
-    <string name="please_input_committe_name">输入小区名称</string>
+    <string name="please_input_committe_name">输入标题，6-20字</string>
     <string name="area">区域</string>
     <string name="decorate">装修</string>
     <string name="please_select">请选择</string>
