@@ -20,6 +20,7 @@ import com.gkzxhn.wisdom.activity.RepairProgressActivity;
 import com.gkzxhn.wisdom.activity.RepairRewardActivity;
 import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
+import com.gkzxhn.wisdom.adapter.OnItemLongClickListener;
 import com.gkzxhn.wisdom.adapter.RepairAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
@@ -84,7 +85,7 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_line_color)));
         adapter=new RepairAdapter(mActivity,TAB);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
@@ -94,18 +95,24 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
         @Override
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
-                case R.id.repair_item_layout_tv_right:
-                    if(TAB== Constants.REPAIR_PROGRESSING_TAB){//查看流程
-                        startActivity(new Intent(mActivity,RepairProgressActivity.class));
-                    }else{//删除
-                        if(!mCheckConfirmDialog.isShowing())mCheckConfirmDialog.show();
-                    }
-                    break;
+//                case R.id.repair_item_layout_tv_right:
+//                    if(TAB== Constants.REPAIR_PROGRESSING_TAB){//查看流程
+//                        startActivity(new Intent(mActivity,RepairProgressActivity.class));
+//                    }else{//删除
+//                        if(!mCheckConfirmDialog.isShowing())mCheckConfirmDialog.show();
+//                    }
+//                    break;
                 default://查看详情
                     startActivity(new Intent(mActivity,RepairDetailActivity.class));
                     break;
             }
 
+
+        }
+    };
+    private OnItemLongClickListener onItemLongClickListener=new OnItemLongClickListener() {
+        @Override
+        public void onLongClickListener(View convertView, int position) {
 
         }
     };

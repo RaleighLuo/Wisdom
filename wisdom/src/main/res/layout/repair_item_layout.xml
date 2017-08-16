@@ -19,58 +19,58 @@
     </FrameLayout>
     <TextView
         android:id="@+id/repair_item_layout_tv_title"
-        android:layout_toLeftOf="@+id/repair_item_layout_ll_buttom"
+        android:layout_toLeftOf="@+id/repair_item_layout_tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="设备设施"
+        android:layout_marginRight="10dip"
         android:layout_marginLeft="8dip"
         android:layout_toRightOf="@+id/repair_item_layout_fl_oval"
         android:textColor="@color/common_text_color"
         />
     <TextView
-        android:id="@+id/repair_item_layout_tv_date"
+        android:id="@+id/repair_item_layout_tv_content"
         android:layout_width="wrap_content"
         android:layout_alignLeft="@+id/repair_item_layout_tv_title"
         android:layout_height="wrap_content"
         android:layout_below="@+id/repair_item_layout_tv_title"
-        android:text="2017年6月1号"
-        android:layout_marginTop="5dip"
-        android:textColor="@color/common_gray_title_color"
+        android:text="电梯故障报修半小时不见维保员，请尽快安排人过来"
+        android:layout_marginTop="10dip"
+        android:maxLines="2"
+        android:textColor="@color/common_light_text_color"
         android:textSize="12sp"
         />
-<LinearLayout
-    android:id="@+id/repair_item_layout_ll_buttom"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_alignParentRight="true"
-    >
     <TextView
-        android:id="@+id/repair_item_layout_tv_left"
+        android:id="@+id/repair_item_layout_tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/detail"
-        android:paddingRight="10dip"
-        android:paddingTop="7dip"
-        android:paddingBottom="7dip"
-        android:paddingLeft="10dip"
-        android:textSize="11sp"
-        android:background="@drawable/repair_detial_btn_selector"
+        android:layout_alignTop="@+id/repair_item_layout_tv_title"
+        android:text="2017年6月1号"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/common_gray_title_color"
+        android:textSize="10sp"
         />
-    <TextView
-        android:id="@+id/repair_item_layout_tv_right"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:textSize="11sp"
-        android:paddingRight="10dip"
-        android:paddingTop="7dip"
-        android:paddingBottom="7dip"
-        android:paddingLeft="10dip"
-        android:background="@drawable/repair_delete_btn_selector"
-        android:textColor="@color/red"
-        />
-</LinearLayout>
+<!--<LinearLayout-->
+    <!--android:id="@+id/repair_item_layout_ll_buttom"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--&gt;-->
+    <!---->
+    <!--<TextView-->
+        <!--android:id="@+id/repair_item_layout_tv_right"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_marginLeft="10dip"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/delete"-->
+        <!--android:textSize="11sp"-->
+        <!--android:paddingRight="10dip"-->
+        <!--android:paddingTop="7dip"-->
+        <!--android:paddingBottom="7dip"-->
+        <!--android:paddingLeft="10dip"-->
+        <!--android:background="@drawable/repair_delete_btn_selector"-->
+        <!--android:textColor="@color/red"-->
+        <!--/>-->
+<!--</LinearLayout>-->
 </RelativeLayout>

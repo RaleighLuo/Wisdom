@@ -2,14 +2,21 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dip"
     >
-    <com.starlight.mobile.android.lib.view.EqualImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/repair_take_photo"
-        android:scaleType="centerCrop"
-        android:id="@+id/publish_house_item_layout_iv_image"
-        />
+    <FrameLayout
+        android:layout_margin="2dip"
+        android:padding="3dip"
+        android:id="@+id/publish_house_item_layout_fl_image"
+        android:background="@color/border_color"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.starlight.mobile.android.lib.view.EqualImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/repair_take_photo"
+            android:scaleType="centerCrop"
+            android:id="@+id/publish_house_item_layout_iv_image"
+            />
+    </FrameLayout>
 
 </FrameLayout>

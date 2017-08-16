@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.activity.PropertyFeeDetailActivity;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
@@ -31,13 +30,6 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, PropertyFeeDetailActivity.class));
-            }
-        });
-
     }
 
     @Override

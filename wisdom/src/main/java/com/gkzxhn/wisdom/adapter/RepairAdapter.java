@@ -21,6 +21,11 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
     private Context context;
     private final int TAB;
     private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
             this.onItemClickListener = onItemClickListener;
@@ -45,20 +50,25 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
-        holder.tvLeft.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            public boolean onLongClick(View v) {
+                if(onItemLongClickListener!=null)onItemLongClickListener.onLongClickListener(v,position);
+                return true;
             }
         });
-        holder.tvRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
-            }
-        });
-
-
+//        holder.tvLeft.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+//            }
+//        });
+//        holder.tvRight.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+//            }
+//        });
     }
 
     @Override
@@ -67,19 +77,19 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView tvTitle,tvDate,tvLeft,tvRight;
+        public TextView tvTitle,tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvDate= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_date);
             tvTitle= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_title);
-            tvLeft= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_left);
-            tvRight= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_right);
-            if(TAB== Constants.REPAIR_PROGRESSING_TAB){
-                tvRight.setText(R.string.progress);
-                tvRight.setBackgroundResource(R.drawable.repair_progress_btn_selector);
-                tvRight.setTextColor(context.getResources().getColor(R.color.pay_color));
-            }
+//            tvLeft= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_left);
+//            tvRight= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_right);
+//            if(TAB== Constants.REPAIR_PROGRESSING_TAB){
+//                tvRight.setText(R.string.progress);
+//                tvRight.setBackgroundResource(R.drawable.repair_progress_btn_selector);
+//                tvRight.setTextColor(context.getResources().getColor(R.color.pay_color));
+//            }
         }
     }
 }
