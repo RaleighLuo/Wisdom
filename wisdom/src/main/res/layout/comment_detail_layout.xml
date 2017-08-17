@@ -62,6 +62,7 @@
         android:textColor="@color/like_check_text_color"
         android:textSize="12sp"
         android:button="@null"
+        android:clickable="true"
         mAttr:radio_left_height="16dip"
         mAttr:radio_left_width="17dip"
         android:drawablePadding="5dip"

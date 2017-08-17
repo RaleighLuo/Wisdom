@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.async.VolleyUtils;
+import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicReplayEntity;
@@ -25,50 +26,21 @@ import java.util.List;
 
 public class TopicCommentDetailPresenter extends BasePresenter<ITopicCommentDetailModel,ITopicCommentDetailView> {
 
-    public TopicCommentDetailPresenter(Context context, ITopicCommentDetailView view,String commentId) {
-        super(context, new TopicCommentDetailModel(commentId), view);
+    public TopicCommentDetailPresenter(Context context, ITopicCommentDetailView view,String commentId,String topicId) {
+        super(context, new TopicCommentDetailModel(commentId,topicId), view);
     }
     public void request(){
         getView().startRefreshAnim();
         mModel.request(new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
-                int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
-                if(code==200){
-                    TopicCommentDetailEntity detailEntity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"comment"), TopicCommentDetailEntity.class);
-                    getView().update(detailEntity);
-                    requestReplayList(true,detailEntity.getTopicId());
-                }else{
-                    getView().stopRefreshAnim();
-                    getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
-                }
-            }
-
-            @Override
-            public void onFailed(VolleyError error) {
-                showErrors(error);
-            }
-        });
-
-    }
-    public void publishReplay(String topicId, String content){
-
-    }
-    public void requestReplayList(final boolean isRefresh,String topicId){
-        if(isRefresh){
-            currentPage=FIRST_PAGE;
-            getView().startRefreshAnim();
-        }
-        mModel.requestReplayList(topicId,currentPage, PAGE_SIZE, new VolleyUtils.OnFinishedListener<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
-                    String comment=JSONUtil.getJSONObjectStringValue(response,"comments");
+                    JSONObject result=JSONUtil.getJSONObject(response,"result");
+                    TopicCommentDetailEntity entity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(result,"comment"),TopicCommentDetailEntity.class);
+                    String comment=JSONUtil.getJSONObjectStringValue(result,"subcomments");
                     List<TopicReplayEntity> list=new Gson().fromJson(comment, new TypeToken<List<TopicReplayEntity>>() {}.getType());
-                    if (list != null && list.size() > 0) currentPage++;
-                    if(isRefresh)getView().updateItems(list);
-                    else getView().loadItems(list);
+                    getView().update(entity,list);
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
@@ -82,8 +54,32 @@ public class TopicCommentDetailPresenter extends BasePresenter<ITopicCommentDeta
         });
 
     }
-    public void like(String topicId){
-        mModel.like(topicId, new VolleyUtils.OnFinishedListener<JSONObject>() {
+    public void publishReplay( String content){
+        getView().showProgress();
+        mModel.publishReplay( content, new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
+                if(code==200){
+                    TopicReplayEntity entity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"sub_comments"),TopicReplayEntity.class);
+                    entity.setPortrait(getSharedPreferences().getString(Constants.USER_PORTRAIT,""));
+                    entity.setNickname(getSharedPreferences().getString(Constants.USER_NICKNAME,""));
+                    getView().commentSuccess(entity);
+                }else{
+                    getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
+                }
+                getView().dismissProgress();
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+                showErrors(error);
+            }
+        });
+
+    }
+    public void like(){
+        mModel.like( new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
@@ -93,6 +89,7 @@ public class TopicCommentDetailPresenter extends BasePresenter<ITopicCommentDeta
                     getView().likeFinish(false);
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
+                getView().dismissProgress();
             }
 
             @Override
@@ -103,9 +100,9 @@ public class TopicCommentDetailPresenter extends BasePresenter<ITopicCommentDeta
         });
 
     }
-    public void delete(final int position, String topicId){
+    public void deleteReplay(final int position,String id){
         getView().showProgress();
-        mModel.delete(topicId, new VolleyUtils.OnFinishedListener<JSONObject>() {
+        mModel.deleteReplay(id,new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
@@ -114,6 +111,7 @@ public class TopicCommentDetailPresenter extends BasePresenter<ITopicCommentDeta
                 }else{
                     getView().showToast(JSONUtil.getJSONObjectStringValue(response,"message"));
                 }
+                getView().dismissProgress();
             }
 
             @Override

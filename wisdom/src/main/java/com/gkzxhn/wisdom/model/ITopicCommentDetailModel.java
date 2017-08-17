@@ -9,9 +9,8 @@ import org.json.JSONObject;
  */
 
 public interface ITopicCommentDetailModel extends IBaseModel {
-    void requestReplayList(String topicId,int currentPage, int pageSize,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
-    void publishReplay(String topicId,String content,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
-    void like(String topicId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
-    void delete(String topicId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void publishReplay(String content,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void like( VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    void deleteReplay(String id,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
     void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
 }

@@ -3,6 +3,7 @@ package com.gkzxhn.wisdom.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Raleigh.Luo on 17/8/15.
  */
 
-public class TopicCommentDetailEntity {
+public class TopicCommentDetailEntity implements Serializable{
     private String id;
     private String nickname;
     @SerializedName("user_image")
@@ -26,17 +27,6 @@ public class TopicCommentDetailEntity {
     @SerializedName("comments_amount")
     private int commentCount;//评论数
     private int replayCount;//回复数
-    private String topicId;
-
-    public String getTopicId() {
-        return topicId == null ? "" : topicId;
-    }
-
-    public void setTopicId(String topicId) {
-        if (topicId != null && !topicId.equals("null"))
-            this.topicId = topicId;
-    }
-
     public int getReplayCount() {
         return replayCount;
     }

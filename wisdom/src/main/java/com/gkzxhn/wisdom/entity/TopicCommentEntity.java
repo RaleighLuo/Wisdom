@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Raleigh.Luo on 17/8/8.
  */
 
-public class TopicCommentEntity implements Serializable{
+public class TopicCommentEntity {
     private String id;
     private String nickname;
     @SerializedName("user_image")

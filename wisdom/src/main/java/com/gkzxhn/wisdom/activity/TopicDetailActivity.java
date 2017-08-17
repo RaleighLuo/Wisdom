@@ -25,6 +25,7 @@ import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.customview.CommentDialog;
 import com.gkzxhn.wisdom.customview.CommentShowDialog;
+import com.gkzxhn.wisdom.entity.TopicCommentDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicReplayEntity;
@@ -204,6 +205,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                 default://跳转到评论详情页面
                     Intent intent=new Intent(TopicDetailActivity.this, TopicCommentDetailActivity.class);
                     intent.putExtra(Constants.EXTRA,  adapter.getItemsId(position));
+                    intent.putExtra(Constants.EXTRAS, mTopicId);
                     startActivity(intent);
                     break;
             }
