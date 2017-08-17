@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by baidu on 17/1/12.
  */
@@ -44,6 +46,9 @@ public class GKApplication extends Application {
         initImageLoader();
         // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
         mContext = getApplicationContext();
+
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
     public void exit(){

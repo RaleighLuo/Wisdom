@@ -41,24 +41,9 @@ public class Utils {
         return dialog;
     }
     public static boolean isConnected() {
-        try {
-            //获得网络连接服务
-            ConnectivityManager connManager = (ConnectivityManager) GKApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
-            // State state = connManager.getActiveNetworkInfo().getState();
-            // 获取WIFI网络连接状态
-            NetworkInfo.State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-            // 判断是否正在使用WIFI网络
-            if (NetworkInfo.State.CONNECTED == state) {
-                return true;
-            } else {
-                state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-                // 判断是否正在使用GPRS网络
-                return NetworkInfo.State.CONNECTED == state;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        ConnectivityManager conn = (ConnectivityManager) GKApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = conn.getActiveNetworkInfo();
+        return (info != null && info.isConnected());
     }
     /**
      * 验证手机号码的合法性

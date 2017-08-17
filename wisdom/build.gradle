@@ -18,6 +18,11 @@ android {
     }
     productFlavors {
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -35,4 +40,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     //Gson解析
     compile project(':base_lib_system')
+    compile files('libs/jcore-android-1.1.6.jar')
+    compile files('libs/jpush-android-3.0.8.jar')
 }
