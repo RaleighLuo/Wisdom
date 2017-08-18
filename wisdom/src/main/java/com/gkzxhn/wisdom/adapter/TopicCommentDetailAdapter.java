@@ -57,7 +57,7 @@ public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicComment
         return mDatas.get(position).getId();
     }
     public String getItemsUserId(int position){
-        return mDatas.get(position).getUserId();
+        return position>=0&&position<mDatas.size()?mDatas.get(position).getUserId():"";
     }
 
     @Override

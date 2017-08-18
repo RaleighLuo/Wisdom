@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.gkzxhn.wisdom.R;
@@ -17,9 +18,17 @@ import com.gkzxhn.wisdom.activity.PropertyFeeDetailActivity;
 
 public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.ViewHolder> {
     private Context context;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public PayRecordAdapter(Context context) {
         this.context = context;
+    }
+    public void removeItem(int position){
+        notifyItemRemoved(position);
     }
 
     @Override
@@ -30,17 +39,17 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, PropertyFeeDetailActivity.class));
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.ivDel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                return true;
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
     }
@@ -51,9 +60,10 @@ public class PayRecordAdapter extends RecyclerView.Adapter<PayRecordAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-
-    public ViewHolder(View itemView) {
-        super(itemView);
+        ImageView ivDel;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ivDel= (ImageView) itemView.findViewById(R.id.payment_history_item_layout_iv_delete);
+        }
     }
-}
 }

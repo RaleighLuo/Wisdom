@@ -26,14 +26,7 @@ public class TopicCommentDetailEntity implements Serializable{
     private int likeable;
     @SerializedName("comments_amount")
     private int commentCount;//评论数
-    private int replayCount;//回复数
-    public int getReplayCount() {
-        return replayCount;
-    }
 
-    public void setReplayCount(int replayCount) {
-        this.replayCount = replayCount;
-    }
 
     public int getCommentCount() {
         return commentCount;

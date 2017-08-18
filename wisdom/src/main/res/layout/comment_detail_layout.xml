@@ -75,7 +75,6 @@
     <com.starlight.mobile.android.lib.view.CusTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         android:clickable="true"
         android:onClick="onClickListener"
         android:id="@+id/comment_detail_layout_tv_comment"

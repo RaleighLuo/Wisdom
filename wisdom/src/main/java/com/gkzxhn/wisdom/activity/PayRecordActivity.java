@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.PayRecordAdapter;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.entity.PayRecordEntity;
 import com.gkzxhn.wisdom.presenter.CommonListPresenter;
 import com.gkzxhn.wisdom.view.ICommonListView;
@@ -36,6 +39,8 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
     private DotsTextView tvLoading;
     private PayRecordAdapter adapter;
     private CommonListPresenter<PayRecordEntity> mPresenter;
+    private CheckConfirmDialog mCheckConfirmDialog;
+    private int currentPosition=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,14 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
 
     }
     private void init(){
+        mCheckConfirmDialog=new CheckConfirmDialog(this);
+        mCheckConfirmDialog.setContent(getResources().getString(R.string.delete_pay_record_hint));
+        mCheckConfirmDialog.setYesBtnListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.removeItem(currentPosition);//移除某项
+            }
+        });
         mPresenter=new CommonListPresenter<PayRecordEntity>(this,this,Constants.PAY_RECORD_TAB);
         findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(android.R.color.white);
         mSwipeRefresh.setOnRefreshListener(this);
@@ -68,9 +81,25 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new PayRecordAdapter(this);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            switch (convertView.getId()){
+                case R.id.payment_history_item_layout_iv_delete:
+                    currentPosition=position;
+                    if(!mCheckConfirmDialog.isShowing())mCheckConfirmDialog.show();
+                    break;
+                default:
+                    startActivity(new Intent(PayRecordActivity.this, PropertyFeeDetailActivity.class));
+                    break;
+            }
+
+        }
+    };
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
@@ -144,5 +173,11 @@ public class PayRecordActivity extends SuperActivity   implements CusSwipeRefres
     @Override
     public void loadItems(List<PayRecordEntity> datas) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mCheckConfirmDialog.isShowing())mCheckConfirmDialog.dismiss();
     }
 }
