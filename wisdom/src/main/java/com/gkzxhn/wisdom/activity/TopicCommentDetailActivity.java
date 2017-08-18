@@ -236,7 +236,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         if(isSuccess) {
             mCommentEnity.setLikeable(!mCommentEnity.isLikeable());
             mCommentEnity.setLikesCount(mCommentEnity.isLikeable()?mCommentEnity.getLikesCount()-1:mCommentEnity.getLikesCount()+1);
-            rbLike.setText(mCommentEnity.getLikesCount());
+            rbLike.setText(String.valueOf(mCommentEnity.getLikesCount()));
         }
         rbLike.setChecked(!mCommentEnity.isLikeable());
 
