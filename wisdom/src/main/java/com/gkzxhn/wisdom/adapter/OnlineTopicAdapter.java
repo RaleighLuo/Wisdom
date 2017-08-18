@@ -1,4 +1,4 @@
-package com.gkzxhn.wisdom.activity;
+package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.OnlinePhotoPreviewActivity;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.DivisionImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;

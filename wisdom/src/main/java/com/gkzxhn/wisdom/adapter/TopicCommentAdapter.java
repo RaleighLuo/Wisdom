@@ -1,7 +1,6 @@
 package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -16,9 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.activity.TopicCommentDetailActivity;
-import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
-import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
 import com.gkzxhn.wisdom.entity.TopicReplayEntity;

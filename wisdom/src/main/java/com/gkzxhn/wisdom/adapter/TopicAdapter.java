@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
-import com.gkzxhn.wisdom.activity.OnlineTopicAdapter;
 import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
