@@ -42,7 +42,7 @@ import java.util.List;
 public class TopicCommentDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,ITopicCommentDetailView {
     private TopicCommentDetailAdapter adapter;
     private ImageView ivPortrait;
-    private TextView tvName,tvDate,tvContent,tvComment, tvReplayCount;
+    private TextView tvName,tvDate,tvContent, tvReplayCount;
     private RadioButtonPlus rbLike;
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
@@ -66,7 +66,6 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         tvName= (TextView) findViewById(R.id.comment_detail_layout_tv_name);
         tvDate= (TextView) findViewById(R.id.comment_detail_layout_tv_date);
         tvContent= (TextView) findViewById(R.id.comment_detail_layout_tv_content);
-        tvComment= (TextView) findViewById(R.id.comment_detail_layout_tv_comment);
         tvReplayCount = (TextView) findViewById(R.id.comment_detail_layout_tv_comment_title);
         rbLike= (RadioButtonPlus) findViewById(R.id.comment_detail_layout_rb_like);
         tvLoading= (DotsTextView) findViewById(R.id.common_loading_layout_tv_load);
@@ -142,6 +141,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
+                setResult(RESULT_OK);
                 finish();
                 break;
             case R.id.comment_detail_layout_tv_comment://回复评论
@@ -247,7 +247,11 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
      */
     @Override
     public void commentSuccess(TopicReplayEntity entity) {
+        mCommentEnity.setCommentCount(mCommentEnity.getCommentCount()+1);
+        tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), mCommentEnity.getCommentCount(),
+                getString(R.string.strip)));
         adapter.addItem(entity);
+        if (ivNodata.isShown()) ivNodata.setVisibility(View.GONE);
     }
 
     /**更新评论详情
@@ -261,10 +265,9 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
             tvName.setText(entity.getNickname());
             tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
             tvContent.setText(entity.getContent());
-            tvComment.setText(String.valueOf(entity.getCommentCount()));
             rbLike.setChecked(!entity.isLikeable());
             rbLike.setText(String.valueOf(entity.getLikesCount()));
-            tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), entity.getReplayCount(),
+            tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), entity.getCommentCount(),
                     getString(R.string.strip)));
             adapter.updateItems(mDatas);
         }
@@ -272,7 +275,13 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
 
     @Override
     public void deleteSuccess(int position) {
+        mCommentEnity.setCommentCount(mCommentEnity.getCommentCount()-1);
+        tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), mCommentEnity.getCommentCount(),
+                getString(R.string.strip)));
         adapter.removeItem(position);
+        if(adapter.getItemCount()==0){
+            if (!ivNodata.isShown()) ivNodata.setVisibility(View.VISIBLE);
+        }
     }
 
 
