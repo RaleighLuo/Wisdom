@@ -129,7 +129,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
      * 发布
      */
     private void publish(){
-        if(currentPosition<adapter.getPhotoCount())mPresenter.uploadPhoto(adapter.getLocalPath(currentPosition));
+        if(currentPosition<adapter.getPhotoCount())mPresenter.uploadPhoto(adapter.getLocalPath(currentPosition),currentPosition);
         else mPresenter.publish(mRepairType,etContent.getText().toString().trim(),adapter.getUrls());
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {

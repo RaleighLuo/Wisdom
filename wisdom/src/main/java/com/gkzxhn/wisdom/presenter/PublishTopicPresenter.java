@@ -50,7 +50,7 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
             }
         });
     }
-    public void uploadPhoto(String filePath){
+    public void uploadPhoto(String filePath,int position){
         getView().startRefreshAnim();
         mUploadHelper.setUploadFinishListener(new UploadHelper.UploadFinishListener() {
             @Override
@@ -72,10 +72,9 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
                 getView().showToast(R.string.upload_image_faild);
             }
         });
-        int random=(int)(Math.random()*100);//0-100的随机数
-        //上传图片命名规则， 随机数_timestamp.jpg
+        //上传图片命名规则， userId_图片编号_timestamp.jpg
         String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
-                +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"))+random;
+                +"_"+(position+1)+"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_TOPICS_URL,uploadName);
     }
 
