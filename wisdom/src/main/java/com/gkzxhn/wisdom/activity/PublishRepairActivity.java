@@ -4,18 +4,19 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
@@ -31,7 +32,6 @@ import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +50,9 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
     private File mPhotoFile;
     private int currentPosition=0;
     private ProgressDialog mProgress;
+    private Spinner mSpinner;
+    private String[] mRepairTypeArray;
+    private String mRepairType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +61,30 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
         init();
     }
     private void initControls(){
+        mSpinner= (Spinner) findViewById(R.id.publish_repair_layout_sp_repair_type);
         btnSubmit= (Button) findViewById(R.id.publish_repair_layout_btn_submit);
         mRecyclerView= (RecyclerView) findViewById(R.id.publish_repair_layout_recycleview);
         ivAdd= (ImageView) findViewById(R.id.publish_repair_layout_iv_add);
         etContent= (EditText) findViewById(R.id.publish_repair_layout_et_content);
     }
     private void init(){
+        //初始化spinnner
+        mRepairTypeArray = getResources().getStringArray(R.array.repair_type);
+        ArrayAdapter<String> spinneradapter = new ArrayAdapter<String>(this,
+                R.layout.repair_item_spinner_item, mRepairTypeArray);
+        mSpinner.setAdapter(spinneradapter);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                mRepairType=mRepairTypeArray[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();
         mRecyclerView.setHasFixedSize(true);

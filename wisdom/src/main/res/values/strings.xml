@@ -264,5 +264,14 @@
         <item>星期五</item>
         <item>星期六</item>
     </array>
+    <string-array name="repair_type">
+        <item>设备设施</item>
+        <item>公共场地</item>
+        <item>花坛</item>
+        <item>绿地</item>
+        <item>树木</item>
+        <item>建筑小品</item>
+        <item>其他</item>
+    </string-array>
 
 </resources>

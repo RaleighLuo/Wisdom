@@ -24,19 +24,19 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
             <!--<TextView-->
-                <!--android:id="@+id/publish_repair_layout_tv_belong_community"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="国际华城 八栋三单元1205"-->
-                <!--android:clickable="true"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:textSize="12sp"-->
-                <!--android:layout_marginTop="@dimen/margin"-->
-                <!--android:layout_marginLeft="20dip"-->
-                <!--android:layout_marginRight="20dip"-->
-                <!--android:onClick="onClickListener"-->
-                <!--android:textColor="@color/blue_text_color"-->
-                <!--android:layout_marginBottom="10dip"/>-->
+            <!--android:id="@+id/publish_repair_layout_tv_belong_community"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="国际华城 八栋三单元1205"-->
+            <!--android:clickable="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_marginTop="@dimen/margin"-->
+            <!--android:layout_marginLeft="20dip"-->
+            <!--android:layout_marginRight="20dip"-->
+            <!--android:onClick="onClickListener"-->
+            <!--android:textColor="@color/blue_text_color"-->
+            <!--android:layout_marginBottom="10dip"/>-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,21 +47,47 @@
                 android:layout_marginRight="20dip"
                 android:textColor="@color/common_light_text_color"
                 />
-            <TextView
-                android:id="@+id/publish_repair_layout_tv_repair_type"
+            <!--<TextView-->
+            <!--android:id="@+id/publish_repair_layout_tv_repair_type"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="电梯故障"-->
+            <!--android:layout_marginLeft="20dip"-->
+            <!--android:layout_marginRight="20dip"-->
+            <!--android:clickable="true"-->
+            <!--android:drawableRight="@android:drawable/arrow_down_float"-->
+            <!--android:background="@drawable/common_item_click_selector"-->
+            <!--android:onClick="onClickListener"-->
+            <!--android:textColor="@color/common_text_color"-->
+            <!--android:paddingTop="10dip"-->
+            <!--android:paddingBottom="10dip"-->
+            <!--/>-->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="电梯故障"
-                android:layout_marginLeft="20dip"
                 android:layout_marginRight="20dip"
-                android:clickable="true"
-                android:drawableRight="@android:drawable/arrow_down_float"
-                android:background="@drawable/common_item_click_selector"
-                android:onClick="onClickListener"
-                android:textColor="@color/common_text_color"
-                android:paddingTop="10dip"
-                android:paddingBottom="10dip"
-                />
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="5dip"
+                >
+                <Spinner
+                    android:id="@+id/publish_repair_layout_sp_repair_type"
+                    android:layout_alignTop="@+id/config_layout_tv_rate_title"
+                    android:layout_alignBottom="@+id/config_layout_tv_rate_title"
+                    android:textSize="20sp"
+                    android:spinnerMode="dropdown"
+                    android:overlapAnchor="false"
+                    android:layout_toRightOf="@+id/config_layout_tv_rate_title"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/white"
+                    android:entries="@array/repair_type"
+                    android:layout_height="wrap_content"/>
+                <View android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@mipmap/ic_down"
+                    />
+            </FrameLayout>
             <EditText
                 android:id="@+id/publish_repair_layout_et_content"
                 android:layout_width="match_parent"
