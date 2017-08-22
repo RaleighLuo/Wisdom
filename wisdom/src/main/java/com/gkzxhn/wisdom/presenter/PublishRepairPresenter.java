@@ -20,16 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Created by Raleigh.Luo on 17/8/4.
+ * Created by Raleigh.Luo on 17/8/22.
  */
 
-public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishView> {
+public class PublishRepairPresenter extends BasePresenter<IPublishModel,IPublishView>  {
     private UploadHelper mUploadHelper=new UploadHelper();
-    public PublishTopicPresenter(Context context, IPublishView view) {
+    public PublishRepairPresenter(Context context, IPublishView view) {
         super(context, new PublishModel(), view);
     }
-    public void publish(String content, List<String> imagUrls){
-        mModel.publishTopic(content, imagUrls, new VolleyUtils.OnFinishedListener<JSONObject>() {
+    public void publish(int repairType,String content, List<String> imagUrls){
+        mModel.publishRepair(repairType,content, imagUrls, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
@@ -56,8 +56,14 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
             @Override
             public void onSuccess(String message, String filePath) {
                 JSONObject json= JSONUtil.getJSONObject(message);
-                String url=JSONUtil.getJSONObjectStringValue(json,"url");
-                getView().uploadPhotoSuccess(url);
+                int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(json,"code"));
+                if(code==200) {
+                    String url = JSONUtil.getJSONObjectStringValue(json, "url");
+                    getView().uploadPhotoSuccess(url);
+                }else{
+                    getView().stopRefreshAnim();
+                    getView().showToast(R.string.upload_image_faild);
+                }
             }
 
             @Override
@@ -69,7 +75,7 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
         //上传图片命名规则， 随机数_timestamp.jpg
         String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
                 +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
-        mUploadHelper.upload(filePath, Constants.UPLOAD_TOPICS_URL,uploadName);
+        mUploadHelper.upload(filePath, Constants.UPLOAD_REPAIRES_URL,uploadName);
     }
 
 }

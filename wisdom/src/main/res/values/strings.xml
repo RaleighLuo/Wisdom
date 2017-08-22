@@ -144,6 +144,7 @@
     <string name="repair_detail">报修详情</string>
     <string name="view_progress">查看流程</string>
     <string name="progress">流程</string>
+    <string name="has_publish_repair">已发布报修</string>
     <string name="delete_repair_hint">是否删除该条报修？</string>
     <!--个人中心-->
     <string name="person_infor">个人中心</string>

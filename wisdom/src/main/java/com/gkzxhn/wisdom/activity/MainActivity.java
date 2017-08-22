@@ -31,7 +31,7 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SuperActivity {
 
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
     NestedScrollView mNestedScrollView; // 标题栏Title
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.main_layout_tv_repair:
-                startActivity(new Intent(this,PublishRepairActivity.class));
+                startActivityForResult(new Intent(this,PublishRepairActivity.class),Constants.EXTRAS_CODE);
                 break;
             case R.id.home_full_screen_layout_tv_pay_record://缴费记录
                 startActivity(new Intent(this,PayRecordActivity.class));
@@ -177,8 +177,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Constants.EXTRA_CODE&&resultCode==RESULT_OK){
-            updatePersonInfor();
+        if(resultCode==RESULT_OK){
+            switch (requestCode){
+                case Constants.EXTRAS_CODE://报修
+                    showToast(R.string.has_publish_repair);
+                    break;
+                case Constants.EXTRA_CODE://个人信息
+                    updatePersonInfor();
+                    break;
+            }
         }
     }
 }

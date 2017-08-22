@@ -22,8 +22,10 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.PublishTopicAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.presenter.PublishRepairPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IBaseView;
+import com.gkzxhn.wisdom.view.IPublishView;
 import com.starlight.mobile.android.lib.album.AlbumActivity;
 import com.starlight.mobile.android.lib.util.CommonHelper;
 import com.starlight.mobile.android.lib.util.PermissionManager;
@@ -40,7 +42,7 @@ import java.util.UUID;
  * 发布报修
  */
 
-public class PublishRepairActivity extends SuperActivity implements IBaseView{
+public class PublishRepairActivity extends SuperActivity implements IPublishView{
     private EditText etContent;
     private Button btnSubmit;
     private ImageView ivAdd;
@@ -53,6 +55,7 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
     private Spinner mSpinner;
     private String[] mRepairTypeArray;
     private String mRepairType;
+    private PublishRepairPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,7 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
         adapter=new PublishTopicAdapter(this);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
+        mPresenter=new PublishRepairPresenter(this,this);
     }
 
     public void onClickListener(View view) {
@@ -104,7 +108,7 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
             case R.id.publish_repair_layout_btn_submit:
                 if(etContent.getText().toString().trim().length()>0) {
                     if (currentPosition != 0) currentPosition = adapter.getUrls().size() - 1;
-//                    publish();
+                    publish();
                 }else{
                     showToast(R.string.topic_publish_hint);
                 }
@@ -119,6 +123,13 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
                 break;
 
         }
+    }
+    /**
+     * 发布
+     */
+    private void publish(){
+        if(currentPosition<adapter.getPhotoCount())mPresenter.uploadPhoto(adapter.getLocalPath(currentPosition));
+        else mPresenter.publish(mRepairType.hashCode(),etContent.getText().toString().trim(),adapter.getUrls());
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
@@ -248,4 +259,16 @@ public class PublishRepairActivity extends SuperActivity implements IBaseView{
         }
     }
 
+    @Override
+    public void onSuccess() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void uploadPhotoSuccess(String url) {
+        adapter.addUrl(url,currentPosition);
+        currentPosition++;
+        publish();
+    }
 }

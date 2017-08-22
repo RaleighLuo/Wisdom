@@ -45,7 +45,7 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
     @Override
     public void like(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_BASE_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
                     topicId,commentId);
             volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {

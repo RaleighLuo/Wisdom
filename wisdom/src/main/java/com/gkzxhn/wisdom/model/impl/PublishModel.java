@@ -1,0 +1,71 @@
+package com.gkzxhn.wisdom.model.impl;
+
+import com.gkzxhn.wisdom.async.VolleyUtils;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.model.IPublishModel;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
+
+/**
+ * Created by Raleigh.Luo on 17/8/4.
+ */
+
+public class PublishModel extends BaseModel implements IPublishModel {
+    /**
+     * @param repareType
+     * @param content
+     * @param imagUrls
+     * @param onFinishedListener
+     */
+    @Override
+    public void publishRepair(int repareType, String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try {
+            JSONObject params=new JSONObject();
+            params.put("content",content);
+            params.put("title",content);
+            if(imagUrls!=null&&imagUrls.size()>0){
+                JSONArray imageArray=new JSONArray();
+                for (String url:imagUrls){
+                    JSONObject json=new JSONObject();
+                    json.put("image_url",url);
+                    imageArray.put(json);
+                }
+                params.put("images_attributes",imageArray);
+            }
+            String url=String.format("%s/%s/repairs",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
+            volleyUtils.post(url,new JSONObject().put("repair",params),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+
+    /**话题发布
+     * @param content
+     * @param imageUrls
+     * @param onFinishedListener
+     */
+    @Override
+    public void publishTopic(String content, List<String> imageUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try {
+            JSONObject params=new JSONObject();
+            params.put("content",content);
+            params.put("title",content);
+            if(imageUrls!=null&&imageUrls.size()>0){
+                JSONArray imageArray=new JSONArray();
+                for (String url:imageUrls){
+                    JSONObject json=new JSONObject();
+                    json.put("image_url",url);
+                    imageArray.put(json);
+                }
+                params.put("images_attributes",imageArray);
+            }
+            String url=String.format("%s/%s/topics",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
+            volleyUtils.post(url,new JSONObject().put("topic",params),REQUEST_TAG,onFinishedListener);
+        } catch (Exception authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
+}

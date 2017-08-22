@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,10 +19,9 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.PublishTopicAdapter;
 import com.gkzxhn.wisdom.common.Constants;
-import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.gkzxhn.wisdom.presenter.PublishTopicPresenter;
 import com.gkzxhn.wisdom.util.Utils;
-import com.gkzxhn.wisdom.view.IPublishTopicView;
+import com.gkzxhn.wisdom.view.IPublishView;
 import com.starlight.mobile.android.lib.album.AlbumActivity;
 import com.starlight.mobile.android.lib.util.CommonHelper;
 import com.starlight.mobile.android.lib.util.PermissionManager;
@@ -39,7 +36,7 @@ import java.util.UUID;
  * Created by Raleigh.Luo on 17/8/2.
  */
 
-public class PublishTopicActivity extends SuperActivity implements IPublishTopicView{
+public class PublishTopicActivity extends SuperActivity implements IPublishView {
     private ImageView ivAdd;
     private RecyclerView mRecyclerView;
     private PublishTopicAdapter adapter;

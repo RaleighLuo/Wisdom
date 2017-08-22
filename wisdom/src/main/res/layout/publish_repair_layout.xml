@@ -136,6 +136,7 @@
         android:layout_height="wrap_content"
         android:text="@string/commit"
         android:layout_marginTop="10dip"
+        android:onClick="onClickListener"
         android:textColor="@android:color/white"
         android:layout_weight="0"
         android:background="@drawable/common_btn_selector"

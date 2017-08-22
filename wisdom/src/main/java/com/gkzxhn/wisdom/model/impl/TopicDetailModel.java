@@ -27,7 +27,7 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     @Override
     public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/topics/%s", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+            String url=String.format("%s/%s/topics/%s", Constants.REQUEST_BASE_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
                     topicId);
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
@@ -71,7 +71,7 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     @Override
     public void delete( VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/topics/%s", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+            String url=String.format("%s/%s/topics/%s", Constants.REQUEST_BASE_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
                     topicId);
             volleyUtils.delete(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
@@ -92,7 +92,7 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     @Override
     public void requestLike(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/topics/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+            String url=String.format("%s/%s/topics/%s/likes", Constants.REQUEST_BASE_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
                     topicId);
             volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
@@ -103,7 +103,7 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     @Override
     public void requestCommentLike(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
-            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_TOPIC_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
+            String url=String.format("%s/%s/topics/%s/comments/%s/likes", Constants.REQUEST_BASE_URL,preferences.getString(Constants.USER_RESIDENTIALAREASID,""),
                     topicId,commentId);
             volleyUtils.post(url,new JSONObject(),REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {
