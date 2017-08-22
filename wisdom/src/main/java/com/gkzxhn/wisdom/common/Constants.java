@@ -53,13 +53,21 @@ public interface Constants {
     public final String DOMAIN_NAME_FILE_XLS = DEMO_FILE_DOMAIN;
     final String UPLOAD_PROFILE_URL=DOMAIN_NAME_FILE_XLS+"/profile";//头像图片
     final String UPLOAD_TOPICS_URL=DOMAIN_NAME_FILE_XLS+"/topics";//话题图片
+    final String UPLOAD_REPAIRES_URL=DOMAIN_NAME_FILE_XLS+"/repairs";//话题图片
+    //上传图片对应的参数字段
+    final Map<String,String> UPLOAD_KEY_MAP=new HashMap<String,String>(){{
+        put(Constants.UPLOAD_PROFILE_URL,"avatar");
+        put(Constants.UPLOAD_TOPICS_URL,"topic");
+        put(Constants.UPLOAD_REPAIRES_URL,"repair");
+    }};
+
 
     public final String RELEASE_DOMAIN="http://123.57.7.159:3000";//发布正式环境
     public final String DEMO_DOMAIN="http://10.93.1.104:3000";//开发环境
     public final String DOMAIN_NAME_XLS = DEMO_DOMAIN;
     final String REQUEST_LOGIN_URL=DOMAIN_NAME_XLS+"/login";//登录
     final String REQUEST_VERIFY_CODE_URL=DOMAIN_NAME_XLS+"/request_code";//获取验证码
-    final String REQUEST_TOPIC_URL =DOMAIN_NAME_XLS+"/residentials";//话题
+    final String REQUEST_BASE_URL =DOMAIN_NAME_XLS+"/residentials";//话题
     final String REQUEST_TOPIC_OPERATE_URL =DOMAIN_NAME_XLS+"/topics";//话题-评论
     final String REQUEST_USER_URL =DOMAIN_NAME_XLS+"/users";//签到，修改用户信息
     //上传图片的auth认证
@@ -92,5 +100,6 @@ public interface Constants {
     final Map<Integer,String> ANALYSIS_KEY_MAP=new HashMap<Integer,String>(){{
         put(Constants.TOPIC_LIST_TAB,"topics");
      }};
+
 
 }
