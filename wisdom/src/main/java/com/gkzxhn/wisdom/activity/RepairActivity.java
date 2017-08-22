@@ -16,6 +16,9 @@ import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.PayRecordAdapter;
 import com.gkzxhn.wisdom.adapter.RepairAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.RepairEntity;
+import com.gkzxhn.wisdom.presenter.CommonListPresenter;
+import com.gkzxhn.wisdom.view.ICommonListView;
 import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.PagerSlidingTabStrip;
@@ -30,12 +33,13 @@ import java.util.List;
  */
 
 public class RepairActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener{
+        CusSwipeRefreshLayout.OnLoadListener,ICommonListView<RepairEntity>{
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
     private View ivNodata;
     private DotsTextView tvLoading;
     private RepairAdapter adapter;
+    private CommonListPresenter<RepairEntity> mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +72,8 @@ public class RepairActivity extends SuperActivity implements CusSwipeRefreshLayo
         adapter=new RepairAdapter(this);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
-//        onRefresh();
+        mPresenter=new CommonListPresenter<>(this,this,Constants.REPAIR_LIST_TAB);
+        onRefresh();
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
@@ -104,13 +109,13 @@ public class RepairActivity extends SuperActivity implements CusSwipeRefreshLayo
 
     @Override
     public void onRefresh() {
-        mSwipeRefresh.setRefreshing(false);
+        mPresenter.request(true);
 
     }
 
     @Override
     public void onLoad() {
-        mSwipeRefresh.setLoading(false);
+        mPresenter.request(false);
     }
 
     public void startRefreshAnim() {
@@ -157,4 +162,14 @@ public class RepairActivity extends SuperActivity implements CusSwipeRefreshLayo
             }
         }
     };
+
+    @Override
+    public void updateItems(List<RepairEntity> datas) {
+        adapter.updateItems(datas);
+    }
+
+    @Override
+    public void loadItems(List<RepairEntity> datas) {
+        adapter.loadItems(datas);
+    }
 }

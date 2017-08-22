@@ -90,24 +90,26 @@ public interface Constants {
     final int LIKE_CANCEL_STATUS =0;//取消点赞
     final int LIKE_DEFAULT_STATUS =-1;//默认
     /*-------------------------------TAB-------------------------------------------------*/
-    final int PAY_RECORD_TAB=0x201;//缴费记录
-    final int REPAIR_PROGRESSING_TAB=0x202;//维修列表－正在进行
-    final int REPAIR_FINISHED_TAB=0x203;//维修列表－完成
-    final int HOUSE_LEASE_TAB=0x204;//房屋租售－租房
-    final int HOUSE_SALE_TAB=0x205;//房屋租售－售房
+
 
 
     //列表Tab配置
-    final int TOPIC_LIST_TAB=0x206;//话题列表
-    final int OWN_TOPIC_LIST_TAB=0x207;//我的话题列表
+    final int TOPIC_LIST_TAB=0x201;//话题列表
+    final int OWN_TOPIC_LIST_TAB=0x202;//我的话题列表
+    final int REPAIR_LIST_TAB=0x203;//社区报修列表
     //列表Tab 解析对应key
     final Map<Integer,String> ANALYSIS_KEY_MAP=new HashMap<Integer,String>(){{
         put(Constants.TOPIC_LIST_TAB,"topics");
         put(Constants.OWN_TOPIC_LIST_TAB,"topics");
+        put(Constants.REPAIR_LIST_TAB,"repairs");
      }};
 
-
-    final int LOGIN_TAB=0x208;//登录
+    final int PAY_RECORD_TAB=0x301;//缴费记录
+    final int REPAIR_PROGRESSING_TAB=0x302;//维修列表－正在进行
+    final int REPAIR_FINISHED_TAB=0x303;//维修列表－完成
+    final int HOUSE_LEASE_TAB=0x304;//房屋租售－租房
+    final int HOUSE_SALE_TAB=0x305;//房屋租售－售房
+    final int LOGIN_TAB=0x306;//登录
 
 
 }

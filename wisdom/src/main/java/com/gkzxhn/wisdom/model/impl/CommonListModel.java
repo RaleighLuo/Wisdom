@@ -34,6 +34,10 @@ public class CommonListModel extends BaseModel implements ICommonListModel{
                     url=String.format("%s/%s/topics?post_user=true&page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
                             currentPage,pageSize);
                     break;
+                case Constants.REPAIR_LIST_TAB:
+                    url=String.format("%s/%s/repairs?page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
+                            currentPage,pageSize);
+                    break;
             }
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);
         } catch (Exception authFailureError) {

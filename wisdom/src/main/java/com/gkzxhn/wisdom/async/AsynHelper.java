@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.entity.RepairEntity;
 import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.google.gson.Gson;
@@ -85,6 +86,10 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
                     case Constants.TOPIC_LIST_TAB:
                         response= (String) params[0];
                         result = new Gson().fromJson(response, new TypeToken<List<TopicEntity>>() {}.getType());
+                        break;
+                    case Constants.REPAIR_LIST_TAB:
+                        response= (String) params[0];
+                        result = new Gson().fromJson(response, new TypeToken<List<RepairEntity>>() {}.getType());
                         break;
                 }
         }catch (Exception ex){
