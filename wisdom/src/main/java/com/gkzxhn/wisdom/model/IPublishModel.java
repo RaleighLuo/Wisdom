@@ -12,12 +12,12 @@ import java.util.List;
 
 public interface IPublishModel extends IBaseModel {
     /**发布报修
-     * @param repareType
+     * @param repairType
      * @param content
      * @param imagUrls
      * @param onFinishedListener
      */
-    public void publishRepair(int repareType,String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
+    public void publishRepair(String repairType,String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener);
 
     /**发布话题
      * @param content

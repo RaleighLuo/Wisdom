@@ -56,8 +56,14 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
             @Override
             public void onSuccess(String message, String filePath) {
                 JSONObject json= JSONUtil.getJSONObject(message);
-                String url=JSONUtil.getJSONObjectStringValue(json,"url");
-                getView().uploadPhotoSuccess(url);
+                int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(json,"code"));
+                if(code==200) {
+                    String url = JSONUtil.getJSONObjectStringValue(json, "url");
+                    getView().uploadPhotoSuccess(url);
+                }else{
+                    getView().stopRefreshAnim();
+                    getView().showToast(R.string.upload_image_faild);
+                }
             }
 
             @Override
@@ -66,9 +72,10 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
                 getView().showToast(R.string.upload_image_faild);
             }
         });
+        int random=(int)(Math.random()*100);//0-100的随机数
         //上传图片命名规则， 随机数_timestamp.jpg
         String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
-                +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
+                +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"))+random;
         mUploadHelper.upload(filePath, Constants.UPLOAD_TOPICS_URL,uploadName);
     }
 

@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
@@ -28,7 +29,7 @@ public class PublishRepairPresenter extends BasePresenter<IPublishModel,IPublish
     public PublishRepairPresenter(Context context, IPublishView view) {
         super(context, new PublishModel(), view);
     }
-    public void publish(int repairType,String content, List<String> imagUrls){
+    public void publish(String repairType,String content, List<String> imagUrls){
         mModel.publishRepair(repairType,content, imagUrls, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -72,9 +73,10 @@ public class PublishRepairPresenter extends BasePresenter<IPublishModel,IPublish
                 getView().showToast(R.string.upload_image_faild);
             }
         });
+        int random=(int)(Math.random()*100);//0-100的随机数
         //上传图片命名规则， 随机数_timestamp.jpg
         String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
-                +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
+                +"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"))+random;
         mUploadHelper.upload(filePath, Constants.UPLOAD_REPAIRES_URL,uploadName);
     }
 

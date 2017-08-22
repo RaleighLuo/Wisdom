@@ -53,7 +53,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
     private int currentPosition=0;
     private ProgressDialog mProgress;
     private Spinner mSpinner;
-    private String[] mRepairTypeArray;
+    private String[] mRepairTypeParams;//报修类型参数值
     private String mRepairType;
     private PublishRepairPresenter mPresenter;
     @Override
@@ -72,14 +72,15 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
     }
     private void init(){
         //初始化spinnner
-        mRepairTypeArray = getResources().getStringArray(R.array.repair_type);
+        mRepairTypeParams = getResources().getStringArray(R.array.repair_type_params);
+        String[] mRepairTypeArray = getResources().getStringArray(R.array.repair_type);
         ArrayAdapter<String> spinneradapter = new ArrayAdapter<String>(this,
                 R.layout.repair_item_spinner_item, mRepairTypeArray);
         mSpinner.setAdapter(spinneradapter);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                mRepairType=mRepairTypeArray[position];
+                mRepairType=mRepairTypeParams[position];
             }
 
             @Override
@@ -87,7 +88,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
 
             }
         });
-
+        mRepairType=mRepairTypeParams[0];
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();
         mRecyclerView.setHasFixedSize(true);
@@ -129,7 +130,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
      */
     private void publish(){
         if(currentPosition<adapter.getPhotoCount())mPresenter.uploadPhoto(adapter.getLocalPath(currentPosition));
-        else mPresenter.publish(mRepairType.hashCode(),etContent.getText().toString().trim(),adapter.getUrls());
+        else mPresenter.publish(mRepairType,etContent.getText().toString().trim(),adapter.getUrls());
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override

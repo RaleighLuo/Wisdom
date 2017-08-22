@@ -15,17 +15,18 @@ import java.util.List;
 
 public class PublishModel extends BaseModel implements IPublishModel {
     /**
-     * @param repareType
+     * @param repairType
      * @param content
      * @param imagUrls
      * @param onFinishedListener
      */
     @Override
-    public void publishRepair(int repareType, String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+    public void publishRepair(String repairType, String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try {
             JSONObject params=new JSONObject();
             params.put("content",content);
             params.put("title",content);
+            params.put("repair_type",repairType);
             if(imagUrls!=null&&imagUrls.size()>0){
                 JSONArray imageArray=new JSONArray();
                 for (String url:imagUrls){

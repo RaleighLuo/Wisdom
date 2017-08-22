@@ -265,6 +265,7 @@
         <item>星期五</item>
         <item>星期六</item>
     </array>
+    <!--报修对应字段-->
     <string-array name="repair_type">
         <item>设备设施</item>
         <item>公共场地</item>
@@ -273,6 +274,15 @@
         <item>树木</item>
         <item>建筑小品</item>
         <item>其他</item>
+    </string-array>
+    <string-array name="repair_type_params">
+        <item>equipment</item>
+        <item>public_site</item>
+        <item>flower_bed</item>
+        <item>greenbelt</item>
+        <item>trees</item>
+        <item>accessorial_building</item>
+        <item>other</item>
     </string-array>
 
 </resources>
