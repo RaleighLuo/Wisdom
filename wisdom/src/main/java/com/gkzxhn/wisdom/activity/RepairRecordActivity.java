@@ -1,18 +1,14 @@
 package com.gkzxhn.wisdom.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
-import com.gkzxhn.wisdom.fragment.NoticeFragment;
-import com.gkzxhn.wisdom.fragment.RepairFragment;
+import com.gkzxhn.wisdom.fragment.RepairRecordFragment;
 import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
-import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 import com.starlight.mobile.android.lib.view.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
@@ -20,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/11.
+ * 我的报修记录
  */
 
 public class RepairRecordActivity extends SuperFragmentActivity {
@@ -52,8 +49,8 @@ public class RepairRecordActivity extends SuperFragmentActivity {
         mTabs.setViewPager(viewPager);
         mTabs.setOnPageChangeListener(onPageChangeListener);
     }
-    public RepairFragment getFragment(int TAB){
-        RepairFragment fragment=new RepairFragment();
+    public RepairRecordFragment getFragment(int TAB){
+        RepairRecordFragment fragment=new RepairRecordFragment();
         Bundle bundle=new Bundle();
         bundle.putInt(Constants.EXTRA_TAB,TAB);
         fragment.setArguments(bundle);

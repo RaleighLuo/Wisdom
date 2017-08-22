@@ -49,6 +49,7 @@
     <string name="pay">缴费</string>
     <string name="talking">话题</string>
     <string name="repair">报修</string>
+
     <string name="newest_notice">最新通知</string>
     <string name="pay_record">缴费记录</string>
     <string name="repair_record">报修记录</string>
@@ -125,6 +126,7 @@
     <string name="please_input_house_lease_money">请输入租金</string>
     <string name="please_input_house_sale_money">请输入售价</string>
     <!--报修-->
+    <string name="community_repair">社区报修</string>
     <string name="please_describe_question">请简单描述问题</string>
     <string name="repair_type">报修类别</string>
     <string name="belong_community">所在小区</string>

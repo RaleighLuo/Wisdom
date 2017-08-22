@@ -106,7 +106,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
-            case R.id.publish_repair_layout_btn_submit:
+            case R.id.common_head_layout_tv_right:
                 if(etContent.getText().toString().trim().length()>0) {
                     if (currentPosition != 0) currentPosition = adapter.getUrls().size() - 1;
                     publish();

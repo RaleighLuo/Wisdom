@@ -125,7 +125,7 @@ public class MainActivity extends SuperActivity {
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.main_layout_tv_repair:
-                startActivityForResult(new Intent(this,PublishRepairActivity.class),Constants.EXTRAS_CODE);
+                startActivity(new Intent(this,RepairActivity.class));
                 break;
             case R.id.home_full_screen_layout_tv_pay_record://缴费记录
                 startActivity(new Intent(this,PayRecordActivity.class));
@@ -179,9 +179,6 @@ public class MainActivity extends SuperActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
             switch (requestCode){
-                case Constants.EXTRAS_CODE://报修
-                    showToast(R.string.has_publish_repair);
-                    break;
                 case Constants.EXTRA_CODE://个人信息
                     updatePersonInfor();
                     break;

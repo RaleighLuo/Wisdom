@@ -16,12 +16,9 @@ import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.RepairDetailActivity;
-import com.gkzxhn.wisdom.activity.RepairProgressActivity;
-import com.gkzxhn.wisdom.activity.RepairRewardActivity;
-import com.gkzxhn.wisdom.adapter.NoticeAdapter;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.OnItemLongClickListener;
-import com.gkzxhn.wisdom.adapter.RepairAdapter;
+import com.gkzxhn.wisdom.adapter.RepairRecordAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
@@ -30,9 +27,10 @@ import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
 
 /**
  * Created by Raleigh.Luo on 17/7/11.
+ * 我的报修记录
  */
 
-public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.OnRefreshListener,
+public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLayout.OnRefreshListener,
         CusSwipeRefreshLayout.OnLoadListener {
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
@@ -40,7 +38,7 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
     private DotsTextView tvLoading;
     private Context mActivity;
     private View parentView;
-    private RepairAdapter adapter;
+    private RepairRecordAdapter adapter;
     private int TAB;
     private CheckConfirmDialog mCheckConfirmDialog;
     @Override
@@ -86,7 +84,7 @@ public class RepairFragment extends Fragment  implements CusSwipeRefreshLayout.O
 //        //添加分割线
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_line_color)));
-        adapter=new RepairAdapter(mActivity,TAB);
+        adapter=new RepairRecordAdapter(mActivity,TAB);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
