@@ -44,8 +44,6 @@ import java.util.UUID;
 
 public class PublishRepairActivity extends SuperActivity implements IPublishView{
     private EditText etContent;
-    private Button btnSubmit;
-    private ImageView ivAdd;
     private RecyclerView mRecyclerView;
     private PublishTopicAdapter adapter;
     private CusPhotoFromDialog optionsDialog;//选择相册或拍照对话框
@@ -65,9 +63,7 @@ public class PublishRepairActivity extends SuperActivity implements IPublishView
     }
     private void initControls(){
         mSpinner= (Spinner) findViewById(R.id.publish_repair_layout_sp_repair_type);
-        btnSubmit= (Button) findViewById(R.id.publish_repair_layout_btn_submit);
         mRecyclerView= (RecyclerView) findViewById(R.id.publish_repair_layout_recycleview);
-        ivAdd= (ImageView) findViewById(R.id.publish_repair_layout_iv_add);
         etContent= (EditText) findViewById(R.id.publish_repair_layout_et_content);
     }
     private void init(){

@@ -92,7 +92,8 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         adapter=new TopicAdapter(mActivity);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
-        mPresenter=new CommonListPresenter<>(mActivity,this, Constants.TOPIC_LIST_TAB);
+        int Tab=getArguments().getInt(Constants.EXTRA_TAB);
+        mPresenter=new CommonListPresenter<>(mActivity,this, Tab);
         onRefresh();
     }
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {

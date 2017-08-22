@@ -31,13 +31,18 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
+    public void onBindViewHolder(ViewHolder holder,final int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 10;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

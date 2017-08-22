@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
+import com.gkzxhn.wisdom.fragment.HouseRentalFragment;
 import com.gkzxhn.wisdom.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.fragment.TopicFragment;
 import com.starlight.mobile.android.lib.adapter.PagerTabAdapter;
@@ -41,8 +42,8 @@ public class TopicActivity extends SuperFragmentActivity{
     }
     private void init(){
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new TopicFragment());
-        fragmentList.add(new TopicFragment());
+        fragmentList.add(getFragment(Constants.OWN_TOPIC_LIST_TAB));
+        fragmentList.add(getFragment(Constants.TOPIC_LIST_TAB));
         List<String>   titleList    = new ArrayList<String>();
         titleList.add(getString(R.string.own));
         titleList.add(getString(R.string.community));
@@ -52,6 +53,13 @@ public class TopicActivity extends SuperFragmentActivity{
         viewPager.setCurrentItem(currentTab, true);
         mTabs.setViewPager(viewPager);
         mTabs.setOnPageChangeListener(onPageChangeListener);
+    }
+    public TopicFragment getFragment(int TAB){
+        TopicFragment fragment=new TopicFragment();
+        Bundle bundle=new Bundle();
+        bundle.putInt(Constants.EXTRA_TAB,TAB);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     private ViewPager.OnPageChangeListener onPageChangeListener=new ViewPager.OnPageChangeListener() {

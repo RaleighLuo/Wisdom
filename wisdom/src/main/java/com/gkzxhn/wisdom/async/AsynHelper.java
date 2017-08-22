@@ -81,6 +81,7 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
                         }
                         editor.commit();
                         break;
+                    case Constants.OWN_TOPIC_LIST_TAB:
                     case Constants.TOPIC_LIST_TAB:
                         response= (String) params[0];
                         result = new Gson().fromJson(response, new TypeToken<List<TopicEntity>>() {}.getType());
