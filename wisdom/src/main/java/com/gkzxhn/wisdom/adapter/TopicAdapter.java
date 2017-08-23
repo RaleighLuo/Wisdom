@@ -79,7 +79,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvName.setText(entity.getNickname());
         ImageLoader.getInstance().displayImage(entity.getPortraitUrl(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
         String date=Utils.getFormateTime(entity.getDate(),new SimpleDateFormat("MM月dd日 HH:mm"));
-        String viewTime=context.getString(R.string.browse)+entity.getViewed()+context.getString(R.string.time);
+        String viewTime=context.getString(R.string.browse)+Utils.getViewedTime(entity.getViewed())+context.getString(R.string.time);
         holder.tvDate.setText(date+"\u3000"+viewTime);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

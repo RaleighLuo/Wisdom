@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
+
+import static com.gkzxhn.wisdom.R.id.repair_item_layout_tv_status;
 
 /**
  * Created by Raleigh.Luo on 17/7/11.
@@ -48,13 +51,6 @@ public class RepairRecordAdapter extends RecyclerView.Adapter<RepairRecordAdapte
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if(onItemLongClickListener!=null)onItemLongClickListener.onLongClickListener(v,position);
-                return true;
-            }
-        });
 //        holder.tvLeft.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -75,19 +71,16 @@ public class RepairRecordAdapter extends RecyclerView.Adapter<RepairRecordAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView tvTitle,tvDate;
+        public TextView tvTitle,tvDate,tvDelete,tvStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvDate= (TextView) itemView.findViewById(R.id.repair_record_item_layout_tv_date);
-            tvTitle= (TextView) itemView.findViewById(R.id.repair_record_item_layout_tv_title);
-//            tvLeft= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_left);
-//            tvRight= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_right);
-//            if(TAB== Constants.REPAIR_PROGRESSING_TAB){
-//                tvRight.setText(R.string.progress);
-//                tvRight.setBackgroundResource(R.drawable.repair_progress_btn_selector);
-//                tvRight.setTextColor(context.getResources().getColor(R.color.pay_color));
-//            }
+            tvDelete= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_delete);
+            tvStatus= (TextView) itemView.findViewById(R.id.repair_item_layout_tv_delete);
+            if(TAB== Constants.REPAIR_FINISHED_TAB){
+                tvDelete.setText(R.string.delete);
+                tvStatus.setText("已完成");
+            }
         }
     }
 }

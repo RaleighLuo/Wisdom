@@ -170,7 +170,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
                 }
                 String date=Utils.getFormateTime(mTopicInfor.getCreatedDate(), new SimpleDateFormat("MM月dd日 HH:mm"));
 
-                String viewTime=context.getString(R.string.browse) + mTopicInfor.getViewed() + context.getString(R.string.time);
+                String viewTime=context.getString(R.string.browse) + Utils.getViewedTime(mTopicInfor.getViewed()) + context.getString(R.string.time);
                 holder.tvHeaderDate.setText(date+"\u3000"+viewTime);
                 holder.tvHeaderName.setText(mTopicInfor.getNickname());
                 if(mTopicInfor.getUserId().equals(mUserId)){//是本人发布的话题，才可以删除

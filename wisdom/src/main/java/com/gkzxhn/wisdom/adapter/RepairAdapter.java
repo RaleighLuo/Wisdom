@@ -53,10 +53,11 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder,final int position) {
-        RepairEntity entity=mData.get(position);
-        holder.tvContent.setText(entity.getContent());
-        holder.tvDate.setText(Utils.getFormateTime(entity.getCreatedDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
-        holder.tvRepairType.setText(getRepairType(entity.getRepairType()));
+//        RepairEntity entity=mData.get(position);
+//        holder.tvContent.setText(entity.getContent());
+//        holder.tvDate.setText(Utils.getFormateTime(entity.getCreatedDate(),new SimpleDateFormat("MM月dd日 HH:mm")));
+//        holder.tvRepairType.setText(getRepairType(entity.getRepairType()));
+//        int time=Utils.getReadTime(entity.getViewed());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 10;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

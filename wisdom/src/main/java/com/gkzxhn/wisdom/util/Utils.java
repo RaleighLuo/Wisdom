@@ -10,6 +10,7 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.GKApplication;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.starlight.mobile.android.lib.util.ConvertUtil;
 import com.starlight.mobile.android.lib.view.CusPhotoFromDialog;
 
 import java.text.DateFormat;
@@ -111,5 +112,17 @@ public class Utils {
         }
         return result;
     }
-
+    public static String getViewedTime(int time){
+        Context context=GKApplication.getInstance().getApplicationContext();
+        String result="";
+        int billion=time/100000000;
+        if(billion>=1){//亿次
+            result=String.format("%s%s",billion==1?String.valueOf(billion):String.format("%.1f",(float)time/(float)100000000), context.getString(R.string.billion));
+        }else if(time/10000>=1){//万次
+            result=String.format("%s%s",time/10000==1?String.valueOf(time/10000):String.format("%.1f",(float)time/(float)10000), context.getString(R.string.ten_thousand));
+        }else{
+            result=String.valueOf(time);
+        }
+        return result;
+    }
 }

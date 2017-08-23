@@ -1,53 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="15dip"
     android:background="@drawable/common_item_click_selector"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/repair_item_layout_fl_oval"
-        android:layout_width="wrap_content"
-        android:layout_alignBottom="@+id/repair_item_layout_tv_title"
-        android:layout_alignTop="@+id/repair_item_layout_tv_title"
-        android:layout_height="wrap_content">
-        <View android:layout_width="5dip"
-            android:layout_gravity="center_vertical"
-            android:layout_height="5dip"
-            android:background="@drawable/repair_oval_shape"
-            />
-    </FrameLayout>
-    <TextView
-        android:id="@+id/repair_item_layout_tv_title"
-        android:layout_toLeftOf="@+id/repair_item_layout_tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="设备设施"
-        android:layout_marginRight="10dip"
-        android:layout_marginLeft="8dip"
-        android:layout_toRightOf="@+id/repair_item_layout_fl_oval"
-        android:textColor="@color/common_text_color"
-        />
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/repair_item_layout_tv_content"
         android:layout_width="wrap_content"
-        android:layout_alignLeft="@+id/repair_item_layout_tv_title"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/repair_item_layout_tv_title"
         android:text="电梯故障报修半小时不见维保员，请尽快安排人过来"
-        android:layout_marginTop="10dip"
+        android:textStyle="bold"
         android:maxLines="2"
+        android:ellipsize="end"
         android:textColor="@color/common_light_text_color"
+        android:textSize="14sp"
+        />
+    />
+
+
+    <FrameLayout
+        android:id="@+id/repair_item_layout_fl_image"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/repair_item_layout_tv_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/repair_item_layout_ll_image"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dip"
+            android:layout_height="wrap_content">
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                mAttr:div_divisor="3"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                mAttr:div_dividend="4"
+                />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/repair_item_layout_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="设备设施"
+        android:textSize="12sp"
+        android:lines="1"
+        android:layout_below="@+id/repair_item_layout_fl_image"
+        android:textColor="@color/common_light_text_color"/>
+    <TextView
+        android:id="@+id/repair_item_layout_tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/repair_item_layout_tv_title"
+        android:text="正在进行"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/dark_orange"
         android:textSize="12sp"
         />
+    <View style="@style/common_light_line_style"
+        android:id="@+id/repair_item_layout_v_line"
+        android:layout_marginTop="10dip"
+        android:layout_height="0.1dip"
+        android:layout_below="@+id/repair_item_layout_tv_title"
+        />
+
     <TextView
         android:id="@+id/repair_item_layout_tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/repair_item_layout_tv_title"
-        android:text="2017年6月1号"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/repair_item_layout_v_line"
+        android:text="2017年6月1号 浏览100次"
         android:textColor="@color/common_gray_title_color"
         android:textSize="10sp"
+        android:layout_marginTop="10dip"
         />
+    <TextView
+        android:id="@+id/repair_item_layout_tv_publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="张先生"
+        android:layout_alignTop="@+id/repair_item_layout_tv_date"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/common_dark_gray_text_color"
+        android:layout_below="@+id/repair_item_layout_tv_content"
+        />
+
 </RelativeLayout>

@@ -20,6 +20,8 @@
     <string name="money_unit">￥</string>
     <string name="more">更多</string>
     <string name="save">保存</string>
+    <string name="ten_thousand">万</string>
+    <string name="billion">亿</string>
 
     <!--相册覆盖类库-->
     <string name="album_all_photos">所有图片</string>
@@ -284,6 +286,13 @@
         <item>greenbelt</item>
         <item>trees</item>
         <item>accessorial_building</item>
+        <item>other</item>
+    </string-array>
+    <string-array name="repair_status">
+        <item>未处理</item>
+        <item>正在处理</item>
+        <item>撤销</item>
+        <item>已完成</item>
         <item>other</item>
     </string-array>
 
