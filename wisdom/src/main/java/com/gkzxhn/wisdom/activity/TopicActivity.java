@@ -36,11 +36,20 @@ public class TopicActivity extends SuperFragmentActivity{
         initControl();
         init();
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControl(){
         mTabs = (PagerSlidingTabStrip) findViewById(R.id.topic_layout_tabs);
         viewPager= (ViewPager) findViewById(R.id.topic_layout_viewPager);
     }
+
+    /**
+     * 初始化
+     */
     private void init(){
+        //初始化两个page的标题
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         fragmentList.add(getFragment(Constants.OWN_TOPIC_LIST_TAB));
         fragmentList.add(getFragment(Constants.TOPIC_LIST_TAB));
@@ -49,11 +58,19 @@ public class TopicActivity extends SuperFragmentActivity{
         titleList.add(getString(R.string.community));
         adapter=new PagerTabAdapter(getSupportFragmentManager(), fragmentList, titleList);
         viewPager.setAdapter(adapter);
+        //设置缓存页面为2个
         viewPager.setOffscreenPageLimit(2);
+        //滑动到当前页面
         viewPager.setCurrentItem(currentTab, true);
-        mTabs.setViewPager(viewPager);
+        mTabs.setViewPager(viewPager);//pagerTab绑定viewpager
+        //设置页面滑动监听器
         mTabs.setOnPageChangeListener(onPageChangeListener);
     }
+
+    /**初始化Fragment 并传入tab值
+     * @param TAB
+     * @return
+     */
     public TopicFragment getFragment(int TAB){
         TopicFragment fragment=new TopicFragment();
         Bundle bundle=new Bundle();
@@ -79,6 +96,10 @@ public class TopicActivity extends SuperFragmentActivity{
 
         }
     };
+
+    /**点击事件监听  布局页面配置的onclick
+     * @param view
+     */
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left:
@@ -90,6 +111,11 @@ public class TopicActivity extends SuperFragmentActivity{
         }
     }
 
+    /**页面返回回调
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

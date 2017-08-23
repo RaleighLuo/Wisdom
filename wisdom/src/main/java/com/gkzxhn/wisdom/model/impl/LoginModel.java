@@ -17,6 +17,10 @@ import static android.R.attr.password;
  */
 
 public class LoginModel extends BaseModel implements ILoginModel {
+    /**获取验证码
+     * @param phone
+     * @param onFinishedListener
+     */
     @Override
     public void requestCode(String phone, VolleyUtils.OnFinishedListener<String> onFinishedListener) {
         try {
@@ -28,6 +32,11 @@ public class LoginModel extends BaseModel implements ILoginModel {
         }
     }
 
+    /**登录
+     * @param phone
+     * @param verifyCode
+     * @param onFinishedListener
+     */
     @Override
     public void login(String phone, String verifyCode, VolleyUtils.OnFinishedListener<String> onFinishedListener) {
         try {

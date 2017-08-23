@@ -39,6 +39,7 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/13.
+ * 评论详情
  */
 
 public class TopicDetailActivity extends SuperActivity implements CusSwipeRefreshLayout.OnRefreshListener,
@@ -257,11 +258,18 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         }
     }
 
+    /**
+     * 开始列表加载动画
+     */
+    @Override
     public void startRefreshAnim() {
         //使用handler刷新页面状态,主要解决vNoDataHint显示问题
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
     }
 
+    /**
+     * 关闭列表加载动画
+     */
     @Override
     public void stopRefreshAnim() {
         handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
@@ -307,7 +315,8 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
      */
     @Override
     protected void onDestroy() {
-        mPresenter.onDestory();
+        mPresenter.onDestory();//释放presenter资源
+        //关闭dialog 防止窗口溢出
         if(confirmDialog!=null&&confirmDialog.isShowing())confirmDialog.dismiss();
         if(mCommentDialog!=null&&mCommentDialog.isShowing())mCommentDialog.dismiss();
         if(mCommentShowDialog!=null&&mCommentShowDialog.isShowing())mCommentShowDialog.dismiss();
@@ -371,12 +380,18 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
         adapter.removeItem(position,subPosition);
     }
 
+    /**
+     * 显示加载进度条
+     */
     @Override
     public void showProgress() {
         if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
 
     }
 
+    /**
+     * 关闭加载进度条
+     */
     @Override
     public void dismissProgress() {
         if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();

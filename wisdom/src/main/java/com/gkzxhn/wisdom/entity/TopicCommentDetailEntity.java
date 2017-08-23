@@ -9,21 +9,22 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/15.
+ * 评论详情
  */
 
 public class TopicCommentDetailEntity implements Serializable{
     private String id;
-    private String nickname;
+    private String nickname;//昵称
     @SerializedName("user_image")
-    private String portrait;
+    private String portrait;//头像下载地址
     @SerializedName("user_id")
     private String userId;
-    private String content;
+    private String content;//评论内容
     @SerializedName("created_at")
-    private String date;
+    private String date;//创建时间
     @SerializedName("likes_amount")
-    private int likesCount;
-    private int likeable;
+    private int likesCount;//点赞数量
+    private int likeable;//是否可以点赞 1没有点赞 0已经点赞
     @SerializedName("comments_amount")
     private int commentCount;//评论数
 

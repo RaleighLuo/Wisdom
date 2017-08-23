@@ -41,6 +41,10 @@ public class Utils {
                 .getString(R.string.cancel));
         return dialog;
     }
+
+    /**网络是否连接
+     * @return
+     */
     public static boolean isConnected() {
         ConnectivityManager conn = (ConnectivityManager) GKApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = conn.getActiveNetworkInfo();
@@ -56,6 +60,11 @@ public class Utils {
         if (TextUtils.isEmpty(mobiles)) return false;
         else return mobiles.matches(telRegex);
     }
+
+    /**数组字符串转list
+     * @param array
+     * @return
+     */
     public static List<String> arrayToList(String[] array){
         List<String> list=new ArrayList<>();
         for(String str:array){
@@ -63,6 +72,54 @@ public class Utils {
         }
         return list;
     }
+
+    /**毫秒数转时间日期 年月日
+     * @param timeInMillis
+     * @return
+     */
+    public static String getDateFromTimeInMillis(long timeInMillis) {
+        String result="";
+        if(timeInMillis>0) {
+            try {
+                Context context=GKApplication.getInstance().getApplicationContext();
+                SimpleDateFormat df=new SimpleDateFormat(String.format("yyyy%sMM%sdd%s",context.getString(R.string.year),
+                        context.getString(R.string.month),context.getString(R.string.day)));
+                Date date = new Date(timeInMillis);
+                //英文格式时间格式化
+                result = df.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**毫秒数转时间日期 年月日时分
+     * @param timeInMillis
+     * @return
+     */
+    public static String getTimeFromTimeInMillis(long timeInMillis) {
+        String result="";
+        if(timeInMillis>0) {
+            try {
+                Context context=GKApplication.getInstance().getApplicationContext();
+                SimpleDateFormat df=new SimpleDateFormat(String.format("yyyy%sMM%sdd%s HH:mm",context.getString(R.string.year),
+                        context.getString(R.string.month),context.getString(R.string.day)));
+                Date date = new Date(timeInMillis);
+                //英文格式时间格式化
+                result = df.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**秒数转时间日期 自定义时间格式
+     * @param timeInMillis
+     * @param df
+     * @return
+     */
     public static String getDateFromTimeInMillis(long timeInMillis,SimpleDateFormat df) {
         String result="";
         if(timeInMillis>0) {
@@ -76,6 +133,11 @@ public class Utils {
         }
         return result;
     }
+
+    /**图片下载 设置默认加载图片参数
+     * @param defualtImgRes
+     * @return
+     */
     public static DisplayImageOptions getOptions(int defualtImgRes) {
         return new DisplayImageOptions.Builder()
                 .showImageOnLoading(defualtImgRes)//默认加载的图片
@@ -88,7 +150,7 @@ public class Utils {
                 .build();
     }
 
-    /**
+    /**时区时间转字符串
      * Convert String date to Date
      * @param date date for String format
      * @return Date object
@@ -112,6 +174,11 @@ public class Utils {
         }
         return result;
     }
+
+    /**浏览次数单位转化
+     * @param time
+     * @return
+     */
     public static String getViewedTime(int time){
         Context context=GKApplication.getInstance().getApplicationContext();
         String result="";

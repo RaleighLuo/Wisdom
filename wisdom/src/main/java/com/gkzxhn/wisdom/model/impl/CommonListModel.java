@@ -21,6 +21,11 @@ public class CommonListModel extends BaseModel implements ICommonListModel{
         return TAB;
     }
 
+    /**请求
+     * @param currentPage 当前页面
+     * @param pageSize 页数
+     * @param onFinishedListener 请求回调监听器
+     */
     @Override
     public void request(int currentPage, int pageSize,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try {

@@ -7,18 +7,19 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/10.
+ * 话题回复列表实体
  */
 
 public class TopicReplayEntity {
     private String id;
-    private String nickname;
+    private String nickname;//昵称
     @SerializedName("user_image")
-    private String portrait;
+    private String portrait;//头像下载地址
     @SerializedName("user_id")
-    private String userId;
-    private String content;
+    private String userId;//创建者Userid
+    private String content;//回复内容
     @SerializedName("created_at")
-    private String date;
+    private String date;//创建日期
 
 
     public String getDate() {

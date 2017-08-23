@@ -4,31 +4,22 @@ import java.io.Serializable;
 
 /**
  * Created by Raleigh.Luo on 17/8/1.
+ * 个人信息－房屋信息
  *
  */
-//  "buildingId": 1,
-//          "buildingName": "1幢",
-//          "regionId": 1,
-//          "regionName": "紫荆苑",
-//          "residentialAreasId": 1,
-//          "residentialAreasName": "乾城江来",
-//          "roomId": 1,
-//          "roomName": "1501",
-//          "unitsId": 1,
-//          "unitsName": "一单元"
 public class RoomEntity implements Serializable{
     private String buildingId;
-    private String buildingName;
+    private String buildingName;//建筑名称
     private String regionId;
-    private String regionName;
+    private String regionName;//区域名称
     private String residentialAreasId;
-    private String residentialAreasName;
+    private String residentialAreasName;//小区名称
     private String roomId;
-    private String roomName;
+    private String roomName;//房号
     private String unitsId;
-    private String unitsName;
-    private float usedArea;
-    private float floorArea;
+    private String unitsName;//房屋单元
+    private float usedArea;//使用面积
+    private float floorArea;//房屋面积
 
     public float getUsedArea() {
         return usedArea;

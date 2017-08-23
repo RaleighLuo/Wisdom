@@ -8,30 +8,31 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/7.
+ * 话题详情
  */
 
 public class TopicDetailEntity {
-    private int viewed;
+    private int viewed;//浏览次数
     private String id;
     @SerializedName("user_id")
-    private String userId;
-    private String content;
+    private String userId;//话题创建者用户ID
+    private String content;//话题内容
     @SerializedName("residential_id")
-    private String residentialId;
+    private String residentialId;//小区ID
     @SerializedName("created_at")
-    private String createdDate;
+    private String createdDate;//创建日期
     @SerializedName("updated_at")
-    private String updatedDate;
+    private String updatedDate;//更新日期
     @SerializedName("comments_amount")
-    private int commentCount;
+    private int commentCount;//评论数量
     @SerializedName("likes_amount")
-    private int likesCount;
+    private int likesCount;//点赞数量
     @SerializedName("images_url")
-    private List<String> images;
-    private int likeable;
-    private String nickname;
+    private List<String> images;//图片地址
+    private int likeable;//是否可点赞 1没有点赞 0已经点赞
+    private String nickname;//昵称
     @SerializedName("user_image")
-    private String portrait;
+    private String portrait;//头像下载地址
 
     public String getPortrait() {
         return portrait == null ? "" : portrait;

@@ -6,18 +6,19 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/8.
+ * 用户id
  */
 
 public class UserEntity {
     private String id;
-    private String name;
-    private String phone;
+    private String name;//名字
+    private String phone;//手机号码
     @SerializedName("user_type")
-    private String userType;
-    private String nickname;
-    private String gender;
+    private String userType;//用户类型
+    private String nickname;//昵称
+    private String gender;//性别
     @SerializedName("user_image")
-    private String portrait;
+    private String portrait;//用户头像
     private List<RoomEntity> roomList;
 
     public List<RoomEntity> getRoomList() {

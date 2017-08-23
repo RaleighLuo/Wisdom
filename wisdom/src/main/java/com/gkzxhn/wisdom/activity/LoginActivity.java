@@ -33,45 +33,61 @@ public class LoginActivity extends SuperActivity implements ILoginView{
         initControls();
         init();
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         tvGetVerifyCode= (TextView) findViewById(R.id.login_layout_tv_get_verify_code);
         etPhone= (EditText) findViewById(R.id.login_layout_et_phone);
         etVerifyCode= (EditText) findViewById(R.id.login_layout_et_verfy_code);
 
     }
+
+    /**
+     * 初始化
+     */
     private void init(){
         mTimer=new CodeCountDownTimer(DOWN_TIME, 1000);
         etPhone.setText("17303854825");
+        //初始化Presenter
         mPresenter=new LoginPresenter(this,this);
+        //初始化加载进度条
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
-        stopRefreshAnim();
+        stopRefreshAnim();//停止show
     }
+
+    /**控件点击事件，对应xml布局的onClick配置
+     * @param view
+     */
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.login_layout_btn_login://登录
-                CommonHelper.clapseSoftInputMethod(this);
+            case R.id.login_layout_btn_login://点击登录
+                CommonHelper.clapseSoftInputMethod(this);//关闭软键盘
                 String phone=etPhone.getText().toString().trim();
                 String code=etVerifyCode.getText().toString().trim();
-                if(phone.length()==0){
+                if(phone.length()==0){//没有输入手机号码
                     showToast(getString(R.string.please_input)+getString(R.string.phone_number));
-                }else if(!Utils.isPhoneNumber(phone)){
+                }else if(!Utils.isPhoneNumber(phone)){//手机号码格式不正确
                     showToast(R.string.error_phone);
 //                }else if(code.length()==0){TODO
 //                    showToast(getString(R.string.please_input)+getString(R.string.verfy_code));
-                }else{
+                }else{//登录
                     mPresenter.login(phone,code);
                 }
                 break;
-            case R.id.login_layout_tv_get_verify_code://获取验证码
+            case R.id.login_layout_tv_get_verify_code://点击获取验证码
                 phone=etPhone.getText().toString().trim();
-                if(phone.length()==0){
+                if(phone.length()==0){//没有输入手机号码
                     showToast(getString(R.string.please_input)+getString(R.string.phone_number));
-                }else if(!Utils.isPhoneNumber(phone)){
+                }else if(!Utils.isPhoneNumber(phone)){//手机号码格式不正确
                     showToast(R.string.error_phone);
-                }else{
+                }else{//请求验证码
                     mPresenter.requstCode(phone);
+                    //开启倒计时60秒
                     mTimer.start();
                     isTimerStop=false;
+                    //获取
                     tvGetVerifyCode.setClickable(false);
                     tvGetVerifyCode.setTextColor(getResources().getColor(R.color.common_hint_text_color));
                 }
@@ -80,27 +96,39 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 
     }
 
+    /**
+     * 显示加载进度条
+     */
     @Override
     public void startRefreshAnim() {
         if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
     }
 
+    /**
+     * 停止加载进度条
+     */
     @Override
     public void stopRefreshAnim() {
         if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
     }
 
 
-
+    /**
+     * 登录成功回调
+     */
     @Override
     public void onSuccess() {
         CommonHelper.clapseSoftInputMethod(this);
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }
+
+    /**
+     * 用户点击返回建
+     */
     @Override
     public void onBackPressed() {
-        CommonHelper.clapseSoftInputMethod(this);
+        CommonHelper.clapseSoftInputMethod(this);//关闭虚拟键盘
         //回到Home主页
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_MAIN);
@@ -110,8 +138,8 @@ public class LoginActivity extends SuperActivity implements ILoginView{
 
     @Override
     protected void onDestroy() {
-        stopRefreshAnim();
-        if(mPresenter!=null)mPresenter.onDestory();
+        stopRefreshAnim();//关闭Dialog,防止窗口溢出
+        if(mPresenter!=null)mPresenter.onDestory();//释放presenter资源
         super.onDestroy();
     }
 
@@ -142,6 +170,7 @@ public class LoginActivity extends SuperActivity implements ILoginView{
         @Override
         public void onFinish() {//倒计时完成
             isTimerStop=true;
+            //获取验证码按钮重置 设置可点击状态
             tvGetVerifyCode.setClickable(true);
             tvGetVerifyCode.setText(R.string.reset_send);
             tvGetVerifyCode.setTextColor(getColor(android.R.color.white));

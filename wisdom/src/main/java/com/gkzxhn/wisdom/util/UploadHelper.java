@@ -30,15 +30,15 @@ import java.util.concurrent.Executors;
 public class UploadHelper {
     private  final int TIME_OUT = 10*10000000; //超时时间
     private  final String CHARSET = "utf-8"; //设置编码
-    public String filePath;
+    public String filePath;//文件路径
     private GKApplication application;
-    private UploadFinishListener listener;
-    private UploadAsyn uploadAsyn;
+    private UploadFinishListener listener;//回调监听器
+    private UploadAsyn uploadAsyn;//异步请求
     private boolean isPhoto=true;
     private final String RESPONSE_CODE="responseCode";
     private final String RESPONSE_MESSAGE="responseMessage";
     private String mUploadUrl=null;//上传地址
-    private String mUploadFileName=null;
+    private String mUploadFileName=null;//文件名
     public UploadHelper(){
         application= GKApplication.getInstance();
     }
@@ -51,6 +51,12 @@ public class UploadHelper {
     public void setUploadFinishListener(UploadFinishListener listener){
         this.listener=listener;
     }
+
+    /**上传图片
+     * @param filePath
+     * @param uploadUrl
+     * @param uploadFileName
+     */
     public void upload(String filePath,String uploadUrl,String uploadFileName){
         this.filePath=filePath;
         isPhoto=true;
@@ -59,6 +65,9 @@ public class UploadHelper {
         startAsynTask();
     }
 
+    /**
+     * 停止上传
+     */
     public void onStop(){
         if (uploadAsyn != null) {
             if (uploadAsyn.getStatus() == AsyncTask.Status.RUNNING) uploadAsyn.cancel(true);
@@ -66,7 +75,7 @@ public class UploadHelper {
         }
     }
     /**
-     * 鍚姩寮傛浠诲姟
+     * 开始异步请求任务
      *
      */
     private void startAsynTask() {
@@ -86,6 +95,10 @@ public class UploadHelper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 异步请求回调
+     */
     private OnAsynFinishListener onAsynFinishListener=new OnAsynFinishListener() {
         @Override
         public void onFinish(JSONObject result) {
@@ -113,6 +126,10 @@ public class UploadHelper {
         public void onSuccess(String message, String filePath);
         public void onFailed(String error);
     }
+
+    /**
+     * 异步上传任务
+     */
     class UploadAsyn extends AsyncTask<Void, Integer, JSONObject>{
 
         private OnAsynFinishListener listener;
@@ -122,6 +139,7 @@ public class UploadHelper {
         @Override
         protected JSONObject doInBackground(Void... params) {
             JSONObject json=new JSONObject();
+            //压缩图片
             String path=new ImageHelper().compressImage(filePath, Constants.SD_PHOTO_PATH,mUploadFileName);//鍘嬬缉鍥剧墖
             if(path!=null)filePath=path;
             File file=new File(filePath);

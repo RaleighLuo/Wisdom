@@ -77,5 +77,9 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
                 +"_"+(position+1)+"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_TOPICS_URL,uploadName);
     }
-
+    @Override
+    public void onDestory() {
+        super.onDestory();
+        mUploadHelper.onStop();
+    }
 }

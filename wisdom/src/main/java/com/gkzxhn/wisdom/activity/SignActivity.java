@@ -30,13 +30,21 @@ public class SignActivity extends SuperActivity implements ISignView{
         initControls();
         init();
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         tvSignHint= (TextView) findViewById(R.id.sign_layout_tv_sign);
         tvSeriesDay= (TextView) findViewById(R.id.sign_layout_tv_series_sign_day);
 
     }
-    private void init(){
 
+    /**
+     * 初始化
+     */
+    private void init(){
+        //初始化presenter
         mPresenter=new SignPresenter(this,this);
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();

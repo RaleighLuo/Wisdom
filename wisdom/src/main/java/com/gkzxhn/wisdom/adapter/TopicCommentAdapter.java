@@ -90,13 +90,17 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         }
     }
 
+    /**更新评论点赞数量
+     * @param isLike
+     */
     public void updateLikeNumber(boolean isLike){
         mTopicInfor.setLikesCount(isLike?mTopicInfor.getLikesCount()+1:mTopicInfor.getLikesCount()-1>0?mTopicInfor.getLikesCount()-1:0);
         tvTopicLikeCount.setText(String.valueOf(mTopicInfor.getLikesCount()));
     }
 
     /**
-     *
+     *评论点赞
+     * @param isSuccess 请求是否成功，没有成功需要恢复原来的点赞状态
      * @param commentId
      * @param position  mData中的position
      */
@@ -129,12 +133,20 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         }
 
     }
+
+    /**更新评论项
+     * @param comments
+     */
     public void updateItems(List<TopicCommentEntity> comments){
         mDatas.clear();
         if(comments!=null&&comments.size()>0)
             mDatas.addAll(comments);
         notifyDataSetChanged();
     }
+
+    /**更新评论项
+     * @param comments
+     */
     public void loadItems(List<TopicCommentEntity> comments){
         if(comments!=null&&comments.size()>0) {
             mDatas.addAll(comments);
@@ -158,6 +170,7 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position==0){
             if(mTopicInfor!=null) {
+                holder.tvHeaderDel.setVisibility(mTopicInfor.getUserId().equals(mUserId)?View.VISIBLE:View.GONE);
                 ImageLoader.getInstance().displayImage(mTopicInfor.getPortrait(), holder.ivHeaderPortrait, Utils.getOptions(R.mipmap.topic_portrait));
                 holder.tvHeaderContent.setText(mTopicInfor.getContent());
                 tvTopicLikeCount.setText(mTopicInfor.getLikesCount() + "");

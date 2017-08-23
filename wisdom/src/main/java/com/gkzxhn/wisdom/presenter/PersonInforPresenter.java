@@ -95,4 +95,10 @@ public class PersonInforPresenter extends BasePresenter<IPersonInforModel,IPerso
                 +"_"+Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_PROFILE_URL,uploadName);
     }
+
+    @Override
+    public void onDestory() {
+        super.onDestory();
+        mUploadHelper.onStop();
+    }
 }

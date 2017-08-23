@@ -4,17 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Raleigh.Luo on 17/8/22.
+ * 报修列表实体
  */
 
 public class RepairEntity {
     private String id;
-    private String content;
+    private String content;//维修内容
     @SerializedName("user_id")
     private String userId;
     @SerializedName("created_at")
-    private String createdDate;
+    private String createdDate;//创建时间
     @SerializedName("updated_at")
-    private String updatedDate;
+    private String updatedDate;//更新时间
     private String status;//当前状态 :undisposed, :processing, :finished
     @SerializedName("repair_type")
     private String repairType;//报修类型

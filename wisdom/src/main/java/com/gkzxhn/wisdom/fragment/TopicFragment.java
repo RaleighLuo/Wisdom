@@ -65,6 +65,10 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         init();
         return parentView;
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         parentView.findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(android.R.color.white);
         tvLoading= (DotsTextView) parentView.findViewById(R.id.common_loading_layout_tv_load);
@@ -73,6 +77,10 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         mSwipeRefresh= (CusSwipeRefreshLayout) parentView.findViewById(R.id.common_list_layout_swipeRefresh);
 
     }
+
+    /**
+     * 初始化
+     */
     private void init(){
         mModel=new TopicDetailModel();
         mSwipeRefresh.setOnRefreshListener(this);
@@ -103,7 +111,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
                 case R.id.topic_item_layout_rb_like://点赞
                     requestLike(position);
                     break;
-                default:
+                default://跳转话题详情
                     Intent intent=new Intent(mActivity, TopicDetailActivity.class);
                     intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
                     startActivityForResult(intent,Constants.EXTRA_CODE);
@@ -113,6 +121,9 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         }
     };
 
+    /**点赞
+     * @param position
+     */
     private void requestLike(final int position){
         mModel.setTopicId(adapter.getItemsId(position));
         mModel.requestLike(new VolleyUtils.OnFinishedListener<JSONObject>() {
@@ -142,22 +153,34 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         super.onDestroy();
     }
 
+    /**
+     * 刷新数据
+     */
     @Override
     public void onRefresh() {
         mPresenter.request(true);
     }
 
+    /**
+     * 加载数据
+     */
     @Override
     public void onLoad() {
         mPresenter.request(false);
     }
 
+    /**
+     * 开始列表加载动画
+     */
     @Override
     public void startRefreshAnim() {
 //使用handler刷新页面状态,主要解决vNoDataHint显示问题
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
     }
 
+    /**
+     * 停止列表加载动画
+     */
     @Override
     public void stopRefreshAnim() {
 //使用handler刷新页面状态,主要解决vNoDataHint显示问题
@@ -174,12 +197,18 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         ((SuperFragmentActivity)mActivity).showToast(showText);
     }
 
+    /**更新数据
+     * @param datas
+     */
     @Override
     public void updateItems(List<TopicEntity> datas) {
         adapter.upateItems(datas);
 
     }
 
+    /**加载数据
+     * @param datas
+     */
     @Override
     public void loadItems(List<TopicEntity> datas) {
         adapter.loadItems(datas);
@@ -224,7 +253,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.EXTRA_CODE&&resultCode== Activity.RESULT_OK){
-            ((TopicActivity)mActivity).onRefresh();
+            ((TopicActivity)mActivity).onRefresh();//刷新数据
         }
     }
 }

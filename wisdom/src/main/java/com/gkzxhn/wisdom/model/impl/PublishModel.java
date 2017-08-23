@@ -14,11 +14,11 @@ import java.util.List;
  */
 
 public class PublishModel extends BaseModel implements IPublishModel {
-    /**
-     * @param repairType
-     * @param content
-     * @param imagUrls
-     * @param onFinishedListener
+    /**发布报修
+     * @param repairType 报修类型
+     * @param content 报修内容
+     * @param imagUrls 报修图片
+     * @param onFinishedListener 请求回调
      */
     @Override
     public void publishRepair(String repairType, String content, List<String> imagUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
@@ -44,9 +44,9 @@ public class PublishModel extends BaseModel implements IPublishModel {
     }
 
     /**话题发布
-     * @param content
-     * @param imageUrls
-     * @param onFinishedListener
+     * @param content 话题内容
+     * @param imageUrls 话题图片
+     * @param onFinishedListener 请求回调
      */
     @Override
     public void publishTopic(String content, List<String> imageUrls, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {

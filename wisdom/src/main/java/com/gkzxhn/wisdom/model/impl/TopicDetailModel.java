@@ -24,6 +24,9 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
     }
 
 
+    /**请求话题详情
+     * @param onFinishedListener
+     */
     @Override
     public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -34,6 +37,11 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
             authFailureError.printStackTrace();
         }
     }
+
+    /**发布评论
+     * @param content
+     * @param onFinishedListener
+     */
     @Override
     public void publishComment(String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -46,6 +54,11 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
 
+    /**发布回复
+     * @param commentId
+     * @param content
+     * @param onFinishedListener
+     */
     @Override
     public void publishReplay(String commentId,String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -68,6 +81,9 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
 
+    /**删除话题
+     * @param onFinishedListener
+     */
     @Override
     public void delete( VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -79,6 +95,10 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
 
+    /**删除评论
+     * @param commentId
+     * @param onFinishedListener
+     */
     @Override
     public void deleteComment(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -89,6 +109,9 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
 
+    /**请求话题点赞／取消点赞
+     * @param onFinishedListener
+     */
     @Override
     public void requestLike(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -100,6 +123,10 @@ public class TopicDetailModel extends BaseModel implements ITopicDetailModel {
         }
     }
 
+    /**请求评论点赞／取消点赞
+     * @param commentId
+     * @param onFinishedListener
+     */
     @Override
     public void requestCommentLike(String commentId, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{

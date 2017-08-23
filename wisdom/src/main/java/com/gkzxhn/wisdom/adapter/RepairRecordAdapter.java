@@ -22,11 +22,6 @@ public class RepairRecordAdapter extends RecyclerView.Adapter<RepairRecordAdapte
     private Context context;
     private final int TAB;
     private OnItemClickListener onItemClickListener;
-    private OnItemLongClickListener onItemLongClickListener;
-
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        this.onItemLongClickListener = onItemLongClickListener;
-    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
             this.onItemClickListener = onItemClickListener;

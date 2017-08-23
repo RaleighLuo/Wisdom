@@ -51,6 +51,10 @@ public class MainActivity extends SuperActivity {
         init();
 
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         mAblAppBar= (AppBarLayout) findViewById(R.id.main_layout_app_bar);
         mNestedScrollView= (NestedScrollView) findViewById(R.id.main_layout_nestedscrollview);
@@ -64,6 +68,10 @@ public class MainActivity extends SuperActivity {
         tvCarpetArea= (TextView) findViewById(R.id.home_full_screen_layout_tv_carpet_area_value);
         tvHousingArea= (TextView) findViewById(R.id.home_full_screen_layout_tv_housing_area_value);
     }
+
+    /**
+     * 初始化
+     */
     private void init(){
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
@@ -87,26 +95,37 @@ public class MainActivity extends SuperActivity {
         mRecyclerView.setAdapter(new MainAdapter(this));
         mNestedScrollView.setFillViewport(true);//NestedScrollView子项全屏
 //        mRecyclerView.setNestedScrollingEnabled(false);//解决滑动不流畅的问题
+        //右上角设置按钮点击事件监听
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                //进入个人中心
                 startActivityForResult(new Intent(MainActivity.this,PersonInforActivity.class),Constants.EXTRA_CODE);
                 return true;
             }
         });
+        //当日时间显示 年月日 周
         Calendar cal=Calendar.getInstance();
-        tvCurrentDate.setText(Utils.getDateFromTimeInMillis(cal.getTimeInMillis(),new SimpleDateFormat(
-                "yyyy年MM月dd日")));
+        tvCurrentDate.setText(Utils.getDateFromTimeInMillis(cal.getTimeInMillis()));
         String[] weeks=getResources().getStringArray(R.array.weeks);
         tvWeek.setText(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
+        //更新个人信息
         updatePersonInfor();
     }
+
+    /**
+     * 根据保存的sharepreference中的值，显示个人信息
+     */
     private void updatePersonInfor(){
         preferences=getSharedPreferences(Constants.USER_TABLE, Context.MODE_PRIVATE);
+        //小区
         tvCommunity.setText(preferences.getString(Constants.USER_RESIDENTIALAREASNAME,""));
+        //小区详情
         tvCommunityDetail.setText(preferences.getString(Constants.USER_REGIONNAME,"")+preferences.getString(Constants.USER_BUILDINGNAME,"")+
                 preferences.getString(Constants.USER_UNITSNAME,"")+preferences.getString(Constants.USER_ROOMNAME,""));
+        //使用面积
         tvCarpetArea.setText(preferences.getFloat(Constants.USER_USEDAREA,0)+getString(R.string.square_meter));
+        //房屋面积
         tvHousingArea.setText(preferences.getFloat(Constants.USER_FLOORAREA,0)+getString(R.string.square_meter));
         //下载头像
         String url= preferences.getString(Constants.USER_PORTRAIT,"");
@@ -122,9 +141,13 @@ public class MainActivity extends SuperActivity {
     }
 
     private boolean isExpanded=true;
+
+    /**点击事件监听
+     * @param view
+     */
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.main_layout_tv_repair:
+            case R.id.main_layout_tv_repair://报修
                 startActivity(new Intent(this,RepairActivity.class));
                 break;
             case R.id.home_full_screen_layout_tv_pay_record://缴费记录
@@ -158,13 +181,19 @@ public class MainActivity extends SuperActivity {
     }
 
 
-
+    /**右上角菜单
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * 用户点击了返回按钮
+     */
     @Override
     public void onBackPressed() {
         //回到Home主页
@@ -179,7 +208,7 @@ public class MainActivity extends SuperActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
             switch (requestCode){
-                case Constants.EXTRA_CODE://个人信息
+                case Constants.EXTRA_CODE://个人信息回调
                     updatePersonInfor();
                     break;
             }

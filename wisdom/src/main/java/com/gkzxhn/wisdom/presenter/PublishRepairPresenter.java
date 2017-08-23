@@ -79,5 +79,9 @@ public class PublishRepairPresenter extends BasePresenter<IPublishModel,IPublish
                 +"_"+(position+1)+"_"+ Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_REPAIRES_URL,uploadName);
     }
-
+    @Override
+    public void onDestory() {
+        super.onDestory();
+        mUploadHelper.onStop();
+    }
 }

@@ -12,6 +12,9 @@ import org.json.JSONObject;
 
 public class PersonInforModel extends BaseModel implements IPersonInforModel {
 
+    /**请求用户信息
+     * @param onFinishedListener
+     */
     @Override
     public void requestUserInfor(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try {
@@ -22,6 +25,11 @@ public class PersonInforModel extends BaseModel implements IPersonInforModel {
         }
     }
 
+    /**更新用户信息
+     * @param nickname
+     * @param portraitUrl
+     * @param onFinishedListener
+     */
     @Override
     public void updateUserInfor(String nickname, String portraitUrl,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try {

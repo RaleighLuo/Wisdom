@@ -11,26 +11,27 @@ import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/8/7.
+ * 话题列表实体
  */
 
 public class TopicEntity {
     private String id;
-    private String content;
+    private String content;//话题内容
     @SerializedName("comments_amount")
     private int commentCount;//评论数
     @SerializedName("created_at")
-    private String date;
+    private String date;//创建日期
     @SerializedName("user_id")
-    private String userId;
-    private int viewed;
-    private String nickname;
+    private String userId;//创建者userId
+    private int viewed;//浏览次数
+    private String nickname;//昵称
     @SerializedName("user_image")
-    private String portraitUrl;
+    private String portraitUrl;//头像下载地址
     @SerializedName("likes_amount")
-    private int likesCount;
+    private int likesCount;//点赞数量
     @SerializedName("images_url")
-    private List<String> images;
-    private boolean likeable;
+    private List<String> images;//图片下载地址
+    private boolean likeable;//是否可以点赞 true没有点赞 false 已经点赞
 
     public boolean isLikeable() {
         return likeable;

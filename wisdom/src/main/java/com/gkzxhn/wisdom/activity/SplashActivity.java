@@ -17,7 +17,7 @@ import com.gkzxhn.wisdom.common.Constants;
  */
 
 public class SplashActivity extends Activity {
-    private   final long SPLASH_DELAY_MILLIS = 1000;
+    private   final long SPLASH_DELAY_MILLIS = 1000;//1秒后跳转
     private final int TO_LOGIN_PAGE=1;
     private final int TO_MAIN_PAGE=2;
     @Override
@@ -38,11 +38,11 @@ public class SplashActivity extends Activity {
 
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what==TO_LOGIN_PAGE){
+            if(msg.what==TO_LOGIN_PAGE){//跳转到登录界面
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-            }else if(msg.what==TO_MAIN_PAGE){
+            }else if(msg.what==TO_MAIN_PAGE){//已经登录，跳转到主页
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

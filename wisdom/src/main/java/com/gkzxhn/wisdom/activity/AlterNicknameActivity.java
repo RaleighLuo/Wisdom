@@ -14,6 +14,7 @@ import com.starlight.mobile.android.lib.util.CommonHelper;
 
 /**
  * Created by Raleigh.Luo on 17/8/8.
+ * 修改昵称
  */
 
 public class AlterNicknameActivity extends SuperActivity implements IPersonInforView{

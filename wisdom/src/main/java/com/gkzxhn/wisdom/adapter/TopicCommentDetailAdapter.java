@@ -46,6 +46,10 @@ public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicComment
             notifyItemRemoved(position);
         }
     }
+
+    /**添加项
+     * @param entity
+     */
     public void addItem(TopicReplayEntity entity){
         if(entity!=null){
             mDatas.add(0,entity);
@@ -53,9 +57,19 @@ public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicComment
         }
 
     }
+
+    /**获取某项id
+     * @param position
+     * @return
+     */
     public String getItemsId(int position){
         return mDatas.get(position).getId();
     }
+
+    /**获取某项的创建者userid
+     * @param position
+     * @return
+     */
     public String getItemsUserId(int position){
         return position>=0&&position<mDatas.size()?mDatas.get(position).getUserId():"";
     }
@@ -81,6 +95,10 @@ public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicComment
         });
 
     }
+
+    /**更新数据
+     * @param datas
+     */
     public void updateItems(List<TopicReplayEntity> datas){
         this.mDatas.clear();
         if(datas!=null&&datas.size()>0){
@@ -89,6 +107,10 @@ public class TopicCommentDetailAdapter extends RecyclerView.Adapter<TopicComment
         notifyDataSetChanged();
 
     }
+
+    /**加载数据
+     * @param datas
+     */
     public void loadItems(List<TopicReplayEntity> datas){
         if(datas!=null&&datas.size()>0){
             mDatas.addAll(datas);

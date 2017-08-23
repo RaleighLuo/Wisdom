@@ -20,6 +20,9 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
         this.topicId = topicId;
     }
 
+    /**请求评论详情
+     * @param onFinishedListener
+     */
     @Override
     public void request(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -30,6 +33,10 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
         }
     }
 
+    /** 发布回复
+     * @param content
+     * @param onFinishedListener
+     */
     @Override
     public void publishReplay(String content, VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -42,6 +49,9 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
         }
     }
 
+    /**评论点赞
+     * @param onFinishedListener
+     */
     @Override
     public void like(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{
@@ -53,6 +63,10 @@ public class TopicCommentDetailModel extends BaseModel implements ITopicCommentD
         }
     }
 
+    /**删除回复
+     * @param id
+     * @param onFinishedListener
+     */
     @Override
     public void deleteReplay(String id,VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{

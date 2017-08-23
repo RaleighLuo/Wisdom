@@ -11,6 +11,9 @@ import org.json.JSONObject;
  */
 
 public class SignModel extends BaseModel implements ISignModel {
+    /**每日签到
+     * @param onFinishedListener
+     */
     @Override
     public void sign(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
         try{

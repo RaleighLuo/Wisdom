@@ -61,6 +61,10 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         initControls();
         init();
     }
+
+    /**
+     * 初始化控件
+     */
     private void initControls(){
         ivPortrait= (ImageView) findViewById(R.id.comment_detail_layout_iv_portrait);
         tvName= (TextView) findViewById(R.id.comment_detail_layout_tv_name);
@@ -73,11 +77,18 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         mRecyclerView= (RecyclerView) findViewById(R.id.common_list_layout_rv_list);
         mSwipeRefresh= (CusSwipeRefreshLayout) findViewById(R.id.common_list_layout_swipeRefresh);
     }
+
+    /**
+     * 初始化
+     */
     private void init(){
+        //初始化Presenter
         mPresenter=new TopicCommentDetailPresenter(this,this,getIntent().getStringExtra(Constants.EXTRA),getIntent().getStringExtra(Constants.EXTRAS));
+        //获取当前用户id
         mUserId=mPresenter.getSharedPreferences().getString(Constants.USER_ID,"");
+        //初始化加载进度条
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
-        dismissProgress();
+        dismissProgress();//关闭
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
                 R.color.holo_orange_light, R.color.holo_red_light);
@@ -91,11 +102,16 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         adapter=new TopicCommentDetailAdapter(this);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
+        //初始化评论对话框
         mCommentDialog=new CommentDialog(this);
         mCommentDialog.setOnClickListener(onClickListener);
-         mPresenter.request();
+        //请求评论详情
+        mPresenter.request();
     }
 
+    /**
+     * 回复评论
+     */
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
         public void onClickListener(View convertView, int position) {
@@ -138,9 +154,13 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
             }
         }
     };
+
+    /**点击事件监听
+     * @param view
+     */
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.common_head_layout_iv_left:
+            case R.id.common_head_layout_iv_left://左上角返回
                 setResult(RESULT_OK);
                 finish();
                 break;
@@ -159,32 +179,50 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
     }
 
 
+    /**
+     * 下拉刷新
+     */
     @Override
     public void onRefresh() {
         mPresenter.request();
     }
 
+    /**横竖屏时Dialog恢复显示位置
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mCommentDialog.measureWindow();
+        mCommentDialog.measureWindow();//恢复窗口位置
     }
 
 
+    /**
+     * 显示加载进度条
+     */
     public void showProgress() {
         if(mProgress!=null&&!mProgress.isShowing())mProgress.show();
 
     }
 
+    /**
+     * 关闭加载进度条
+     */
     public void dismissProgress() {
         if(mProgress!=null&&mProgress.isShowing())mProgress.dismiss();
     }
 
+    /**
+     * 开始列表加载动画
+     */
     public void startRefreshAnim() {
         //使用handler刷新页面状态,主要解决vNoDataHint显示问题
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
     }
 
+    /**
+     * 关闭列表加载动画
+     */
     public void stopRefreshAnim() {
         handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
     }
@@ -225,19 +263,27 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
     };
     @Override
     protected void onDestroy() {
-        mPresenter.onDestory();
+        mPresenter.onDestory();//释放presenter资源
+        //关闭Dialog 防止窗口溢出
         if(mCommentDialog!=null&&mCommentDialog.isShowing())mCommentDialog.dismiss();
         if(mCommentShowDialog!=null&&mCommentShowDialog.isShowing())mCommentShowDialog.dismiss();
         super.onDestroy();
     }
 
+    /**评论点赞成功
+     * @param isSuccess
+     */
     @Override
     public void likeFinish(boolean isSuccess) {
         if(isSuccess) {
+            //设置相反值
             mCommentEnity.setLikeable(!mCommentEnity.isLikeable());
+            //更新点赞数量
             mCommentEnity.setLikesCount(mCommentEnity.isLikeable()?mCommentEnity.getLikesCount()-1:mCommentEnity.getLikesCount()+1);
+            //显示最新点赞数量
             rbLike.setText(String.valueOf(mCommentEnity.getLikesCount()));
         }
+        //点赞check  isLikeable 没有点赞
         rbLike.setChecked(!mCommentEnity.isLikeable());
 
     }
@@ -250,7 +296,8 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
         mCommentEnity.setCommentCount(mCommentEnity.getCommentCount()+1);
         tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), mCommentEnity.getCommentCount(),
                 getString(R.string.strip)));
-        adapter.addItem(entity);
+        adapter.addItem(entity);//评论添加到头部
+        //关闭nodata显示
         if (ivNodata.isShown()) ivNodata.setVisibility(View.GONE);
     }
 
@@ -261,6 +308,7 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
     public void update(TopicCommentDetailEntity entity,List<TopicReplayEntity> mDatas) {
         if(entity!=null) {
             this.mCommentEnity = entity;
+            //现在头像
             ImageLoader.getInstance().displayImage(entity.getPortrait(), ivPortrait, Utils.getOptions(R.mipmap.person_portrait));
             tvName.setText(entity.getNickname());
             tvDate.setText(Utils.getFormateTime(entity.getDate(), new SimpleDateFormat("MM月dd日 HH:mm")));
@@ -269,10 +317,13 @@ public class TopicCommentDetailActivity extends SuperActivity implements CusSwip
             rbLike.setText(String.valueOf(entity.getLikesCount()));
             tvReplayCount.setText(String.format("%s(%s%s)", getString(R.string.replay_comment), entity.getCommentCount(),
                     getString(R.string.strip)));
-            adapter.updateItems(mDatas);
+            adapter.updateItems(mDatas);//更新回复 列表
         }
     }
 
+    /**删除回复成功
+     * @param position
+     */
     @Override
     public void deleteSuccess(int position) {
         mCommentEnity.setCommentCount(mCommentEnity.getCommentCount()-1);

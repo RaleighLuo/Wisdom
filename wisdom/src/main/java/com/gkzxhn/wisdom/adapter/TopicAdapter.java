@@ -39,6 +39,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         this.context = context;
 
     }
+
+    /**点赞话题
+     * @param position 位置
+     * @param isSuccess 是否请求成功
+     */
     public void like(int position,boolean isSuccess){
         if(position>=0&&position<mDatas.size()) {
             if (isSuccess) {
@@ -51,12 +56,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     }
 
 
+    /**更新话题项
+     * @param list
+     */
     public void upateItems(List<TopicEntity> list){
         mDatas.clear();
         if(list!=null&&list.size()>0)mDatas.addAll(list);
         notifyDataSetChanged();
 
     }
+
+    /**加载话题项
+     * @param list
+     */
     public void loadItems(List<TopicEntity> list){
         if(list!=null&&list.size()>0) {
             mDatas.addAll(list);

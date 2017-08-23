@@ -5,8 +5,8 @@ package com.gkzxhn.wisdom.entity;
  */
 
 public class PhotoEntity {
-    private String localPath;
-    private String imageUrl;
+    private String localPath;//图片本地地址
+    private String imageUrl;//图片下载地址
 
     public PhotoEntity(String localPath) {
         this.localPath = localPath;
