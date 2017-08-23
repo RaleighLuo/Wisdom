@@ -49,6 +49,11 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
         this.mTopicInfor=entity;
         notifyItemChanged(0);
     }
+
+    public TopicDetailEntity getTopicInfor() {
+        return mTopicInfor ;
+    }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -91,12 +96,17 @@ public class TopicCommentAdapter extends RecyclerView.Adapter<TopicCommentAdapte
     }
 
     /**更新评论点赞数量
-     * @param isLike
+     *
      */
-    public void updateLikeNumber(boolean isLike){
-        mTopicInfor.setLikesCount(isLike?mTopicInfor.getLikesCount()+1:mTopicInfor.getLikesCount()-1>0?mTopicInfor.getLikesCount()-1:0);
+    public void updateLikeNumber(){
+        mTopicInfor.setLikeable(!mTopicInfor.isLikeable());
+        mTopicInfor.setLikesCount(!mTopicInfor.isLikeable()?mTopicInfor.getLikesCount()+1:(mTopicInfor.getLikesCount()-1>0?mTopicInfor.getLikesCount()-1:0));
         tvTopicLikeCount.setText(String.valueOf(mTopicInfor.getLikesCount()));
     }
+    public boolean commentIsLikeable(){
+        return mTopicInfor.isLikeable();
+    }
+
 
     /**
      *评论点赞

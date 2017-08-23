@@ -75,6 +75,29 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             notifyDataSetChanged();
         }
     }
+    public void removeItem(int position){
+        if(position>=0&&position<mDatas.size()) {
+            mDatas.remove(position);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * @param position
+     * @param commentCount
+     * @param likeCount
+     */
+    public void updateItem(int position,int commentCount,int likeCount,boolean isLikeable){
+        if(position>=0&&position<mDatas.size()) {
+            TopicEntity entity=mDatas.get(position);
+            if(entity.getCommentCount()!=commentCount||entity.getLikesCount()!=likeCount) {
+                entity.setCommentCount(commentCount);
+                entity.setLikesCount(likeCount);
+                entity.setLikeable(isLikeable);
+                notifyItemChanged(position);
+            }
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.topic_item_layout,null,false);

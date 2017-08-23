@@ -56,7 +56,6 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private ImageView ivLike;
     private CheckConfirmDialog confirmDialog;
     private ProgressDialog mProgress;
-    private boolean isLike=false;
     private String mUserId=null;
     private CommentShowDialog mCommentShowDialog;
     @Override
@@ -236,10 +235,15 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left://返回按钮
+                Intent intent=new Intent();
+                intent.putExtra(Constants.EXTRA,adapter.getTopicInfor().getCommentCount());//评论数
+                intent.putExtra(Constants.EXTRAS,adapter.getTopicInfor().getLikesCount());//点赞数量
+                intent.putExtra(Constants.EXTRA_TAB,adapter.getTopicInfor().isLikeable());//是否能点赞
+                setResult(RESULT_OK,intent);
                 finish();
                 break;
             case R.id.topic_detial_layout_ll_like://话题点赞 已点赞enabel＝false
-                if(isLike){//已经点赞咯,->取消点赞
+                if(!adapter.commentIsLikeable()){//已经点赞咯,->取消点赞
                     tvLike.setEnabled(false);
                     ivLike.setColorFilter(null);
                 }else{//没有点赞，－>点赞
@@ -339,7 +343,6 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     public void update(TopicDetailEntity entity) {
         adapter.updateHead(entity);
         if(!entity.isLikeable()){//已经点赞
-            isLike=true;
             tvLike.setEnabled(true);
             ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
         }
@@ -367,7 +370,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void deleteTopicSuccess() {
         Toast.makeText(getApplicationContext(),R.string.delete_topic_success,Toast.LENGTH_SHORT).show();
-        setResult(RESULT_OK);
+        setResult(RESULT_CANCELED);
         finish();
     }
 
@@ -403,7 +406,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void likeFinished(boolean isSuccess) {
         if(!isSuccess) {//请求失败－恢复
-            if (isLike) {//已经点赞咯
+            if (!adapter.commentIsLikeable()) {//已经点赞咯
                 tvLike.setEnabled(true);
                 ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
             } else {//没有点赞
@@ -411,8 +414,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                 ivLike.setColorFilter(null);
             }
         }else{
-            isLike=!isLike;
-            adapter.updateLikeNumber(isLike);
+            adapter.updateLikeNumber();
         }
     }
 
@@ -441,5 +443,15 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     @Override
     public void publishReplaySuccess(int position,TopicReplayEntity comment) {
         adapter.addReplay(position,comment);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        intent.putExtra(Constants.EXTRA,adapter.getTopicInfor().getCommentCount());//评论数
+        intent.putExtra(Constants.EXTRAS,adapter.getTopicInfor().getLikesCount());//点赞数量
+        intent.putExtra(Constants.EXTRA_TAB,adapter.getTopicInfor().isLikeable());//是否能点赞
+        setResult(RESULT_OK,intent);
+        super.onBackPressed();
     }
 }

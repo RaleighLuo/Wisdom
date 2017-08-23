@@ -53,6 +53,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private TopicAdapter adapter;
     private CommonListPresenter<TopicEntity> mPresenter;
     private TopicDetailModel mModel;
+    private int currentPosition=-1;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -112,6 +113,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
                     requestLike(position);
                     break;
                 default://跳转话题详情
+                    currentPosition=position;
                     Intent intent=new Intent(mActivity, TopicDetailActivity.class);
                     intent.putExtra(Constants.EXTRA,adapter.getItemsId(position));
                     startActivityForResult(intent,Constants.EXTRA_CODE);
@@ -252,8 +254,13 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Constants.EXTRA_CODE&&resultCode== Activity.RESULT_OK){
-            ((TopicActivity)mActivity).onRefresh();//刷新数据
+        if(requestCode==Constants.EXTRA_CODE){
+            if(resultCode== Activity.RESULT_OK){
+                adapter.updateItem(currentPosition,data.getIntExtra(Constants.EXTRA,0),data.getIntExtra(Constants.EXTRAS,0),
+                        data.getBooleanExtra(Constants.EXTRA_TAB,false));
+            }else if(resultCode==Activity.RESULT_CANCELED){//删除话题数据
+                adapter.removeItem(currentPosition);
+            }
         }
     }
 }
