@@ -43,7 +43,7 @@
             android:id="@+id/message_comment_item_layout_iv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/like"
+            android:src="@mipmap/like_grey"
             android:visibility="gone"
             android:tint="@color/orange_color"
             />

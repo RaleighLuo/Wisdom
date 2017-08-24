@@ -96,8 +96,8 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
-//        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-//        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        int size=getResources().getDimensionPixelSize(R.dimen.topic_line_height);
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new TopicAdapter(mActivity);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
@@ -110,6 +110,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
                 case R.id.topic_item_layout_rb_like://点赞
+                case R.id.topic_item_layout_fl_like:
                     requestLike(position);
                     break;
                 default://跳转话题详情

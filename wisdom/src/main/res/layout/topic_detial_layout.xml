@@ -48,7 +48,7 @@
             <ImageView
                 android:layout_width="15dip"
                 android:layout_height="15dip"
-                android:src="@mipmap/comment"
+                android:src="@mipmap/comment_grey"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:id="@+id/topic_detial_layout_iv_like"
                 android:layout_width="15dip"
                 android:layout_height="15dip"
-                android:src="@mipmap/like"
+                android:src="@mipmap/like_grey"
                 />
             <TextView
                 android:id="@+id/topic_detial_layout_tv_like"

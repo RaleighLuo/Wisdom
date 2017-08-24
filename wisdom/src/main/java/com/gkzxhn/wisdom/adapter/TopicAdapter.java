@@ -105,7 +105,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final TopicEntity entity=mDatas.get(position);
         holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
         holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
@@ -119,6 +119,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
+        holder.flComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
+        holder.flLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.rbLike.setChecked(entity.isLikeable());
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
@@ -157,9 +170,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         private RadioButtonPlus rbLike;
         private RecyclerView mRecyclerView;
         private OnlineTopicAdapter adapter;
+        private View flComment,flLike;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            flComment=itemView.findViewById(R.id.topic_item_layout_fl_comment);
+            flLike=itemView.findViewById(R.id.topic_item_layout_fl_like);
             ivPortrait= (ImageView) itemView.findViewById(R.id.topic_item_layout_iv_portrait);
             mRecyclerView= (RecyclerView) itemView.findViewById(R.id.topic_item_layout_rv_image);
             tvName= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_name);

@@ -7,6 +7,7 @@
     <dimen name="common_head_rightImgPadding">10dip</dimen>
     <dimen name="common_head_title_size">18sp</dimen>
     <dimen name="common_head_text_size">14sp</dimen>
+    <dimen name="topic_line_height">7dip</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="recycler_view_line_height">5dip</dimen>
     <dimen name="recycler_view_line_light_height">0.5dip</dimen>
