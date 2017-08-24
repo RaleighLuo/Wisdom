@@ -135,7 +135,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.ViewHolder
                     });
 
                 }else{//隐藏
-                    ivImage.setVisibility(View.INVISIBLE);
+                    ivImage.setVisibility(View.GONE);
                     ivImage.setOnClickListener(null);
                 }
 

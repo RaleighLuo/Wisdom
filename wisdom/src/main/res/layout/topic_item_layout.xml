@@ -54,15 +54,66 @@
         android:layout_below="@+id/topic_item_layout_iv_portrait"
         android:layout_alignLeft="@+id/topic_item_layout_iv_portrait"
         />
-    <android.support.v7.widget.RecyclerView
+
+    <FrameLayout
+        android:id="@+id/topic_item_layout_rl_image"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:paddingTop="5dip"
         android:layout_marginRight="@dimen/margin"
-        android:layout_alignLeft="@+id/topic_item_layout_tv_content"
-        android:id="@+id/topic_item_layout_rv_image"
         android:layout_below="@+id/topic_item_layout_tv_content"
-        />
+        android:layout_alignLeft="@+id/topic_item_layout_tv_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/topic_item_layout_ll_image"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dip"
+            android:layout_height="wrap_content">
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                mAttr:div_divisor="3"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                mAttr:div_dividend="4"
+                />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
+        </LinearLayout>
+    </FrameLayout>
     <View
         android:id="@+id/topic_item_layout_v_content_line"
         style="@style/common_light_line_style"
@@ -70,7 +121,7 @@
         android:layout_marginTop="10dip"
         android:layout_marginRight="@dimen/margin"
         android:layout_alignLeft="@+id/topic_item_layout_tv_content"
-        android:layout_below="@+id/topic_item_layout_rv_image"
+        android:layout_below="@+id/topic_item_layout_rl_image"
         />
     <LinearLayout
         android:id="@+id/topic_item_layout_ll_comment"

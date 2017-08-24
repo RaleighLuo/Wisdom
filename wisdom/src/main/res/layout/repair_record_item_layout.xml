@@ -67,6 +67,17 @@
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
                 />
+            <com.gkzxhn.wisdom.customview.DivisionImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_imageloading"
+                android:scaleType="centerCrop"
+                mAttr:div_divisor="3"
+                mAttr:div_dividend="4"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                />
 
         </LinearLayout>
     </FrameLayout>

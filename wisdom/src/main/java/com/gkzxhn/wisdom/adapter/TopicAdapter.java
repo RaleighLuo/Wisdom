@@ -1,22 +1,28 @@
 package com.gkzxhn.wisdom.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.OnlinePhotoPreviewActivity;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.customview.DivisionImageView;
 import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.util.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.view.FullyGridLayoutManager;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +119,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvContent.setText(entity.getContent());
         holder.tvName.setText(entity.getNickname());
         ImageLoader.getInstance().displayImage(entity.getPortraitUrl(),holder.ivPortrait,Utils.getOptions(R.mipmap.topic_portrait));
-       String date=Utils.getFormateTime(entity.getDate(),new SimpleDateFormat(String.format("MM%sdd%s HH:mm",context.getString(R.string.month),context.getString(R.string.day))));
+        String date=Utils.getFormateTime(entity.getDate(),new SimpleDateFormat(String.format("MM%sdd%s HH:mm",context.getString(R.string.month),context.getString(R.string.day))));
         String viewTime=context.getString(R.string.browse)+Utils.getViewedTime(entity.getViewed())+context.getString(R.string.time);
         holder.tvDate.setText(date+"\u3000"+viewTime);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -142,16 +148,33 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
             }
         });
-        if(entity.getImages()!=null&&entity.getImages().size()>0){
-            RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams)holder. mRecyclerView.getLayoutParams();
-            params.height=RelativeLayout.LayoutParams.WRAP_CONTENT;
-            holder.mRecyclerView.setLayoutParams(params);
-            holder.adapter.updateItems(entity.getImages());
+        //图片
+        if(entity.getImages().size()==0){
+            holder.llImagesPanel.setVisibility(View.GONE);
         }else{
-            RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams)holder. mRecyclerView.getLayoutParams();
-            params.height=0;
-            holder.mRecyclerView.setLayoutParams(params);
-            holder.adapter.updateItems(null);
+            holder.llImagesPanel.setVisibility(View.VISIBLE);
+            for(int i=0;i<holder.llImagesPanel.getChildCount();i++){
+                DivisionImageView ivImage= (DivisionImageView) holder.llImagesPanel.getChildAt(i);
+                if(i<entity.getImages().size()){//显示图片
+                    ivImage.setVisibility(View.VISIBLE);
+                    ImageLoader.getInstance().displayImage(entity.getImages().get(i),ivImage,Utils.getOptions(R.mipmap.ic_imageloading));
+                    final int index=i;
+                    ivImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(context ,OnlinePhotoPreviewActivity.class);
+                            intent.putExtra(Constants.EXTRAS, (Serializable) entity.getImages());
+                            intent.putExtra(Constants.EXTRA_POSITION, index);
+                            context.startActivity(intent);
+                        }
+                    });
+
+                }else{//隐藏
+                    ivImage.setVisibility(View.GONE);
+                    ivImage.setOnClickListener(null);
+                }
+
+            }
         }
 
     }
@@ -168,26 +191,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         private ImageView ivPortrait;
         private TextView tvName,tvDate,tvContent,tvComment;
         private RadioButtonPlus rbLike;
-        private RecyclerView mRecyclerView;
-        private OnlineTopicAdapter adapter;
         private View flComment,flLike;
-
+        private LinearLayout llImagesPanel;
         public ViewHolder(View itemView) {
             super(itemView);
+            llImagesPanel= (LinearLayout) itemView.findViewById(R.id.topic_item_layout_ll_image);
             flComment=itemView.findViewById(R.id.topic_item_layout_fl_comment);
             flLike=itemView.findViewById(R.id.topic_item_layout_fl_like);
             ivPortrait= (ImageView) itemView.findViewById(R.id.topic_item_layout_iv_portrait);
-            mRecyclerView= (RecyclerView) itemView.findViewById(R.id.topic_item_layout_rv_image);
             tvName= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_name);
             tvDate= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_date);
             tvContent= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_content);
             rbLike= (RadioButtonPlus) itemView.findViewById(R.id.topic_item_layout_rb_like);
             tvComment= (TextView) itemView.findViewById(R.id.topic_item_layout_tv_comment);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            adapter=new OnlineTopicAdapter(context,false);
-            mRecyclerView.setAdapter(adapter);
         }
     }
 }
