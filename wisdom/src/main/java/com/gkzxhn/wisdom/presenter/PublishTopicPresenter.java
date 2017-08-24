@@ -29,6 +29,7 @@ public class PublishTopicPresenter extends BasePresenter<IPublishModel,IPublishV
         super(context, new PublishModel(), view);
     }
     public void publish(String content, List<String> imagUrls){
+        getView().startRefreshAnim();
         mModel.publishTopic(content, imagUrls, new VolleyUtils.OnFinishedListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {

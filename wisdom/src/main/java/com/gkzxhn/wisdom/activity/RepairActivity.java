@@ -92,8 +92,8 @@ public class RepairActivity extends SuperActivity implements CusSwipeRefreshLayo
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
-            case R.id.common_head_layout_iv_right://发布话题
-                startActivityForResult(new Intent(this,PublishTopicActivity.class), Constants.EXTRA_CODE);
+            case R.id.common_head_layout_iv_right://发布
+                startActivityForResult(new Intent(this,PublishRepairActivity.class), Constants.EXTRA_CODE);
                 break;
         }
     }
