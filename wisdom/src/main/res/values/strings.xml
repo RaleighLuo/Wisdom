@@ -131,6 +131,8 @@
     <string name="please_input_house_lease_money">请输入租金</string>
     <string name="please_input_house_sale_money">请输入售价</string>
     <!--报修-->
+
+    <string name="revoke">撤销</string>
     <string name="community_repair">社区报修</string>
     <string name="please_describe_question">请简单描述问题</string>
     <string name="repair_type">报修类别</string>
@@ -292,11 +294,10 @@
         <item>other</item>
     </string-array>
     <string-array name="repair_status">
-        <item>未处理</item>
-        <item>正在处理</item>
-        <item>撤销</item>
+        <item>物业指派工单</item>
+        <item>维修处理中</item>
         <item>已完成</item>
-        <item>other</item>
+        <item>已撤销</item>
     </string-array>
 
 </resources>

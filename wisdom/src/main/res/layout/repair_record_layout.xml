@@ -8,7 +8,8 @@
         android:id="@+id/repair_record_layout_ch_head"
         style="@style/common_head_style"
         mAttr:chHead_leftImg="@mipmap/ic_back"
-        mAttr:chHead_title="@string/repair_record"
+        mAttr:chHead_title="@string/community_repair"
+        mAttr:chHead_rightImg="@mipmap/topic_add"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"/>
     <com.starlight.mobile.android.lib.view.PagerSlidingTabStrip

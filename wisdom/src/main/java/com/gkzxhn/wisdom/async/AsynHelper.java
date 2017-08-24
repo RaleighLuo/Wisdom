@@ -87,7 +87,10 @@ public class AsynHelper extends AsyncTask<Object, Integer, Object> {
                         response= (String) params[0];
                         result = new Gson().fromJson(response, new TypeToken<List<TopicEntity>>() {}.getType());
                         break;
-                    case Constants.REPAIR_LIST_TAB:
+                    case Constants.COMMUNITY_REPAIR_PROGRESSING_TAB:
+                    case Constants.COMMUNITY_REPAIR_FINISHED_TAB:
+                    case Constants.REPAIR_FINISHED_TAB:
+                    case Constants.REPAIR_PROGRESSING_TAB:
                         response= (String) params[0];
                         result = new Gson().fromJson(response, new TypeToken<List<RepairEntity>>() {}.getType());
                         break;

@@ -2,6 +2,9 @@ package com.gkzxhn.wisdom.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Raleigh.Luo on 17/8/22.
  * 报修列表实体
@@ -20,6 +23,41 @@ public class RepairEntity {
     @SerializedName("repair_type")
     private String repairType;//报修类型
     private int viewed;//浏览次数
+    private List<String> images;
+    private String nickname;
+    @SerializedName("user_image")
+    private String portrait;
+
+    public static final String STATUS_UNDISPOSED="undisposed";//未分配
+    public static final String STATUS_PROCESSING="processing";//正在进行
+    public static final String STATUS_FINISHED="finished";//已完成
+
+    public List<String> getImages() {
+        if(images == null)images=new ArrayList<>();
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public String getNickname() {
+        return nickname == null ? "" : nickname;
+    }
+
+    public void setNickname(String nickname) {
+        if (nickname != null && !nickname.equals("null"))
+            this.nickname = nickname;
+    }
+
+    public String getPortrait() {
+        return portrait == null ? "" : portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        if (portrait != null && !portrait.equals("null"))
+            this.portrait = portrait;
+    }
 
     public int getViewed() {
         return viewed;

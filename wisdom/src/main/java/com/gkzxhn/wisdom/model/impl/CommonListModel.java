@@ -2,6 +2,7 @@ package com.gkzxhn.wisdom.model.impl;
 
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.entity.RepairEntity;
 import com.gkzxhn.wisdom.model.ICommonListModel;
 
 import org.json.JSONObject;
@@ -39,9 +40,21 @@ public class CommonListModel extends BaseModel implements ICommonListModel{
                     url=String.format("%s/%s/topics?post_user=true&page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
                             currentPage,pageSize);
                     break;
-                case Constants.REPAIR_LIST_TAB:
+                case Constants.COMMUNITY_REPAIR_PROGRESSING_TAB://社区报修－正在进行
                     url=String.format("%s/%s/repairs?page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
                             currentPage,pageSize);
+                    break;
+                case Constants.COMMUNITY_REPAIR_FINISHED_TAB://社区报修－已完成
+                    url=String.format("%s/%s/repairs?status=%s&page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
+                            RepairEntity.STATUS_FINISHED,currentPage,pageSize);
+                    break;
+                case Constants.REPAIR_PROGRESSING_TAB://我的报修－正在进行
+                    url=String.format("%s/%s/repairs?post_user=true&page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
+                            currentPage,pageSize);
+                    break;
+                case Constants.REPAIR_FINISHED_TAB://我的报修－已完成
+                    url=String.format("%s/%s/repairs?status=%s&post_user=true&page=%s&limit=%s",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""),
+                            RepairEntity.STATUS_FINISHED,currentPage,pageSize);
                     break;
             }
             volleyUtils.get(JSONObject.class,url,REQUEST_TAG,onFinishedListener);

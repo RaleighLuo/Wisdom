@@ -10,6 +10,7 @@
         style="@style/common_head_style"
         mAttr:chHead_leftImg="@mipmap/ic_back"
         mAttr:chHead_title="@string/repair_detail"
+        mAttr:chHead_rightText="@string/delete"
         mAttr:chHead_title_padding_left="0dip" />
     <View style="@style/common_line_style"
         android:layout_below="@+id/repair_detail_layout_ch_head"
@@ -33,11 +34,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:text="2017年7月10日 12:30"
+        android:text="2017年7月10日 12:30  浏览100次"
         android:layout_alignLeft="@+id/repair_detail_layout_tv_title"
         android:textColor="@color/common_text_color"
         android:layout_marginTop="10dip"
         android:layout_below="@+id/repair_detail_layout_tv_title"
+        />
+    <TextView
+        android:id="@+id/repair_detail_layout_tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="张先生"
+        android:textSize="10sp"
+        android:layout_alignRight="@+id/repair_detail_layout_tv_title"
+        android:textColor="@color/blue_text_color"
+        android:layout_alignTop="@+id/repair_detail_layout_tv_date"
         />
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

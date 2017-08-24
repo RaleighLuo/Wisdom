@@ -18,7 +18,6 @@
         android:textColor="@color/common_light_text_color"
         android:textSize="14sp"
         />
-    />
 
 
     <FrameLayout
@@ -106,7 +105,7 @@
         android:layout_marginTop="10dip"
         />
     <TextView
-        android:id="@+id/repair_item_layout_tv_publisher"
+        android:id="@+id/repair_item_layout_tv_publisher_or_del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="张先生"

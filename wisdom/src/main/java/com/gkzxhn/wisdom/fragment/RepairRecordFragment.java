@@ -16,14 +16,20 @@ import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.activity.RepairDetailActivity;
+import com.gkzxhn.wisdom.activity.SuperFragmentActivity;
 import com.gkzxhn.wisdom.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.adapter.OnItemLongClickListener;
-import com.gkzxhn.wisdom.adapter.RepairRecordAdapter;
+import com.gkzxhn.wisdom.adapter.RepairAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.customview.CheckConfirmDialog;
+import com.gkzxhn.wisdom.entity.RepairEntity;
+import com.gkzxhn.wisdom.presenter.RepairPresenter;
+import com.gkzxhn.wisdom.view.IRepairView;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
+
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/11.
@@ -31,16 +37,17 @@ import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
  */
 
 public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLayout.OnRefreshListener,
-        CusSwipeRefreshLayout.OnLoadListener {
+        CusSwipeRefreshLayout.OnLoadListener,IRepairView {
     private RecyclerView mRecyclerView;
     private CusSwipeRefreshLayout mSwipeRefresh;
     private View ivNodata;
     private DotsTextView tvLoading;
     private Context mActivity;
     private View parentView;
-    private RepairRecordAdapter adapter;
+    private RepairAdapter adapter;
     private int TAB;
     private CheckConfirmDialog mCheckConfirmDialog;
+    private RepairPresenter mPresenter;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -63,6 +70,7 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
     }
     private void init(){
         TAB=getArguments().getInt(Constants.EXTRA_TAB);
+        mPresenter=new RepairPresenter(mActivity,this,TAB);
         mCheckConfirmDialog = new CheckConfirmDialog(mActivity);
         mCheckConfirmDialog.setContent(getResources().getString(R.string.delete_repair_hint));
         mCheckConfirmDialog.setYesBtnListener(new View.OnClickListener() {
@@ -82,9 +90,9 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
-        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_line_color)));
-        adapter=new RepairRecordAdapter(mActivity,TAB);
+        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        adapter=new RepairAdapter(mActivity,TAB);
         adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
@@ -93,13 +101,8 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
         @Override
         public void onClickListener(View convertView, int position) {
             switch (convertView.getId()){
-//                case R.id.repair_item_layout_tv_right:
-//                    if(TAB== Constants.REPAIR_PROGRESSING_TAB){//查看流程
-//                        startActivity(new Intent(mActivity,RepairProgressActivity.class));
-//                    }else{//删除
-//                        if(!mCheckConfirmDialog.isShowing())mCheckConfirmDialog.show();
-//                    }
-//                    break;
+                case R.id.repair_item_layout_tv_publisher_or_del://删除或撤销
+                    break;
                 default://查看详情
                     startActivity(new Intent(mActivity,RepairDetailActivity.class));
                     break;
@@ -108,31 +111,38 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
 
         }
     };
-    private OnItemLongClickListener onItemLongClickListener=new OnItemLongClickListener() {
-        @Override
-        public void onLongClickListener(View convertView, int position) {
-
-        }
-    };
 
     @Override
     public void onRefresh() {
-        mSwipeRefresh.setRefreshing(false);
+        mPresenter.request(true);
 
     }
 
     @Override
     public void onLoad() {
-        mSwipeRefresh.setLoading(false);
+        mPresenter.request(false);
     }
+    @Override
     public void startRefreshAnim() {
         //使用handler刷新页面状态,主要解决vNoDataHint显示问题
         handler.sendEmptyMessage(Constants.START_REFRESH_UI);
     }
 
-    public void stopRefreshUI() {
+    @Override
+    public void stopRefreshAnim() {
         handler.sendEmptyMessage(Constants.STOP_REFRESH_UI);
     }
+
+    @Override
+    public void showToast(int testResId) {
+        ((SuperFragmentActivity)mActivity).showToast(testResId);
+    }
+
+    @Override
+    public void showToast(String showText) {
+        ((SuperFragmentActivity)mActivity).showToast(showText);
+    }
+
 
     private Handler handler=new Handler(){
         @Override
@@ -168,4 +178,24 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
             }
         }
     };
+
+    @Override
+    public void updateItems(List<RepairEntity> datas) {
+        adapter.updateItems(datas);
+    }
+
+    @Override
+    public void loadItems(List<RepairEntity> datas) {
+        adapter.loadItems(datas);
+    }
+
+    @Override
+    public void deleteSuccess(int position) {
+
+    }
+
+    @Override
+    public void cancelSuccess(int position) {
+
+    }
 }

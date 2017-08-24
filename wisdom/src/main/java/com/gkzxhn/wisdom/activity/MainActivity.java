@@ -147,14 +147,18 @@ public class MainActivity extends SuperActivity {
      */
     public void onClickListener(View view){
         switch (view.getId()){
-            case R.id.main_layout_tv_repair://报修
-                startActivity(new Intent(this,RepairActivity.class));
+            case R.id.main_layout_tv_repair://社区报修
+                Intent intent=new Intent(this,RepairRecordActivity.class);
+                intent.putExtra(Constants.EXTRA_TAB,Constants.COMMUNITY_REPAIR_TAB);
+                startActivity(intent);
                 break;
             case R.id.home_full_screen_layout_tv_pay_record://缴费记录
                 startActivity(new Intent(this,PayRecordActivity.class));
                 break;
             case R.id.home_full_screen_layout_tv_repair_record://报修记录
-                startActivity(new Intent(this,RepairRecordActivity.class));
+                intent=new Intent(this,RepairRecordActivity.class);
+                intent.putExtra(Constants.EXTRA_TAB,Constants.REPAIR_TAB);
+                startActivity(intent);
                 break;
             case R.id.main_layout_tv_talking://话题
                 startActivity(new Intent(this,TopicActivity.class));

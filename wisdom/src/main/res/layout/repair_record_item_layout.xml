@@ -108,10 +108,10 @@
         android:layout_marginTop="10dip"
         />
     <TextView
-        android:id="@+id/repair_item_layout_tv_delete"
+        android:id="@+id/repair_item_layout_tv_publisher_or_del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="撤销"
+        android:text="@string/revoke"
         android:paddingLeft="8dip"
         android:layout_below="@+id/repair_item_layout_v_line"
         android:paddingRight="8dip"
