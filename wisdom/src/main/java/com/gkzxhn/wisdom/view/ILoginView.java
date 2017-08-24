@@ -6,4 +6,5 @@ package com.gkzxhn.wisdom.view;
 
 public interface ILoginView extends IBaseView{
     public void onSuccess();
+    public void getCode(String code);
 }

@@ -123,6 +123,11 @@ public class LoginActivity extends SuperActivity implements ILoginView{
         finish();
     }
 
+    @Override
+    public void getCode(String code) {
+        etVerifyCode.setText(code);
+    }
+
     /**
      * 用户点击返回建
      */

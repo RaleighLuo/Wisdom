@@ -45,6 +45,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 if(code==200){
                     String verifyCode=JSONUtil.getJSONObjectStringValue(json,"sms_code");
                     showCode(verifyCode);
+                    getView().getCode(verifyCode);
                 }else{
                     getView().showToast(R.string.service_not_available);
                 }
