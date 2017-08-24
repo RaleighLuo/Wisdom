@@ -157,6 +157,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 DivisionImageView ivImage= (DivisionImageView) holder.llImagesPanel.getChildAt(i);
                 if(i<entity.getImages().size()){//显示图片
                     ivImage.setVisibility(View.VISIBLE);
+                    if(entity.getImages().size()==1){
+                        ivImage.setDivisor(2,3);
+                    }
                     ImageLoader.getInstance().displayImage(entity.getImages().get(i),ivImage,Utils.getOptions(R.mipmap.ic_imageloading));
                     final int index=i;
                     ivImage.setOnClickListener(new View.OnClickListener() {
