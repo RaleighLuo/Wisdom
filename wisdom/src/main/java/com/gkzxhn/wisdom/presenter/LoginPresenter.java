@@ -98,9 +98,8 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                                 getView().startRefreshAnim();
                                 getView().onSuccess(null);
                             }else{//多房屋
-//                                TODO
                                 List<RoomEntity> datas= (List<RoomEntity>) object;
-                                getView().startRefreshAnim();
+                                getView().stopRefreshAnim();
                                 getView().onSuccess(datas);
                             }
 
