@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,10 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.presenter.LoginPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.ILoginView;
 import com.starlight.mobile.android.lib.util.CommonHelper;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Raleigh.Luo on 17/7/14.
@@ -48,10 +55,12 @@ public class LoginActivity extends SuperActivity implements ILoginView{
      * 初始化
      */
     private void init(){
-        mTimer=new CodeCountDownTimer(DOWN_TIME, 1000);
-        etPhone.setText("17303854825");
         //初始化Presenter
         mPresenter=new LoginPresenter(this,this);
+        mTimer=new CodeCountDownTimer(DOWN_TIME, 1000);
+        mPresenter.getSharedPreferences().getString(Constants.USER_PHONE,"");
+        etPhone.setText("17303854825");
+
         //初始化加载进度条
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();//停止show
@@ -117,10 +126,30 @@ public class LoginActivity extends SuperActivity implements ILoginView{
      * 登录成功回调
      */
     @Override
-    public void onSuccess() {
+    public void onSuccess(List<RoomEntity> rooms) {
         CommonHelper.clapseSoftInputMethod(this);
-        startActivity(new Intent(this,MainActivity.class));
-        finish();
+        if(rooms!=null){
+            Intent intent = new Intent(this, ChangeCommunityActivity.class);
+            intent.putExtra(Constants.EXTRA, (Serializable) rooms);
+            intent.putExtra(Constants.EXTRA_TAB,Constants.LOGIN_TAB);
+            startActivityForResult(intent, Constants.EXTRA_CODE);
+        }else{
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.EXTRA_CODE){
+            if(resultCode==RESULT_OK){
+                startActivity(new Intent(this,MainActivity.class));
+                finish();
+            }else{
+                mPresenter.getSharedPreferences().edit().clear().commit();
+            }
+        }
     }
 
     @Override

@@ -62,6 +62,7 @@
     <string name="housing_area">房屋面积</string>
     <string name="square_meter">㎡</string>
     <string name="newst_notice">最新通知</string>
+    <string name="please_select_community">请选择小区</string>
     <!--投诉-->
     <string name="complaint">投诉</string>
     <string name="property_phone">物业电话 400－1256-789</string>

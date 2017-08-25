@@ -168,46 +168,48 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     private OnItemClickListener onItemClickListener=new OnItemClickListener() {
         @Override
         public void onClickListener(View convertView, int position) {
-            switch (convertView.getId()){
-                case R.id.topic_comment_layout_rb_like://评论点赞－发请求
-                    mPresenter.requestCommentLike(adapter.getItemsId(position),position);
-                    break;
-                case R.id.topic_comment_layout_iv_comment://评论回复－弹出对话框
-                    if(!mCommentDialog.isShowing()){
-                        mCommentDialog.show();
-                        mCommentDialog.setPosition(position);//记住位置
-                        //设置默认提示
-                        mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
-                    }
-                    break;
-                case R.id.topic_detial_layout_tv_delete://删除话题
-                    if(confirmDialog==null) {//提示对话框
-                        confirmDialog = new CheckConfirmDialog(TopicDetailActivity.this);
-                        confirmDialog.setContent(getResources().getString(R.string.delete_topic_hint));
-                        confirmDialog.setYesBtnListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (confirmDialog != null && confirmDialog.isShowing())
-                                    confirmDialog.dismiss();
-                                mPresenter.delete();//点击确定后，请求删除话题
-                            }
-                        });
-                    }
-                    if(!confirmDialog.isShowing())confirmDialog.show();//显示提示对话框
-                    break;
-                case R.id.topic_comment_layout_rl_root://回复评论－弹出回复对话
-                    if(!mCommentDialog.isShowing()){
-                        mCommentDialog.show();
-                        mCommentDialog.setPosition(position);
-                        mCommentDialog.setHint(String.format("%s %s",getString(R.string.reply_colon),adapter.getItem(position).getNickname()));
-                    }
-                    break;
-                default://跳转到评论详情页面
-                    Intent intent=new Intent(TopicDetailActivity.this, TopicCommentDetailActivity.class);
-                    intent.putExtra(Constants.EXTRA,  adapter.getItemsId(position));
-                    intent.putExtra(Constants.EXTRAS, mTopicId);
-                    startActivity(intent);
-                    break;
+            if(adapter.getTopicInfor()!=null) {
+                switch (convertView.getId()) {
+                    case R.id.topic_comment_layout_rb_like://评论点赞－发请求
+                        mPresenter.requestCommentLike(adapter.getItemsId(position), position);
+                        break;
+                    case R.id.topic_comment_layout_iv_comment://评论回复－弹出对话框
+                        if (!mCommentDialog.isShowing()) {
+                            mCommentDialog.show();
+                            mCommentDialog.setPosition(position);//记住位置
+                            //设置默认提示
+                            mCommentDialog.setHint(String.format("%s %s", getString(R.string.reply_colon), adapter.getItem(position).getNickname()));
+                        }
+                        break;
+                    case R.id.topic_detial_layout_tv_delete://删除话题
+                        if (confirmDialog == null) {//提示对话框
+                            confirmDialog = new CheckConfirmDialog(TopicDetailActivity.this);
+                            confirmDialog.setContent(getResources().getString(R.string.delete_topic_hint));
+                            confirmDialog.setYesBtnListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (confirmDialog != null && confirmDialog.isShowing())
+                                        confirmDialog.dismiss();
+                                    mPresenter.delete();//点击确定后，请求删除话题
+                                }
+                            });
+                        }
+                        if (!confirmDialog.isShowing()) confirmDialog.show();//显示提示对话框
+                        break;
+                    case R.id.topic_comment_layout_rl_root://回复评论－弹出回复对话
+                        if (!mCommentDialog.isShowing()) {
+                            mCommentDialog.show();
+                            mCommentDialog.setPosition(position);
+                            mCommentDialog.setHint(String.format("%s %s", getString(R.string.reply_colon), adapter.getItem(position).getNickname()));
+                        }
+                        break;
+                    default://跳转到评论详情页面
+                        Intent intent = new Intent(TopicDetailActivity.this, TopicCommentDetailActivity.class);
+                        intent.putExtra(Constants.EXTRA, adapter.getItemsId(position));
+                        intent.putExtra(Constants.EXTRAS, mTopicId);
+                        startActivity(intent);
+                        break;
+                }
             }
 
         }
@@ -235,28 +237,34 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
     public void onClickListener(View view){
         switch (view.getId()){
             case R.id.common_head_layout_iv_left://返回按钮
-                Intent intent=new Intent();
-                intent.putExtra(Constants.EXTRA,adapter.getTopicInfor().getCommentCount());//评论数
-                intent.putExtra(Constants.EXTRAS,adapter.getTopicInfor().getLikesCount());//点赞数量
-                intent.putExtra(Constants.EXTRA_TAB,adapter.getTopicInfor().isLikeable());//是否能点赞
-                setResult(RESULT_OK,intent);
+                if(adapter.getTopicInfor()!=null) {
+                    Intent intent = new Intent();
+                    intent.putExtra(Constants.EXTRA, adapter.getTopicInfor().getCommentCount());//评论数
+                    intent.putExtra(Constants.EXTRAS, adapter.getTopicInfor().getLikesCount());//点赞数量
+                    intent.putExtra(Constants.EXTRA_TAB, adapter.getTopicInfor().isLikeable());//是否能点赞
+                    setResult(RESULT_OK, intent);
+                }
                 finish();
                 break;
             case R.id.topic_detial_layout_ll_like://话题点赞 已点赞enabel＝false
-                if(!adapter.commentIsLikeable()){//已经点赞咯,->取消点赞
-                    tvLike.setEnabled(false);
-                    ivLike.setColorFilter(null);
-                }else{//没有点赞，－>点赞
-                    tvLike.setEnabled(true);
-                    ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+                if(adapter.getTopicInfor()!=null) {
+                    if (!adapter.commentIsLikeable()) {//已经点赞咯,->取消点赞
+                        tvLike.setEnabled(false);
+                        ivLike.setColorFilter(null);
+                    } else {//没有点赞，－>点赞
+                        tvLike.setEnabled(true);
+                        ivLike.setColorFilter(getResources().getColor(R.color.orange_color));
+                    }
+                    mPresenter.requestLike();
                 }
-                mPresenter.requestLike();
                 break;
             case R.id.topic_detial_layout_ll_comment://话题评论
-                if(!mCommentDialog.isShowing()){
-                    mCommentDialog.show();
-                    mCommentDialog.setPosition(-1);
-                    mCommentDialog.setHint(R.string.comment);
+                if(adapter.getTopicInfor()!=null) {
+                    if (!mCommentDialog.isShowing()) {
+                        mCommentDialog.show();
+                        mCommentDialog.setPosition(-1);
+                        mCommentDialog.setHint(R.string.comment);
+                    }
                 }
                 break;
         }
@@ -447,11 +455,13 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent();
-        intent.putExtra(Constants.EXTRA,adapter.getTopicInfor().getCommentCount());//评论数
-        intent.putExtra(Constants.EXTRAS,adapter.getTopicInfor().getLikesCount());//点赞数量
-        intent.putExtra(Constants.EXTRA_TAB,adapter.getTopicInfor().isLikeable());//是否能点赞
-        setResult(RESULT_OK,intent);
+        if(adapter.getTopicInfor()!=null) {
+            Intent intent = new Intent();
+            intent.putExtra(Constants.EXTRA, adapter.getTopicInfor().getCommentCount());//评论数
+            intent.putExtra(Constants.EXTRAS, adapter.getTopicInfor().getLikesCount());//点赞数量
+            intent.putExtra(Constants.EXTRA_TAB, adapter.getTopicInfor().isLikeable());//是否能点赞
+            setResult(RESULT_OK, intent);
+        }
         super.onBackPressed();
     }
 }

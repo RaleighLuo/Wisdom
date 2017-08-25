@@ -11,6 +11,7 @@ import android.widget.RemoteViews;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
+import com.gkzxhn.wisdom.activity.ChangeCommunityActivity;
 import com.gkzxhn.wisdom.async.AsynHelper;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
@@ -26,6 +27,7 @@ import com.starlight.mobile.android.lib.util.JSONUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -91,10 +93,12 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                         public void back(Object object) {
                             if(object==null){//只有一套房屋
                                 getView().startRefreshAnim();
-                                getView().onSuccess();
+                                getView().onSuccess(null);
                             }else{//多房屋
 //                                TODO
                                 List<RoomEntity> datas= (List<RoomEntity>) object;
+                                getView().startRefreshAnim();
+                                getView().onSuccess(datas);
                             }
 
                         }

@@ -35,7 +35,7 @@ public class ChangeCommunityAdapter extends RecyclerView.Adapter<ChangeCommunity
         this.mDatas = mDatas;
     }
     public RoomEntity getCheckItem(){
-        return mDatas.get(mCheckedPosition);
+        return mCheckedPosition==-1?null:mDatas.get(mCheckedPosition);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ChangeCommunityAdapter extends RecyclerView.Adapter<ChangeCommunity
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        RoomEntity entity=mDatas.get(position);
+        final RoomEntity entity=mDatas.get(position);
         holder.tvTitle.setText(entity.getResidentialAreasName());
         holder.tvContent.setText(entity.getRegionName()+entity.getBuildingName()+entity.getUnitsName()+entity.getRoomName());
         holder.cbCheck.setChecked(mDefaultResidentialAreasId.equals(entity.getResidentialAreasId()));
@@ -58,6 +58,7 @@ public class ChangeCommunityAdapter extends RecyclerView.Adapter<ChangeCommunity
             @Override
             public void onClick(View v) {
                 if(mCheckedPosition!=position){
+                    mDefaultResidentialAreasId=entity.getResidentialAreasId();
                     if(mLastCheck!=null)mLastCheck.setChecked(false);
                     mCheckedPosition=position;
                     notifyItemChanged(position);
@@ -68,6 +69,7 @@ public class ChangeCommunityAdapter extends RecyclerView.Adapter<ChangeCommunity
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(mCheckedPosition!=position){
+                    mDefaultResidentialAreasId=entity.getResidentialAreasId();
                     if(mLastCheck!=null)mLastCheck.setChecked(false);
                     mCheckedPosition=position;
                     notifyItemChanged(position);

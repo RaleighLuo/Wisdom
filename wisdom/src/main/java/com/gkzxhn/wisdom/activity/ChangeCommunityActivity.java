@@ -12,6 +12,7 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.ChangeCommunityAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.RoomEntity;
+import com.starlight.mobile.android.lib.view.CusHeadView;
 
 import java.util.List;
 
@@ -38,29 +39,33 @@ public class ChangeCommunityActivity extends SuperActivity {
         adapter.updateItems((List<RoomEntity>) getIntent().getSerializableExtra(Constants.EXTRA));
     }
     public void onClickListener(View view){
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.common_head_layout_iv_left:
                 finish();
                 break;
             case R.id.common_head_layout_tv_right:
-                setResult(RESULT_OK);
-                RoomEntity roomEntity=adapter.getCheckItem();
-                SharedPreferences.Editor editor=preferences.edit();
-                editor.putString(Constants.USER_BUILDINGID,roomEntity.getBuildingId());
-                editor.putString(Constants.USER_BUILDINGNAME,roomEntity.getBuildingName());
-                editor.putString(Constants.USER_REGIONID,roomEntity.getRegionId());
-                editor.putString(Constants.USER_REGIONNAME,roomEntity.getRegionName());
-                editor.putString(Constants.USER_RESIDENTIALAREASID,roomEntity.getResidentialAreasId());
-                editor.putString(Constants.USER_RESIDENTIALAREASNAME,roomEntity.getResidentialAreasName());
-                editor.putString(Constants.USER_ROOMID,roomEntity.getRoomId());
-                editor.putString(Constants.USER_ROOMNAME,roomEntity.getRoomName());
-                editor.putString(Constants.USER_UNITSID,roomEntity.getUnitsId());
-                editor.putString(Constants.USER_UNITSNAME,roomEntity.getUnitsName());
-                editor.putFloat(Constants.USER_USEDAREA,roomEntity.getUsedArea());
-                editor.putFloat(Constants.USER_FLOORAREA,roomEntity.getFloorArea());
-                editor.commit();
-                finish();
-                break;
+                RoomEntity roomEntity = adapter.getCheckItem();
+                if (roomEntity == null) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString(Constants.USER_BUILDINGID, roomEntity.getBuildingId());
+                    editor.putString(Constants.USER_BUILDINGNAME, roomEntity.getBuildingName());
+                    editor.putString(Constants.USER_REGIONID, roomEntity.getRegionId());
+                    editor.putString(Constants.USER_REGIONNAME, roomEntity.getRegionName());
+                    editor.putString(Constants.USER_RESIDENTIALAREASID, roomEntity.getResidentialAreasId());
+                    editor.putString(Constants.USER_RESIDENTIALAREASNAME, roomEntity.getResidentialAreasName());
+                    editor.putString(Constants.USER_ROOMID, roomEntity.getRoomId());
+                    editor.putString(Constants.USER_ROOMNAME, roomEntity.getRoomName());
+                    editor.putString(Constants.USER_UNITSID, roomEntity.getUnitsId());
+                    editor.putString(Constants.USER_UNITSNAME, roomEntity.getUnitsName());
+                    editor.putFloat(Constants.USER_USEDAREA, roomEntity.getUsedArea());
+                    editor.putFloat(Constants.USER_FLOORAREA, roomEntity.getFloorArea());
+                    editor.commit();
+                    setResult(RESULT_OK);
+                    finish();
+                    break;
+                }else{
+                    showToast(R.string.please_select_community);
+                }
         }
     }
 }
