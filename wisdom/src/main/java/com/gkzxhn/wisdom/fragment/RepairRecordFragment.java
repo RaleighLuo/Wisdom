@@ -61,7 +61,7 @@ public class RepairRecordFragment extends Fragment  implements CusSwipeRefreshLa
         return parentView;
     }
     private void initControls(){
-        parentView.findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(android.R.color.white);
+        parentView.findViewById(R.id.common_list_layout_fl_root).setBackgroundResource(R.color.common_bg_color);
         tvLoading= (DotsTextView) parentView.findViewById(R.id.common_loading_layout_tv_load);
         ivNodata=parentView.findViewById(R.id.common_no_data_layout_iv_image);
         mRecyclerView= (RecyclerView) parentView.findViewById(R.id.common_list_layout_rv_list);
