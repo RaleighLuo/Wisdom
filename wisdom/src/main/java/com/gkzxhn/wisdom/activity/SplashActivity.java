@@ -25,7 +25,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
         SharedPreferences sp=getSharedPreferences(Constants.USER_TABLE, Activity.MODE_PRIVATE);
-        if(sp.getString(Constants.USER_TOKEN,"").length()==0){//未登录
+        if(sp.getString(Constants.USER_TOKEN,"").length()==0||sp.getString(Constants.USER_RESIDENTIALAREASID,"").length()==0){//未登录
             mHandler.sendEmptyMessageDelayed(TO_LOGIN_PAGE, SPLASH_DELAY_MILLIS);
         }else{//已登录
             mHandler.sendEmptyMessageDelayed(TO_MAIN_PAGE, SPLASH_DELAY_MILLIS);

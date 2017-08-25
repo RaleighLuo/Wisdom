@@ -47,6 +47,8 @@ public interface Constants {
     final String TODAY_IS_SIGN="today_is_sign";//今天是否已经签到
     final String LAST_SERIES_SIGN_DATE="last_series_sign_date";//最近一次连续签到日期
     final String SERIES_SIGN_DAY="series_sign_day";//连续签到天数
+
+    final String FINAL_TABLE="final_table";//不清除的数据表
     /*-------------------------------Request URL-------------------------------------------------*/
     public final String RELEASE_FILE_DOMAIN="http://123.57.7.159:1339";//发布正式环境
     public final String DEMO_FILE_DOMAIN="http://10.93.1.104:1339";//开发环境

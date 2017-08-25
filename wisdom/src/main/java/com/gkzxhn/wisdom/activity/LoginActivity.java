@@ -58,8 +58,8 @@ public class LoginActivity extends SuperActivity implements ILoginView{
         //初始化Presenter
         mPresenter=new LoginPresenter(this,this);
         mTimer=new CodeCountDownTimer(DOWN_TIME, 1000);
-        mPresenter.getSharedPreferences().getString(Constants.USER_PHONE,"");
-        etPhone.setText("17303854825");
+        String phone=getSharedPreferences(Constants.FINAL_TABLE,Context.MODE_PRIVATE).getString(Constants.USER_PHONE,"");
+        etPhone.setText(phone.length()==0?"17303854825":phone);
 
         //初始化加载进度条
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));

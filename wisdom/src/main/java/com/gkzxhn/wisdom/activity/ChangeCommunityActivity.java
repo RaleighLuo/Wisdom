@@ -45,7 +45,7 @@ public class ChangeCommunityActivity extends SuperActivity {
                 break;
             case R.id.common_head_layout_tv_right:
                 RoomEntity roomEntity = adapter.getCheckItem();
-                if (roomEntity == null) {
+                if (roomEntity != null) {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString(Constants.USER_BUILDINGID, roomEntity.getBuildingId());
                     editor.putString(Constants.USER_BUILDINGNAME, roomEntity.getBuildingName());
@@ -62,10 +62,11 @@ public class ChangeCommunityActivity extends SuperActivity {
                     editor.commit();
                     setResult(RESULT_OK);
                     finish();
-                    break;
+
                 }else{
                     showToast(R.string.please_select_community);
                 }
+                break;
         }
     }
 }

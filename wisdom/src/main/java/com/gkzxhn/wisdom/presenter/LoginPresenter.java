@@ -15,6 +15,7 @@ import com.gkzxhn.wisdom.activity.ChangeCommunityActivity;
 import com.gkzxhn.wisdom.async.AsynHelper;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.model.ILoginModel;
 import com.gkzxhn.wisdom.model.impl.LoginModel;
@@ -78,7 +79,7 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
         mNotificationManager.notify(1, notification);
 
     }
-    public void login(String phone,String code){
+    public void login(final String phone, String code){
         getView().startRefreshAnim();
         mModel.login(phone, code, new VolleyUtils.OnFinishedListener<String>() {
             @Override
@@ -86,6 +87,8 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                 JSONObject json=JSONUtil.getJSONObject(response);
                 int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(json,"code"));
                 if(code==200){
+                    GKApplication.getInstance().getSharedPreferences(Constants.FINAL_TABLE,Context.MODE_PRIVATE).edit().
+                            putString(Constants.USER_PHONE,phone).commit();//将手机号码保存到常量表里
                     String token= JSONUtil.getJSONObjectStringValue(json,"token");
                     getSharedPreferences().edit().putString(Constants.USER_TOKEN,token).commit();
                     startAsynTask(Constants.LOGIN_TAB, new AsynHelper.TaskFinishedListener() {
