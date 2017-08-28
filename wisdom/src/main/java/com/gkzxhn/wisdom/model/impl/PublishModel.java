@@ -55,11 +55,9 @@ public class PublishModel extends BaseModel implements IPublishModel {
             if(imageUrls!=null&&imageUrls.size()>0){
                 JSONArray imageArray=new JSONArray();
                 for (String url:imageUrls){
-                    JSONObject json=new JSONObject();
-                    json.put("image_url",url);
-                    imageArray.put(json);
+                    imageArray.put(url);
                 }
-                params.put("images_attributes",imageArray);
+                params.put("images",imageArray);
             }
             String url=String.format("%s/%s/topics",Constants.REQUEST_BASE_URL,getSharedPreferences().getString(Constants.USER_RESIDENTIALAREASID,""));
             volleyUtils.post(url,new JSONObject().put("topic",params),REQUEST_TAG,onFinishedListener);

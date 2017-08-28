@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.gkzxhn.wisdom.R;
@@ -259,8 +260,9 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
             if(resultCode== Activity.RESULT_OK){
                 adapter.updateItem(currentPosition,data.getIntExtra(Constants.EXTRA,0),data.getIntExtra(Constants.EXTRAS,0),
                         data.getBooleanExtra(Constants.EXTRA_TAB,false));
-            }else if(resultCode==Activity.RESULT_CANCELED){//删除话题数据
+            }else if(resultCode==2){//删除话题数据
                 adapter.removeItem(currentPosition);
+                showToast(R.string.delete_topic_success);
             }
         }
     }

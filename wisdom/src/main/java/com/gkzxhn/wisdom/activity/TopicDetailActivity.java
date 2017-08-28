@@ -377,8 +377,7 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
      */
     @Override
     public void deleteTopicSuccess() {
-        Toast.makeText(getApplicationContext(),R.string.delete_topic_success,Toast.LENGTH_SHORT).show();
-        setResult(RESULT_CANCELED);
+        setResult(2);
         finish();
     }
 

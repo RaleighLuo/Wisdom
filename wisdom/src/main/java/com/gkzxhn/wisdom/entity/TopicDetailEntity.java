@@ -27,7 +27,6 @@ public class TopicDetailEntity {
     private int commentCount;//评论数量
     @SerializedName("likes_amount")
     private int likesCount;//点赞数量
-    @SerializedName("images_url")
     private List<String> images;//图片地址
     private int likeable;//是否可点赞 1没有点赞 0已经点赞
     private String nickname;//昵称

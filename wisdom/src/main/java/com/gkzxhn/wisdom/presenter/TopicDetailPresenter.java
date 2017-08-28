@@ -8,6 +8,7 @@ import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.TopicCommentEntity;
 import com.gkzxhn.wisdom.entity.TopicDetailEntity;
+import com.gkzxhn.wisdom.entity.TopicEntity;
 import com.gkzxhn.wisdom.entity.TopicReplayEntity;
 import com.gkzxhn.wisdom.model.ITopicDetailModel;
 import com.gkzxhn.wisdom.model.impl.TopicDetailModel;
@@ -43,8 +44,8 @@ public class TopicDetailPresenter extends BasePresenter<ITopicDetailModel,ITopic
             public void onSuccess(JSONObject response) {
                 int code= ConvertUtil.strToInt( JSONUtil.getJSONObjectStringValue(response,"code"));
                 if(code==200){
-                    TopicDetailEntity detailEntity=new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"topic"), TopicDetailEntity.class);
-                    getView().update(detailEntity);
+                    List<TopicDetailEntity> result = new Gson().fromJson(JSONUtil.getJSONObjectStringValue(response,"topic"), new TypeToken<List<TopicDetailEntity>>() {}.getType());
+                    getView().update(result!=null&&result.size()>0?result.get(0):null);
                     requestComments(true);
                 }else{
                     getView().stopRefreshAnim();
