@@ -20,6 +20,9 @@ public interface Constants {
     public final String SD_ROOT_PHOTO_PATH = SD_ROOT_PATH+"/photo/";//图片，不自动删除
     public final String SD_PHOTO_PATH = SD_ROOT_PHOTO_PATH+"cutPhoto/";//拍照存储或压缩图片的图片路径,启动时自动删除
     public final String SD_AUDIO_PATH = SD_ROOT_PATH+"/audio/";
+
+    public final String SYSTEM_DATABASE = "system_database";//存储当前用户系统数据
+    public final int SYSTEM_DATABASE_VERSION = 1;
     /*-------------------------------User Tab-------------------------------------------------*/
     final String USER_TABLE="user_table";
     final String USER_IS_UNAUTHORIZED="isUnauthorized";

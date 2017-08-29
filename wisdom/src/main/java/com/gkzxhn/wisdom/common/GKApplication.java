@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 import cn.jpush.android.api.JPushInterface;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by baidu on 17/1/12.
@@ -39,9 +41,11 @@ public class GKApplication extends Application {
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private ImageLoaderConfiguration config = null;
     private BaseDiskCache imageLoadCache;
+    private RealmConfiguration mSystemRealmConfiguration;
     @Override
     public void onCreate() {
         super.onCreate();
+        buildDBConfig();
         application = this;
         initImageLoader();
         // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
@@ -58,7 +62,20 @@ public class GKApplication extends Application {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
+    public void buildDBConfig(){
+        mSystemRealmConfiguration = new RealmConfiguration.Builder(this)
+                .name(Constants.SYSTEM_DATABASE)
+                .schemaVersion(Constants.SYSTEM_DATABASE_VERSION).build();
+    }
+    public Realm getSystemRealm() {
+        Realm realm = null;
+        try {
+            realm = Realm.getInstance(mSystemRealmConfiguration);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return realm;
+    }
 
     private void initImageLoader(){
         File pictureCacheDirFile = new File(Constants.SD_IMAGE_CACHE_PATH);

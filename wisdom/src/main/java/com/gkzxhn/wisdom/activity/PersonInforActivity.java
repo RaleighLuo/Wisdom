@@ -48,7 +48,6 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private PersonInforPresenter mPresenter;
     private ProgressDialog mProgress;
     private TextView tvHouseNumber,tvPhone,tvCommunity,tvNickname;
-    private List<RoomEntity> mRoomList=null;
     private int mResultCode=RESULT_CANCELED;
 
 
@@ -72,6 +71,15 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         mPresenter=new PersonInforPresenter(this,this);
         mProgress = ProgressDialog.show(this, null, getString(R.string.please_waiting));
         stopRefreshAnim();
+        initPersonInfor();
+        updateCommunity();
+        mPresenter.requestUserInfor();//请求个人信息
+    }
+
+    /**
+     * 更新个人信息
+     */
+    private void initPersonInfor(){
         //下载头像
         String url=mPresenter.getSharedPreferences().getString(Constants.USER_PORTRAIT,"");
         if(url.length()>0){
@@ -83,10 +91,8 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                 ImageLoader.getInstance().displayImage(url, ivPortrait, Utils.getOptions(R.mipmap.person_portrait));
             }
         }
-        updateCommunity();
         tvPhone.setText(mPresenter.getSharedPreferences().getString(Constants.USER_PHONE,""));
         tvNickname.setText(mPresenter.getSharedPreferences().getString(Constants.USER_NICKNAME,""));
-        mPresenter.requestUserInfor();//请求个人信息
     }
 
     /**
@@ -134,11 +140,8 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
                 startActivityForResult(new Intent(this,AlterNicknameActivity.class),Constants.EXTRA_CODE);
                 break;
             case R.id.person_infor_layout_tv_community://切换小区
-                if(mRoomList!=null) {
-                    Intent intent = new Intent(this, ChangeCommunityActivity.class);
-                    intent.putExtra(Constants.EXTRA, (Serializable) mRoomList);
-                    startActivityForResult(intent, Constants.EXTRAS_CODE);
-                }
+                Intent intent = new Intent(this, ChangeCommunityActivity.class);
+                startActivityForResult(intent, Constants.EXTRAS_CODE);
                 break;
         }
     }
@@ -290,7 +293,9 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
 
     @Override
     public void update(UserEntity entity) {
-        mRoomList=entity.getRoomList();
+        if(entity!=null){
+            initPersonInfor();
+        }
     }
 
     @Override

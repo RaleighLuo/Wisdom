@@ -19,16 +19,6 @@ public class UserEntity {
     private String gender;//性别
     @SerializedName("user_image")
     private String portrait;//用户头像
-    private List<RoomEntity> roomList;
-
-    public List<RoomEntity> getRoomList() {
-        return roomList;
-    }
-
-    public void setRoomList(List<RoomEntity> roomList) {
-        this.roomList = roomList;
-    }
-
     public String getId() {
         return id == null ? "" : id;
     }

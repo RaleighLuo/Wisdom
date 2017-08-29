@@ -42,6 +42,7 @@
     <string name="lib_confirm">确定</string>
 
     <!--登录-->
+    <string name="has_not_house">暂未分配房屋</string>
     <string name="phone_number">手机号</string>
     <string name="get_verfy_code">获取验证码</string>
     <string name="verfy_code">验证码</string>

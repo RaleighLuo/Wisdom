@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface ILoginView extends IBaseView{
-    public void onSuccess(List<RoomEntity> rooms);
+    public void onSuccess(int roomSize);
     public void getCode(String code);
 }

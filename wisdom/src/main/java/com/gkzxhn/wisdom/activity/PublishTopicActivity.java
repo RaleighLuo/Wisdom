@@ -32,6 +32,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import io.realm.RealmConfiguration;
+
 /**
  * Created by Raleigh.Luo on 17/8/2.
  */
@@ -46,6 +48,7 @@ public class PublishTopicActivity extends SuperActivity implements IPublishView 
     private File mPhotoFile;
     private int currentPosition=0;
     private EditText etContent;
+    private RealmConfiguration mSystemRealmConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

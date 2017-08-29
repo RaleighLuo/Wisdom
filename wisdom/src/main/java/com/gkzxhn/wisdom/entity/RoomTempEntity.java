@@ -1,15 +1,10 @@
 package com.gkzxhn.wisdom.entity;
 
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
- * Created by Raleigh.Luo on 17/8/1.
- * 个人信息－房屋信息
- *
+ * Created by Raleigh.Luo on 17/8/29.
  */
-public class RoomEntity extends RealmObject {
+
+public class RoomTempEntity {
     private String buildingId;
     private String buildingName;//建筑名称
     private String regionId;

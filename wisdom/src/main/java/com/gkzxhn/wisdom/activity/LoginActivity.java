@@ -126,16 +126,17 @@ public class LoginActivity extends SuperActivity implements ILoginView{
      * 登录成功回调
      */
     @Override
-    public void onSuccess(List<RoomEntity> rooms) {
+    public void onSuccess(int roomSize) {
         CommonHelper.clapseSoftInputMethod(this);
-        if(rooms!=null){
-            Intent intent = new Intent(this, ChangeCommunityActivity.class);
-            intent.putExtra(Constants.EXTRA, (Serializable) rooms);
-            intent.putExtra(Constants.EXTRA_TAB,Constants.LOGIN_TAB);
-            startActivityForResult(intent, Constants.EXTRA_CODE);
-        }else{
-            startActivity(new Intent(this,MainActivity.class));
+        if (roomSize == 0) {
+            showToast(R.string.has_not_house);
+        } else if (roomSize == 1) {//一套房屋
+            startActivity(new Intent(this, MainActivity.class));
             finish();
+        } else {//多套房屋
+            Intent intent = new Intent(this, ChangeCommunityActivity.class);
+            intent.putExtra(Constants.EXTRA_TAB, Constants.LOGIN_TAB);
+            startActivityForResult(intent, Constants.EXTRA_CODE);
         }
     }
 

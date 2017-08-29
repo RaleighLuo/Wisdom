@@ -11,10 +11,13 @@ import android.view.View;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.ChangeCommunityAdapter;
 import com.gkzxhn.wisdom.common.Constants;
+import com.gkzxhn.wisdom.common.GKApplication;
 import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.starlight.mobile.android.lib.view.CusHeadView;
 
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Created by Raleigh.Luo on 17/8/8.
@@ -25,6 +28,7 @@ public class ChangeCommunityActivity extends SuperActivity {
     private RecyclerView mRecyclerView;
     private ChangeCommunityAdapter adapter;
     private SharedPreferences preferences;
+    private Realm mRealm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,8 @@ public class ChangeCommunityActivity extends SuperActivity {
         preferences=getSharedPreferences(Constants.USER_TABLE, Context.MODE_PRIVATE);
         adapter=new ChangeCommunityAdapter(this,preferences.getString(Constants.USER_RESIDENTIALAREASID,""));
         mRecyclerView.setAdapter(adapter);
-        adapter.updateItems((List<RoomEntity>) getIntent().getSerializableExtra(Constants.EXTRA));
+        mRealm=GKApplication.getInstance().getSystemRealm();
+        adapter.updateItems(mRealm.allObjects(RoomEntity.class));
     }
     public void onClickListener(View view){
         switch (view.getId()) {
@@ -68,5 +73,11 @@ public class ChangeCommunityActivity extends SuperActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(mRealm!=null)mRealm.close();
+        super.onDestroy();
     }
 }

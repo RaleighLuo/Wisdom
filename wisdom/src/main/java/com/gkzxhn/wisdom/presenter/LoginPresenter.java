@@ -94,14 +94,8 @@ public class LoginPresenter extends BasePresenter<ILoginModel ,ILoginView> {
                     startAsynTask(Constants.LOGIN_TAB, new AsynHelper.TaskFinishedListener() {
                         @Override
                         public void back(Object object) {
-                            if(object==null){//只有一套房屋
-                                getView().startRefreshAnim();
-                                getView().onSuccess(null);
-                            }else{//多房屋
-                                List<RoomEntity> datas= (List<RoomEntity>) object;
                                 getView().stopRefreshAnim();
-                                getView().onSuccess(datas);
-                            }
+                                getView().onSuccess((Integer) object);
 
                         }
                     }, JSONUtil.getJSONObjectStringValue(json,"profile"));
