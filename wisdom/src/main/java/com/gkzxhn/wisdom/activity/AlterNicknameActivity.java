@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.UserEntity;
+import com.gkzxhn.wisdom.entity.VersionEntity;
 import com.gkzxhn.wisdom.presenter.PersonInforPresenter;
 import com.gkzxhn.wisdom.view.IPersonInforView;
 import com.starlight.mobile.android.lib.util.CommonHelper;
@@ -68,5 +69,10 @@ public class AlterNicknameActivity extends SuperActivity implements IPersonInfor
     public void update(UserEntity entity) {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void updateVersion(VersionEntity entity) {
+
     }
 }
