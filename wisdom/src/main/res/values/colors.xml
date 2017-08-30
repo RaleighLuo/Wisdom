@@ -2,9 +2,11 @@
 <resources>
     <color name="colorPrimary">#1d1d1d</color>
     <color name="pay_color">#04c2aa</color>
+
+    <color name="ju_color">#3d9998</color>
     <color name="talking_color">#f6b379</color>
     <color name="repair_color">#4793f6</color>
-    <color name="property_color">#6c6cc1</color>
+    <color name="property_color">#444395</color>
     <color name="blue_text_color">#5a92e5</color>
     <color name="committee_color">#40b1b0</color>
     <color name="main_color">#1d1d1d</color>

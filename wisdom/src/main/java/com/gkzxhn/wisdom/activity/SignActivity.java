@@ -21,7 +21,7 @@ import java.util.Calendar;
 public class SignActivity extends SuperActivity implements ISignView{
     private SignPresenter mPresenter;
     private ProgressDialog mProgress;
-    private TextView tvSignHint,tvSeriesDay;
+    private TextView tvSeriesDay;
     private int mDistanceDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class SignActivity extends SuperActivity implements ISignView{
      * 初始化控件
      */
     private void initControls(){
-        tvSignHint= (TextView) findViewById(R.id.sign_layout_tv_sign);
         tvSeriesDay= (TextView) findViewById(R.id.sign_layout_tv_series_sign_day);
 
     }
@@ -58,9 +57,7 @@ public class SignActivity extends SuperActivity implements ISignView{
         }
         boolean isSign=mPresenter.getSharedPreferences().getBoolean(Constants.TODAY_IS_SIGN,false);
         if(isSign) {
-            tvSignHint.setText(R.string.today_has_sign);
-            tvSignHint.setEnabled(false);
-            findViewById(R.id.sign_layout_iv_sign).setEnabled(false);
+            findViewById(R.id.sign_layout_btn_sign).setEnabled(false);
         }
     }
     public void onClickListener(View view){
@@ -68,11 +65,8 @@ public class SignActivity extends SuperActivity implements ISignView{
             case R.id.common_head_layout_tv_right:
                 finish();
                 break;
-            case R.id.sign_layout_iv_sign://签到
+            case R.id.sign_layout_btn_sign://签到
                 mPresenter.sign();
-                break;
-            case R.id.sign_layout_tv_sign:
-                findViewById(R.id.sign_layout_iv_sign).performClick();
                 break;
         }
     }
@@ -91,9 +85,7 @@ public class SignActivity extends SuperActivity implements ISignView{
     @Override
     public void onSuccess() {
         showToast(R.string.sign_success);
-        tvSignHint.setText(R.string.today_has_sign);
-        tvSignHint.setEnabled(false);
-        findViewById(R.id.sign_layout_iv_sign).setEnabled(false);
+        findViewById(R.id.sign_layout_btn_sign).setEnabled(false);
         SharedPreferences.Editor editor=mPresenter.getSharedPreferences().edit();
         editor.putBoolean(Constants.TODAY_IS_SIGN,true);
         editor.putInt(Constants.SERIES_SIGN_DAY,mDistanceDay+1);
