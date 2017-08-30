@@ -175,6 +175,21 @@
     <string name="alter_nickname">修改昵称</string>
     <string name="please_input_nickname">请输入昵称</string>
     <string name="input_nickname_hint">好昵称可以让邻居们更容易记住你</string>
+    <string name="update_verson">版本更新</string>
+    <string name="has_last_verson">已是最新版本</string>
+    <string name="last_verson">新版本：</string>
+    <string name="current_verson">当前版本：</string>
+    <string name="check_version">正在检查最新版本...</string>
+
+    <!--版本更新-->
+    <string name="update_version_hint">狱务通监狱版更新</string>
+    <string name="new_version_colon">新版本：</string>
+    <string name="has_last_version">已经是最新版本</string>
+    <string name="download">马上更新</string>
+    <string name="check_updating">正在检测最新版本...</string>
+    <string name="ignore_version">忽略此版本</string>
+    <string name="download_failed">下载失败</string>
+
     <!--物业缴费-->
     <string name="property_payment">物业缴费</string>
     <string name="payment">支付</string>

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,8 +21,10 @@ import android.widget.TextView;
 import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.customview.UpdateDialog;
 import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.entity.UserEntity;
+import com.gkzxhn.wisdom.entity.VersionEntity;
 import com.gkzxhn.wisdom.presenter.PersonInforPresenter;
 import com.gkzxhn.wisdom.util.Utils;
 import com.gkzxhn.wisdom.view.IPersonInforView;
@@ -47,8 +50,9 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     private ImageView ivPortrait;
     private PersonInforPresenter mPresenter;
     private ProgressDialog mProgress;
-    private TextView tvHouseNumber,tvPhone,tvCommunity,tvNickname;
+    private TextView tvHouseNumber,tvPhone,tvCommunity,tvNickname,tvCheckVersion;
     private int mResultCode=RESULT_CANCELED;
+    private UpdateDialog updateDialog;
 
 
     @Override
@@ -65,6 +69,7 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         ivPortrait = (ImageView) findViewById(R.id.person_infor_layout_iv_portrait);
         tvPhone= (TextView) findViewById(R.id.person_infor_layout_tv_phone);
         tvCommunity= (TextView) findViewById(R.id.person_infor_layout_tv_community);
+        tvCheckVersion= (TextView) findViewById(R.id.person_infor_layout_tv_verson);
     }
 
     private void init() {
@@ -74,6 +79,17 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
         initPersonInfor();
         updateCommunity();
         mPresenter.requestUserInfor();//请求个人信息
+        //当前App版本
+        try {
+            PackageManager pm = getPackageManager();
+            PackageInfo packageInfo = null;
+            packageInfo = pm.getPackageInfo(getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            tvCheckVersion.setText(getString(R.string.current_verson)+packageInfo.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -142,6 +158,10 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
             case R.id.person_infor_layout_tv_community://切换小区
                 Intent intent = new Intent(this, ChangeCommunityActivity.class);
                 startActivityForResult(intent, Constants.EXTRAS_CODE);
+                break;
+            case R.id.person_infor_layout_tv_update_version://版本更新
+                tvCheckVersion.setText(R.string.check_updating);
+                mPresenter.requestVersion();
                 break;
         }
     }
@@ -302,5 +322,42 @@ public class PersonInforActivity extends SuperActivity implements IPersonInforVi
     public void onBackPressed() {
         setResult(mResultCode);
         super.onBackPressed();
+    }
+
+    public void updateVersion(VersionEntity version) {
+        //新版本
+        int newVersion = version.getVersionCode();
+        PackageManager pm = getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = pm.getPackageInfo(getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            int currentVersion=packageInfo.versionCode;//当前App版本
+            if (newVersion > currentVersion) {//新版本大于当前版本
+                //版本名
+                String versionName =  version.getVersionName();
+                // 下载地址
+                String downloadUrl =  version.getDownloadUrl();
+                //是否强制更新
+                if(updateDialog==null)updateDialog=new UpdateDialog(this);
+                updateDialog.setForceUpdate(version.isForce());
+                updateDialog.setDownloadInfor(versionName,newVersion,downloadUrl);
+                updateDialog.show();//显示对话框
+                tvCheckVersion.setText(getString(R.string.new_version_colon)+versionName);
+            }else{
+                tvCheckVersion.setText(R.string.has_last_version);
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestory();
+        stopRefreshAnim();
+        if(updateDialog!=null&&updateDialog.isShowing())updateDialog.dismiss();
+        super.onDestroy();
     }
 }

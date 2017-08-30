@@ -47,6 +47,9 @@ public interface Constants {
     final String USER_USEDAREA="user_usedArea";
     final String USER_FLOORAREA="user_floorArea";
 
+    final String LAST_IGNORE_VERSION="last_ignore_version";//上一个忽略的版本
+
+
     final String TODAY_IS_SIGN="today_is_sign";//今天是否已经签到
     final String LAST_SERIES_SIGN_DATE="last_series_sign_date";//最近一次连续签到日期
     final String SERIES_SIGN_DAY="series_sign_day";//连续签到天数
@@ -75,6 +78,9 @@ public interface Constants {
     final String REQUEST_BASE_URL =DOMAIN_NAME_XLS+"/residentials";//话题
     final String REQUEST_TOPIC_OPERATE_URL =DOMAIN_NAME_XLS+"/topics";//话题-评论
     final String REQUEST_USER_URL =DOMAIN_NAME_XLS+"/users";//签到，修改用户信息
+    final String REQUEST_VERSION_URL =DOMAIN_NAME_XLS+"/version";//版本更新UI
+
+
     //上传图片的auth认证
     final String UPLOAD_FILE_AUTHORIZATION="523b87c4419da5f9186dbe8aa90f37a3876b95e448fe2abf5bf7e4753d5aa25fe88caa7ed96d4a2e89c01f839891b74362bb2450d352f1e4c3d4f7d8d51f5c65";
     /*-------------------------------Request Code-------------------------------------------------*/

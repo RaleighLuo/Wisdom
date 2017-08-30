@@ -256,6 +256,37 @@
                 android:textColor="@color/person_infor_text_color_selector"
                 android:layout_marginLeft="@dimen/margin"
                 />
+            <!--版本更新-->
+            <TextView
+                android:id="@+id/person_infor_layout_tv_verson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_verson"
+                android:textSize="10sp"
+                android:paddingTop="20dip"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_alignBottom="@+id/person_infor_layout_tv_update_version"
+                android:layout_alignTop="@+id/person_infor_layout_tv_update_version"
+                android:textColor="@color/person_infor_text_color_selector"
+                android:layout_alignParentRight="true"
+                />
+            <TextView
+                android:id="@+id/person_infor_layout_tv_update_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/update_verson"
+                android:onClick="onClickListener"
+                android:clickable="true"
+                android:layout_below="@+id/person_infor_layout_tv_contact_property"
+                android:background="@drawable/common_item_click_selector"
+                android:textSize="12sp"
+                android:paddingTop="20dip"
+                android:layout_marginRight="@dimen/margin"
+                android:paddingBottom="10dip"
+                android:textColor="@color/person_infor_text_color_selector"
+                android:layout_marginLeft="@dimen/margin"
+                />
+
             <View style="@style/common_line_style"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginLeft="@dimen/margin"

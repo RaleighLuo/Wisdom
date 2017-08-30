@@ -8,6 +8,7 @@ import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.entity.RoomEntity;
 import com.gkzxhn.wisdom.entity.UserEntity;
+import com.gkzxhn.wisdom.entity.VersionEntity;
 import com.gkzxhn.wisdom.model.IPersonInforModel;
 import com.gkzxhn.wisdom.model.impl.PersonInforModel;
 import com.gkzxhn.wisdom.util.UploadHelper;
@@ -94,6 +95,20 @@ public class PersonInforPresenter extends BasePresenter<IPersonInforModel,IPerso
         String uploadName=getSharedPreferences().getString(Constants.USER_ID,"")
                 +"_"+Utils.getDateFromTimeInMillis(System.currentTimeMillis(),new SimpleDateFormat("yyyyMMddHHmmss"));
         mUploadHelper.upload(filePath, Constants.UPLOAD_PROFILE_URL,uploadName);
+    }
+    public void  requestVersion(){
+        mModel.requestVersion(new VolleyUtils.OnFinishedListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                int code= ConvertUtil.strToInt(JSONUtil.getJSONObjectStringValue(response,"code"));
+                if(code== HttpStatus.SC_OK){
+                   getView().updateVersion(new Gson().fromJson(response.toString(), VersionEntity.class));
+                }
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {}
+        });
     }
 
     @Override

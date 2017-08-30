@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.model.impl;
 
+import com.android.volley.AuthFailureError;
 import com.gkzxhn.wisdom.async.VolleyUtils;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.model.IPersonInforModel;
@@ -11,6 +12,15 @@ import org.json.JSONObject;
  */
 
 public class PersonInforModel extends BaseModel implements IPersonInforModel {
+
+    @Override
+    public void requestVersion(VolleyUtils.OnFinishedListener<JSONObject> onFinishedListener) {
+        try {
+            volleyUtils.get(JSONObject.class,Constants.REQUEST_VERSION_URL,REQUEST_TAG,onFinishedListener);
+        } catch (AuthFailureError authFailureError) {
+            authFailureError.printStackTrace();
+        }
+    }
 
     /**请求用户信息
      * @param onFinishedListener

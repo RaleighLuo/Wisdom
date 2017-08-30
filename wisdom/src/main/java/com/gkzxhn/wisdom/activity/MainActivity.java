@@ -3,6 +3,9 @@ package com.gkzxhn.wisdom.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,7 +24,11 @@ import com.gkzxhn.wisdom.R;
 import com.gkzxhn.wisdom.adapter.MainAdapter;
 import com.gkzxhn.wisdom.common.Constants;
 import com.gkzxhn.wisdom.common.GKApplication;
+import com.gkzxhn.wisdom.customview.UpdateDialog;
+import com.gkzxhn.wisdom.entity.VersionEntity;
+import com.gkzxhn.wisdom.presenter.MainPresenter;
 import com.gkzxhn.wisdom.util.Utils;
+import com.gkzxhn.wisdom.view.IMainView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -31,7 +38,7 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MainActivity extends SuperActivity {
+public class MainActivity extends SuperActivity implements IMainView{
 
     AppBarLayout mAblAppBar; // 整个可以滑动的AppBar
     NestedScrollView mNestedScrollView; // 标题栏Title
@@ -42,6 +49,8 @@ public class MainActivity extends SuperActivity {
     private TextView tvCurrentDate,tvWeek,tvCommunity,tvCommunityDetail,
             tvCarpetArea,tvHousingArea;
     private SharedPreferences preferences;
+    private MainPresenter mPresenter;
+    private UpdateDialog updateDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +82,7 @@ public class MainActivity extends SuperActivity {
      * 初始化
      */
     private void init(){
+        mPresenter=new MainPresenter(this,this);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         // AppBar的监听
@@ -111,6 +121,7 @@ public class MainActivity extends SuperActivity {
         tvWeek.setText(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
         //更新个人信息
         updatePersonInfor();
+        mPresenter.requestVersion();
     }
 
     /**
@@ -217,5 +228,59 @@ public class MainActivity extends SuperActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    public void startRefreshAnim() {
+
+    }
+
+    @Override
+    public void stopRefreshAnim() {
+
+    }
+
+    @Override
+    public void updateVersion(VersionEntity version) {
+        //新版本
+        int newVersion = version.getVersionCode();
+        PackageManager pm = getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = pm.getPackageInfo(getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            int currentVersion=packageInfo.versionCode;//当前App版本
+            int lastIgnoreVersion= mPresenter.getSharedPreferences().getInt(Constants.LAST_IGNORE_VERSION,0);
+            boolean isIgoreVersion=lastIgnoreVersion==newVersion;//若是已忽略的版本，则不弹出升级对话框
+            if(version.isForce())isIgoreVersion=false;
+            if (newVersion > currentVersion&&!isIgoreVersion) {//新版本大于当前版本，则弹出更新下载到对话框
+                //版本名
+                String versionName =  version.getVersionName();
+                // 下载地址
+                String downloadUrl =  version.getDownloadUrl();
+                //是否强制更新
+                boolean isForceUpdate= version.isForce();
+                if(updateDialog==null)updateDialog=new UpdateDialog(this);
+                updateDialog.setForceUpdate(isForceUpdate);
+                updateDialog.setDownloadInfor(versionName,newVersion,downloadUrl);
+                updateDialog.show();//显示对话框
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestory();
+        if(updateDialog!=null&&updateDialog.isShowing())updateDialog.dismiss();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(updateDialog!=null&&updateDialog.isShowing())updateDialog.measureWindow();
     }
 }
