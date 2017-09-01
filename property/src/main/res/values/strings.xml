@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">property</string>
+    <string name="no_data">暂无数据</string>
+    <!--common-->
+    <string name="commit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="take_photo">拍照</string>
+    <string name="album">相册</string>
+    <string name="please_input">请输入</string>
+    <string name="confirm">确定</string>
+    <string name="delete_photo_hint">是否删除该图片？</string>
+    <string name="please_waiting">请稍候...</string>
+    <string name="unexpected_errors">服务不可用，请稍后再试</string>
+    <string name="user_not_authorized">登录已失效，请重新登录</string>
+    <string name="request_timeout_with_try">请求超时，请重试</string>
+    <string name="service_not_available">服务不可用，请稍后再试</string>
+    <string name="not_available_network_hint">当前网络不可用，请检查网络设置</string>
+    <string name="yuan">元</string>
+    <string name="money_unit">￥</string>
+    <string name="more">更多</string>
+    <string name="save">保存</string>
+    <string name="ten_thousand">万</string>
+    <string name="billion">亿</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <!--相册覆盖类库-->
+    <string name="album_all_photos">所有图片</string>
+    <string name="album_preview">预览</string>
+    <string name="album_photos">图片</string>
+    <string name="album_pictures">张图片</string>
+    <string name="album_picture">张图片</string>
+    <string name="album_loading">正在加载</string>
+    <string name="album_cutting">请稍后</string>
+    <string name="album_no_sd_card">没有SD卡</string>
+    <string name="album_no_photo">没有图片</string>
+    <string name="album_finish">完成</string>
+    <string name="album_select">选择</string>
+    <string name="album_up_to">最多</string>
+    <string name="lib_confirm">确定</string>
 </resources>

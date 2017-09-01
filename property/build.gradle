@@ -3,21 +3,25 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
-
     defaultConfig {
-        applicationId "com.gkzxhn.property"
+        applicationId 'com.gkzxhn.wisdom.property'
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
-
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -27,8 +31,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile project(':base_lib_system')
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    //volley请求框架
+    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+    //Jpush 类库
+    compile files('libs/jpush-android-3.0.8.jar')
+    compile files('libs/jcore-android-1.1.6.jar')
 }
