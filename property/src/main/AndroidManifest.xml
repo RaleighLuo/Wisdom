@@ -57,9 +57,12 @@
         android:smallScreens="true"
         android:xlargeScreens="true"/>
     <application android:allowBackup="true" android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true" android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,6 +70,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

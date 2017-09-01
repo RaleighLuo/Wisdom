@@ -1,0 +1,16 @@
+<resources>
+    <!--公共头部定义，覆盖类库中的定义-->
+    <dimen name="common_head_height">50dip</dimen>
+    <dimen name="common_head_padding_left">0dip</dimen>
+    <dimen name="common_head_leftImgPadding">10dip</dimen>
+
+    <dimen name="common_head_rightImgPadding">10dip</dimen>
+    <dimen name="common_head_title_size">18sp</dimen>
+    <dimen name="common_head_text_size">14sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="recycler_view_line_height">5dip</dimen>
+    <dimen name="recycler_view_line_light_height">0.5dip</dimen>
+    <!--边距-->
+    <dimen name="margin">15dip</dimen>
+
+</resources>
