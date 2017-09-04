@@ -33,6 +33,7 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private Context mActivity;
     private View parentView;
     private OrderAdapter adapter;
+    private int TAB;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -54,6 +55,7 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
 
     }
     private void init(){
+        TAB=getArguments().getInt(Constants.EXTRA_TAB);
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
         mSwipeRefresh.setColor(R.color.holo_blue_bright, R.color.holo_green_light,
@@ -66,9 +68,9 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
-        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
+        int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
-        adapter=new OrderAdapter(mActivity);
+        adapter=new OrderAdapter(mActivity,TAB);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
