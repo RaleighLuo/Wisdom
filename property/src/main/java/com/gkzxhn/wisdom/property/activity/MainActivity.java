@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.fragment.HomeFragment;
 import com.gkzxhn.wisdom.property.fragment.OrderFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 import com.starlight.mobile.android.lib.view.CusViewPager;
@@ -45,10 +46,10 @@ public class MainActivity extends SuperActivity {
         footRadioGroup.setVisibility(View.VISIBLE);
         footRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         List<Fragment> fragmentList=new ArrayList<Fragment>();
-        fragmentList.add(new OrderFragment());
-        fragmentList.add(new OrderFragment());
-        fragmentList.add(new OrderFragment());
-        fragmentList.add(new OrderFragment());
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new HomeFragment());
         ViewPagerAdapter adapter = new ViewPagerAdapter(this,
                 getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);//设置适配器

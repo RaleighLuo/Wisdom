@@ -76,6 +76,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/BlackTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

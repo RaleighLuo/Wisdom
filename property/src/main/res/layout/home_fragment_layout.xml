@@ -7,4 +7,21 @@
         style="@style/common_green_head_style"
         mAttr:chHead_title="@string/order_mananger"
         mAttr:chHead_title_padding_left="0dip" />
+    <com.starlight.mobile.android.lib.view.PagerSlidingTabStrip
+        android:id="@+id/home_fragment_layout_pagerSlidingTabStrip"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/white"
+        mAttr:pstsDividerColor="@android:color/transparent"
+        mAttr:pstsIndicatorColor="@color/colorPrimary"
+        mAttr:pstsIndicatorHeight="3dip"
+        mAttr:pstsShouldExpand="true"
+        mAttr:pstsTextSelectedColor="@color/colorPrimary"
+        mAttr:pstsTextUnSelectedColor="@color/common_light_text_color" />
+    <com.starlight.mobile.android.lib.view.CusViewPager
+        android:id="@+id/home_fragment_layout_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        />
 </LinearLayout>

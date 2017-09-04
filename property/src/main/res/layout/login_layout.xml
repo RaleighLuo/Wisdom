@@ -74,14 +74,61 @@
         android:background="@drawable/common_item_click_selector"
         android:textColor="@color/common_light_text_color"
         android:textSize="12sp"
+
         android:layout_alignRight="@+id/login_layout_v_verify_code"
         android:layout_alignTop="@+id/login_layout_et_verify_code"
         />
+    <TextView
+        android:id="@+id/login_layout_tv_role"
+        android:layout_width="wrap_content"
+        android:text="@string/role"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginRight="20dip"
+        android:layout_alignBottom="@+id/login_layout_rg_role"
+        android:layout_alignLeft="@+id/login_layout_et_phone"
+        android:layout_alignTop="@+id/login_layout_rg_role"
+        android:layout_height="wrap_content" />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/login_layout_tv_role"
+        android:layout_below="@+id/login_layout_v_verify_code"
+        android:id="@+id/login_layout_rg_role"
+        android:layout_marginTop="15dip"
+        android:layout_height="wrap_content">
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_layout_rb_manager_role"
+            android:text="@string/manager_role"
+            android:button="@null"
+            mAttr:radio_left_height="30dip"
+            mAttr:radio_left_width="30dip"
+            android:drawablePadding="10dip"
+            android:drawableLeft="@drawable/album_checkbox_selector"
+            android:layout_alignLeft="@+id/login_layout_et_phone"
+            />
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_layout_rb_repair_role"
+            android:text="@string/repire_role"
+            android:checked="true"
+            android:button="@null"
+            android:layout_marginLeft="30dip"
+            mAttr:radio_left_height="30dip"
+            mAttr:radio_left_width="30dip"
+            android:drawablePadding="10dip"
+            android:drawableLeft="@drawable/album_checkbox_selector"
+            android:layout_alignLeft="@+id/login_layout_et_phone"
+            />
+    </RadioGroup>
     <Button
         android:id="@+id/login_layout_btn_login_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_layout_v_verify_code"
+        android:layout_below="@+id/login_layout_rg_role"
         android:layout_marginTop="30dip"
         android:text="@string/entry_community"
         android:onClick="onClickListener"

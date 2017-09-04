@@ -44,4 +44,19 @@
     <string name="please_input_verify_code">请输入验证码</string>
     <string name="get_verify_code">获取验证码</string>
     <string name="entry_community">进入社区</string>
+    <string name="repire_role">维修工</string>
+    <string name="manager_role">物业经理</string>
+    <string name="role">身份选择：</string>
+
+
+    <!--主页-->
+    <string name="order">工单</string>
+    <string name="notice">公告</string>
+    <string name="topic">论坛</string>
+    <string name="person">我的</string>
+    <!--工单-->
+    <string name="order_mananger">工单管理</string>
+    <string name="unassigned">未指派</string>
+    <string name="assigned">已指派</string>
+    <string name="assign">指派</string>
 </resources>

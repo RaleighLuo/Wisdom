@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dip"
+    android:background="@drawable/common_item_click_selector"
+    >
+    <ImageView
+        android:id="@+id/order_item_layout_iv_image"
+        android:layout_width="52dip"
+        android:layout_height="52dip"
+        android:layout_marginRight="10dip"
+        android:src="@mipmap/ic_imageloading"
+        android:scaleType="centerCrop"
+        />
+    <TextView
+        android:id="@+id/order_item_layout_tv_type"
+        android:layout_toRightOf="@+id/order_item_layout_iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设备设施"
+        android:textStyle="bold"
+        android:textColor="@color/common_text_color"
+        />
+    <TextView
+        android:id="@+id/order_item_layout_tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-08-08 19:08"
+        android:layout_below="@+id/order_item_layout_tv_type"
+        android:layout_alignLeft="@+id/order_item_layout_tv_type"
+        android:layout_marginTop="5dip"
+        android:textColor="@color/common_dark_gray_text_color"
+        android:textSize="10sp"
+        />
+    <TextView
+        android:id="@+id/order_item_layout_tv_content"
+        android:layout_below="@+id/order_item_layout_tv_date"
+        android:layout_alignLeft="@+id/order_item_layout_tv_date"
+        android:layout_marginTop="10dip"
+        android:maxLines="2"
+        android:textSize="12sp"
+        android:textColor="@color/common_light_text_color"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9月5日凌晨四点多，沈阳市皇姑区长江街海丽德大厦B座一电梯发生故障，电梯在六七楼之间停留，有7人被困"
+        />
+    <TextView
+        android:id="@+id/order_item_layout_tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assign"
+        android:gravity="center"
+        android:background="@drawable/green_btn_empty_selector"
+        android:paddingTop="4dip"
+        android:textColor="@color/colorPrimary"
+        android:paddingBottom="4dip"
+        android:paddingRight="10dip"
+        android:paddingLeft="10dip"
+        android:textSize="12sp"
+        android:layout_alignParentRight="true"
+        />
+
+
+</RelativeLayout>
