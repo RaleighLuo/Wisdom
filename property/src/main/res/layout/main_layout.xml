@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusViewPager
+        android:id="@+id/main_layout_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:flipInterval="30"
+        android:layout_weight="1"
+        android:layout_above="@+id/main_layout_radiogroup_foot"
+        android:background="@color/common_bg_color"
+        android:persistentDrawingCache="animation" />
+    <View style="@style/common_line_style"
+        android:background="@color/common_hint_text_color"
+        android:layout_above="@+id/main_layout_radiogroup_foot"
+        />
+    <RadioGroup
+        android:id="@+id/main_layout_radiogroup_foot"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+        <!--android:background="@drawable/main_foot_background_shade"-->
+
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:id="@+id/main_layout_radio_first"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_first_item_selector"
+            android:gravity="center"
+            android:checked="true"
+            mAttr:radio_top_height="20dip"
+            android:paddingTop="5dip"
+            android:textColor="@color/main_text_checked_color"
+            mAttr:radio_top_width="20dip"
+            android:text="@string/order"
+            android:textSize="10sp" />
+
+
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:id="@+id/main_layout_radio_second"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_second_item_selector"
+            android:gravity="center"
+            android:paddingTop="5dip"
+            mAttr:radio_top_height="20dip"
+            mAttr:radio_top_width="20dip"
+            android:textColor="@color/main_text_checked_color"
+            android:text="@string/notice"
+            android:textSize="10sp" />
+
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:id="@+id/main_layout_radio_third"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            mAttr:radio_top_height="20dip"
+            android:paddingTop="5dip"
+            android:textColor="@color/main_text_checked_color"
+            mAttr:radio_top_width="20dip"
+            android:text="@string/topic"
+            android:drawableTop="@drawable/main_third_item_selector"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <com.starlight.mobile.android.lib.view.RadioButtonPlus
+            android:id="@+id/main_layout_radio_four"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:paddingTop="5dip"
+            mAttr:radio_top_height="20dip"
+            mAttr:radio_top_width="20dip"
+            android:textColor="@color/main_text_checked_color"
+            android:text="@string/person"
+            android:drawableTop="@drawable/main_four_item_selector"
+            android:gravity="center"
+            android:textSize="10sp" />
+    </RadioGroup>
+</LinearLayout>

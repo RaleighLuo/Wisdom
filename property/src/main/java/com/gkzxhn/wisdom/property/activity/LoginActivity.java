@@ -2,6 +2,7 @@ package com.gkzxhn.wisdom.property.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.gkzxhn.wisdom.property.R;
@@ -26,6 +27,17 @@ public class LoginActivity extends SuperActivity {
                 break;
 
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {//点击返回键，返回到主页
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+
+        }
+        return false;
     }
 
 }
