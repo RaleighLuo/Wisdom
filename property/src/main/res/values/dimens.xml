@@ -11,6 +11,6 @@
     <dimen name="recycler_view_line_height">5dip</dimen>
     <dimen name="recycler_view_line_light_height">0.5dip</dimen>
     <!--边距-->
-    <dimen name="margin">15dip</dimen>
+    <dimen name="margin">12dip</dimen>
 
 </resources>

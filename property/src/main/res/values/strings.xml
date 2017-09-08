@@ -59,4 +59,11 @@
     <string name="unassigned">未指派</string>
     <string name="assigned">已指派</string>
     <string name="assign">指派</string>
+    <!--公告-->
+    <string name="publish">发布</string>
+    <string name="submit">提交</string>
+    <string name="wu">物</string>
+    <string name="ju">居</string>
+    <string name="please_input_title">输入标题</string>
+    <string name="please_input_notice_content">输入公告内容</string>
 </resources>

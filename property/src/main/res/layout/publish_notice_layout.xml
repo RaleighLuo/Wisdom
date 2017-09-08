@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        android:id="@+id/publish_notice_layout_ch_head"
+        style="@style/common_green_head_style"
+        mAttr:chHead_leftImg="@mipmap/ic_back_white"
+        mAttr:chHead_rightText="@string/submit"
+        mAttr:chHead_title="@string/notice"
+        mAttr:chHead_title_padding_left="0dip" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="center"
+        android:textColorHint="@color/common_hint_text_color"
+        android:padding="@dimen/margin"
+        android:textColor="@color/common_text_color"
+        android:hint="@string/please_input_title"
+        />
+    <View style="@style/common_light_line_style"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textSize="12sp"
+        android:padding="@dimen/margin"
+        android:minLines="6"
+        android:textColorHint="@color/common_hint_text_color"
+        android:textColor="@color/common_text_color"
+        android:layout_marginTop="10dip"
+        android:gravity="top"
+        android:hint="@string/please_input_notice_content"
+        />
+</LinearLayout>

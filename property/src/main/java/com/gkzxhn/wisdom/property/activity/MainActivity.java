@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 
 import com.gkzxhn.wisdom.property.R;
 import com.gkzxhn.wisdom.property.fragment.HomeFragment;
+import com.gkzxhn.wisdom.property.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.property.fragment.OrderFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 import com.starlight.mobile.android.lib.view.CusViewPager;
@@ -47,7 +48,7 @@ public class MainActivity extends SuperActivity {
         footRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         List<Fragment> fragmentList=new ArrayList<Fragment>();
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new HomeFragment());
+        fragmentList.add(new NoticeFragment());
         fragmentList.add(new HomeFragment());
         fragmentList.add(new HomeFragment());
         ViewPagerAdapter adapter = new ViewPagerAdapter(this,
