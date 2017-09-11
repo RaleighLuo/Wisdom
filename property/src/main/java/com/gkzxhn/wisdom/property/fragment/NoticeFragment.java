@@ -78,7 +78,7 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        //添加分割线
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_light_height);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_line_color)));
         adapter=new NoticeAdapter(mActivity);
         mRecyclerView.setAdapter(adapter);
         onRefresh();

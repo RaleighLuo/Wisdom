@@ -43,7 +43,6 @@ public class MainActivity extends SuperActivity {
      * 初始化
      */
     private void init(){
-        //若是从资格认证界面进入，则需提示用户 已成功认证
         footRadioGroup.setVisibility(View.VISIBLE);
         footRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         List<Fragment> fragmentList=new ArrayList<Fragment>();
