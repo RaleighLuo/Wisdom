@@ -68,4 +68,8 @@
     <string name="please_input_notice_content">输入公告内容</string>
     <!--论坛-->
     <!--<string name="topic">论坛</string>-->
+
+    <!--设置-->
+    <string name="setting">设置</string>
+    <string name="message">消息</string>
 </resources>

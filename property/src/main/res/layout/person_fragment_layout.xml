@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:background="@color/common_bg_color"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        style="@style/common_green_head_style"
+        mAttr:chHead_title="@string/person"
+        android:id="@+id/topic_fragment_layout_ch_head"
+        mAttr:chHead_title_padding_left="0dip" />
+    <LinearLayout
+        android:id="@+id/person_fragment_layout_ll_header"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="72dip"
+            android:id="@+id/person_fragment_layout_iv_portrait"
+            android:layout_height="72dip"
+            android:src="@mipmap/portrait"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="25dip"
+            android:layout_marginBottom="25dip"
+            android:layout_marginRight="15dip"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/person_fragment_layout_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小李"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                />
+            <TextView
+                android:id="@+id/person_fragment_layout_tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13766469876"
+                android:textSize="12sp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@mipmap/phone"
+                android:drawablePadding="2dip"
+                android:layout_marginTop="5dip"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
+        <ImageView android:layout_width="10dip"
+            android:id="@+id/person_fragment_layout_iv_right"
+            android:layout_height="22dip"
+            android:src="@mipmap/white_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+
+            />
+    </LinearLayout>
+    <View style="@style/common_light_line_style"
+        android:layout_marginTop="@dimen/margin"
+        />
+    <com.starlight.mobile.android.lib.view.CusTextView
+        android:layout_width="match_parent"
+        android:padding="15dip"
+        android:drawableLeft="@mipmap/message"
+        android:drawableRight="@mipmap/grey_arrow"
+        android:drawablePadding="10dip"
+        android:layout_height="wrap_content"
+        android:text="@string/message"
+        mAttr:ctv_leftImg_height="20dip"
+        mAttr:ctv_leftImg_width="20dip"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:id="@+id/person_fragment_layout_tv_message"
+        android:textColor="@color/common_light_text_color"
+        android:background="@drawable/common_white_item_click_selector"
+        />
+    <View style="@style/common_light_line_style"/>
+    <View style="@style/common_light_line_style"
+        android:layout_marginTop="@dimen/margin"
+        />
+    <com.starlight.mobile.android.lib.view.CusTextView
+        android:layout_width="match_parent"
+        android:padding="15dip"
+        android:gravity="center_vertical"
+        android:drawableLeft="@mipmap/setting"
+        android:drawableRight="@mipmap/grey_arrow"
+        android:drawablePadding="10dip"
+        mAttr:ctv_leftImg_height="18dip"
+        mAttr:ctv_leftImg_width="18dip"
+        android:clickable="true"
+        android:id="@+id/person_fragment_layout_tv_setting"
+        android:layout_height="wrap_content"
+        android:text="@string/setting"
+        android:textColor="@color/common_light_text_color"
+        android:background="@drawable/common_white_item_click_selector"
+        />
+    <View style="@style/common_light_line_style"/>
+
+</LinearLayout>

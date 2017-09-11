@@ -11,6 +11,7 @@ import com.gkzxhn.wisdom.property.R;
 import com.gkzxhn.wisdom.property.fragment.HomeFragment;
 import com.gkzxhn.wisdom.property.fragment.NoticeFragment;
 import com.gkzxhn.wisdom.property.fragment.OrderFragment;
+import com.gkzxhn.wisdom.property.fragment.PersonFragment;
 import com.gkzxhn.wisdom.property.fragment.TopicFragment;
 import com.starlight.mobile.android.lib.adapter.ViewPagerAdapter;
 import com.starlight.mobile.android.lib.view.CusViewPager;
@@ -50,7 +51,7 @@ public class MainActivity extends SuperActivity {
         fragmentList.add(new HomeFragment());
         fragmentList.add(new NoticeFragment());
         fragmentList.add(new TopicFragment());
-        fragmentList.add(new HomeFragment());
+        fragmentList.add(new PersonFragment());
         ViewPagerAdapter adapter = new ViewPagerAdapter(this,
                 getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);//设置适配器

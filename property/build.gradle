@@ -40,4 +40,11 @@ dependencies {
     //Jpush 类库
     compile files('libs/jpush-android-3.0.8.jar')
     compile files('libs/jcore-android-1.1.6.jar')
+    //圆头像类库
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.android.support:cardview-v7:23.1.0'
+    //Gson解析
+    compile 'com.google.code.gson:gson:2.8.0'
+
 }
