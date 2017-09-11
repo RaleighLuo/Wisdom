@@ -7,9 +7,13 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="40dip"
         android:layout_height="40dip"
-        android:src="@mipmap/ic_imageloading"
+        android:src="@mipmap/portrait"
         android:scaleType="centerCrop"
-        android:layout_margin="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="5dip"
+
         android:id="@+id/notice_item_layout_iv_portrait"
         />
     <TextView
@@ -45,10 +49,12 @@
         android:layout_height="wrap_content"
         android:text="9月3号小区停水通知,09月10日22时41分在山东济宁市兖州市(北纬35.59度,东经116.85度)发生3.6级地震,震源深度18千米。"
         android:layout_marginBottom="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:textColor="@color/common_light_text_color"
         android:layout_alignLeft="@+id/notice_item_layout_iv_portrait"
         android:layout_below="@+id/notice_item_layout_iv_portrait"
         android:maxLines="2"
+        android:textSize="12sp"
         android:ellipsize="end"
         />
 
