@@ -72,4 +72,7 @@
     <!--设置-->
     <string name="setting">设置</string>
     <string name="message">消息</string>
+    <string name="clear_cache">清空缓存</string>
+    <string name="exit_account">退出账号</string>
+    <string name="update_version">检查更新</string>
 </resources>

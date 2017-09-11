@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.property.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.activity.SettingActivity;
 
 /**
  * Created by Raleigh.Luo on 17/9/11.
@@ -47,6 +49,7 @@ public class PersonFragment extends Fragment {
                 case R.id.person_fragment_layout_tv_message://消息
                     break;
                 case R.id.person_fragment_layout_tv_setting://设置
+                    startActivity(new Intent(mActivity, SettingActivity.class));
                     break;
             }
         }
