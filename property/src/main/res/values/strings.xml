@@ -66,4 +66,6 @@
     <string name="ju">居</string>
     <string name="please_input_title">输入标题</string>
     <string name="please_input_notice_content">输入公告内容</string>
+    <!--论坛-->
+    <!--<string name="topic">论坛</string>-->
 </resources>
