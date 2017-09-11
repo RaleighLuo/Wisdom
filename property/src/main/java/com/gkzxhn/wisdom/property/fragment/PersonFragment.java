@@ -49,7 +49,6 @@ public class PersonFragment extends Fragment {
                 case R.id.person_fragment_layout_tv_setting://设置
                     break;
             }
-
         }
     };
 }
