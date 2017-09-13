@@ -4,11 +4,6 @@
     android:background="@color/common_bg_color"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.starlight.mobile.android.lib.view.CusHeadView
-        style="@style/common_green_head_style"
-        mAttr:chHead_title="@string/person"
-        android:id="@+id/topic_fragment_layout_ch_head"
-        mAttr:chHead_title_padding_left="0dip" />
     <LinearLayout
         android:id="@+id/person_fragment_layout_ll_header"
         android:layout_width="match_parent"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:background="@color/common_bg_color"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.starlight.mobile.android.lib.view.CusHeadView
+        style="@style/common_green_head_style"
+        mAttr:chHead_title="@string/message"
+        mAttr:chHead_title_padding_left="0dip" />
+    <include layout="@layout/common_list_layout"
+        />
+</LinearLayout>
