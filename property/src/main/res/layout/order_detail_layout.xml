@@ -168,14 +168,16 @@
                     android:textSize="12sp"
                     android:id="@+id/order_detail_layout_layout_tv_repairman_title"
                     />
-                <TextView
+                <com.starlight.mobile.android.lib.view.CusTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="技术部 李浩"
                     android:textSize="12sp"
+                    mAttr:ctv_leftImg_height="20dip"
+                    mAttr:ctv_leftImg_width="20dip"
                     android:drawablePadding="5dip"
                     android:gravity="center_vertical"
-                    android:drawableLeft="@mipmap/call"
+                    android:drawableLeft="@mipmap/ic_menu_call"
                     android:layout_gravity="right|center_vertical"
                     android:background="@drawable/common_item_click_selector"
                     android:layout_alignParentRight="true"
