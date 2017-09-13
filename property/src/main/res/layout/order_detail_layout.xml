@@ -138,13 +138,12 @@
                 android:id="@+id/order_detail_layout_layout_tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已接受单"
+                android:text="已接受工单"
                 android:textSize="10sp"
                 android:textColor="@color/common_light_text_color"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dip"
+                android:layout_marginTop="15dp"
                 android:layout_below="@+id/order_detail_layout_tv_order_status_title"
-                />
+                android:layout_centerHorizontal="true" />
             <ProgressBar
                 android:id="@+id/order_detail_layout_layout_progress"
                 android:layout_width="match_parent"
