@@ -38,6 +38,11 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/person_infor_layout_ch_head"
         />
+    <View style="@style/common_light_line_style"
+        android:id="@+id/person_infor_layout_v_line"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_below="@+id/person_infor_layout_tv_portrait"
+        />
     <TextView
         android:id="@+id/person_infor_layout_tv_nickname_title"
         android:layout_width="match_parent"
@@ -46,7 +51,7 @@
         android:padding="@dimen/margin"
         android:onClick="onClickListener"
         android:clickable="true"
-        android:layout_below="@+id/person_infor_layout_tv_portrait"
+        android:layout_below="@+id/person_infor_layout_v_line"
         android:background="@drawable/common_white_item_click_selector"
         android:textColor="@color/common_light_text_color"
         android:gravity="center_vertical"

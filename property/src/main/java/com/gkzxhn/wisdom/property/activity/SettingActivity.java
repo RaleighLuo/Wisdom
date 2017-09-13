@@ -1,5 +1,6 @@
 package com.gkzxhn.wisdom.property.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,6 +22,7 @@ public class SettingActivity extends SuperActivity {
                 finish();
                 break;
             case R.id.setting_layout_btn_exit://退出账号
+                startActivity(new Intent(this,LoginActivity.class));
                 break;
             case R.id.setting_layout_tv_clear_cache:
                 break;

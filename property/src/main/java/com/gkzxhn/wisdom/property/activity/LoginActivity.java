@@ -22,6 +22,7 @@ public class LoginActivity extends SuperActivity {
         switch (view.getId()){
             case R.id.login_layout_btn_login_in://登录
                 startActivity(new Intent(this,MainActivity.class));
+                finish();
                 break;
             case R.id.login_layout_tv_get_verify_code://获取验证码
                 break;
