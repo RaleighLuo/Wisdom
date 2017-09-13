@@ -75,4 +75,10 @@
     <string name="clear_cache">清空缓存</string>
     <string name="exit_account">退出账号</string>
     <string name="update_version">检查更新</string>
+    <string name="person_infor">个人信息</string>
+    <string name="portrait">头像</string>
+    <string name="nickname">昵称</string>
+    <string name="alter_nickname">修改昵称</string>
+    <string name="please_input_nickname">请输入昵称</string>
+    <string name="input_nickname_hint">好昵称可以让业主们更容易记住你</string>
 </resources>

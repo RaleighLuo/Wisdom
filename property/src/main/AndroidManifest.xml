@@ -97,6 +97,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
         <activity
+            android:name=".activity.AlterNicknameActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
+        <activity
             android:name=".activity.SettingActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"

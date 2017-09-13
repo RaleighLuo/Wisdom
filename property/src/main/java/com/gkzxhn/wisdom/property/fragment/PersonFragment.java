@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.property.R;
 import com.gkzxhn.wisdom.property.activity.MessageActivity;
+import com.gkzxhn.wisdom.property.activity.PersonInforActivity;
 import com.gkzxhn.wisdom.property.activity.SettingActivity;
 
 /**
@@ -46,6 +47,7 @@ public class PersonFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.person_fragment_layout_ll_header://个人信息
+                    startActivity(new Intent(mActivity, PersonInforActivity.class));
                     break;
                 case R.id.person_fragment_layout_tv_message://消息
                     startActivity(new Intent(mActivity, MessageActivity.class));
