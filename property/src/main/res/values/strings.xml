@@ -59,6 +59,14 @@
     <string name="unassigned">未指派</string>
     <string name="assigned">已指派</string>
     <string name="assign">指派</string>
+    <string name="order_detail">工单详情</string>
+    <string name="accept">接受</string>
+    <string name="refuse">拒绝</string>
+    <string name="repair_owner_infor">报修业主信息</string>
+    <string name="contact_now">联系他</string>
+    <string name="order_progress_title">工单进度</string>
+    <string name="repairman">维修人员</string>
+    <string name="repairma">维修人员</string>
     <!--公告-->
     <string name="publish">发布</string>
     <string name="submit">提交</string>
