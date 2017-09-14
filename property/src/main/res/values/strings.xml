@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">property</string>
+    <string name="app_name">智慧社区物业版</string>
     <string name="no_data">暂无数据</string>
     <!--common-->
     <string name="commit">提交</string>
