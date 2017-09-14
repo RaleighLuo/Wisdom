@@ -7,7 +7,6 @@
     <com.starlight.mobile.android.lib.view.CusHeadView
         android:id="@+id/login_layout_ch_head"
         style="@style/common_head_style"
-        mAttr:chHead_rightText="@string/save"
         mAttr:chHead_title="@string/login_in"
         mAttr:chHead_title_padding_left="0dip" />
     <ImageView

@@ -7,6 +7,7 @@
     <com.starlight.mobile.android.lib.view.CusHeadView
         style="@style/common_green_head_style"
         mAttr:chHead_title="@string/message"
+        mAttr:chHead_leftImg="@mipmap/ic_back_white"
         mAttr:chHead_title_padding_left="0dip" />
     <include layout="@layout/common_list_layout"
         />

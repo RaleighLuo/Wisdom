@@ -60,6 +60,13 @@ public class MessageActivity extends SuperActivity  implements CusSwipeRefreshLa
         adapter=new MessageAdapter(this);
         mRecyclerView.setAdapter(adapter);
     }
+    public void onClickListener(View view){
+        switch (view.getId()){
+            case R.id.common_head_layout_iv_left:
+                finish();
+                break;
+        }
+    }
     @Override
     public void onRefresh() {
         mSwipeRefresh.setRefreshing(false);

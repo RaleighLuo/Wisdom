@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.activity.LoginActivity;
 import com.gkzxhn.wisdom.property.activity.MessageActivity;
 import com.gkzxhn.wisdom.property.activity.PersonInforActivity;
 import com.gkzxhn.wisdom.property.activity.SettingActivity;
@@ -39,7 +40,9 @@ public class PersonFragment extends Fragment {
     private void init(){
         parentView.findViewById(R.id.person_fragment_layout_ll_header).setOnClickListener(onClickListener);
         parentView.findViewById(R.id.person_fragment_layout_tv_message).setOnClickListener(onClickListener);
-        parentView.findViewById(R.id.person_fragment_layout_tv_setting).setOnClickListener(onClickListener);
+        parentView.findViewById(R.id.person_fragment_layout_tv_clear_cache).setOnClickListener(onClickListener);
+        parentView.findViewById(R.id.person_fragment_layout_tv_update_version).setOnClickListener(onClickListener);
+        parentView.findViewById(R.id.person_fragment_layout_btn_exit).setOnClickListener(onClickListener);
 
     }
     private View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -52,8 +55,12 @@ public class PersonFragment extends Fragment {
                 case R.id.person_fragment_layout_tv_message://消息
                     startActivity(new Intent(mActivity, MessageActivity.class));
                     break;
-                case R.id.person_fragment_layout_tv_setting://设置
-                    startActivity(new Intent(mActivity, SettingActivity.class));
+                case R.id.person_fragment_layout_tv_clear_cache:
+                    break;
+                case R.id.person_fragment_layout_tv_update_version:
+                    break;
+                case R.id.person_fragment_layout_btn_exit:
+                    startActivity(new Intent(mActivity,LoginActivity.class));
                     break;
             }
         }

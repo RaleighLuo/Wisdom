@@ -248,7 +248,7 @@
                 android:layout_alignBottom="@+id/order_detail_layout_tv_phone"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/order_detail_layout_tv_phone"
-                android:background="@drawable/grey_empty_shape"
+                android:background="@drawable/grey_empty_selector"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClickListener"

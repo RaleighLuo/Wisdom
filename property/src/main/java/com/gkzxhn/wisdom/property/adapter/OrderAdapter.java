@@ -27,7 +27,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(TAB== Constants.REPAIR_ASSIGNED_TAB?R.layout.order_assigned_item_layout:R.layout.order_item_layout,null,false);
+        View view= LayoutInflater.from(context).inflate(TAB== Constants.REPAIR_ASSIGNED_TAB?R.layout.order_assigned_item_layout:
+                R.layout.order_item_layout,null,false);
         return new ViewHolder(view);
     }
 
@@ -45,6 +46,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         context.startActivity(intent);
                     }
                 });
+                holder.tvOperate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
                 break;
             case Constants.REPAIR_UNACCEPT_TAB://待接受
                 holder.tvOperate.setText(R.string.accept);
@@ -54,6 +61,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         Intent intent=new Intent(context, OrderDetailActivity.class);
                         intent.putExtra(Constants.EXTRA,Constants.ORDER_STATUS_UNACCEPT);
                         context.startActivity(intent);
+                    }
+                });
+                holder.tvOperate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
                     }
                 });
                 break;

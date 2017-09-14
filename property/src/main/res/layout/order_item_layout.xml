@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:text="@string/assign"
         android:gravity="center"
+        android:clickable="true"
         android:background="@drawable/green_btn_empty_selector"
         android:paddingTop="4dip"
         android:textColor="@color/colorPrimary"
