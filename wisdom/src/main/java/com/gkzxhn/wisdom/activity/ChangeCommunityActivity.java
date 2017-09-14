@@ -65,6 +65,7 @@ public class ChangeCommunityActivity extends SuperActivity {
                     editor.putFloat(Constants.USER_USEDAREA, roomEntity.getUsedArea());
                     editor.putFloat(Constants.USER_FLOORAREA, roomEntity.getFloorArea());
                     editor.commit();
+                    GKApplication.getInstance().setJpushTagsAndAlias();//设置极光推送的标签和别名
                     setResult(RESULT_OK);
                     finish();
 

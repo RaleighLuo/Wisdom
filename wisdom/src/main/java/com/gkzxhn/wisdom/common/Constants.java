@@ -13,7 +13,7 @@ public interface Constants {
     /*-------------------------------Configration-------------------------------------------------*/
     final int REQUEST_TIMEOUT=60000;//超时时间1分钟
     public final String ATTACH_TYPE_IMAGE_POSTFIX_JPEG=".jpg";
-    public final String SD_ROOT_PATH= Environment.getExternalStorageDirectory().getPath()+"/Wisdom";
+    public final String SD_ROOT_PATH= Environment.getExternalStorageDirectory().getPath()+"/Wisdom/wisdom";
     public final String SD_FILE_CACHE_PATH = SD_ROOT_PATH+"/cache/";
 
     public final String SD_IMAGE_CACHE_PATH = SD_ROOT_PATH+"/imageCache/";//图片下载的缓存

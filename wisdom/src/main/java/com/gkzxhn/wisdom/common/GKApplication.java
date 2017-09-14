@@ -21,6 +21,8 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashSet;
+import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import io.realm.Realm;
@@ -56,11 +58,28 @@ public class GKApplication extends Application {
     }
 
     public void exit(){
+        //移除
+        JPushInterface.cleanTags(this,1);
+        JPushInterface.deleteAlias(this,1);
         SharedPreferences preferences=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE);
         preferences.edit().clear().commit();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    /**
+     * 设置极光推送的标签和别名
+     */
+    public void setJpushTagsAndAlias(){
+        SharedPreferences preferences=getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE);
+        //设置Jpush标签，发送群组消息
+        Set<String> tags=new HashSet<>();
+        tags.add(preferences.getString(Constants.USER_RESIDENTIALAREASID,""));
+        JPushInterface.setTags(this,1,tags);
+        //设置Jpush别名，发送单个消息使用
+        String alias=String.format("%s_%s",preferences.getString(Constants.USER_ID,""),preferences.getString(Constants.USER_RESIDENTIALAREASID,""));
+        JPushInterface.setAlias(this,1,alias);
     }
     public void buildDBConfig(){
         mSystemRealmConfiguration = new RealmConfiguration.Builder(this)

@@ -19,7 +19,11 @@ import com.gkzxhn.wisdom.view.ILoginView;
 import com.starlight.mobile.android.lib.util.CommonHelper;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Raleigh.Luo on 17/7/14.
@@ -127,10 +131,12 @@ public class LoginActivity extends SuperActivity implements ILoginView{
      */
     @Override
     public void onSuccess(int roomSize) {
+
         CommonHelper.clapseSoftInputMethod(this);
         if (roomSize == 0) {
             showToast(R.string.has_not_house);
         } else if (roomSize == 1) {//一套房屋
+            GKApplication.getInstance().setJpushTagsAndAlias();//设置极光推送的标签和别名
             startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {//多套房屋
