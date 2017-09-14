@@ -15,7 +15,7 @@
     <color name="common_line_color">#dddddd</color>
     <color name="blue_text_color">#5a92e5</color>
     <color name="orange_color">#ff7a04</color>
-    <color name="property_color">#444395</color>
-    <color name="ju_color">#3d9998</color>
+    <color name="property_color">#1eccba</color>
+    <color name="ju_color">#ff7a04</color>
     <color name="red">#fd0101</color>
 </resources>
