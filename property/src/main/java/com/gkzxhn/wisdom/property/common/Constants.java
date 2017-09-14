@@ -33,6 +33,7 @@ public interface Constants {
     final String USER_PHONE="user_phone";
     final String USER_NICKNAME="user_nickname";
     final String USER_GENDER="user_gender";
+    final String USER_ROLE="user_role";
 
     final String USER_BUILDINGID="user_buildingId";
     final String USER_BUILDINGNAME="user_buildingName";
@@ -100,21 +101,32 @@ public interface Constants {
     final int LIKE_STATUS =1;//点赞
     final int LIKE_CANCEL_STATUS =0;//取消点赞
     final int LIKE_DEFAULT_STATUS =-1;//默认
+    final int MANAGER_ROLE=1;
+    final int REPAIRMANE_ROLE=0;
+    final  String ORDER_STATUS_UNASSIGN="unassign";
+    final  String ORDER_STATUS_UNACCEPT="unaccept";
+    final  String ORDER_STATUS_ACCEPTED="accepted";
+    final  String ORDER_STATUS_REPAIRING="repairing";
+    final  String ORDER_STATUS_REPAIRED="repaired";
+    final  String ORDER_STATUS_REFUSED="refused";
+
     /*-------------------------------TAB-------------------------------------------------*/
-
-
 
     //列表Tab配置
     final int TOPIC_LIST_TAB=0x201;//话题列表
     final int OWN_TOPIC_LIST_TAB=0x202;//我的话题列表
     final int REPAIR_UNASSIGNED_TAB=0x203;//维修列表－未指派
     final int REPAIR_ASSIGNED_TAB=0x204;//维修列表－已指派
+    final int REPAIR_UNACCEPT_TAB=0x205;//维修列表－未接受
+    final int REPAIR_ACCEPTED_TAB=0x206;//维修列表－已接受
     //列表Tab 解析对应key
     final Map<Integer,String> ANALYSIS_KEY_MAP=new HashMap<Integer,String>(){{
         put(Constants.TOPIC_LIST_TAB,"topics");
         put(Constants.OWN_TOPIC_LIST_TAB,"topics");
         put(Constants.REPAIR_UNASSIGNED_TAB,"repairs");
         put(Constants.REPAIR_ASSIGNED_TAB,"repairs");
+        put(Constants.REPAIR_UNACCEPT_TAB,"repairs");
+        put(Constants.REPAIR_ACCEPTED_TAB,"repairs");
      }};
 
     final int LOGIN_TAB=0x306;//登录

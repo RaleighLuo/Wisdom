@@ -47,7 +47,7 @@
         android:text="9月5日凌晨四点多，沈阳市皇姑区长江街海丽德大厦B座一电梯发生故障，电梯在六七楼之间停留，有7人被困"
         />
     <TextView
-        android:id="@+id/order_item_layout_tv_status"
+        android:id="@+id/order_item_layout_tv_operate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/assign"

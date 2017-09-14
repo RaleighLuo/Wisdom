@@ -178,21 +178,6 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                             mCommentDialog.setHint(String.format("%s %s", getString(R.string.reply_colon), adapter.getItem(position).getNickname()));
                         }
                         break;
-                    case R.id.topic_detial_layout_tv_delete://删除话题
-                        if (confirmDialog == null) {//提示对话框
-                            confirmDialog = new CheckConfirmDialog(TopicDetailActivity.this);
-                            confirmDialog.setContent(getResources().getString(R.string.delete_topic_hint));
-                            confirmDialog.setYesBtnListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (confirmDialog != null && confirmDialog.isShowing())
-                                        confirmDialog.dismiss();
-                                    mPresenter.delete();//点击确定后，请求删除话题
-                                }
-                            });
-                        }
-                        if (!confirmDialog.isShowing()) confirmDialog.show();//显示提示对话框
-                        break;
                     case R.id.topic_comment_layout_rl_root://回复评论－弹出回复对话
                         if (!mCommentDialog.isShowing()) {
                             mCommentDialog.show();
@@ -208,7 +193,6 @@ public class TopicDetailActivity extends SuperActivity implements CusSwipeRefres
                         break;
                 }
             }
-
         }
     };
 

@@ -58,15 +58,35 @@
     <string name="order_mananger">工单管理</string>
     <string name="unassigned">未指派</string>
     <string name="assigned">已指派</string>
+    <string name="unaccept">待接受</string>
+    <string name="accepted">已接受</string>
     <string name="assign">指派</string>
     <string name="order_detail">工单详情</string>
     <string name="accept">接受</string>
     <string name="refuse">拒绝</string>
+    <string name="start_repair">开始维修</string>
+    <string name="finish_repair">维修完成</string>
     <string name="repair_owner_infor">报修业主信息</string>
     <string name="contact_now">联系他</string>
     <string name="order_progress_title">工单进度</string>
     <string name="repairman">维修人员</string>
     <string name="repairma">维修人员</string>
+    <string-array name="order_status">
+        <item>待指派</item>
+        <item>待接受</item>
+        <item>已接受</item>
+        <item>维修中</item>
+        <item>已维修</item>
+        <item>已拒绝</item>
+    </string-array>
+    <string-array name="order_status_params">
+        <item>unassign</item>
+        <item>unaccept</item>
+        <item>accepted</item>
+        <item>repairing</item>
+        <item>repaired</item>
+        <item>refused</item>
+    </string-array>
     <!--公告-->
     <string name="publish">发布</string>
     <string name="submit">提交</string>

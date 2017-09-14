@@ -50,10 +50,19 @@ public class HomeFragment extends Fragment {
 //        pagerTab.setUnderlineHeight(0);
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         List<String>   titleList    = new ArrayList<String>();
-        fragmentList.add(getFragment(Constants.REPAIR_UNASSIGNED_TAB));
-        fragmentList.add(getFragment(Constants.REPAIR_ASSIGNED_TAB));
-        titleList.add(getString(R.string.unassigned));
-        titleList.add(getString(R.string.assigned));
+
+        if(mActivity.getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getInt(Constants.USER_ROLE,Constants.REPAIRMANE_ROLE)==Constants.MANAGER_ROLE) {
+            //物业经理角色
+            titleList.add(getString(R.string.unassigned));
+            titleList.add(getString(R.string.assigned));
+            fragmentList.add(getFragment(Constants.REPAIR_UNASSIGNED_TAB));
+            fragmentList.add(getFragment(Constants.REPAIR_ASSIGNED_TAB));
+        }else{
+            titleList.add(getString(R.string.unaccept));
+            titleList.add(getString(R.string.accepted));
+            fragmentList.add(getFragment(Constants.REPAIR_UNACCEPT_TAB));
+            fragmentList.add(getFragment(Constants.REPAIR_ACCEPTED_TAB));
+        }
         adapter=new PagerTabAdapter(getChildFragmentManager(), fragmentList, titleList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);

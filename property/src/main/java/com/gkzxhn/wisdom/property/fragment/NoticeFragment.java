@@ -37,6 +37,7 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
     private Context mActivity;
     private View parentView;
     private NoticeAdapter adapter;
+
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -55,14 +56,21 @@ public class NoticeFragment extends Fragment implements CusSwipeRefreshLayout.On
         ivNodata=parentView.findViewById(R.id.common_no_data_layout_iv_image);
         mRecyclerView= (RecyclerView) parentView.findViewById(R.id.common_list_layout_rv_list);
         mSwipeRefresh= (CusSwipeRefreshLayout) parentView.findViewById(R.id.common_list_layout_swipeRefresh);
-        ((CusHeadView)parentView.findViewById(R.id.notice_fragment_layout_ch_head)).setBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.getId()==R.id.common_head_layout_tv_right){//发布
-                startActivity(new Intent(mActivity,PublishNoticeActivity.class));
+        CusHeadView chHead=((CusHeadView)parentView.findViewById(R.id.notice_fragment_layout_ch_head));
+        if(mActivity.getSharedPreferences(Constants.USER_TABLE,Context.MODE_PRIVATE).getInt(Constants.USER_ROLE,Constants.REPAIRMANE_ROLE)==Constants.MANAGER_ROLE){
+            //物业经理角色
+            chHead.setBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(v.getId()==R.id.common_head_layout_tv_right){//发布
+                        startActivity(new Intent(mActivity,PublishNoticeActivity.class));
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            chHead.getRightTv().setVisibility(View.GONE);
+        }
+
     }
     private void init(){
         mSwipeRefresh.setOnRefreshListener(this);
