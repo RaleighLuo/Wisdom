@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gkzxhn.wisdom.property.R;
 
@@ -27,7 +28,19 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if(position==1||position==4||position==7){
+            holder.tvIcon.setText(R.string.ju);
+            holder.tvIcon.setBackgroundResource(R.drawable.committee_oval_shape);
+        }else{
+            holder.tvIcon.setText(R.string.wu);
+            holder.tvIcon.setBackgroundResource(R.drawable.property_oval_shape);
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
@@ -36,9 +49,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView tvIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tvIcon= (TextView) itemView.findViewById(R.id.notice_item_layout_tv_icon);
         }
     }
 }
