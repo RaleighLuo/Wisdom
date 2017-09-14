@@ -10,6 +10,7 @@
         <item name="chHead_title_size">@dimen/common_head_title_size</item>
         <item name="chHead_text_size">@dimen/common_head_text_size</item>
         <item name="chHead_textColor">@android:color/white</item>
+        <item name="android:elevation">5dip</item>
         <item name="chHead_imgClickEffect">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="chHead_textClickEffect">?android:attr/selectableItemBackgroundBorderless</item>
     </style>
@@ -21,6 +22,7 @@
         <item name="chHead_titleColor">@android:color/white</item>
         <item name="chHead_leftImgPadding">15dip</item>
         <item name="chHead_rightImgPadding">15dip</item>
+        <item name="android:elevation">5dip</item>
         <item name="chHead_title_size">@dimen/common_head_title_size</item>
         <item name="chHead_text_size">@dimen/common_head_text_size</item>
         <item name="chHead_textColor">@android:color/white</item>

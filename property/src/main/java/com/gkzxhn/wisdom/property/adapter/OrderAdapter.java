@@ -19,8 +19,13 @@ import com.gkzxhn.wisdom.property.common.Constants;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
     private Context context;
     private final int TAB;
+    private OnItemClickListener onItemClickListener;
 
-    public OrderAdapter(Context context,int tab) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public OrderAdapter(Context context, int tab) {
         this.context = context;
         this.TAB=tab;
     }
@@ -33,7 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         switch (TAB){
             case Constants.REPAIR_UNASSIGNED_TAB://未指派
@@ -49,7 +54,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 holder.tvOperate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
                     }
                 });
                 break;
@@ -66,7 +71,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 holder.tvOperate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 });
                 break;

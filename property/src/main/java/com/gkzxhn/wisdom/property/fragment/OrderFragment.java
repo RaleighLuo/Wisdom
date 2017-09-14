@@ -14,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.property.adapter.OrderAdapter;
 import com.gkzxhn.wisdom.property.common.Constants;
+import com.gkzxhn.wisdom.property.customview.AssignDialog;
 import com.starlight.mobile.android.lib.view.CusSwipeRefreshLayout;
 import com.starlight.mobile.android.lib.view.RecycleViewDivider;
 import com.starlight.mobile.android.lib.view.dotsloading.DotsTextView;
@@ -34,6 +36,7 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
     private View parentView;
     private OrderAdapter adapter;
     private int TAB;
+    private AssignDialog mAssignDialog;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -55,6 +58,7 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
 
     }
     private void init(){
+        mAssignDialog=new AssignDialog(mActivity);
         TAB=getArguments().getInt(Constants.EXTRA_TAB);
         mSwipeRefresh.setOnRefreshListener(this);
         mSwipeRefresh.setOnLoadListener(this);
@@ -71,8 +75,21 @@ public class OrderFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new OrderAdapter(mActivity,TAB);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
+    }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            if(!mAssignDialog.isShowing())mAssignDialog.show();
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mAssignDialog.isShowing())mAssignDialog.dismiss();
     }
 
     @Override

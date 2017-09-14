@@ -55,6 +55,7 @@
     <string name="topic">话题</string>
     <string name="person">我的</string>
     <!--工单-->
+    <string name="please_assign">请指派</string>
     <string name="order_mananger">工单管理</string>
     <string name="unassigned">未指派</string>
     <string name="assigned">已指派</string>
