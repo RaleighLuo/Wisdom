@@ -58,7 +58,9 @@
         android:xlargeScreens="true"/>
     <application android:allowBackup="true" android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher"
-        android:supportsRtl="true" android:theme="@style/AppTheme">
+        android:supportsRtl="true" android:theme="@style/AppTheme"
+        android:name=".common.GKApplication"
+        >
         <activity android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
@@ -81,6 +83,23 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.OnlinePhotoPreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
+        <activity
+            android:name=".activity.TopicDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".activity.TopicCommentDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+
         <activity
             android:name=".activity.PublishNoticeActivity"
             android:configChanges="orientation|screenSize"

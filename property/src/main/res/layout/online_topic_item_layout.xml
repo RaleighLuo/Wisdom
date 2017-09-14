@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_margin="2dip"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.gkzxhn.wisdom.property.customview.DivisionImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_imageloading"
+            android:scaleType="centerCrop"
+            mAttr:div_divisor="2"
+            mAttr:div_dividend="3"
+            android:id="@+id/publish_topic_item_layout_iv_image"
+            />
+        <TextView
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:text="@string/del"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:padding="15dip"
+            android:id="@+id/publish_topic_item_layout_tv_del"
+            android:textColor="@color/red"
+            android:background="@drawable/white_oval_selector"
+            />
+    </FrameLayout>
+
+</FrameLayout>

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.activity.TopicDetailActivity;
 import com.gkzxhn.wisdom.property.entity.TopicEntity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.starlight.mobile.android.lib.view.RadioButtonPlus;
@@ -105,6 +106,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
+            }
+        });
 //        final TopicEntity entity=mDatas.get(position);
 //        holder.tvComment.setText(String.valueOf(entity.getCommentCount()));
 //        holder.rbLike.setText(String.valueOf(entity.getLikesCount()));
@@ -115,12 +122,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 //        String date=Utils.getFormateTime(entity.getDate(),new SimpleDateFormat(String.format("MM%sdd%s HH:mm",context.getString(R.string.month),context.getString(R.string.day))));
 //        String viewTime=context.getString(R.string.browse)+Utils.getViewedTime(entity.getViewed())+context.getString(R.string.time);
 //        holder.tvDate.setText(date+"\u3000"+viewTime);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(onItemClickListener!=null)onItemClickListener.onClickListener(v,position);
-//            }
-//        });
+
 //        holder.flComment.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

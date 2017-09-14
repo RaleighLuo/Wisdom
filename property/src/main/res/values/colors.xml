@@ -15,4 +15,6 @@
     <color name="common_line_color">#dddddd</color>
     <color name="blue_text_color">#5a92e5</color>
     <color name="orange_color">#ff7a04</color>
+
+    <color name="red">#fd0101</color>
 </resources>

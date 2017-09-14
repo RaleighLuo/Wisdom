@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg_color"
+    >
+    <View style="@style/common_line_style"
+        />
+    <EditText
+        android:id="@+id/comment_dialog_layout_et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:lines="1"
+        android:hint="@string/comment"
+        android:layout_margin="10dip"
+        android:ellipsize="end"
+        android:textColorHint="@color/common_hint_text_color"
+        android:textSize="14sp"
+        android:layout_toLeftOf="@+id/comment_dialog_layout_tv_send"
+        android:background="@drawable/grey_empty_shape"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send"
+        android:gravity="center"
+        android:paddingLeft="5dip"
+        android:layout_marginRight="10dip"
+        android:enabled="false"
+        android:textColor="@color/comment_send_text_color"
+        android:paddingRight="5dip"
+        android:layout_alignTop="@+id/comment_dialog_layout_et_content"
+        android:layout_alignBottom="@+id/comment_dialog_layout_et_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/comment_dialog_layout_tv_send"
+        />
+
+</RelativeLayout>

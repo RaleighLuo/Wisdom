@@ -1,6 +1,7 @@
 package com.gkzxhn.wisdom.property.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gkzxhn.wisdom.property.R;
+import com.gkzxhn.wisdom.property.activity.TopicDetailActivity;
+import com.gkzxhn.wisdom.property.adapter.OnItemClickListener;
 import com.gkzxhn.wisdom.property.adapter.OrderAdapter;
 import com.gkzxhn.wisdom.property.adapter.TopicAdapter;
 import com.gkzxhn.wisdom.property.common.Constants;
@@ -70,6 +73,7 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         int size=getResources().getDimensionPixelSize(R.dimen.recycler_view_line_height);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL, size, getResources().getColor(R.color.common_bg_color)));
         adapter=new TopicAdapter(mActivity);
+        adapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setAdapter(adapter);
         onRefresh();
     }
@@ -79,7 +83,24 @@ public class TopicFragment extends Fragment implements CusSwipeRefreshLayout.OnR
         mSwipeRefresh.setRefreshing(false);
 
     }
+    private OnItemClickListener onItemClickListener=new OnItemClickListener() {
+        @Override
+        public void onClickListener(View convertView, int position) {
+            switch (convertView.getId()){
+                case R.id.topic_item_layout_rb_like://点赞
+                case R.id.topic_item_layout_fl_like:
+//                    requestLike(position);
+                    break;
+                default://跳转话题详情
+//                    currentPosition=position;
+                    Intent intent=new Intent(mActivity, TopicDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA,"");
+                    startActivityForResult(intent,Constants.EXTRA_CODE);
+                    break;
+            }
 
+        }
+    };
     @Override
     public void onLoad() {
         mSwipeRefresh.setLoading(false);
